@@ -169,7 +169,7 @@ export function ImportCoursesDialog({ children }: { children?: ReactNode }) {
               <p className="mb-1 font-medium">Corregí estos errores:</p>
               <ul className="list-disc space-y-0.5 pl-4">
                 {errors.map((err, i) => (
-                  <li key={i}>{err}</li>
+                  <li key={err}>{err}</li>
                 ))}
               </ul>
             </div>

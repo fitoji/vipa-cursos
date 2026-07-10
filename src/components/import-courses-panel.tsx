@@ -218,7 +218,7 @@ export function ImportCoursesPanel({ onImported }: { onImported?: () => void }) 
                   const res = results[i];
                   const raw = item as Record<string, unknown>;
                   return (
-                    <TableRow key={i} className={res.ok ? "" : "bg-destructive/5 text-destructive"}>
+                    <TableRow key={String(raw.start_date ?? "") + "-" + String(raw.place ?? "") + "-" + String(raw.teacher ?? "")} className={res.ok ? "" : "bg-destructive/5 text-destructive"}>
                       <TableCell>{String(raw.start_date ?? "—")}</TableCell>
                       <TableCell>{String(raw.place ?? "—")}</TableCell>
                       <TableCell>
@@ -246,7 +246,7 @@ export function ImportCoursesPanel({ onImported }: { onImported?: () => void }) 
               <ul className="list-disc space-y-0.5 pl-4">
                 {results.map((r, i) =>
                   !r.ok ? (
-                    <li key={i}>
+                    <li key={r.errors.join(";")}>
                       Fila {i + 1}: {r.errors.join("; ")}
                     </li>
                   ) : null,
