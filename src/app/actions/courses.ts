@@ -2,8 +2,21 @@
 
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
-import { headers } from "next/headers";
-import { auth } from "@/lib/auth";
+
+async function getSession() {
+  // In Next.js 16 server actions, cookies() gives us the request cookies reliably.
+  // We call our own /api/auth/get-session endpoint instead of auth.api.getSession
+  // to avoid header-passing issues with Turbopack.
+  const { cookies } = await import("next/headers");
+  const cookieStore = await cookies();
+  const cookieHeader = cookieStore.toString();
+  const origin = process.env.BETTER_AUTH_URL ?? "http://localhost:3000";
+  const res = await fetch(`${origin}/api/auth/get-session`, {
+    headers: { Cookie: cookieHeader },
+  });
+  if (!res.ok) return null;
+  return res.json();
+}
 
 const courseSchema = z.object({
   start_date: z.string().min(1),
@@ -30,7 +43,7 @@ type CourseRow = {
 };
 
 export async function createCourse({ data }: { data: CourseInput }) {
-  const session = await auth.api.getSession({ headers: await headers() });
+  const session = await getSession();
   if (!session?.user?.id) throw new Error("Unauthorized");
   const userId = session.user.id;
 
@@ -47,7 +60,7 @@ export async function createCourse({ data }: { data: CourseInput }) {
 }
 
 export async function listCourses(): Promise<CourseRow[]> {
-  const session = await auth.api.getSession({ headers: await headers() });
+  const session = await getSession();
   if (!session?.user?.id) throw new Error("Unauthorized");
   const userId = session.user.id;
 
@@ -65,7 +78,7 @@ export async function listCourses(): Promise<CourseRow[]> {
 const updateSchema = courseSchema.extend({ id: z.number().int().positive() });
 
 export async function updateCourse({ data }: { data: z.infer<typeof updateSchema> }) {
-  const session = await auth.api.getSession({ headers: await headers() });
+  const session = await getSession();
   if (!session?.user?.id) throw new Error("Unauthorized");
   const userId = session.user.id;
 
@@ -89,7 +102,7 @@ export async function updateCourse({ data }: { data: z.infer<typeof updateSchema
 }
 
 export async function deleteCourse({ data }: { data: { id: number } }) {
-  const session = await auth.api.getSession({ headers: await headers() });
+  const session = await getSession();
   if (!session?.user?.id) throw new Error("Unauthorized");
   const userId = session.user.id;
 
