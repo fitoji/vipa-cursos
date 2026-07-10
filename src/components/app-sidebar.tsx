@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { BarChart3, BookOpen, ArrowLeft } from "lucide-react";
+import { BarChart3, BookOpen, ArrowLeft, Upload } from "lucide-react";
 
 import {
   Sidebar,
@@ -16,7 +16,7 @@ import {
   SidebarSeparator,
 } from "@/components/ui/sidebar";
 
-type View = "stats" | "courses";
+type View = "stats" | "courses" | "import";
 
 interface AppSidebarProps {
   activeView: View;
@@ -63,6 +63,15 @@ export function AppSidebar({ activeView, onNavigate }: AppSidebarProps) {
 
       <SidebarFooter>
         <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              isActive={activeView === "import"}
+              onClick={() => onNavigate("import")}
+            >
+              <Upload className="h-4 w-4" />
+              <span>Importar datos</span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
               <Link href="/">

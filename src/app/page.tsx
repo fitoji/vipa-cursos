@@ -3,12 +3,18 @@
 import { useQuery, useMutation, useQueryClient, queryOptions } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { useState } from "react";
 import { toast } from "sonner";
 import Link from "next/link";
 
 import { createCourse, listCourses } from "@/app/actions/courses";
+import {
+  courseFormSchema,
+  type CourseFormValues,
+  DAY_PRESETS,
+  defaultCourseFormValues,
+  daysFromFormValues,
+} from "@/lib/course-form";
 import { authClient } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -26,31 +32,12 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Badge } from "@/components/ui/badge";
 import { DatePicker } from "@/components/ui/date-picker";
 import { LandingView } from "@/components/landing-view";
+import { ImportCoursesDialog } from "@/components/import-courses-dialog";
 
 const coursesQuery = queryOptions({
   queryKey: ["courses"],
   queryFn: () => listCourses(),
 });
-
-const DAY_PRESETS = [1, 3, 10, 20, 30, 45, 60] as const;
-
-const formSchema = z
-  .object({
-    start_date: z.string().min(1, "Requerido"),
-    place: z.string().min(1, "Requerido"),
-    teacher: z.string(),
-    country: z.string(),
-    mode: z.enum(["sit", "serve"]),
-    daysPreset: z.string().min(1, "Selecciona una opción"),
-    daysCustom: z.string(),
-    obs: z.string(),
-  })
-  .refine((v) => v.daysPreset !== "other" || (!!v.daysCustom && Number(v.daysCustom) > 0), {
-    message: "Ingresa la cantidad de días",
-    path: ["daysCustom"],
-  });
-
-type FormValues = z.infer<typeof formSchema>;
 
 export default function Home() {
   const { data: session } = authClient.useSession();
@@ -58,18 +45,9 @@ export default function Home() {
   const { data: courses = [] } = useQuery(coursesQuery);
   const create = createCourse;
 
-  const form = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      start_date: "",
-      place: "",
-      teacher: "",
-      country: "",
-      mode: "sit",
-      daysPreset: "10",
-      daysCustom: "",
-      obs: "",
-    },
+  const form = useForm<CourseFormValues>({
+    resolver: zodResolver(courseFormSchema),
+    defaultValues: defaultCourseFormValues,
   });
 
   const [submitting, setSubmitting] = useState(false);
@@ -79,9 +57,8 @@ export default function Home() {
     return <LandingView />;
   }
 
-  const onSubmit = async (values: FormValues) => {
-    const days =
-      values.daysPreset === "other" ? Number(values.daysCustom) : Number(values.daysPreset);
+  const onSubmit = async (values: CourseFormValues) => {
+    const days = daysFromFormValues(values);
     setSubmitting(true);
     try {
       await create({
@@ -96,16 +73,7 @@ export default function Home() {
         },
       });
       toast.success("Curso guardado");
-      form.reset({
-        start_date: "",
-        place: "",
-        teacher: "",
-        country: "",
-        mode: "sit",
-        daysPreset: "10",
-        daysCustom: "",
-        obs: "",
-      });
+      form.reset(defaultCourseFormValues);
       await qc.invalidateQueries({ queryKey: ["courses"] });
     } catch (e) {
       console.error(e);
@@ -128,6 +96,7 @@ export default function Home() {
           <Button variant="outline" asChild>
             <Link href="/dashboard">Panel de Control</Link>
           </Button>
+          <ImportCoursesDialog />
         </header>
 
         <Card>

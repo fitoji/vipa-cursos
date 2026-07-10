@@ -1,11 +1,19 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-import { updateCourse, listCourses } from "@/app/actions/courses";
+import { updateCourse } from "@/app/actions/courses";
+import {
+  courseFormSchema,
+  type Course,
+  type CourseFormValues,
+  DAY_PRESETS,
+  defaultCourseFormValues,
+  daysFromFormValues,
+  toFormValues,
+} from "@/lib/course-form";
 import {
   Dialog,
   DialogContent,
@@ -27,42 +35,6 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { DatePicker } from "@/components/ui/date-picker";
 
-type Course = Awaited<ReturnType<typeof listCourses>>[number];
-
-const DAY_PRESETS = [1, 3, 10, 20, 30, 45, 60] as const;
-
-const schema = z
-  .object({
-    start_date: z.string().min(1, "Requerido"),
-    place: z.string().min(1, "Requerido"),
-    teacher: z.string(),
-    country: z.string(),
-    mode: z.enum(["sit", "serve"]),
-    daysPreset: z.string().min(1),
-    daysCustom: z.string(),
-    obs: z.string(),
-  })
-  .refine((v) => v.daysPreset !== "other" || (!!v.daysCustom && Number(v.daysCustom) > 0), {
-    message: "Ingresa la cantidad de días",
-    path: ["daysCustom"],
-  });
-
-type FormValues = z.infer<typeof schema>;
-
-function toFormValues(c: Course): FormValues {
-  const isPreset = (DAY_PRESETS as readonly number[]).includes(c.days);
-  return {
-    start_date: c.start_date.slice(0, 10),
-    place: c.place,
-    teacher: c.teacher ?? "",
-    country: c.country ?? "",
-    mode: c.mode,
-    daysPreset: isPreset ? String(c.days) : "other",
-    daysCustom: isPreset ? "" : String(c.days),
-    obs: c.obs ?? "",
-  };
-}
-
 export function EditCourseDialog({
   course,
   open,
@@ -76,20 +48,9 @@ export function EditCourseDialog({
   const update = updateCourse;
   const [saving, setSaving] = useState(false);
 
-  const form = useForm<FormValues>({
-    resolver: zodResolver(schema),
-    defaultValues: course
-      ? toFormValues(course)
-      : {
-          start_date: "",
-          place: "",
-          teacher: "",
-          country: "",
-          mode: "sit",
-          daysPreset: "10",
-          daysCustom: "",
-          obs: "",
-        },
+  const form = useForm<CourseFormValues>({
+    resolver: zodResolver(courseFormSchema),
+    defaultValues: course ? toFormValues(course) : defaultCourseFormValues,
   });
 
   useEffect(() => {
@@ -98,10 +59,9 @@ export function EditCourseDialog({
 
   const daysPreset = form.watch("daysPreset");
 
-  const onSubmit = async (values: FormValues) => {
+  const onSubmit = async (values: CourseFormValues) => {
     if (!course) return;
-    const days =
-      values.daysPreset === "other" ? Number(values.daysCustom) : Number(values.daysPreset);
+    const days = daysFromFormValues(values);
     setSaving(true);
     try {
       await update({

@@ -28,6 +28,16 @@ const courseSchema = z.object({
 
 export type CourseInput = z.infer<typeof courseSchema>;
 
+type ImportCourseInput = {
+  start_date: string;
+  place: string;
+  teacher?: string;
+  country?: string;
+  mode: "sit" | "serve";
+  days: number;
+  obs?: string;
+};
+
 type CourseRow = {
   id: number;
   start_date: string;
@@ -55,6 +65,29 @@ export async function createCourse({ data }: { data: CourseInput }) {
   revalidatePath("/");
   revalidatePath("/dashboard");
   return rows[0] as CourseRow;
+}
+
+export async function importCourses({ data }: { data: ImportCourseInput[] }) {
+  const session = await getSession();
+  if (!session?.user?.id) throw new Error("Unauthorized");
+  const userId = session.user.id;
+
+  const parsed = z.array(courseSchema).parse(data);
+
+  const { neon } = await import("@neondatabase/serverless");
+  const sql = neon(process.env.DATABASE_URL!);
+  let inserted = 0;
+  for (const c of parsed) {
+    const rows = await sql`
+      INSERT INTO vipassana_courses (start_date, place, teacher, country, mode, days, obs, user_id)
+      VALUES (${c.start_date}, ${c.place}, ${c.teacher}, ${c.country}, ${c.mode}, ${c.days}, ${c.obs}, ${userId})
+      RETURNING id
+    `;
+    if (rows.length > 0) inserted++;
+  }
+  revalidatePath("/");
+  revalidatePath("/dashboard");
+  return { count: inserted };
 }
 
 export async function listCourses(): Promise<CourseRow[]> {

@@ -55,10 +55,11 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { EditCourseDialog } from "@/components/edit-course-dialog";
+import { ImportCoursesPanel } from "@/components/import-courses-panel";
 import { AppSidebar } from "@/components/app-sidebar";
 
 type Course = Awaited<ReturnType<typeof listCourses>>[number];
-type View = "stats" | "courses";
+type View = "stats" | "courses" | "import";
 
 const coursesQuery = queryOptions({
   queryKey: ["courses"],
@@ -335,7 +336,7 @@ export function DashboardView() {
                   </CardContent>
                 </Card>
               </div>
-            ) : (
+            ) : view === "courses" ? (
               /* ── Courses View ── */
               <>
                 <div className="mb-4 relative max-w-sm">
@@ -397,6 +398,8 @@ export function DashboardView() {
                   </Table>
                 </div>
               </>
+            ) : (
+              <ImportCoursesPanel onImported={() => setView("courses")} />
             )}
           </div>
         </div>
