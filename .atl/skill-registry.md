@@ -20,25 +20,24 @@ Last updated: 2026-07-10
 
 ### Project-level (vipa-cursos)
 
-| Skill                       | Trigger / description                                   | Path                                                                                                              |
-| --------------------------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `accessibility`             | Accessibility patterns and best practices for web UIs   | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/accessibility/SKILL.md`             |
-| `bun`                       | Bun runtime patterns and configuration                  | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/bun/SKILL.md`                       |
-| `composition-patterns`      | React composition patterns and component design         | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/composition-patterns/SKILL.md`      |
-| `frontend-design`           | Frontend design principles and UI/UX patterns           | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/frontend-design/SKILL.md`           |
-| `neon-postgres`             | Neon Postgres serverless database patterns              | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/neon-postgres/SKILL.md`             |
-| `nodejs-backend-patterns`   | Node.js backend patterns and best practices             | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/nodejs-backend-patterns/SKILL.md`   |
-| `nodejs-best-practices`     | Node.js best practices and conventions                  | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/nodejs-best-practices/SKILL.md`     |
-| `react-best-practices`      | React best practices and patterns                       | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/react-best-practices/SKILL.md`      |
-| `react-hook-form`           | React Hook Form patterns and validation                 | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/react-hook-form/SKILL.md`           |
-| `seo`                       | SEO patterns and best practices for web apps            | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/seo/SKILL.md`                       |
-| `shadcn`                    | shadcn/ui component patterns and customization          | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/shadcn/SKILL.md`                    |
-| `tailwind-css-patterns`     | Tailwind CSS patterns and utility classes               | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/tailwind-css-patterns/SKILL.md`     |
-| `tailwind-v4-shadcn`        | Tailwind v4 CSS-first config with shadcn/ui integration | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/tailwind-v4-shadcn/SKILL.md`        |
-| `tanstack-start`            | TanStack Start SSR, routing, and server functions       | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/tanstack-start/SKILL.md`            |
-| `typescript-advanced-types` | Advanced TypeScript types and generics patterns         | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/typescript-advanced-types/SKILL.md` |
-| `vite`                      | Vite build tool configuration and optimization          | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/vite/SKILL.md`                      |
-| `zod`                       | Zod schema validation patterns                          | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/zod/SKILL.md`                       |
+| Skill                            | Trigger / description                                                                 | Path                                                                                                              |
+| -------------------------------- | ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `accessibility`                  | Accessibility patterns and best practices for web UIs                                 | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/accessibility/SKILL.md`             |
+| `better-auth-best-practices`     | Better Auth server/client config, adapters, sessions, plugins, env vars               | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/better-auth-best-practices/SKILL.md` |
+| `composition-patterns`           | React composition patterns and component design                                       | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/composition-patterns/SKILL.md`      |
+| `email-and-password-best-practices` | Email verification, password reset, credential auth with Better Auth               | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/email-and-password-best-practices/SKILL.md` |
+| `frontend-design`                | Frontend design principles and UI/UX patterns                                         | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/frontend-design/SKILL.md`           |
+| `neon-postgres`                  | Neon Postgres serverless database patterns                                            | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/neon-postgres/SKILL.md`             |
+| `nodejs-backend-patterns`        | Node.js backend patterns and best practices                                           | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/nodejs-backend-patterns/SKILL.md`   |
+| `nodejs-best-practices`          | Node.js best practices and conventions                                                | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/nodejs-best-practices/SKILL.md`     |
+| `react-best-practices`           | React best practices and patterns                                                     | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/react-best-practices/SKILL.md`      |
+| `react-hook-form`                | React Hook Form patterns and validation                                               | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/react-hook-form/SKILL.md`           |
+| `seo`                            | SEO patterns and best practices for web apps                                          | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/seo/SKILL.md`                       |
+| `shadcn`                         | shadcn/ui component patterns and customization                                        | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/shadcn/SKILL.md`                    |
+| `tailwind-css-patterns`          | Tailwind CSS patterns and utility classes                                             | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/tailwind-css-patterns/SKILL.md`     |
+| `tailwind-v4-shadcn`             | Tailwind v4 CSS-first config with shadcn/ui integration                               | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/tailwind-v4-shadcn/SKILL.md`        |
+| `typescript-advanced-types`      | Advanced TypeScript types and generics patterns                                       | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/typescript-advanced-types/SKILL.md` |
+| `zod`                            | Zod schema validation patterns                                                        | `/Volumes/SSD Samsung MAC/DEV SSD/NUEVA GENERACION/vipa-cursos/.agents/skills/zod/SKILL.md`                       |
 
 ### Global (opencode + agents)
 
