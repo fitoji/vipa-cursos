@@ -121,7 +121,7 @@ export default function Home() {
           <div>
             <h1 className="text-3xl font-semibold tracking-tight">Mis cursos de Vipassana</h1>
             <p className="mt-1 text-sm text-muted-foreground">
-              Guarda tus sits y servicios en un solo lugar.
+              Guarda tus cursos sentados y servicios en un solo lugar.
             </p>
           </div>
           <Button variant="outline" asChild>
@@ -155,12 +155,12 @@ export default function Home() {
 
               <div className="grid gap-1.5">
                 <Label htmlFor="teacher">Profesor/a</Label>
-                <Input id="teacher" {...form.register("teacher")} />
+                <Input id="teacher" placeholder="ej.: S.N.Goenka" {...form.register("teacher")} />
               </div>
 
               <div className="grid gap-1.5">
                 <Label htmlFor="country">País</Label>
-                <Input id="country" {...form.register("country")} />
+                <Input id="country" placeholder="ej.: Argentina" {...form.register("country")} />
               </div>
 
               <div className="grid gap-1.5 sm:col-span-2">
@@ -172,11 +172,11 @@ export default function Home() {
                 >
                   <label className="flex items-center gap-2">
                     <RadioGroupItem value="sit" id="mode-sit" />
-                    <span>Sit</span>
+                    <span>Sentar</span>
                   </label>
                   <label className="flex items-center gap-2">
                     <RadioGroupItem value="serve" id="mode-serve" />
-                    <span>Serve</span>
+                    <span>Servir</span>
                   </label>
                 </RadioGroup>
               </div>
@@ -215,7 +215,7 @@ export default function Home() {
 
               <div className="grid gap-1.5 sm:col-span-2">
                 <Label htmlFor="obs">Observaciones</Label>
-                <Textarea id="obs" rows={3} {...form.register("obs")} />
+                <Textarea id="obs" placeholder="Agrega información adicional..." rows={3} {...form.register("obs")} />
               </div>
 
               <div className="sm:col-span-2 flex justify-end">

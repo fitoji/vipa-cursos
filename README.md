@@ -6,14 +6,14 @@ Built with **Next.js 16 (App Router)**, **React 19**, **Tailwind CSS 4**, **shad
 
 ## Tech stack
 
-| Concern        | Choice                                             |
-| -------------- | -------------------------------------------------- |
-| Framework      | Next.js 16 (App Router)                            |
-| UI             | React 19, Tailwind CSS 4, shadcn/ui (new-york)     |
-| Data fetching  | React Query (client cache) + Server Actions        |
-| Database       | Neon Postgres via `@neondatabase/serverless`       |
-| Package mgr    | pnpm 11                                            |
-| Deploy         | Vercel                                             |
+| Concern       | Choice                                         |
+| ------------- | ---------------------------------------------- |
+| Framework     | Next.js 16 (App Router)                        |
+| UI            | React 19, Tailwind CSS 4, shadcn/ui (new-york) |
+| Data fetching | React Query (client cache) + Server Actions    |
+| Database      | Neon Postgres via `@neondatabase/serverless`   |
+| Package mgr   | pnpm 11                                        |
+| Deploy        | Vercel                                         |
 
 ## Prerequisites
 
@@ -42,13 +42,13 @@ pnpm dev      # http://localhost:3000
 
 ## Scripts
 
-| Command       | Description                          |
-| ------------- | ------------------------------------ |
-| `pnpm dev`    | Start the dev server (Turbopack)     |
-| `pnpm build`  | Production build                     |
-| `pnpm start`  | Run the production server            |
-| `pnpm lint`   | ESLint (flat config)                 |
-| `pnpm format` | Prettier `--write .`                 |
+| Command       | Description                      |
+| ------------- | -------------------------------- |
+| `pnpm dev`    | Start the dev server (Turbopack) |
+| `pnpm build`  | Production build                 |
+| `pnpm start`  | Run the production server        |
+| `pnpm lint`   | ESLint (flat config)             |
+| `pnpm format` | Prettier `--write .`             |
 
 ## Database
 

@@ -1,3 +1,3 @@
-[ ] agregar modo dark / light
-[ ] utilizar los estilos de midnight.css
-[ ] agregar header y footer
+[x] agregar modo dark / light
+[x] utilizar los estilos de midnight.css
+[x] agregar header y footer
