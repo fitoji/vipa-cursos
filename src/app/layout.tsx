@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { Providers } from "./providers";
 import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -43,10 +44,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${montserrat.variable} ${playfair.variable} ${sourceCode.variable}`}
     >
-      <body>
+      <body className="flex min-h-screen flex-col">
         <Providers>
           <SiteHeader />
-          {children}
+          <main className="flex-1">{children}</main>
+          <SiteFooter />
         </Providers>
         <Toaster richColors position="top-right" />
       </body>

@@ -2,12 +2,19 @@
 
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import { useTheme } from "next-themes";
+import { Moon, Sun } from "lucide-react";
+import { useEffect, useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
 
 export function SiteHeader() {
   const router = useRouter();
   const qc = useQueryClient();
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
 
   const { data: session } = authClient.useSession();
   const email = session?.user?.email;
@@ -24,6 +31,18 @@ export function SiteHeader() {
         <span className="text-sm font-medium">Mis cursos de Vipassana</span>
         <div className="flex items-center gap-3">
           {email && <span className="text-sm text-muted-foreground">{email}</span>}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            aria-label="Cambiar tema"
+          >
+            {mounted && theme === "dark" ? (
+              <Sun className="h-4 w-4" />
+            ) : (
+              <Moon className="h-4 w-4" />
+            )}
+          </Button>
           <Button variant="outline" size="sm" onClick={handleLogout}>
             Cerrar sesión
           </Button>
