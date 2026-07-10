@@ -8,18 +8,14 @@ import { authClient } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 type Mode = "signin" | "signup";
 
 export default function LoginPage() {
   const router = useRouter();
   const [mode, setMode] = useState<Mode>("signin");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
@@ -39,7 +35,11 @@ export default function LoginPage() {
           return;
         }
       } else {
-        const { error } = await authClient.signUp.email({ email, password });
+        if (!name) {
+          toast.error("Ingresa tu nombre");
+          return;
+        }
+        const { error } = await authClient.signUp.email({ name, email, password });
         if (error) {
           toast.error(error.message ?? "No se pudo registrar");
           return;
@@ -82,6 +82,17 @@ export default function LoginPage() {
           </div>
 
           <form onSubmit={handleSubmit} className="grid gap-4">
+            {mode === "signup" && (
+              <div className="grid gap-1.5">
+                <Label htmlFor="name">Nombre</Label>
+                <Input
+                  id="name"
+                  autoComplete="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+            )}
             <div className="grid gap-1.5">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -103,11 +114,7 @@ export default function LoginPage() {
               />
             </div>
             <Button type="submit" disabled={busy}>
-              {busy
-                ? "Procesando…"
-                : mode === "signin"
-                  ? "Iniciar sesión"
-                  : "Registrarse"}
+              {busy ? "Procesando…" : mode === "signin" ? "Iniciar sesión" : "Registrarse"}
             </Button>
           </form>
         </CardContent>
