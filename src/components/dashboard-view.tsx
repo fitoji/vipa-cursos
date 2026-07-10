@@ -56,11 +56,12 @@ import {
 } from "@/components/ui/sidebar";
 import { EditCourseDialog } from "@/components/edit-course-dialog";
 import { ImportCoursesPanel } from "@/components/import-courses-panel";
+import { LocationsExplorer } from "@/components/locations-explorer";
 import { AppSidebar } from "@/components/app-sidebar";
 import { formatDate } from "@/lib/format";
 
 type Course = Awaited<ReturnType<typeof listCourses>>[number];
-type View = "stats" | "courses" | "import";
+type View = "stats" | "courses" | "locations" | "import";
 
 const coursesQuery = queryOptions({
   queryKey: ["courses"],
@@ -230,6 +231,8 @@ export function DashboardView() {
                 globalFilter={globalFilter}
                 onGlobalFilterChange={setGlobalFilter}
               />
+            ) : view === "locations" ? (
+              <LocationsExplorer />
             ) : (
               <ImportCoursesPanel onImported={() => setView("courses")} />
             )}

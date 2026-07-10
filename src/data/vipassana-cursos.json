@@ -1,0 +1,1118 @@
+{
+  "meta": {
+    "source": "dhamma.org/en/locations/directory",
+    "last_updated": "2026-07-10",
+    "total_centers": 270,
+    "total_non_centers": 132,
+    "total_locations": 402
+  },
+  "continents": [
+    {
+      "name": "Asia",
+      "countries": [
+        {
+          "name": "India",
+          "region": "South Asia",
+          "centers": [
+            { "name": "Dhamma Giri", "city": "Igatpuri", "state": "Maharashtra" },
+            { "name": "Dhamma Pattana", "city": "Mumbai", "state": "Maharashtra" },
+            { "name": "Dhamma Sarita", "city": "Khadakpada", "state": "Maharashtra" },
+            { "name": "Dhamma Tapovana", "city": "Igatpuri", "state": "Maharashtra" },
+            { "name": "Dhamma Tapovana2", "city": "Igatpuri", "state": "Maharashtra" },
+            { "name": "Dhamma Punna", "city": "Pune", "state": "Maharashtra" },
+            { "name": "Dhamma Ānanda", "city": "Pune", "state": "Maharashtra" },
+            { "name": "Dhamma Bhumi", "city": "Ahmedabad", "state": "Gujarat" },
+            { "name": "Dhamma Divakara", "city": "Vadodara", "state": "Gujarat" },
+            { "name": "Dhamma Vaṭa", "city": "Vadodara", "state": "Gujarat" },
+            { "name": "Dhamma Pīṭha", "city": "Ahmedabad", "state": "Gujarat" },
+            { "name": "Dhamma Narmadā", "city": "Bharuch", "state": "Gujarat" },
+            { "name": "Dhamma Jalāsaya", "city": "Bhavnagar", "state": "Gujarat" },
+            { "name": "Dhamma Ambika", "city": "Navsari", "state": "Gujarat" },
+            { "name": "Dhammasongadh", "city": "Dist Tapi", "state": "Gujarat" },
+            { "name": "Dhamma Junagadh", "city": "Junagadh", "state": "Gujarat" },
+            { "name": "Dhamma Avani", "city": "Kutch", "state": "Gujarat" },
+            { "name": "Dhamma Rava", "city": "Kutch", "state": "Gujarat" },
+            { "name": "Dhamma Sindhu", "city": "Kutch", "state": "Gujarat" },
+            { "name": "Dhamma Divākara", "city": "Mehsana", "state": "Gujarat" },
+            { "name": "Dhamma Aravalli", "city": "Modasa", "state": "Gujarat" },
+            { "name": "Dhamma Pāli", "city": "Palitana", "state": "Gujarat" },
+            { "name": "Dhamma Koṭa", "city": "Rajkot", "state": "Gujarat" },
+            { "name": "Dhamma Kota", "city": "Kota", "state": "Rajasthan" },
+            { "name": "Dhamma Thali", "city": "Jaipur", "state": "Rajasthan" },
+            { "name": "Dhamma Pushkar", "city": "Pushkar", "state": "Rajasthan" },
+            { "name": "Dhamma Aranya", "city": "Chaksu", "state": "Rajasthan" },
+            { "name": "Dhamma Pubbaja", "city": "Churu", "state": "Rajasthan" },
+            { "name": "Dhamma Nilaya", "city": "Jamdoli", "state": "Rajasthan" },
+            { "name": "Dhamma Marudhara", "city": "Jodhpur", "state": "Rajasthan" },
+            { "name": "Dhammācala", "city": "Mt. Abu", "state": "Rajasthan" },
+            { "name": "Dhamma Madhuvana", "city": "Sri Ganganagar", "state": "Rajasthan" },
+            { "name": "Dhamma Goa", "city": "Goa" },
+            { "name": "Dhamma Sota", "city": "Delhi" },
+            { "name": "Dhamma Paṭṭhāna", "city": "Kammaspur", "state": "Haryana" },
+            { "name": "Dhamma Kāruṇika", "city": "Karnal", "state": "Haryana" },
+            { "name": "Dhamma Hitkari", "city": "Rohtak", "state": "Haryana" },
+            { "name": "Dhamma Sikhara", "city": "Dharamshala", "state": "Himachal Pradesh" },
+            { "name": "Dhamma Laddha", "city": "Ladakh" },
+            { "name": "Dhamma Salila", "city": "Dehradun", "state": "Uttarakhand" },
+            { "name": "Dhamma Anchal", "city": "Ambikapur", "state": "Chhattisgarh" },
+            { "name": "Dhamma Garh", "city": "Bilaspur", "state": "Chhattisgarh" },
+            { "name": "Dhamma Ketu", "city": "Durg", "state": "Chhattisgarh" },
+            { "name": "Dhamma Kuti", "city": "Raipur", "state": "Chhattisgarh" },
+            { "name": "Dhamma Sukhalaya", "city": "Bengaluru", "state": "Karnataka" },
+            { "name": "Dhamma Paphulla", "city": "Bengaluru", "state": "Karnataka" },
+            { "name": "Dhamma Nagari", "city": "Davangere", "state": "Karnataka" },
+            { "name": "Dhamma Vana", "city": "Mysuru", "state": "Karnataka" },
+            { "name": "Dhamma Nadī", "city": "Udupi", "state": "Karnataka" },
+            { "name": "Dhamma Ketana", "city": "Cheriyanad", "state": "Kerala" },
+            { "name": "Dhamma Paduma", "city": "Thiruvananthapuram", "state": "Kerala" },
+            { "name": "Dhamma Parimala", "city": "Wayanad", "state": "Kerala" },
+            { "name": "Dhamma Kānana", "city": "Balaghat", "state": "Madhya Pradesh" },
+            { "name": "Dhamma Pāla", "city": "Bhopal", "state": "Madhya Pradesh" },
+            { "name": "Dhamma Chhavi", "city": "Chhindwara", "state": "Madhya Pradesh" },
+            { "name": "Dhamma Guna", "city": "Guna", "state": "Madhya Pradesh" },
+            { "name": "Dhamma Mālwā", "city": "Indore", "state": "Madhya Pradesh" },
+            { "name": "Dhamma Bala", "city": "Jabalpur", "state": "Madhya Pradesh" },
+            { "name": "Dhamma Rata", "city": "Ratlam", "state": "Madhya Pradesh" },
+            { "name": "Dhamma Ajaya", "city": "Ajaypur", "state": "Maharashtra" },
+            { "name": "Dhamma Anākula", "city": "Akola", "state": "Maharashtra" },
+            { "name": "Dhamma Amravati", "city": "Amravati", "state": "Maharashtra" },
+            { "name": "Dhamma Ajantā", "city": "Aurangabad", "state": "Maharashtra" },
+            { "name": "Dhamma Bhanḍāra", "city": "Bhandara", "state": "Maharashtra" },
+            { "name": "Dhamma Bhūsana", "city": "Bhusaval", "state": "Maharashtra" },
+            { "name": "Dhamma Kiran", "city": "Buldana", "state": "Maharashtra" },
+            { "name": "Dhamma Udaka", "city": "Dapoli", "state": "Maharashtra" },
+            { "name": "Dhamma Sarovara", "city": "Dhule", "state": "Maharashtra" },
+            { "name": "Dhamma Pades", "city": "Ratnagiri", "state": "Maharashtra" },
+            { "name": "Dhamma Kanheri", "city": "Mumbai", "state": "Maharashtra" },
+            { "name": "Global Vipassana Pagoda", "city": "Mumbai", "state": "Maharashtra" },
+            { "name": "Dhamma Vasudhā", "city": "Wardha", "state": "Maharashtra" },
+            { "name": "Dhamma Jalgaon", "city": "Jalgaon", "state": "Maharashtra" },
+            { "name": "Dhamma Vāhini", "city": "Kalyan", "state": "Maharashtra" },
+            { "name": "Dragon Palace Vipassana Meditation Centre", "city": "Nagpur", "state": "Maharashtra" },
+            { "name": "Dhamma Ālaya", "city": "Kolhapur", "state": "Maharashtra" },
+            { "name": "Dhamma Ᾱvāsa", "city": "Latur", "state": "Maharashtra" },
+            { "name": "Dhamma Manjusha", "city": "Manju", "state": "Maharashtra" },
+            { "name": "Dhamma Manamoda", "city": "Manmad", "state": "Maharashtra" },
+            { "name": "Dhamma Nāga", "city": "Nagpur", "state": "Maharashtra" },
+            { "name": "Dhamma Sugati", "city": "Nagpur", "state": "Maharashtra" },
+            { "name": "Dhamma Niranjana", "city": "Nanded", "state": "Maharashtra" },
+            { "name": "Dhamma Nāsikā", "city": "Nashik", "state": "Maharashtra" },
+            { "name": "Dhamma Vipula", "city": "New Mumbai", "state": "Maharashtra" },
+            { "name": "Dhamma Gond", "city": "Gondia", "state": "Maharashtra" },
+            { "name": "Dhamma Vāṭikā", "city": "Palghar", "state": "Maharashtra" },
+            { "name": "Dhamma Paṭhāra", "city": "Parner", "state": "Maharashtra" },
+            { "name": "Dhamma Sindhudurg", "city": "Pulas", "state": "Maharashtra" },
+            { "name": "Dhamma Puṇṇa", "city": "Pune", "state": "Maharashtra" },
+            { "name": "Dhamma Sugandha", "city": "Sangli", "state": "Maharashtra" },
+            { "name": "Dhamma Siddhapuri", "city": "Solapur", "state": "Maharashtra" },
+            { "name": "Dhamma Desa", "city": "Hingoli", "state": "Maharashtra" },
+            { "name": "Dhamma Malla", "city": "Yavatmal", "state": "Maharashtra" },
+            { "name": "Dhamma Pubbottara", "city": "Kamalanagar", "state": "Assam" },
+            { "name": "Dhamma Asama", "city": "Kamrup", "state": "Assam" },
+            { "name": "Dhamma Aruna", "city": "Mudoi", "state": "Assam" },
+            { "name": "Dhamma Bhubaneshwar", "city": "Bhubaneshwar", "state": "Odisha" },
+            { "name": "Dhamma Utkal", "city": "Khariar Road", "state": "Odisha" },
+            { "name": "Dhamma Dhaja", "city": "Hoshiarpur", "state": "Punjab" },
+            { "name": "Dhamma Sikkim", "city": "Changey Senti", "state": "Sikkim" },
+            { "name": "Dhamma Sineru", "city": "Gyanalakha", "state": "Sikkim" },
+            { "name": "Dhamma Setu", "city": "Chennai", "state": "Tamil Nadu" },
+            { "name": "Dhamma Madhurā", "city": "Dindigul", "state": "Tamil Nadu" },
+            { "name": "Dhamma Triveni", "city": "Kalampalayam Tirupur", "state": "Tamil Nadu" },
+            { "name": "Dhamma Kanchi", "city": "Kanchipuram", "state": "Tamil Nadu" },
+            { "name": "Dhamma Arunachala", "city": "Tiruvannamalai", "state": "Tamil Nadu" },
+            { "name": "Dhamma Ahobilam", "city": "Ahobilam", "state": "Andhra Pradesh" },
+            { "name": "Dhamma Ārāma", "city": "Kumudavalli Village", "state": "Andhra Pradesh" },
+            { "name": "Dhamma Anurakkhi", "city": "Pulivendula", "state": "Andhra Pradesh" },
+            { "name": "Dhamma Vijaya", "city": "Vijayarai", "state": "Andhra Pradesh" },
+            { "name": "Dhamma Bāvarī", "city": "Nirmal", "state": "Telangana" },
+            { "name": "Dhamma Khetta", "city": "Hyderabad", "state": "Telangana" },
+            { "name": "Dhamma Teera", "city": "Mahabubnagar", "state": "Telangana" },
+            { "name": "Dhamma Nāgājjuna", "city": "Nagarjun Sagar", "state": "Telangana" },
+            { "name": "Dhamma Nāgājjuna2", "city": "Nagarjun Sagar", "state": "Telangana" },
+            { "name": "Dhamma Tapo Sāgara", "city": "Nagarjuna Sagar", "state": "Telangana" },
+            { "name": "Dhamma Nijjhāna", "city": "Nizamabad", "state": "Telangana" },
+            { "name": "Dhamma Koṇdañña", "city": "Sanga Reddy", "state": "Telangana" },
+            { "name": "Dhamma Koṇdañña2", "city": "Sanga Reddy", "state": "Telangana" },
+            { "name": "Dhamma Puri", "city": "Machmara", "state": "West Bengal" },
+            { "name": "Dhamma Gaṅgā", "city": "Kolkata", "state": "West Bengal" },
+            { "name": "Dhammataṭa", "city": "Siliguri", "state": "West Bengal" },
+            { "name": "Dhamma Banga", "city": "Sonarpur", "state": "West Bengal" },
+            { "name": "Dhamma Sudha", "city": "Hastinapur", "state": "Uttar Pradesh" },
+            { "name": "Dhamma Kalyana", "city": "Kanpur", "state": "Uttar Pradesh" },
+            { "name": "Dhamma Kaya", "city": "Kushinagar", "state": "Uttar Pradesh" },
+            { "name": "Dhamma Lakkhaṇa", "city": "Lucknow", "state": "Uttar Pradesh" },
+            { "name": "Dhamma Cakka", "city": "Sarnath", "state": "Uttar Pradesh" },
+            { "name": "Dhamma Suvatthi", "city": "Sravasti", "state": "Uttar Pradesh" },
+            { "name": "Dhamma Bodhi", "city": "BodhGaya", "state": "Bihar" },
+            { "name": "Dhamma Sambodhi", "city": "Bodhgaya", "state": "Bihar" },
+            { "name": "Dhamma Licchavī", "city": "Muzaffarpur", "state": "Bihar" },
+            { "name": "Dhamma Pāṭaliputta", "city": "Patna", "state": "Bihar" },
+            { "name": "Dhamma Vesāli", "city": "Vaishali", "state": "Bihar" },
+            { "name": "Dhamma Upavana", "city": "Bara Chakia", "state": "Bihar" },
+            { "name": "Dhamma Dhaja", "city": "Hoshiarpur", "state": "Punjab" }
+          ],
+          "non_centers": [
+            { "name": "Vipassana Goa", "city": "Goa" },
+            { "name": "Vipassana Courses in Dharmaj, Gujarat", "city": "Dharmaj" },
+            { "name": "Vipassana Courses in Nalanda, Bihar", "city": "Nalanda" },
+            { "name": "Vipassana in Chaksu, Rajasthan", "city": "Chaksu" },
+            { "name": "Vipassana Trust Sagar (M.P.)", "city": "Sagar" },
+            { "name": "Vasai Virar Vipassana Samiti", "city": "Virar" },
+            { "name": "Mahad Vipassana", "city": "Mahad" },
+            { "name": "Mitra Upakram Vipassana", "city": "Maharashtra" },
+            { "name": "Telugu Land Courses", "state": "Telugu Land" },
+            { "name": "Non-centre Vipassana Courses in Tamil Nadu", "state": "Tamil Nadu" },
+            { "name": "Coimbatore Vipassana Center", "city": "Coimbatore" }
+          ]
+        },
+        {
+          "name": "Bangladesh",
+          "region": "South Asia",
+          "centers": [
+            { "name": "Dhamma Dhaka", "city": "Dhaka" },
+            { "name": "Dhamma Bangladesh", "city": "Chittagong" }
+          ],
+          "non_centers": [
+            { "name": "Bangladesh Vipassana Society", "city": "Khagrachari" }
+          ]
+        },
+        {
+          "name": "Nepal",
+          "region": "South Asia",
+          "centers": [
+            { "name": "Dhamma Shringa", "city": "Kathmandu" },
+            { "name": "Dhamma Ādhāra", "city": "Kathmandu" },
+            { "name": "Dhamma Kitti", "city": "Kirtipur" },
+            { "name": "Dhamma Āsaya", "city": "Lalitpur" },
+            { "name": "Dhammāgāra", "city": "Lalitpur" },
+            { "name": "Dhamma Nibhā", "city": "Kakani Village" },
+            { "name": "Dhamma Tarāi", "city": "Birganj" },
+            { "name": "Dhamma Birāṭa", "city": "Biratnagar" },
+            { "name": "Dhamma Citavana", "city": "Chitwan" },
+            { "name": "Dhamma Pokharā", "city": "Pokhara" },
+            { "name": "Dhamma Sagar", "city": "Lukla" },
+            { "name": "Dhamma Jananī", "city": "Lumbini" },
+            { "name": "Dhamma Gāma", "city": "Ramgram" },
+            { "name": "Dhamma Sīsa", "city": "Tansen" },
+            { "name": "Dhamma Parāga", "city": "Ghorahi" },
+            { "name": "Dhammayāna", "city": "Bhimdatta" },
+            { "name": "Dhamma Surakhetta", "city": "Katkuwa Surkhet" },
+            { "name": "Dhamma Suriyo", "city": "Illam District" },
+            { "name": "Dhamma Nandana", "city": "Banganga" }
+          ],
+          "non_centers": []
+        },
+        {
+          "name": "Sri Lanka",
+          "region": "South Asia",
+          "centers": [
+            { "name": "Dhamma Kūṭa", "city": "Kandy" },
+            { "name": "Dhamma Anurādha", "city": "Anuradhapura" },
+            { "name": "Dhamma Sobhā", "city": "Kosgama" },
+            { "name": "Dhamma Dharani", "city": "Negampaha" },
+            { "name": "Dhamma Dakkhiṇa", "city": "Thihagoda" },
+            { "name": "Dhamma Araṇa", "city": "Wellawaya" }
+          ],
+          "non_centers": []
+        },
+        {
+          "name": "Myanmar",
+          "region": "Southeast Asia",
+          "centers": [
+            { "name": "Dhamma Joti", "city": "Yangon" },
+            { "name": "Dhamma Magga", "city": "Yangon" },
+            { "name": "Dhamma Hita Sukha Geha", "city": "Yangon" },
+            { "name": "Dhamma Vimutti", "city": "Mandalay" },
+            { "name": "Dhamma Maṇḍapa", "city": "Mandalay" },
+            { "name": "Dhamma Maṇḍala", "city": "Mandalay" },
+            { "name": "Dhamma Ratana", "city": "Mogok" },
+            { "name": "Dhamma Makuṭa", "city": "Mogok" },
+            { "name": "Dhamma Mahimãr", "city": "Pyin Oo Lwin" },
+            { "name": "Dhamma Mayūradipa", "city": "Ayeyarwady" },
+            { "name": "Dhamma Manorama", "city": "Ma-U-Bin" },
+            { "name": "Dhamma Mitta Yāna", "city": "Myaungmya" },
+            { "name": "Dhamma Nidhi", "city": "Indagaw" },
+            { "name": "Dhamma Rakkhita", "city": "Thayawaddi" },
+            { "name": "Dhamma Sangam", "city": "Nan Kway village" },
+            { "name": "Dhamma Cetiya Paṭṭhāra", "city": "Kaytho" },
+            { "name": "Dhamma Manohara", "city": "Than-Phyu-Za-Yet" },
+            { "name": "Dhamma Shwe", "city": "Sagaing" },
+            { "name": "Dhamma Ñāṇadhaja", "city": "Sagaing" },
+            { "name": "Dhamma Lābha", "city": "Lashio" },
+            { "name": "Dhamma Pabbata", "city": "Muse" },
+            { "name": "Dhamma Mahā Pabbata", "city": "Taunggyi" },
+            { "name": "Dhamma Mani", "city": "Penwegone" }
+          ],
+          "non_centers": []
+        },
+        {
+          "name": "Thailand",
+          "region": "Southeast Asia",
+          "centers": [
+            { "name": "Dhamma Kañcana", "city": "Kanchanaburi" },
+            { "name": "Dhamma Kamala", "city": "Prachinburi" },
+            { "name": "Dhamma Canda Pabhā", "city": "Chantaburi" },
+            { "name": "Dhamma Suvaṇṇa", "city": "Khon Kaen" },
+            { "name": "Dhamma Dhānī", "city": "Bangkok" },
+            { "name": "Dhamma Sīmanta", "city": "Lamphun" },
+            { "name": "Dhamma Sudhālaya", "city": "Nakhon Sawan" },
+            { "name": "Dhamma Porāṇo", "city": "Nakhon Si Thammarat" },
+            { "name": "Dhamma Raṃsimā", "city": "Pathum Thani" },
+            { "name": "Dhamma Paṭhavī", "city": "Phetchaburi" },
+            { "name": "Dhamma Ābhā", "city": "Phitsanulok" },
+            { "name": "Dhamma Bhuvana", "city": "Ubon Ratchathani" },
+            { "name": "Dhamma Puneti", "city": "Udon Thani" }
+          ],
+          "non_centers": []
+        },
+        {
+          "name": "Cambodia",
+          "region": "Southeast Asia",
+          "centers": [
+            { "name": "Dhamma Laṭṭhikā", "city": "Battambang" },
+            { "name": "Dhamma Kamboja", "city": "Kampong Cham" }
+          ],
+          "non_centers": [
+            { "name": "Vipassana Cambodia", "city": "Phnom Penh" }
+          ]
+        },
+        {
+          "name": "Vietnam",
+          "region": "Southeast Asia",
+          "centers": [
+            { "name": "Dhamma Bhāsura", "city": "Tây Ninh" }
+          ],
+          "non_centers": [
+            { "name": "Vipassana Việt Nam", "city": "Ho Chi Minh City" }
+          ]
+        },
+        {
+          "name": "Indonesia",
+          "region": "Southeast Asia",
+          "centers": [
+            { "name": "Dhamma Geha", "city": "Bali" }
+          ],
+          "non_centers": [
+            { "name": "Vipassana Meditation in Java", "city": "Gadog-Puncak" },
+            { "name": "Vipassana Meditation in Indonesia" }
+          ]
+        },
+        {
+          "name": "Malaysia",
+          "region": "Southeast Asia",
+          "centers": [
+            { "name": "Dhamma Malaya", "city": "Pahang" },
+            { "name": "Dhamma Sundara", "city": "Kuala Ketil" }
+          ],
+          "non_centers": [
+            { "name": "Johor Vipassana", "city": "Johor" }
+          ]
+        },
+        {
+          "name": "Singapore",
+          "region": "Southeast Asia",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Meditation in Singapore", "city": "Singapore" }
+          ]
+        },
+        {
+          "name": "Philippines",
+          "region": "Southeast Asia",
+          "centers": [
+            { "name": "Dhamma Phala", "city": "Tiaong, Quezon Province" }
+          ],
+          "non_centers": []
+        },
+        {
+          "name": "Hong Kong",
+          "region": "Eastern Asia",
+          "centers": [
+            { "name": "Vipassana Hong Kong", "city": "Tung Wan, Lantau Island" }
+          ],
+          "non_centers": []
+        },
+        {
+          "name": "Japan",
+          "region": "Eastern Asia",
+          "centers": [
+            { "name": "Dhamma Ādicca", "city": "Chiba" },
+            { "name": "Dhamma Bhānu", "city": "Kyoto" }
+          ],
+          "non_centers": []
+        },
+        {
+          "name": "Mongolia",
+          "region": "Eastern Asia",
+          "centers": [
+            { "name": "Dhamma Mahana", "city": "Ulaanbaatar" }
+          ],
+          "non_centers": []
+        },
+        {
+          "name": "South Korea",
+          "region": "Eastern Asia",
+          "centers": [
+            { "name": "Dhamma Korea", "city": "Jinan-gun" }
+          ],
+          "non_centers": []
+        },
+        {
+          "name": "Taiwan",
+          "region": "Eastern Asia",
+          "centers": [
+            { "name": "Dhamma Vikāsa" },
+            { "name": "Dhammodaya", "city": "Taichung" }
+          ],
+          "non_centers": [
+            { "name": "Vipassana in Taiwan" }
+          ]
+        },
+        {
+          "name": "Iran",
+          "region": "Central and Western Asia",
+          "centers": [
+            { "name": "Dhamma Iran", "city": "Mehrshahr" }
+          ],
+          "non_centers": []
+        },
+        {
+          "name": "Israel",
+          "region": "Central and Western Asia",
+          "centers": [
+            { "name": "Dhamma Pamoda", "city": "Deganya Bet" }
+          ],
+          "non_centers": []
+        },
+        {
+          "name": "Turkey",
+          "region": "Central and Western Asia",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Meditation in Turkey", "city": "Aydın, Izmir" }
+          ]
+        },
+        {
+          "name": "Uzbekistan",
+          "region": "Central and Western Asia",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Association of Uzbekistan" }
+          ]
+        },
+        {
+          "name": "Armenia",
+          "region": "Central and Western Asia",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Meditation in Armenia" }
+          ]
+        },
+        {
+          "name": "Jordan",
+          "region": "Central and Western Asia",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Meditation in Jordan", "city": "As-Salt" }
+          ]
+        },
+        {
+          "name": "Lebanon",
+          "region": "Central and Western Asia",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Meditation in Lebanon" }
+          ]
+        },
+        {
+          "name": "Oman",
+          "region": "Central and Western Asia",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Meditation in Sultanate of Oman" }
+          ]
+        },
+        {
+          "name": "Palestine",
+          "region": "Central and Western Asia",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Meditation in Palestine", "city": "Zababida" }
+          ]
+        },
+        {
+          "name": "Bahrain",
+          "region": "Central and Western Asia",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Meditation in Bahrain" }
+          ]
+        },
+        {
+          "name": "United Arab Emirates",
+          "region": "Central and Western Asia",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana UAE" }
+          ]
+        },
+        {
+          "name": "Kazakhstan",
+          "region": "Central and Western Asia",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Kazakhstan" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Europe",
+      "countries": [
+        {
+          "name": "Austria",
+          "centers": [
+            { "name": "Dhamma Mudita", "city": "Oberösterreich" }
+          ],
+          "non_centers": []
+        },
+        {
+          "name": "Belgium",
+          "centers": [
+            { "name": "Dhamma Pajjota", "city": "Dilsen-Stokkem" }
+          ],
+          "non_centers": []
+        },
+        {
+          "name": "France",
+          "centers": [
+            { "name": "Dhamma Mahī", "city": "Champignelles" },
+            { "name": "Dhamma Sūriyārāma", "city": "Labroquère" },
+            { "name": "Dhamma Nilaya", "city": "Beautheil-Saints" }
+          ],
+          "non_centers": [
+            { "name": "Vipassana Meditation France" },
+            { "name": "Paris Area", "city": "Paris" },
+            { "name": "North East" },
+            { "name": "North West" },
+            { "name": "South East" },
+            { "name": "South West" }
+          ]
+        },
+        {
+          "name": "Germany",
+          "centers": [
+            { "name": "Dhamma Sampatti", "city": "Hohritt" },
+            { "name": "Dhamma Dvāra", "city": "Triebel" }
+          ],
+          "non_centers": [
+            { "name": "Vipassana Meditation Germany" },
+            { "name": "Southeast Vipassana Group", "city": "Hausham" },
+            { "name": "Northwest Vipassana Group", "city": "Meppen" },
+            { "name": "Southwest Vipassana Group", "city": "Bad Wurzach" }
+          ]
+        },
+        {
+          "name": "Italy",
+          "centers": [
+            { "name": "Dhamma Aṭala", "city": "Lutirano (Florence)" }
+          ],
+          "non_centers": []
+        },
+        {
+          "name": "Spain",
+          "centers": [
+            { "name": "Dhamma Neru", "city": "Santa Maria de Palautordera (Barcelona)" },
+            { "name": "Dhamma Sacca", "city": "Ávila" }
+          ],
+          "non_centers": [
+            { "name": "Vipassana in Spain" },
+            { "name": "North and East Area" },
+            { "name": "West, Center and South Area" }
+          ]
+        },
+        {
+          "name": "United Kingdom",
+          "centers": [
+            { "name": "Dhamma Padhāna", "city": "Herefordshire" },
+            { "name": "Dhamma Dīpa", "city": "Herefordshire" },
+            { "name": "Dhamma Sukhakārī", "city": "Suffolk" }
+          ],
+          "non_centers": [
+            { "name": "Vipassana Meditation UK" },
+            { "name": "North of England", "city": "Northern England" },
+            { "name": "Scotland Vipassana", "city": "Edinburgh" }
+          ]
+        },
+        {
+          "name": "Sweden",
+          "centers": [
+            { "name": "Dhamma Sobhana", "city": "Ödeshög" }
+          ],
+          "non_centers": []
+        },
+        {
+          "name": "Switzerland",
+          "centers": [
+            { "name": "Dhamma Sumeru", "city": "Mont Soleil" }
+          ],
+          "non_centers": []
+        },
+        {
+          "name": "Netherlands",
+          "centers": [
+            { "name": "Dhamma Taḷāka", "city": "Almere" }
+          ],
+          "non_centers": []
+        },
+        {
+          "name": "Latvia",
+          "centers": [
+            { "name": "Dhamma Laṭṭhi", "city": "Sigulda" }
+          ],
+          "non_centers": []
+        },
+        {
+          "name": "Lithuania",
+          "centers": [
+            { "name": "Dhamma Līḷhā", "city": "Varėna" }
+          ],
+          "non_centers": []
+        },
+        {
+          "name": "Poland",
+          "centers": [
+            { "name": "Dhamma Pallava", "city": "Dziadowice" }
+          ],
+          "non_centers": [
+            { "name": "Vipassana Meditation in Poland", "city": "Krutyń" }
+          ]
+        },
+        {
+          "name": "Russia",
+          "centers": [
+            { "name": "Dhamma Dullabha" }
+          ],
+          "non_centers": [
+            { "name": "Vipassana Meditation in Moscow Region", "city": "Moscow" },
+            { "name": "Novosibirsk Vipassana Courses", "city": "Novosibirsk" },
+            { "name": "Vipassana Courses in Perm", "city": "Perm" },
+            { "name": "St. Petersburg Non Centre Vipassana", "city": "St. Petersburg" },
+            { "name": "Yekaterinburg NonCenter Vipassana Courses", "city": "Yekaterinburg" }
+          ]
+        },
+        {
+          "name": "Croatia",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Croatia", "city": "Zagreb" }
+          ]
+        },
+        {
+          "name": "Greece",
+          "centers": [],
+          "non_centers": [
+            { "name": "Greek Vipassana Association", "city": "Crete" }
+          ]
+        },
+        {
+          "name": "Portugal",
+          "centers": [],
+          "non_centers": [
+            { "name": "Associação Vipassana Portugal", "city": "Faro, Rogil" }
+          ]
+        },
+        {
+          "name": "Serbia",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Serbia", "city": "Belgrade" }
+          ]
+        },
+        {
+          "name": "Slovenia",
+          "centers": [],
+          "non_centers": [
+            { "name": "Fundacija Vipassana", "city": "Ljubljana" }
+          ]
+        },
+        {
+          "name": "Macedonia",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Meditation in Macedonia" }
+          ]
+        },
+        {
+          "name": "Denmark",
+          "centers": [],
+          "non_centers": [
+            { "name": "Denmark Vipassana", "city": "Copenhagen" }
+          ]
+        },
+        {
+          "name": "Estonia",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Meditation in Estonia", "city": "Tallinn" }
+          ]
+        },
+        {
+          "name": "Finland",
+          "centers": [],
+          "non_centers": [
+            { "name": "Finland Vipassana", "city": "Helsinki" }
+          ]
+        },
+        {
+          "name": "Ireland",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Meditation in Ireland" }
+          ]
+        },
+        {
+          "name": "Norway",
+          "centers": [],
+          "non_centers": [
+            { "name": "Norway Vipassana", "city": "Gol" }
+          ]
+        },
+        {
+          "name": "Belarus",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Meditation in Belarus", "city": "Minsk" }
+          ]
+        },
+        {
+          "name": "Bulgaria",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Bulgaria", "city": "Troyan" }
+          ]
+        },
+        {
+          "name": "Czech Republic",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Czech Republic and Slovakia", "city": "Praha" }
+          ]
+        },
+        {
+          "name": "Georgia",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Georgia" }
+          ]
+        },
+        {
+          "name": "Hungary",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Meditation in Hungary", "city": "Salgótarján" }
+          ]
+        },
+        {
+          "name": "Moldova",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Meditation Moldova", "city": "Chişinău" }
+          ]
+        },
+        {
+          "name": "Romania",
+          "centers": [],
+          "non_centers": [
+            { "name": "Fundația Vipassana România", "city": "Cluj-Napoca" }
+          ]
+        },
+        {
+          "name": "Slovakia",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Slovakia", "city": "Bratislava" }
+          ]
+        },
+        {
+          "name": "Ukraine",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Meditation in Ukraine", "city": "Kyiv" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "North America",
+      "countries": [
+        {
+          "name": "Canada",
+          "centers": [
+            { "name": "Dhamma Karuṇā", "city": "Youngstown", "province": "Alberta" },
+            { "name": "Dhamma Modana", "city": "Duncan", "province": "British Columbia" },
+            { "name": "Dhamma Surabhi", "city": "Merritt", "province": "British Columbia" },
+            { "name": "Dhamma Toraṇa", "city": "Egbert", "province": "Ontario" },
+            { "name": "Dhamma Suttama", "city": "Montebello", "province": "Quebec" }
+          ],
+          "non_centers": [
+            { "name": "Atlantic Canada Vipassana Meditation", "province": "Atlantic Canada" },
+            { "name": "Po Lam Meditation Vihara", "city": "Chilliwack", "province": "British Columbia" },
+            { "name": "Vipassana Meditation in Manitoba", "city": "Winnipeg", "province": "Manitoba" }
+          ]
+        },
+        {
+          "name": "United States",
+          "centers": [
+            { "name": "Dhamma Santosa", "state": "California" },
+            { "name": "Dhamma Maṇḍa", "city": "Kelseyville", "state": "California" },
+            { "name": "Dhamma Mahāvana", "city": "North Fork", "state": "California" },
+            { "name": "Dhamma Vaddhana", "city": "Twentynine Palms", "state": "California" },
+            { "name": "Dhamma Sela", "city": "Elbert", "state": "Colorado" },
+            { "name": "Dhamma Pubbananda", "city": "Claymont", "state": "Delaware" },
+            { "name": "Dhamma Patāpa", "city": "Jesup", "state": "Georgia" },
+            { "name": "Dhamma Pasava", "city": "Lava Hot Springs", "state": "Idaho" },
+            { "name": "Dhamma Pakāsa", "city": "Pecatonica", "state": "Illinois" },
+            { "name": "Dhamma Dharā", "city": "Shelburne Falls", "state": "Massachusetts" },
+            { "name": "Dhamma Sirī", "city": "Kaufman", "state": "Texas" },
+            { "name": "Dhamma Sukha", "city": "New Ulm", "state": "Texas" },
+            { "name": "Dhamma Kuñja", "city": "Onalaska", "state": "Washington" },
+            { "name": "Dhamma Visuddhi", "city": "Menomonie", "state": "Wisconsin" }
+          ],
+          "non_centers": [
+            { "name": "Atlanta Dhamma House", "city": "Atlanta", "state": "Georgia" },
+            { "name": "Hawaii Vipassana Association", "city": "Waianae", "state": "Hawaii" },
+            { "name": "Michigan Vipassana Association", "city": "Ann Arbor", "state": "Michigan" },
+            { "name": "Montana Vipassana Association", "city": "Missoula", "state": "Montana" },
+            { "name": "New York Vipassana Association", "city": "New York", "state": "New York" },
+            { "name": "Ohio Vipassana Association", "city": "Cleveland & Columbus", "state": "Ohio" }
+          ]
+        },
+        {
+          "name": "Mexico",
+          "centers": [
+            { "name": "Dhamma Makaranda", "city": "San Bartolo Amanalco" }
+          ],
+          "non_centers": [
+            { "name": "All Mexico Courses" },
+            { "name": "México Vipassana - Monterrey", "city": "Monterrey" },
+            { "name": "Vipassana Meditation - Morelos", "city": "Morelos" },
+            { "name": "México Vipassana - Oaxaca", "city": "Oaxaca" },
+            { "name": "Vipassana in Bajio", "city": "Queretaro" },
+            { "name": "Vipassana México - Veracruz", "city": "Veracruz" }
+          ]
+        },
+        {
+          "name": "Cuba",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Cuba", "city": "La Habana" }
+          ]
+        },
+        {
+          "name": "Puerto Rico",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Puerto Rico" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Latin America and Caribbean",
+      "countries": [
+        {
+          "name": "Argentina",
+          "centers": [
+            { "name": "Dhamma Sukhadā", "city": "Brandsen", "province": "Buenos Aires" },
+            { "name": "Dhamma Viriya", "city": "Capilla del Monte", "province": "Córdoba" }
+          ],
+          "non_centers": [
+            { "name": "Vipassana Meditation in Argentina" },
+            { "name": "Vipassana Argentina - Mendoza", "city": "Mendoza" }
+          ]
+        },
+        {
+          "name": "Bolivia",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Meditation in Bolivia" }
+          ]
+        },
+        {
+          "name": "Brazil",
+          "centers": [
+            { "name": "Dhamma Santi", "city": "Engenheiro Paulo de Frontin", "province": "Rio de Janeiro" },
+            { "name": "Dhamma Uyyāna", "city": "Pirenópolis", "province": "Goiás" },
+            { "name": "Dhamma Saraṇa", "city": "Santana de Parnaíba", "province": "São Paulo" }
+          ],
+          "non_centers": [
+            { "name": "Vipassana in Brazil" },
+            { "name": "Vipassana Brasil - Minas Gerais", "province": "Minas Gerais" },
+            { "name": "Vipassana Brasil - Nordeste", "province": "Nordeste" },
+            { "name": "Vipassana Brasil - Parana", "province": "Paraná" },
+            { "name": "Vipassana Brasil - Santa Catarina", "city": "Florianópolis", "province": "Santa Catarina" }
+          ]
+        },
+        {
+          "name": "Chile",
+          "centers": [
+            { "name": "Dhamma Pasanna", "city": "Melipilla", "province": "Región Metropolitana" }
+          ],
+          "non_centers": [
+            { "name": "Vipassana Chile" }
+          ]
+        },
+        {
+          "name": "Colombia",
+          "centers": [
+            { "name": "Dhamma Gutti", "city": "Medellín", "province": "Antioquia" },
+            { "name": "Dhamma Nandanavana", "city": "San Antonio del Tequendama", "province": "Cundinamarca" }
+          ],
+          "non_centers": [
+            { "name": "Vipassana Colombia - Bogotá", "city": "Bogotá" },
+            { "name": "All Colombia Courses" }
+          ]
+        },
+        {
+          "name": "Costa Rica",
+          "centers": [
+            { "name": "Dhamma Ariya", "city": "Cartago" }
+          ],
+          "non_centers": []
+        },
+        {
+          "name": "Curaçao",
+          "centers": [],
+          "non_centers": [
+            { "name": "Curaçao Vipassana" }
+          ]
+        },
+        {
+          "name": "Dominican Republic",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Dominican Republic", "city": "Gasper Hernandez" }
+          ]
+        },
+        {
+          "name": "Ecuador",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Meditation in Ecuador" },
+            { "name": "Vipassana Ecuador - Cuenca", "city": "Cuenca" },
+            { "name": "Vipassana Ecuador - Quito", "city": "Quito" }
+          ]
+        },
+        {
+          "name": "El Salvador",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana El Salvador" }
+          ]
+        },
+        {
+          "name": "Guatemala",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Guatemala" }
+          ]
+        },
+        {
+          "name": "Haiti",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Haiti", "city": "Port-au-Prince" }
+          ]
+        },
+        {
+          "name": "Honduras",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Honduras" }
+          ]
+        },
+        {
+          "name": "Nicaragua",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Nicaragua" }
+          ]
+        },
+        {
+          "name": "Panama",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Panamá" }
+          ]
+        },
+        {
+          "name": "Paraguay",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Paraguay", "city": "Asunción" }
+          ]
+        },
+        {
+          "name": "Peru",
+          "centers": [
+            { "name": "Dhamma Suriya", "city": "Lima" }
+          ],
+          "non_centers": [
+            { "name": "Vipassana Perú - Cusco", "city": "Cusco" },
+            { "name": "Vipassana Meditation in Peru" }
+          ]
+        },
+        {
+          "name": "Suriname",
+          "centers": [],
+          "non_centers": [
+            { "name": "Suriname Vipassana", "city": "Paramaribo" }
+          ]
+        },
+        {
+          "name": "Uruguay",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Uruguay" }
+          ]
+        },
+        {
+          "name": "Venezuela",
+          "centers": [
+            { "name": "Dhamma Veṇuvana", "city": "Aragua" }
+          ],
+          "non_centers": [
+            { "name": "Vipassana Venezuela - Occidente" },
+            { "name": "Vipassana Meditation in Venezuela" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Africa",
+      "countries": [
+        {
+          "name": "Ethiopia",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Ethiopia", "city": "Addis Ababa" }
+          ]
+        },
+        {
+          "name": "Kenya",
+          "centers": [],
+          "non_centers": [
+            { "name": "Kenya Vipassana Meditation Courses", "city": "Nairobi" }
+          ]
+        },
+        {
+          "name": "Madagascar",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Madagascar", "city": "Antsirabé" }
+          ]
+        },
+        {
+          "name": "Mauritius",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Meditation in Mauritius" }
+          ]
+        },
+        {
+          "name": "Morocco",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Meditation in Morocco", "city": "Marrakech" }
+          ]
+        },
+        {
+          "name": "Mozambique",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Meditation in Mozambique" }
+          ]
+        },
+        {
+          "name": "Namibia",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Meditation in Namibia" }
+          ]
+        },
+        {
+          "name": "Reunion",
+          "centers": [],
+          "non_centers": [
+            { "name": "Reunion Island Vipassana Meditation", "city": "Ile de la Réunion" }
+          ]
+        },
+        {
+          "name": "Senegal",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Meditation in Senegal" }
+          ]
+        },
+        {
+          "name": "South Africa",
+          "centers": [
+            { "name": "Dhamma Patākā", "city": "Worcester", "province": "Western Cape" }
+          ],
+          "non_centers": []
+        },
+        {
+          "name": "Tunisia",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Meditation in Tunisia" }
+          ]
+        },
+        {
+          "name": "Uganda",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Meditation in Uganda" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Oceania",
+      "countries": [
+        {
+          "name": "Australia",
+          "centers": [
+            { "name": "Dhamma Bhumi", "city": "Blackheath", "state": "New South Wales" },
+            { "name": "Dhamma Pāsāda", "city": "Lower Portland", "state": "New South Wales" },
+            { "name": "Dhamma Rasmi", "city": "Pomona", "state": "Queensland" },
+            { "name": "Dhamma Rasa", "city": "Pomona", "state": "Queensland" },
+            { "name": "Dhamma Ujjala", "city": "Clare", "state": "South Australia" },
+            { "name": "Dhamma Pabhā", "city": "Upper Dromedary", "state": "Tasmania" },
+            { "name": "Dhamma Aloka", "city": "Woori Yallock", "state": "Victoria" },
+            { "name": "Dhamma Padīpa", "city": "Brookton", "state": "Western Australia" }
+          ],
+          "non_centers": [
+            { "name": "Dhamma Passaddhi", "city": "Northern Rivers Gold Coast", "state": "New South Wales" },
+            { "name": "Vipassana Meditation Northern Territory", "city": "Darwin", "state": "Northern Territory" }
+          ]
+        },
+        {
+          "name": "New Caledonia",
+          "centers": [],
+          "non_centers": [
+            { "name": "New Caledonia Vipassana" }
+          ]
+        },
+        {
+          "name": "French Polynesia",
+          "centers": [],
+          "non_centers": [
+            { "name": "Vipassana Meditation in French Polynesia", "city": "Tahiti" }
+          ]
+        }
+      ]
+    }
+  ]
+}

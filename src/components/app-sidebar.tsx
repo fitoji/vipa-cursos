@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { BarChart3, BookOpen, ArrowLeft, Upload } from "lucide-react";
+import { BarChart3, BookOpen, ArrowLeft, Upload, MapPin } from "lucide-react";
 
 import {
   Sidebar,
@@ -16,7 +16,7 @@ import {
   SidebarSeparator,
 } from "@/components/ui/sidebar";
 
-type View = "stats" | "courses" | "import";
+type View = "stats" | "courses" | "locations" | "import";
 
 interface AppSidebarProps {
   activeView: View;
@@ -26,6 +26,7 @@ interface AppSidebarProps {
 const navItems: { view: View; label: string; icon: React.ComponentType<{ className?: string }> }[] = [
   { view: "stats", label: "Estadísticas", icon: BarChart3 },
   { view: "courses", label: "Ver todos los cursos", icon: BookOpen },
+  { view: "locations", label: "Centros Vipassana", icon: MapPin },
 ];
 
 export function AppSidebar({ activeView, onNavigate }: AppSidebarProps) {

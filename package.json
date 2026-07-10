@@ -9,7 +9,9 @@
     "start": "next start",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "doctor": "npx react-doctor@latest"
+    "doctor": "npx react-doctor@latest",
+    "db:schema": "tsx scripts/create-schema.ts",
+    "db:seed": "tsx scripts/seed-locations.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -79,6 +81,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "globals": "^15.15.0",
     "prettier": "^3.7.3",
+    "tsx": "^4.23.0",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.56.1"
   },
