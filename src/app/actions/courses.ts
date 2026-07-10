@@ -2,6 +2,8 @@
 
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
+import { headers } from "next/headers";
+import { auth } from "@/lib/auth";
 
 const courseSchema = z.object({
   start_date: z.string().min(1),
@@ -28,11 +30,15 @@ type CourseRow = {
 };
 
 export async function createCourse({ data }: { data: CourseInput }) {
+  const session = await auth.api.getSession({ headers: await headers() });
+  if (!session?.user?.id) throw new Error("Unauthorized");
+  const userId = session.user.id;
+
   const { neon } = await import("@neondatabase/serverless");
   const sql = neon(process.env.DATABASE_URL!);
   const rows = await sql`
-    INSERT INTO vipassana_courses (start_date, place, teacher, country, mode, days, obs)
-    VALUES (${data.start_date}, ${data.place}, ${data.teacher}, ${data.country}, ${data.mode}, ${data.days}, ${data.obs})
+    INSERT INTO vipassana_courses (start_date, place, teacher, country, mode, days, obs, user_id)
+    VALUES (${data.start_date}, ${data.place}, ${data.teacher}, ${data.country}, ${data.mode}, ${data.days}, ${data.obs}, ${userId})
     RETURNING id, start_date, place, teacher, country, mode, days, obs, created_at
   `;
   revalidatePath("/");
@@ -41,11 +47,16 @@ export async function createCourse({ data }: { data: CourseInput }) {
 }
 
 export async function listCourses(): Promise<CourseRow[]> {
+  const session = await auth.api.getSession({ headers: await headers() });
+  if (!session?.user?.id) throw new Error("Unauthorized");
+  const userId = session.user.id;
+
   const { neon } = await import("@neondatabase/serverless");
   const sql = neon(process.env.DATABASE_URL!);
   const rows = await sql`
     SELECT id, start_date, place, teacher, country, mode, days, obs, created_at
     FROM vipassana_courses
+    WHERE user_id = ${userId}
     ORDER BY start_date DESC, id DESC
   `;
   return rows as CourseRow[];
@@ -54,6 +65,10 @@ export async function listCourses(): Promise<CourseRow[]> {
 const updateSchema = courseSchema.extend({ id: z.number().int().positive() });
 
 export async function updateCourse({ data }: { data: z.infer<typeof updateSchema> }) {
+  const session = await auth.api.getSession({ headers: await headers() });
+  if (!session?.user?.id) throw new Error("Unauthorized");
+  const userId = session.user.id;
+
   const { neon } = await import("@neondatabase/serverless");
   const sql = neon(process.env.DATABASE_URL!);
   const rows = await sql`
@@ -65,7 +80,7 @@ export async function updateCourse({ data }: { data: z.infer<typeof updateSchema
         mode = ${data.mode},
         days = ${data.days},
         obs = ${data.obs}
-    WHERE id = ${data.id}
+    WHERE id = ${data.id} AND user_id = ${userId}
     RETURNING id, start_date, place, teacher, country, mode, days, obs, created_at
   `;
   revalidatePath("/");
@@ -74,9 +89,13 @@ export async function updateCourse({ data }: { data: z.infer<typeof updateSchema
 }
 
 export async function deleteCourse({ data }: { data: { id: number } }) {
+  const session = await auth.api.getSession({ headers: await headers() });
+  if (!session?.user?.id) throw new Error("Unauthorized");
+  const userId = session.user.id;
+
   const { neon } = await import("@neondatabase/serverless");
   const sql = neon(process.env.DATABASE_URL!);
-  await sql`DELETE FROM vipassana_courses WHERE id = ${data.id}`;
+  await sql`DELETE FROM vipassana_courses WHERE id = ${data.id} AND user_id = ${userId}`;
   revalidatePath("/");
   revalidatePath("/dashboard");
   return { ok: true };
