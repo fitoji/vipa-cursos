@@ -1,2 +1,7 @@
 minimumReleaseAge: 0
-dangerouslyAllowAllBuilds: true
+trustPolicy: no-downgrade
+blockExoticSubdeps: true
+overrides:
+  undici-types: 8.7.0
+allowBuilds:
+  sharp: true
