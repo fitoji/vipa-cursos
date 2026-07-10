@@ -3,8 +3,15 @@ import { Pool } from "pg";
 import { nextCookies } from "better-auth/next-js";
 import { sendEmail } from "@/lib/email";
 
+// Neon requires SSL. We explicitly set rejectUnauthorized: true (verify-full)
+// to avoid the pg v9 deprecation warning about sslmode=require aliasing.
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: true },
+});
+
 export const auth = betterAuth({
-  database: new Pool({ connectionString: process.env.DATABASE_URL }),
+  database: pool,
   secret: process.env.BETTER_AUTH_SECRET!,
   baseURL: process.env.BETTER_AUTH_URL ?? "http://localhost:3000",
   emailAndPassword: {

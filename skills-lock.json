@@ -47,8 +47,9 @@
     },
     "neon-postgres": {
       "source": "neondatabase/agent-skills",
-      "sourceType": "autoskills-registry",
-      "computedHash": "afa90370212ed99bb472c8d64ca6a5169e3608a6c0d3e570565e7997b1dc81b2"
+      "sourceType": "github",
+      "skillPath": "skills/neon-postgres/SKILL.md",
+      "computedHash": "800cc5890f74962e4e0dc15584cc17ea6f4c49f73dda35704f9630981abc3e5d"
     },
     "nodejs-backend-patterns": {
       "source": "wshobson/agents",
