@@ -2,8 +2,8 @@
  * Email sending for Better Auth email flows.
  *
  * Currently: console.log placeholder for local dev.
- * Production: replace with Cloudflare Email Service or any SMTP provider.
- * See skill: cloudflare-email-service
+ * Production: replace with a Vercel-compatible email provider
+ * such as Resend, SendGrid, AWS SES, or Postmark.
  */
 
 export async function sendEmail({
