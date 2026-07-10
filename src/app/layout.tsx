@@ -21,20 +21,37 @@ const sourceCode = Source_Code_Pro({
   variable: "--font-source-code",
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://vipa-cursos.vercel.app";
+
 export const metadata: Metadata = {
-  title: "Mis cursos de Vipassana",
-  description: "Registro personal de cursos de meditación Vipassana.",
-  authors: [{ name: "Vipassana Tracker" }],
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Vipa Cursos — Registro de Cursos de Vipassana",
+    template: "%s | Vipa Cursos",
+  },
+  description:
+    "App personal para registrar y organizar tus cursos de meditación Vipassana. Guarda fechas, lugares, profesores y duración de cada sit y serve.",
+  authors: [{ name: "Vipa Cursos" }],
+  creator: "Vipa Cursos",
   icons: {
     icon: "/favicon.png",
   },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
-    title: "Mis cursos de Vipassana",
-    description: "Registro personal de cursos de meditación Vipassana.",
     type: "website",
+    locale: "es_AR",
+    url: siteUrl,
+    siteName: "Vipa Cursos",
+    title: "Vipa Cursos — Registro de Cursos de Vipassana",
+    description: "App personal para registrar y organizar tus cursos de meditación Vipassana.",
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
+    title: "Vipa Cursos — Registro de Cursos de Vipassana",
+    description: "App personal para registrar y organizar tus cursos de meditación Vipassana.",
   },
 };
 
