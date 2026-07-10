@@ -31,7 +31,11 @@ export function LoginForm() {
     setBusy(true);
     try {
       if (mode === "signin") {
-        const { error } = await authClient.signIn.email({ email, password });
+        const { error } = await authClient.signIn.email({
+          email,
+          password,
+          callbackURL: "/",
+        });
         if (error) {
           toast.error(error.message ?? "No se pudo iniciar sesión");
           return;
@@ -41,7 +45,12 @@ export function LoginForm() {
           toast.error("Ingresa tu nombre");
           return;
         }
-        const { error } = await authClient.signUp.email({ name, email, password });
+        const { error } = await authClient.signUp.email({
+          name,
+          email,
+          password,
+          callbackURL: "/",
+        });
         if (error) {
           toast.error(error.message ?? "No se pudo registrar");
           return;
