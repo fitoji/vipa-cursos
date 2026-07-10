@@ -215,7 +215,7 @@ export function DashboardView() {
                 </div>
               </div>
               <Button variant="outline" asChild>
-                <Link href="/">
+                <Link href="/cursos">
                   <ArrowLeft className="mr-2 h-4 w-4" /> Volver
                 </Link>
               </Button>

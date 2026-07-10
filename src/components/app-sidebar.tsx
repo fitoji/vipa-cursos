@@ -74,7 +74,7 @@ export function AppSidebar({ activeView, onNavigate }: AppSidebarProps) {
           </SidebarMenuItem>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <Link href="/">
+              <Link href="/cursos">
                 <ArrowLeft className="h-4 w-4" />
                 <span>Volver</span>
               </Link>

@@ -34,7 +34,7 @@ export function LoginForm() {
         const { error } = await authClient.signIn.email({
           email,
           password,
-          callbackURL: "/",
+          callbackURL: "/cursos",
         });
         if (error) {
           toast.error(error.message ?? "No se pudo iniciar sesión");
@@ -49,7 +49,7 @@ export function LoginForm() {
           name,
           email,
           password,
-          callbackURL: "/",
+          callbackURL: "/cursos",
         });
         if (error) {
           toast.error(error.message ?? "No se pudo registrar");
@@ -57,7 +57,7 @@ export function LoginForm() {
         }
       }
       toast.success("Sesión iniciada");
-      router.push("/");
+      router.push("/cursos");
       router.refresh();
     } catch {
       toast.error("Ocurrió un error inesperado");
