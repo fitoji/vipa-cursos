@@ -56,6 +56,12 @@ export function LoginForm() {
           return;
         }
       }
+      // Wait for session to be fully established before navigating
+      const { data: sess } = await authClient.getSession();
+      if (!sess?.session) {
+        toast.error("Sesión no establecida, intenta de nuevo");
+        return;
+      }
       toast.success("Sesión iniciada");
       router.push("/cursos");
       router.refresh();
@@ -69,7 +75,10 @@ export function LoginForm() {
   const handleGoogle = async () => {
     setBusy(true);
     try {
-      const { error } = await authClient.signIn.social({ provider: "google" });
+      const { error } = await authClient.signIn.social({
+        provider: "google",
+        callbackURL: "/cursos",
+      });
       if (error) {
         toast.error(error.message ?? "No se pudo iniciar sesión con Google");
       }

@@ -84,7 +84,7 @@ export function LandingView() {
               <Link href="/login">Empezar ahora</Link>
             </Button>
             <Button size="lg" variant="ghost" asChild>
-              <Link href="/login">Ya tengo cuenta</Link>
+              <Link href="/cursos">Ir a mis cursos</Link>
             </Button>
           </div>
         </div>

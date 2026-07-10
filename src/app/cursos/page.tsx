@@ -3,7 +3,7 @@
 import { useQuery, useQueryClient, queryOptions } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { redirect } from "next/navigation";
 import { toast } from "sonner";
 import Link from "next/link";
@@ -54,8 +54,11 @@ export default function CursosPage() {
   const [submitting, setSubmitting] = useState(false);
   const daysPreset = form.watch("daysPreset");
 
-  if (isPending) return null;
-  if (!session) redirect("/login");
+  useEffect(() => {
+    if (!isPending && !session) redirect("/login");
+  }, [isPending, session]);
+
+  if (isPending || !session) return null;
 
   const onSubmit = async (values: CourseFormValues) => {
     const days = daysFromFormValues(values);

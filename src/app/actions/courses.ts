@@ -92,7 +92,7 @@ export async function importCourses({ data }: { data: ImportCourseInput[] }) {
 
 export async function listCourses(): Promise<CourseRow[]> {
   const session = await getSession();
-  if (!session?.user?.id) throw new Error("Unauthorized");
+  if (!session?.user?.id) return [];
   const userId = session.user.id;
 
   const { neon } = await import("@neondatabase/serverless");
