@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "Mis cursos de Vipassana",
   description: "Registro personal de cursos de meditación Vipassana.",
   authors: [{ name: "Vipassana Tracker" }],
+  icons: {
+    icon: "/favicon.png",
+  },
   openGraph: {
     title: "Mis cursos de Vipassana",
     description: "Registro personal de cursos de meditación Vipassana.",
