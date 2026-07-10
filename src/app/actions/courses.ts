@@ -2,20 +2,18 @@
 
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
+import { auth } from "@/lib/auth";
 
 async function getSession() {
-  // In Next.js 16 server actions, cookies() gives us the request cookies reliably.
-  // We call our own /api/auth/get-session endpoint instead of auth.api.getSession
-  // to avoid header-passing issues with Turbopack.
-  const { cookies } = await import("next/headers");
   const cookieStore = await cookies();
-  const cookieHeader = cookieStore.toString();
-  const origin = process.env.BETTER_AUTH_URL ?? "http://localhost:3000";
-  const res = await fetch(`${origin}/api/auth/get-session`, {
-    headers: { Cookie: cookieHeader },
-  });
-  if (!res.ok) return null;
-  return res.json();
+  const allCookies = cookieStore.getAll();
+  const h = new Headers();
+  h.set(
+    "cookie",
+    allCookies.map((c) => `${c.name}=${c.value}`).join("; "),
+  );
+  return auth.api.getSession({ headers: h });
 }
 
 const courseSchema = z.object({

@@ -1,0 +1,60 @@
+{
+  "continent": "Asia",
+  "region": "Eastern Asia",
+  "summary": {
+    "centers": 7,
+    "non_centers": 1
+  },
+  "locations": [
+    {
+      "country": "Hong Kong",
+      "type": "Center",
+      "name": "Vipassana Hong Kong",
+      "city": "Tung Wan, Lantau Island"
+    },
+    {
+      "country": "Japan",
+      "type": "Center",
+      "name": "Dhamma Ādicca",
+      "city": "Chiba",
+      "prefecture": "Chiba-ken"
+    },
+    {
+      "country": "Japan",
+      "type": "Center",
+      "name": "Dhamma Bhānu",
+      "city": "Kyoto"
+    },
+    {
+      "country": "Mongolia",
+      "type": "Center",
+      "name": "Dhamma Mahana",
+      "city": "Ulaanbaatar"
+    },
+    {
+      "country": "South Korea",
+      "type": "Center",
+      "name": "Dhamma Korea",
+      "city": "Jinan-gun",
+      "province": "Chǒllabuk-do"
+    },
+    {
+      "country": "Taiwan",
+      "type": "Center",
+      "name": "Dhamma Vikāsa",
+      "city": null
+    },
+    {
+      "country": "Taiwan",
+      "type": "Center",
+      "name": "Dhammadaya",
+      "city": "Taichung"
+    },
+    {
+      "country": "Taiwan",
+      "type": "Non-Centre",
+      "name": "Vipassana in Taiwan",
+      "city": null
+    }
+  ]
+}

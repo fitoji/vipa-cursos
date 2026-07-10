@@ -1,0 +1,73 @@
+{
+  "continent": "Asia",
+  "region": "South Asia",
+  "country": "India",
+  "subregion": "Western India",
+  "locations": [
+    {
+      "type": "Center",
+      "name": "Dhamma Giri",
+      "city": "Igatpuri",
+      "state": "Maharashtra"
+    },
+    {
+      "type": "Center",
+      "name": "Dhamma Pattana",
+      "city": "Mumbai",
+      "state": "Maharashtra"
+    },
+    {
+      "type": "Center",
+      "name": "Dhamma Sarita",
+      "city": "Khadakpada",
+      "state": "Maharashtra"
+    },
+    {
+      "type": "Center",
+      "name": "Dhamma Tapovana",
+      "city": "Igatpuri",
+      "state": "Maharashtra"
+    },
+    {
+      "type": "Center",
+      "name": "Dhamma Punna",
+      "city": "Pune",
+      "state": "Maharashtra"
+    },
+    {
+      "type": "Center",
+      "name": "Dhamma Bhumi",
+      "city": "Ahmedabad",
+      "state": "Gujarat"
+    },
+    {
+      "type": "Center",
+      "name": "Dhamma Divakara",
+      "city": "Vadodara",
+      "state": "Gujarat"
+    },
+    {
+      "type": "Center",
+      "name": "Dhamma Kota",
+      "city": "Kota",
+      "state": "Rajasthan"
+    },
+    {
+      "type": "Center",
+      "name": "Dhamma Thali",
+      "city": "Jaipur",
+      "state": "Rajasthan"
+    },
+    {
+      "type": "Center",
+      "name": "Dhamma Pushkar",
+      "city": "Pushkar",
+      "state": "Rajasthan"
+    },
+    {
+      "type": "Center",
+      "name": "Dhamma Goa",
+      "city": "Goa"
+    }
+  ]
+}

@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Badge } from "@/components/ui/badge";
+import { DatePicker } from "@/components/ui/date-picker";
 import { LandingView } from "@/components/landing-view";
 
 const coursesQuery = queryOptions({
@@ -137,7 +138,10 @@ export default function Home() {
             <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 sm:grid-cols-2">
               <div className="grid gap-1.5">
                 <Label htmlFor="start_date">Fecha de inicio</Label>
-                <Input id="start_date" type="date" {...form.register("start_date")} />
+                <DatePicker
+                  value={form.watch("start_date")}
+                  onChange={(v) => form.setValue("start_date", v)}
+                />
                 {form.formState.errors.start_date && (
                   <p className="text-xs text-destructive">
                     {form.formState.errors.start_date.message}

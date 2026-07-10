@@ -1,0 +1,114 @@
+{
+  "continent": "Europe",
+  "summary": {
+    "centers": 21,
+    "non_centers": 43
+  },
+  "centers": [
+    {
+      "country": "Austria",
+      "name": "Dhamma Mudita",
+      "city": "Oberösterreich"
+    },
+    {
+      "country": "Belgium",
+      "name": "Dhamma Pajjota",
+      "city": "Dilsen-Stokkem"
+    },
+    {
+      "country": "France",
+      "name": "Dhamma Mahi",
+      "city": "Champagne-sur-Seine"
+    },
+    {
+      "country": "France",
+      "name": "Dhamma Sūriyārāma",
+      "city": "Labroquère"
+    },
+    {
+      "country": "France",
+      "name": "Dhamma Nīlaya",
+      "city": "Seine-Maritime"
+    },
+    {
+      "country": "France",
+      "name": "Dhamma Vijaya",
+      "city": "Yonne"
+    },
+    {
+      "country": "Germany",
+      "name": "Dhamma Dvāra",
+      "city": "Triebel"
+    },
+    {
+      "country": "Germany",
+      "name": "Dhamma Pallava",
+      "city": "Klosterdorf"
+    },
+    {
+      "country": "Italy",
+      "name": "Dhamma Aṭala",
+      "city": "Lutirano (Florence)"
+    },
+    {
+      "country": "Latvia",
+      "name": "Dhamma Laṭṭhi",
+      "city": "Sigulda"
+    },
+    {
+      "country": "Lithuania",
+      "name": "Dhamma Līḷhā",
+      "city": "Varėna District"
+    },
+    {
+      "country": "Poland",
+      "name": "Dhamma Pallava",
+      "city": "Dziadowice"
+    },
+    {
+      "country": "Russia",
+      "name": "Dhamma Dullabha",
+      "city": "Moscow Region"
+    },
+    {
+      "country": "Spain",
+      "name": "Dhamma Neru",
+      "city": "Santa Maria de Palautordera (Barcelona)"
+    },
+    {
+      "country": "Spain",
+      "name": "Dhamma Sacca",
+      "city": "Ávila"
+    },
+    {
+      "country": "Sweden",
+      "name": "Dhamma Sobhana",
+      "city": "Ödeshög"
+    },
+    {
+      "country": "Switzerland",
+      "name": "Dhamma Sumeru",
+      "city": "Kiental"
+    },
+    {
+      "country": "United Kingdom",
+      "name": "Dhamma Dīpa",
+      "city": "Herefordshire"
+    },
+    {
+      "country": "United Kingdom",
+      "name": "Dhamma Padāna",
+      "city": "Herefordshire"
+    },
+    {
+      "country": "United Kingdom",
+      "name": "Dhamma Sukhakārī",
+      "city": "Suffolk"
+    },
+    {
+      "country": "United Kingdom",
+      "name": "Dhamma Padhāna Scotland",
+      "city": "Scotland"
+    }
+  ]
+}

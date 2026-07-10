@@ -1,0 +1,22 @@
+{
+  "continent": "Asia",
+  "region": "South Asia",
+  "country": "Nepal",
+  "locations": [
+    {
+      "type": "Center",
+      "name": "Dhamma Shringa",
+      "city": "Kathmandu"
+    },
+    {
+      "type": "Center",
+      "name": "Dhamma Kitti",
+      "city": "Lumbini"
+    },
+    {
+      "type": "Center",
+      "name": "Dhamma Tarai",
+      "city": "Birgunj"
+    }
+  ]
+}

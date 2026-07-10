@@ -1,0 +1,27 @@
+{
+  "continent": "Asia",
+  "region": "South Asia",
+  "country": "Sri Lanka",
+  "locations": [
+    {
+      "type": "Center",
+      "name": "Dhamma Kuta",
+      "city": "Kandy"
+    },
+    {
+      "type": "Center",
+      "name": "Dhamma Anuradha",
+      "city": "Anuradhapura"
+    },
+    {
+      "type": "Center",
+      "name": "Dhamma Sobhana",
+      "city": "Colombo"
+    },
+    {
+      "type": "Center",
+      "name": "Dhamma Mahavana",
+      "city": "Sri Lanka"
+    }
+  ]
+}

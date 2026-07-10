@@ -1,0 +1,26 @@
+{
+  "continent": "Asia",
+  "region": "Southeast Asia",
+  "country": "Indonesia",
+  "locations": [
+    {
+      "type": "Center",
+      "name": "Dhamma Java",
+      "city": "Bogor"
+    },
+    {
+      "type": "Center",
+      "name": "Dhamma Sundara",
+      "city": "Jakarta"
+    },
+    {
+      "type": "Non-Centre",
+      "name": "Vipassana Bali",
+      "city": "Bali"
+    },
+    {
+      "type": "Non-Centre",
+      "name": "Vipassana Indonesia Regional Courses"
+    }
+  ]
+}

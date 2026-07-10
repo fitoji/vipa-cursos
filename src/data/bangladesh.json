@@ -1,0 +1,17 @@
+{
+  "continent": "Asia",
+  "region": "South Asia",
+  "country": "Bangladesh",
+  "locations": [
+    {
+      "type": "Center",
+      "name": "Dhamma Dhaka",
+      "city": "Dhaka"
+    },
+    {
+      "type": "Center",
+      "name": "Dhamma Bangladesh",
+      "city": "Chittagong"
+    }
+  ]
+}

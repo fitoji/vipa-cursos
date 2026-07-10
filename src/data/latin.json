@@ -1,0 +1,155 @@
+{
+  "continent": "Latin America and Caribbean",
+  "centers": 13,
+  "non_centers": 36,
+  "countries": [
+    {
+      "country": "Argentina",
+      "centers": [
+        {
+          "name": "Dhamma Sukhada",
+          "city": "Brandsen",
+          "province": "Buenos Aires"
+        },
+        {
+          "name": "Dhamma Viriya",
+          "city": "Capilla del Monte",
+          "province": "Cordoba"
+        }
+      ],
+      "non_centers": [
+        {
+          "name": "Vipassana Argentina - Mendoza",
+          "city": "Mendoza"
+        },
+        {
+          "name": "Vipassana Meditation in Argentina"
+        }
+      ]
+    },
+    {
+      "country": "Brazil",
+      "centers": [
+        {
+          "name": "Dhamma Santi",
+          "city": "Engenheiro Paulo de Frontin",
+          "province": "Rio de Janeiro"
+        },
+        {
+          "name": "Dhamma Uyyana",
+          "city": "Pirenopolis",
+          "province": "Goias"
+        },
+        {
+          "name": "Dhamma Sarana",
+          "city": "Santana de Parnaiba",
+          "province": "Sao Paulo"
+        }
+      ],
+      "non_centers": [
+        {
+          "name": "Vipassana Brasil - Minas Gerais"
+        },
+        {
+          "name": "Vipassana Brasil - Nordeste"
+        },
+        {
+          "name": "Vipassana Brasil - Parana"
+        },
+        {
+          "name": "Vipassana Brasil - Santa Catarina",
+          "city": "Florianopolis"
+        }
+      ]
+    },
+    {
+      "country": "Chile",
+      "centers": [
+        {
+          "name": "Dhamma Pasanna",
+          "city": "Melipilla",
+          "province": "Region Metropolitana de Santiago"
+        }
+      ],
+      "non_centers": [
+        {
+          "name": "Vipassana Chile"
+        }
+      ]
+    },
+    {
+      "country": "Colombia",
+      "centers": [
+        {
+          "name": "Dhamma Gutti",
+          "province": "Antioquia"
+        },
+        {
+          "name": "Dhamma Nandanavana",
+          "city": "San Antonio del Tequendama",
+          "province": "Cundinamarca"
+        }
+      ],
+      "non_centers": [
+        {
+          "name": "Vipassana Colombia - Bogota"
+        },
+        {
+          "name": "All Colombia Courses"
+        }
+      ]
+    },
+    {
+      "country": "Costa Rica",
+      "centers": [
+        {
+          "name": "Dhamma Ariya",
+          "city": "Cartago"
+        }
+      ]
+    },
+    {
+      "country": "Mexico",
+      "centers": [
+        {
+          "name": "Dhamma Makaranda",
+          "city": "San Bartolo Amanalco"
+        }
+      ],
+      "non_centers": [
+        { "name": "Monterrey" },
+        { "name": "Morelos" },
+        { "name": "Oaxaca" },
+        { "name": "Queretaro" },
+        { "name": "Veracruz" },
+        { "name": "All Mexico Courses" }
+      ]
+    },
+    {
+      "country": "Peru",
+      "centers": [
+        {
+          "name": "Dhamma Suriya",
+          "city": "Lima"
+        }
+      ],
+      "non_centers": [
+        { "name": "Cusco" },
+        { "name": "Vipassana Meditation in Peru" }
+      ]
+    },
+    {
+      "country": "Venezuela",
+      "centers": [
+        {
+          "name": "Dhamma Venuvana",
+          "province": "Aragua"
+        }
+      ],
+      "non_centers": [
+        { "name": "Vipassana Venezuela - Occidente" },
+        { "name": "Vipassana Meditation in Venezuela" }
+      ]
+    }
+  ]
+}

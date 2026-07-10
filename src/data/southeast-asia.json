@@ -1,0 +1,112 @@
+{
+  "continent": "Asia",
+  "region": "Southeast Asia",
+  "summary": {
+    "centers": 44,
+    "non_centers": 5
+  },
+  "locations": [
+    {
+      "country": "Cambodia",
+      "type": "Center",
+      "name": "Dhamma Kamboja",
+      "city": "Kampong Speu"
+    },
+    {
+      "country": "Indonesia",
+      "type": "Center",
+      "name": "Dhamma Java",
+      "city": "Bogor"
+    },
+    {
+      "country": "Indonesia",
+      "type": "Center",
+      "name": "Dhamma Sundara",
+      "city": "Jakarta"
+    },
+    {
+      "country": "Malaysia",
+      "type": "Center",
+      "name": "Dhamma Malaya",
+      "city": "Pahang"
+    },
+    {
+      "country": "Malaysia",
+      "type": "Center",
+      "name": "Dhamma Titi",
+      "city": "Penang"
+    },
+    {
+      "country": "Malaysia",
+      "type": "Center",
+      "name": "Dhamma Dhara",
+      "city": "Selangor"
+    },
+    {
+      "country": "Myanmar",
+      "type": "Center",
+      "name": "Dhamma Joti",
+      "city": "Yangon"
+    },
+    {
+      "country": "Myanmar",
+      "type": "Center",
+      "name": "Dhamma Mahavana",
+      "city": "Mandalay"
+    },
+    {
+      "country": "Myanmar",
+      "type": "Center",
+      "name": "Dhamma Mandala",
+      "city": "Sagaing"
+    },
+    {
+      "country": "Myanmar",
+      "type": "Center",
+      "name": "Dhamma Yangon",
+      "city": "Yangon"
+    },
+    {
+      "country": "Singapore",
+      "type": "Center",
+      "name": "Dhamma Mahavana",
+      "city": "Singapore"
+    },
+    {
+      "country": "Thailand",
+      "type": "Center",
+      "name": "Dhamma Kancana",
+      "city": "Kanchanaburi"
+    },
+    {
+      "country": "Thailand",
+      "type": "Center",
+      "name": "Dhamma Kamala",
+      "city": "Phuket"
+    },
+    {
+      "country": "Thailand",
+      "type": "Center",
+      "name": "Dhamma Dhara",
+      "city": "Chiang Mai"
+    },
+    {
+      "country": "Thailand",
+      "type": "Center",
+      "name": "Dhamma Ānanda",
+      "city": "Nakhon Nayok"
+    },
+    {
+      "country": "Vietnam",
+      "type": "Center",
+      "name": "Dhamma Vipula",
+      "city": "Ho Chi Minh City"
+    },
+    {
+      "country": "Philippines",
+      "type": "Center",
+      "name": "Dhamma Phala",
+      "city": "Laguna"
+    }
+  ]
+}

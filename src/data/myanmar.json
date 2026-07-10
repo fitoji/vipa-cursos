@@ -1,0 +1,37 @@
+{
+  "continent": "Asia",
+  "region": "Southeast Asia",
+  "country": "Myanmar",
+  "locations": [
+    {
+      "type": "Center",
+      "name": "Dhamma Joti",
+      "city": "Yangon"
+    },
+    {
+      "type": "Center",
+      "name": "Dhamma Mahavana",
+      "city": "Mandalay"
+    },
+    {
+      "type": "Center",
+      "name": "Dhamma Mandala",
+      "city": "Sagaing"
+    },
+    {
+      "type": "Center",
+      "name": "Dhamma Yangon",
+      "city": "Yangon"
+    },
+    {
+      "type": "Center",
+      "name": "Dhamma Mahi",
+      "city": "Myanmar"
+    },
+    {
+      "type": "Center",
+      "name": "Dhamma Myitta",
+      "city": "Myanmar"
+    }
+  ]
+}

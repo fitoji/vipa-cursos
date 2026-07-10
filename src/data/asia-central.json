@@ -1,0 +1,32 @@
+{
+  "continent": "Asia",
+  "region": "Central and Western Asia",
+  "locations": [
+    {
+      "country": "Iran",
+      "type": "Non-Centre",
+      "name": "Vipassana Iran"
+    },
+    {
+      "country": "Israel",
+      "type": "Center",
+      "name": "Dhamma Nirvana",
+      "city": "Israel"
+    },
+    {
+      "country": "Turkey",
+      "type": "Non-Centre",
+      "name": "Vipassana Turkey"
+    },
+    {
+      "country": "Kazakhstan",
+      "type": "Non-Centre",
+      "name": "Vipassana Kazakhstan"
+    },
+    {
+      "country": "Uzbekistan",
+      "type": "Non-Centre",
+      "name": "Vipassana Uzbekistan"
+    }
+  ]
+}

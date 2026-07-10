@@ -25,6 +25,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { DatePicker } from "@/components/ui/date-picker";
 
 type Course = Awaited<ReturnType<typeof listCourses>>[number];
 
@@ -135,7 +136,10 @@ export function EditCourseDialog({
         <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 sm:grid-cols-2">
           <div className="grid gap-1.5">
             <Label htmlFor="e_start">Fecha</Label>
-            <Input id="e_start" type="date" {...form.register("start_date")} />
+            <DatePicker
+              value={form.watch("start_date")}
+              onChange={(v) => form.setValue("start_date", v)}
+            />
           </div>
           <div className="grid gap-1.5">
             <Label htmlFor="e_place">Lugar</Label>
