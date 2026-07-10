@@ -151,7 +151,7 @@ export function DashboardView() {
       <div className="mx-auto max-w-6xl px-4 py-10">
         <div className="mb-6 flex items-center justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-semibold tracking-tight">Dashboard</h1>
+            <h1 className="text-3xl font-semibold tracking-tight">Panel de Control</h1>
             <p className="mt-1 text-sm text-muted-foreground">
               {courses.length} curso{courses.length === 1 ? "" : "s"} registrado
               {courses.length === 1 ? "" : "s"}.

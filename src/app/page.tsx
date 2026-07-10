@@ -118,7 +118,7 @@ export default function Home() {
             </p>
           </div>
           <Button variant="outline" asChild>
-            <Link href="/dashboard">Ver dashboard</Link>
+            <Link href="/dashboard">Panel de Control</Link>
           </Button>
         </header>
 
