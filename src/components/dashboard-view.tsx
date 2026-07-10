@@ -57,6 +57,7 @@ import {
 import { EditCourseDialog } from "@/components/edit-course-dialog";
 import { ImportCoursesPanel } from "@/components/import-courses-panel";
 import { AppSidebar } from "@/components/app-sidebar";
+import { formatDate } from "@/lib/format";
 
 type Course = Awaited<ReturnType<typeof listCourses>>[number];
 type View = "stats" | "courses" | "import";
@@ -321,7 +322,7 @@ export function DashboardView() {
                               <div>
                                 <p className="text-sm font-medium">{course.place}</p>
                                 <p className="text-xs text-muted-foreground">
-                                  {new Date(course.start_date).toLocaleDateString()} ·{" "}
+                                  {formatDate(course.start_date)} ·{" "}
                                   {course.teacher || "Sin profesor"} · {course.days} días
                                 </p>
                               </div>

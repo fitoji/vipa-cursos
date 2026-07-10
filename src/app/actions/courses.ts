@@ -76,18 +76,18 @@ export async function importCourses({ data }: { data: ImportCourseInput[] }) {
 
   const { neon } = await import("@neondatabase/serverless");
   const sql = neon(process.env.DATABASE_URL!);
-  let inserted = 0;
-  for (const c of parsed) {
-    const rows = await sql`
-      INSERT INTO vipassana_courses (start_date, place, teacher, country, mode, days, obs, user_id)
-      VALUES (${c.start_date}, ${c.place}, ${c.teacher}, ${c.country}, ${c.mode}, ${c.days}, ${c.obs}, ${userId})
-      RETURNING id
-    `;
-    if (rows.length > 0) inserted++;
-  }
+  const inserted = await Promise.all(
+    parsed.map((c) =>
+      sql`
+        INSERT INTO vipassana_courses (start_date, place, teacher, country, mode, days, obs, user_id)
+        VALUES (${c.start_date}, ${c.place}, ${c.teacher}, ${c.country}, ${c.mode}, ${c.days}, ${c.obs}, ${userId})
+        RETURNING id
+      `,
+    ),
+  );
   revalidatePath("/");
   revalidatePath("/dashboard");
-  return { count: inserted };
+  return { count: inserted.length };
 }
 
 export async function listCourses(): Promise<CourseRow[]> {

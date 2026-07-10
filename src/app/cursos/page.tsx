@@ -17,6 +17,7 @@ import {
   daysFromFormValues,
 } from "@/lib/course-form";
 import { authClient } from "@/lib/auth-client";
+import { formatDate } from "@/lib/format";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -220,7 +221,7 @@ export default function CursosPage() {
                         <Badge variant="outline">{c.days} días</Badge>
                       </div>
                       <p className="mt-1 text-sm text-muted-foreground">
-                        {new Date(c.start_date).toLocaleDateString()}
+                        {formatDate(c.start_date)}
                         {c.teacher ? ` · ${c.teacher}` : ""}
                         {c.country ? ` · ${c.country}` : ""}
                       </p>
