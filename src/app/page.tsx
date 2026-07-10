@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import Link from "next/link";
 
 import { createCourse, listCourses } from "@/app/actions/courses";
+import { authClient } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -23,6 +24,7 @@ import {
 } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Badge } from "@/components/ui/badge";
+import { LandingView } from "@/components/landing-view";
 
 const coursesQuery = queryOptions({
   queryKey: ["courses"],
@@ -50,6 +52,7 @@ const formSchema = z
 type FormValues = z.infer<typeof formSchema>;
 
 export default function Home() {
+  const { data: session } = authClient.useSession();
   const qc = useQueryClient();
   const { data: courses = [] } = useQuery(coursesQuery);
   const create = createCourse;
@@ -70,6 +73,10 @@ export default function Home() {
 
   const [submitting, setSubmitting] = useState(false);
   const daysPreset = form.watch("daysPreset");
+
+  if (!session) {
+    return <LandingView />;
+  }
 
   const onSubmit = async (values: FormValues) => {
     const days =
