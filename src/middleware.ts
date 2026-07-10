@@ -4,7 +4,7 @@ import { getSessionCookie } from "better-auth/cookies";
 export async function middleware(request: NextRequest) {
   const sessionCookie = getSessionCookie(request);
   const { pathname } = request.nextUrl;
-  if (!sessionCookie && (pathname === "/" || pathname === "/dashboard")) {
+  if (!sessionCookie && pathname === "/dashboard") {
     return NextResponse.redirect(new URL("/login", request.url));
   }
   if (sessionCookie && pathname === "/login") {
@@ -13,4 +13,4 @@ export async function middleware(request: NextRequest) {
   return NextResponse.next();
 }
 
-export const config = { matcher: ["/", "/dashboard", "/login"] };
+export const config = { matcher: ["/dashboard", "/login"] };
