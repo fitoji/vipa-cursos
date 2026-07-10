@@ -60,6 +60,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="es"
       className={`${montserrat.variable} ${playfair.variable} ${sourceCode.variable}`}
+      suppressHydrationWarning
     >
       <body className="flex min-h-screen flex-col">
         <Providers>
