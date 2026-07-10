@@ -76,7 +76,16 @@ export function DashboardView() {
   const [editing, setEditing] = useState<Course | null>(null);
   const [deleting, setDeleting] = useState<Course | null>(null);
   const [busyDelete, setBusyDelete] = useState(false);
-  const [view, setView] = useState<View>("stats");
+  const [view, setViewState] = useState<View>("stats");
+
+  const setView = (v: View) => {
+    if (v === view) return;
+    if (typeof document !== "undefined" && document.startViewTransition) {
+      document.startViewTransition(() => setViewState(v));
+    } else {
+      setViewState(v);
+    }
+  };
 
   const handleDelete = async () => {
     if (!deleting) return;
@@ -212,7 +221,6 @@ export function DashboardView() {
             </div>
 
             {view === "stats" ? (
-              /* ── Stats View ── */
               <div className="space-y-8">
                 {/* Summary cards */}
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
