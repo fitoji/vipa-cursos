@@ -21,6 +21,9 @@ next-env.d.ts
 .wrangler/
 .dev.vars
 
+# Skill registry cache
+.atl/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
