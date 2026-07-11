@@ -22,6 +22,10 @@ import {
   Globe,
   Clock,
   Users,
+  UserCheck,
+  HeartHandshake,
+  TrendingUp,
+  Award,
   BookOpen,
   FileText,
   MessageSquare,
@@ -119,6 +123,10 @@ export function DashboardView() {
     const countries = new Set(courses.flatMap((c) => (c.country ? [c.country] : []))).size;
     const sitCount = courses.filter((c) => c.mode === "sit").length;
     const serveCount = courses.filter((c) => c.mode === "serve").length;
+    const sit10 = courses.filter((c) => c.mode === "sit" && c.days === 10).length;
+    const serve10 = courses.filter((c) => c.mode === "serve" && c.days === 10).length;
+    const longServe = courses.filter((c) => c.mode === "serve" && (c.days ?? 0) >= 20).length;
+    const longCourses = courses.filter((c) => (c.days ?? 0) >= 20).length;
     const recentCourses = [...courses]
       .sort((a, b) => new Date(b.start_date).getTime() - new Date(a.start_date).getTime())
       .slice(0, 5);
@@ -130,6 +138,10 @@ export function DashboardView() {
       countries,
       sitCount,
       serveCount,
+      sit10,
+      serve10,
+      longServe,
+      longCourses,
       recentCourses,
     };
   }, [courses]);
@@ -360,6 +372,10 @@ function StatsView({
   countries,
   sitCount,
   serveCount,
+  sit10,
+  serve10,
+  longServe,
+  longCourses,
   recentCourses,
 }: {
   totalCourses: number;
@@ -368,6 +384,10 @@ function StatsView({
   countries: number;
   sitCount: number;
   serveCount: number;
+  sit10: number;
+  serve10: number;
+  longServe: number;
+  longCourses: number;
   recentCourses: Course[];
 }) {
   const [statsRef, statsInView] = useInView(0.1);
@@ -377,6 +397,10 @@ function StatsView({
   const animTotalDaysSit = useCountUp(totalDaysSit, 800, statsInView);
   const animTotalDaysServe = useCountUp(totalDaysServe, 800, statsInView);
   const animCountries = useCountUp(countries, 800, statsInView);
+  const animSit10 = useCountUp(sit10, 800, statsInView);
+  const animServe10 = useCountUp(serve10, 800, statsInView);
+  const animLongServe = useCountUp(longServe, 800, statsInView);
+  const animLongCourses = useCountUp(longCourses, 800, statsInView);
 
   return (
     <div className="space-y-8">
@@ -437,12 +461,64 @@ function StatsView({
                 <div className="text-2xl font-bold">{animCountries.toLocaleString()}</div>
               </CardContent>
             </Card>
+
+            <Card
+              className={cn("card-interactive", statsInView && "anim-fade-up")}
+              style={statsInView ? staggerDelay(4) : undefined}
+            >
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Cursos sentados (10d)</CardTitle>
+                <UserCheck className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{animSit10.toLocaleString()}</div>
+              </CardContent>
+            </Card>
+
+            <Card
+              className={cn("card-interactive", statsInView && "anim-fade-up")}
+              style={statsInView ? staggerDelay(5) : undefined}
+            >
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Cursos sirviendo (10d)</CardTitle>
+                <HeartHandshake className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{animServe10.toLocaleString()}</div>
+              </CardContent>
+            </Card>
+
+            <Card
+              className={cn("card-interactive", statsInView && "anim-fade-up")}
+              style={statsInView ? staggerDelay(6) : undefined}
+            >
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Largos sirviendo (20d+)</CardTitle>
+                <TrendingUp className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{animLongServe.toLocaleString()}</div>
+              </CardContent>
+            </Card>
+
+            <Card
+              className={cn("card-interactive", statsInView && "anim-fade-up")}
+              style={statsInView ? staggerDelay(7) : undefined}
+            >
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Cursos largos (20d+)</CardTitle>
+                <Award className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{animLongCourses.toLocaleString()}</div>
+              </CardContent>
+            </Card>
           </div>
 
           {/* Mode breakdown */}
           <Card
             className={cn(statsInView && "anim-fade-up")}
-            style={statsInView ? staggerDelay(4) : undefined}
+            style={statsInView ? staggerDelay(8) : undefined}
           >
             <CardHeader>
               <CardTitle className="text-sm font-medium">Desglose por modo</CardTitle>
