@@ -17,6 +17,7 @@ import {
   ArrowUpDown,
   ArrowLeft,
   Pencil,
+  Plus,
   Trash2,
   Calendar,
   Globe,
@@ -254,11 +255,18 @@ export function DashboardView() {
                   </p>
                 </div>
               </div>
-              <Button variant="outline" asChild>
-                <Link href="/cursos">
-                  <ArrowLeft className="mr-2 h-4 w-4" /> Volver
-                </Link>
-              </Button>
+              <div className="flex items-center gap-2">
+                <Button variant="default" size="sm" asChild>
+                  <Link href="/cursos">
+                    <Plus className="mr-1 h-4 w-4" /> Nuevo curso
+                  </Link>
+                </Button>
+                <Button variant="outline" asChild>
+                  <Link href="/cursos">
+                    <ArrowLeft className="mr-2 h-4 w-4" /> Volver
+                  </Link>
+                </Button>
+              </div>
             </div>
 
             {isLoading ? (

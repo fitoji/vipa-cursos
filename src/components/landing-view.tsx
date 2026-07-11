@@ -1,12 +1,15 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { BookOpen, Clock, BarChart3, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useInView, staggerDelay } from "@/lib/animations";
 import { cn } from "@/lib/utils";
 import { authClient } from "@/lib/auth-client";
+import { listCourses } from "@/app/actions/courses";
 
 const features = [
   {
@@ -32,11 +35,23 @@ const features = [
 ];
 
 export function LandingView() {
-  const { data: session } = authClient.useSession();
+  const router = useRouter();
+  const { data: session, isPending } = authClient.useSession();
   const isLoggedIn = !!session;
   const [heroRef, heroInView] = useInView(0.1);
   const [featuresRef, featuresInView] = useInView(0.1);
   const [ctaRef, ctaInView] = useInView(0.2);
+
+  // If logged in, check courses and redirect accordingly
+  useEffect(() => {
+    if (isPending || !session) return;
+    listCourses().then((courses) => {
+      router.replace(courses.length > 0 ? "/dashboard" : "/cursos");
+    });
+  }, [session, isPending, router]);
+
+  // Don't flash the landing for logged-in users
+  if (isPending || isLoggedIn) return null;
 
   return (
     <div className="min-h-screen bg-background">
