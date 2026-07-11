@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" role="img" aria-label="Peaceful forest illustration">
+  <defs>
+    <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#6C47FF" stop-opacity="0.06"/>
+      <stop offset="60%" stop-color="#8B9D5B" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#6C47FF" stop-opacity="0.02"/>
+    </linearGradient>
+    <radialGradient id="sunGlow" cx="75%" cy="25%" r="40%">
+      <stop offset="0%" stop-color="#8B9D5B" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#8B9D5B" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ground" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8B9D5B" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#6B7D3B" stop-opacity="0.15"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sky bg -->
+  <rect width="300" height="200" fill="url(#sky)" rx="12"/>
+
+  <!-- Sun glow -->
+  <circle cx="225" cy="50" r="80" fill="url(#sunGlow)"/>
+
+  <!-- Distant trees (background) -->
+  <g fill="#6C47FF" opacity="0.06">
+    <polygon points="40,200 50,130 60,200"/>
+    <polygon points="70,200 82,120 94,200"/>
+    <polygon points="100,200 110,140 120,200"/>
+    <polygon points="200,200 212,118 224,200"/>
+    <polygon points="230,200 240,135 250,200"/>
+    <polygon points="260,200 272,128 284,200"/>
+  </g>
+
+  <!-- Mid-ground trees -->
+  <g fill="#6C47FF" opacity="0.1">
+    <polygon points="30,200 38,100 46,200"/>
+    <polygon points="80,200 90,95 100,200"/>
+    <polygon points="130,200 142,85 154,200"/>
+    <polygon points="175,200 188,90 201,200"/>
+    <polygon points="215,200 230,78 245,200"/>
+    <polygon points="260,200 275,105 290,200"/>
+  </g>
+
+  <!-- Foreground trees -->
+  <g fill="#8B9D5B" opacity="0.2">
+    <polygon points="15,200 25,80 35,200"/>
+    <polygon points="55,200 68,70 81,200"/>
+    <polygon points="105,200 118,75 131,200"/>
+    <polygon points="145,200 160,65 175,200"/>
+    <polygon points="190,200 205,72 220,200"/>
+    <polygon points="235,200 252,60 269,200"/>
+  </g>
+
+  <!-- Ground -->
+  <rect y="170" width="300" height="30" fill="url(#ground)" rx="0 0 12 12"/>
+
+  <!-- Gentle path / stream -->
+  <path d="M150,200 Q140,185 148,175 Q155,168 152,162" stroke="#6C47FF" stroke-width="1.5" fill="none" opacity="0.12" stroke-linecap="round"/>
+
+  <!-- Fireflies / light particles -->
+  <circle cx="100" cy="60" r="1.5" fill="#8B9D5B" opacity="0.15"/>
+  <circle cx="200" cy="50" r="1" fill="#8B9D5B" opacity="0.12"/>
+  <circle cx="160" cy="40" r="1.2" fill="#6C47FF" opacity="0.1"/>
+  <circle cx="250" cy="55" r="1" fill="#8B9D5B" opacity="0.08"/>
+  <circle cx="80" cy="45" r="0.8" fill="#6C47FF" opacity="0.1"/>
+</svg>

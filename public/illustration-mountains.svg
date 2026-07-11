@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" role="img" aria-label="Zen mountain landscape">
+  <defs>
+    <linearGradient id="skyZen" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#6C47FF" stop-opacity="0.06"/>
+      <stop offset="50%" stop-color="#8B9D5B" stop-opacity="0.03"/>
+      <stop offset="100%" stop-color="#4A30CC" stop-opacity="0.06"/>
+    </linearGradient>
+    <linearGradient id="mtn1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#6C47FF" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#4A30CC" stop-opacity="0.25"/>
+    </linearGradient>
+    <linearGradient id="mtn2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8B9D5B" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#6B7D3B" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="mtn3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#6C47FF" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#8B9D5B" stop-opacity="0.12"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#6C47FF" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#4A30CC" stop-opacity="0.08"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="300" height="200" fill="url(#skyZen)" rx="12"/>
+
+  <!-- Moon -->
+  <circle cx="240" cy="40" r="14" fill="#8B9D5B" opacity="0.1"/>
+  <circle cx="245" cy="38" r="11" fill="#F5F5F0" opacity="0.15"/>
+
+  <!-- Background mountains -->
+  <polygon points="0,160 50,90 120,160" fill="url(#mtn3)"/>
+  <polygon points="180,160 240,95 300,160" fill="url(#mtn3)"/>
+
+  <!-- Mid-ground mountain -->
+  <polygon points="60,170 130,100 200,170" fill="url(#mtn2)"/>
+  <polygon points="80,170 100,155 115,170" fill="#FFFFFF" opacity="0.06"/>
+
+  <!-- Main mountain -->
+  <polygon points="20,190 90,110 140,190" fill="url(#mtn1)"/>
+  <!-- Snow cap -->
+  <polygon points="80,120 90,110 100,120 92,118" fill="#FFFFFF" opacity="0.1"/>
+
+  <!-- Reflection mountains in water -->
+  <polygon points="20,170 90,140 140,170" fill="#4A30CC" opacity="0.05"/>
+
+  <!-- Water -->
+  <rect y="170" width="300" height="30" fill="url(#water)" rx="0 0 12 12"/>
+
+  <!-- Water ripple lines -->
+  <g stroke="#6C47FF" stroke-width="0.5" fill="none" opacity="0.06" stroke-linecap="round">
+    <path d="M80,178 Q100,176 120,178"/>
+    <path d="M160,182 Q180,180 200,182"/>
+    <path d="M50,185 Q70,184 90,185"/>
+  </g>
+
+  <!-- Birds -->
+  <g stroke="#6C47FF" stroke-width="0.8" fill="none" opacity="0.15" stroke-linecap="round">
+    <path d="M180,35 Q183,32 186,35"/>
+    <path d="M190,30 Q192,28 194,30"/>
+    <path d="M175,38 Q178,35 181,38"/>
+  </g>
+</svg>

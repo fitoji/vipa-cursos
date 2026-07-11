@@ -8,43 +8,6 @@ import { useInView, staggerDelay } from "@/lib/animations";
 import { cn } from "@/lib/utils";
 import { authClient } from "@/lib/auth-client";
 
-function PenguinIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 64 64"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      aria-hidden="true"
-    >
-      {/* Body */}
-      <ellipse cx="32" cy="38" rx="18" ry="22" fill="currentColor" className="text-foreground" />
-      {/* Belly */}
-      <ellipse cx="32" cy="40" rx="11" ry="16" fill="currentColor" className="text-primary" />
-      {/* Head */}
-      <circle cx="32" cy="18" r="12" fill="currentColor" className="text-foreground" />
-      {/* Eyes */}
-      <circle cx="27" cy="16" r="2.5" fill="currentColor" className="text-background" />
-      <circle cx="37" cy="16" r="2.5" fill="currentColor" className="text-background" />
-      <circle cx="27.5" cy="15.5" r="1" fill="currentColor" className="text-foreground" />
-      <circle cx="37.5" cy="15.5" r="1" fill="currentColor" className="text-foreground" />
-      {/* Beak */}
-      <path d="M29 21 L32 26 L35 21 Z" fill="currentColor" className="text-accent" />
-      {/* Left flipper */}
-      <path d="M14 32 Q8 38 12 48 Q16 44 18 38 Z" fill="currentColor" className="text-foreground" />
-      {/* Right flipper */}
-      <path
-        d="M50 32 Q56 38 52 48 Q48 44 46 38 Z"
-        fill="currentColor"
-        className="text-foreground"
-      />
-      {/* Feet */}
-      <ellipse cx="26" cy="58" rx="5" ry="2.5" fill="currentColor" className="text-accent" />
-      <ellipse cx="38" cy="58" rx="5" ry="2.5" fill="currentColor" className="text-accent" />
-    </svg>
-  );
-}
-
 const features = [
   {
     icon: BookOpen,
