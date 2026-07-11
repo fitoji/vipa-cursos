@@ -1,0 +1,360 @@
+{
+  "layout": {
+    "meta": {
+      "title": "Vipa Courses — Vipassana Course Tracker",
+      "description": "Personal app to register and organize your Vipassana meditation courses. Save dates, locations, teachers, and duration of each sit and serve.",
+      "ogDescription": "Personal app to register and organize your Vipassana meditation courses."
+    }
+  },
+  "HomePage": {
+    "meta": {
+      "title": "Vipa Courses — Your personal Vipassana course tracker",
+      "description": "Keep track of every sitting (sit) and service (serve) Vipassana meditation course in one place."
+    }
+  },
+  "Landing": {
+    "hero": {
+      "title": "Vipa Courses",
+      "subtitle": "Your personal Vipassana meditation course tracker. Log every sit and serve, and review your journey whenever you need.",
+      "cta": "Get started",
+      "loggedInCta": "Dashboard",
+      "newCourse": "New course"
+    },
+    "features": {
+      "heading": "Everything you need",
+      "items": {
+        "register": {
+          "title": "Record every course",
+          "description": "Date, place, teacher, country, mode (sit or serve), and duration."
+        },
+        "history": {
+          "title": "Full history",
+          "description": "View all your courses in one place — past and present."
+        },
+        "dashboard": {
+          "title": "Dashboard",
+          "description": "Filter, sort, and search your courses with an interactive table."
+        },
+        "privacy": {
+          "title": "Private and secure",
+          "description": "Only you can see your data. Authentication with Google or email."
+        }
+      }
+    },
+    "cta": {
+      "title": "Walk your path mindfully",
+      "description": "Keep track of your Vipassana practice simply and in an organized way.",
+      "button": "Sign up free",
+      "alt": "Vipassana Pagoda"
+    }
+  },
+  "LoginPage": {
+    "meta": {
+      "title": "Sign in",
+      "description": "Access your Vipa Courses account to register and organize your Vipassana meditation courses."
+    }
+  },
+  "LoginForm": {
+    "title": "Access your account",
+    "mode": {
+      "signIn": "Sign in",
+      "signUp": "Sign up"
+    },
+    "oauth": "Continue with Google",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "password": "Password",
+      "showPassword": "Show password",
+      "hidePassword": "Hide password",
+      "submitSignIn": "Sign in",
+      "submitSignUp": "Sign up",
+      "processing": "Processing…"
+    },
+    "errors": {
+      "missingFields": "Please enter email and password",
+      "missingName": "Please enter your name",
+      "signInFailed": "Could not sign in",
+      "signUpFailed": "Could not sign up",
+      "sessionNotReady": "Session not established, please try again",
+      "googleFailed": "Could not sign in with Google",
+      "unexpected": "An unexpected error occurred"
+    },
+    "success": {
+      "signedIn": "Signed in"
+    }
+  },
+  "DashboardPage": {
+    "meta": {
+      "title": "Dashboard",
+      "description": "Complete view of your Vipassana meditation courses. Filter, sort, and manage your history."
+    }
+  },
+  "Dashboard": {
+    "header": {
+      "title": "Dashboard",
+      "coursesCount": "{count} course{plural} registered.",
+      "newCourse": "New course",
+      "back": "Back",
+      "loading": "Loading…"
+    },
+    "stats": {
+      "totalCourses": "Total courses",
+      "daysSitting": "Days sitting",
+      "daysServing": "Days serving",
+      "countriesVisited": "Countries visited",
+      "coursesSitting10d": "Courses sitting (10d)",
+      "coursesServing10d": "Courses serving (10d)",
+      "longServing20d": "Long serving (20d+)",
+      "longCourses20d": "Long courses (20d+)",
+      "modeBreakdown": "Mode breakdown",
+      "recentCourses": "Recent courses",
+      "noCourses": "No courses registered.",
+      "countriesDialogTitle": "Countries visited",
+      "noCountries": "No countries registered"
+    },
+    "table": {
+      "header": {
+        "date": "Date",
+        "place": "Place",
+        "teacher": "Teacher",
+        "country": "Country",
+        "mode": "Mode",
+        "days": "Days",
+        "obs": "Notes",
+        "actions": "Actions"
+      },
+      "notSpecified": "—",
+      "noTeacher": "No teacher",
+      "daysLabel": "{days} days",
+      "searchPlaceholder": "Search by place, teacher, country…",
+      "noResults": "No results.",
+      "deleteDialog": {
+        "title": "Delete this course?",
+        "description": "{place} — {days} days ({mode}). This action cannot be undone.",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "deleting": "Deleting…"
+      },
+      "filterBadge": "Remove filter"
+    },
+    "empty": {
+      "title": "No courses registered",
+      "description": "Import your data from a JSON file or add courses manually.",
+      "addCourse": "Add course",
+      "excelTip": "Have data in Excel or Word?",
+      "excelTipDesc": "Copy your data and paste it into ChatGPT with this prompt:",
+      "copy": "Copy",
+      "copied": "Copied"
+    },
+    "sidebar": {
+      "stats": "Statistics",
+      "allCourses": "View all courses",
+      "centers": "Vipassana Centers",
+      "download": "Download data",
+      "downloading": "Downloading…",
+      "noData": "No courses to download",
+      "import": "Import data",
+      "back": "Back"
+    },
+    "toast": {
+      "deleted": "Course deleted",
+      "deleteError": "Could not delete",
+      "downloadSuccess": "{count} courses downloaded",
+      "downloadError": "Download error",
+      "noData": "No courses to download"
+    },
+    "edit": {
+      "dialogTitle": "Edit course",
+      "save": "Save changes",
+      "saving": "Saving…",
+      "cancel": "Cancel",
+      "success": "Course updated",
+      "error": "Could not update",
+      "labels": {
+        "date": "Date",
+        "place": "Place",
+        "teacher": "Teacher",
+        "country": "Country",
+        "mode": "Mode",
+        "days": "Days",
+        "obs": "Notes",
+        "sit": "Sit",
+        "serve": "Serve"
+      }
+    },
+    "filters": {
+      "activeFilters": "Active filters:",
+      "clear": "Clear",
+      "presets": {
+        "modeSit": "Mode: sit",
+        "modeServe": "Mode: serve",
+        "sit10d": "Sitting (10d)",
+        "serve10d": "Serving (10d)",
+        "longServe20d": "Long serving (20d+)",
+        "longCourses20d": "Long courses (20d+)"
+      }
+    },
+    "modeBreakdown": {
+      "courses": "{count} course{plural}"
+    },
+    "recent": {
+      "dateFormat": "{date} · {teacher} · {days} days",
+      "noTeacher": "No teacher"
+    }
+  },
+  "CursosPage": {
+    "title": "My Vipassana Courses",
+    "subtitle": "Save your sitting and service courses in one place.",
+    "dashboardLink": "Dashboard",
+    "formTitle": "New course",
+    "labels": {
+      "startDate": "Start date",
+      "place": "Place / Center",
+      "placePlaceholder": "Dhamma...",
+      "teacher": "Teacher",
+      "teacherPlaceholder": "e.g.: S.N.Goenka",
+      "country": "Country",
+      "countryPlaceholder": "e.g.: Argentina",
+      "mode": "Mode",
+      "modeSit": "Sit",
+      "modeServe": "Serve",
+      "days": "Days",
+      "daysPlaceholder": "Select an option",
+      "daysCustomSit": "Days (custom)",
+      "daysCustomServe": "LTS days",
+      "obs": "Notes",
+      "obsPlaceholder": "Add additional information..."
+    },
+    "days": {
+      "other": "Other…",
+      "lts": "LTS (long-term service)",
+      "label": "{days} days",
+      "labelWithName": "{days} days — {name}"
+    },
+    "submit": {
+      "save": "Save course",
+      "saving": "Saving…",
+      "saved": "Saved"
+    },
+    "toast": {
+      "saved": "Course saved",
+      "saveError": "Could not save"
+    }
+  },
+  "ImportCourses": {
+    "pageTitle": "Import courses (JSON)",
+    "pageDescription": "Paste or drag a {code} file with an array of courses. You'll see the details below before importing.",
+    "dialogTitle": "Import courses (JSON)",
+    "dialogDescription": "Paste or drag a {code} file with an array of courses.",
+    "dropzone": {
+      "dragLabel": "Drag your .json file here",
+      "clickLabel": "or click to select it",
+      "ariaLabel": "Drag a JSON file here or click to select it",
+      "dragActive": "Drop the file here"
+    },
+    "textareaPlaceholder": "Or paste the JSON here…",
+    "format": {
+      "title": "Expected format",
+      "required": "{field}: required.",
+      "modeInfo": "{field}: only {values}.",
+      "daysInfo": "{field}: positive integer.",
+      "optional": "{fields}: optional.",
+      "unknownTip": "Fields without info: use {code} instead of {empty}. If an AI fills empty fields with empty strings, import will fail.",
+      "modeValues": "\"sit\" or \"serve\""
+    },
+    "table": {
+      "header": {
+        "date": "Date",
+        "place": "Place",
+        "mode": "Mode",
+        "days": "Days",
+        "teacher": "Teacher",
+        "country": "Country"
+      }
+    },
+    "preview": {
+      "summary": "{total} course{plural} detected · {valid} valid · {invalid} with errors",
+      "errorTitle": "Rows with errors:",
+      "rowError": "Row {index}: {errors}"
+    },
+    "errors": {
+      "invalidJson": "Invalid JSON: check that the content is a valid array.",
+      "notArray": "JSON must be an array of courses.",
+      "fileTooLarge": "File is too large (max 5 MB)",
+      "mustBeJson": "File must be .json",
+      "validationTitle": "Fix these errors:"
+    },
+    "buttons": {
+      "clear": "Clear",
+      "import": "Import",
+      "importCount": "Import {count} course{cplural}",
+      "importing": "Importing…",
+      "cancel": "Cancel"
+    },
+    "toast": {
+      "imported": "{count} course{cplural} imported",
+      "importError": "Could not import"
+    }
+  },
+  "SiteHeader": {
+    "themeLabel": "Toggle theme",
+    "userMenu": "User",
+    "signOut": "Sign out",
+    "signIn": "Sign in",
+    "signUp": "Sign up"
+  },
+  "SiteFooter": {
+    "copyright": "Vipa Courses © {year}",
+    "tagline": "Vipassana Meditation"
+  },
+  "ErrorPage": {
+    "title": "Oops!",
+    "message": "Something went wrong.",
+    "retry": "Try again",
+    "goHome": "Go home"
+  },
+  "NotFoundPage": {
+    "code": "404",
+    "title": "Page not found",
+    "message": "The page you are looking for doesn't exist or has been moved.",
+    "goHome": "Go home"
+  },
+  "LocationsExplorer": {
+    "continentLabel": "Continent",
+    "allContinents": "All",
+    "searchPlaceholder": "Search by name, city, or country…",
+    "countrySelectPlaceholder": "All countries",
+    "allCountries": "All countries",
+    "typeSelectPlaceholder": "All types",
+    "allTypes": "All types",
+    "typeCenter": "Centers",
+    "typeNonCentre": "Non-Centres",
+    "activeFilters": "Active filters:",
+    "clearFilters": "Clear",
+    "noResults": "No centers found with those filters.",
+    "table": {
+      "header": {
+        "name": "Name",
+        "type": "Type",
+        "country": "Country",
+        "city": "City",
+        "state": "State/Province",
+        "continent": "Continent"
+      }
+    },
+    "pagination": {
+      "resultCount": "{total} result{tplural}",
+      "pageInfo": "— page {page} of {totalPages}",
+      "notSpecified": "—"
+    }
+  },
+  "common": {
+    "notSpecified": "—",
+    "noResults": "No results.",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "loading": "Loading…"
+  }
+}
