@@ -80,7 +80,9 @@ export function LandingView() {
       {/* Hero */}
       <section className="relative overflow-hidden px-4 pb-20 pt-24 text-center">
         <div ref={heroRef} className="mx-auto max-w-2xl">
-          <PenguinIcon
+          <img
+            src="/logo-icon.svg"
+            alt="Vipa Cursos"
             className={cn("mx-auto mb-6 h-28 w-28 drop-shadow-lg", heroInView && "anim-fade-up")}
           />
           <h1
@@ -154,7 +156,9 @@ export function LandingView() {
       {!isLoggedIn && (
         <section className="px-4 py-20 text-center">
           <div ref={ctaRef} className="mx-auto max-w-lg">
-            <PenguinIcon
+            <img
+              src="/logo-icon.svg"
+              alt="Vipa Cursos"
               className={cn(
                 "mx-auto mb-4 h-12 w-12 opacity-60 anim-float",
                 ctaInView && "anim-fade-in",

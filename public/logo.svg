@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 72" role="img" aria-labelledby="vipa-title vipa-desc">
+  <title id="vipa-title">Vipa Cursos Logo</title>
+  <desc id="vipa-desc">A penguin meditating in lotus pose with the text Vipa Cursos</desc>
+  
+  <defs>
+    <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6C47FF"/>
+      <stop offset="100%" stop-color="#4A30CC"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8B9D5B"/>
+      <stop offset="100%" stop-color="#6B7D3B"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Penguin logo mark -->
+  <g id="logo-mark" transform="translate(4, 6)">
+    <!-- Outer circle (subtle background) -->
+    <circle cx="30" cy="30" r="29" fill="#1E2235" opacity="0.06"/>
+    
+    <!-- Lotus base / cushion -->
+    <ellipse cx="30" cy="52" rx="16" ry="4" fill="url(#accentGrad)" opacity="0.3"/>
+    <ellipse cx="30" cy="51" rx="14" ry="3" fill="url(#accentGrad)" opacity="0.15"/>
+    
+    <!-- Body (penguin in meditation) -->
+    <ellipse cx="30" cy="35" rx="12" ry="16" fill="url(#bodyGrad)"/>
+    
+    <!-- Belly (white) -->
+    <ellipse cx="30" cy="38" rx="7" ry="10" fill="#FFFFFF"/>
+    
+    <!-- Head -->
+    <circle cx="30" cy="18" r="10" fill="#1E2235"/>
+    
+    <!-- Face (white mask) -->
+    <ellipse cx="30" cy="17" rx="7" ry="6" fill="#FFFFFF"/>
+    
+    <!-- Eyes (closed, peaceful) -->
+    <path d="M26 16 Q27 14 28 16" stroke="#1E2235" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+    <path d="M32 16 Q33 14 34 16" stroke="#1E2235" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+    
+    <!-- Beak -->
+    <polygon points="28.5,18 31.5,18 30,20.5" fill="url(#accentGrad)"/>
+    
+    <!-- Arms/wings in meditation mudra -->
+    <path d="M18 30 Q15 28 17 25" stroke="url(#bodyGrad)" stroke-width="3" fill="none" stroke-linecap="round" transform="rotate(-15, 18, 30)"/>
+    <path d="M42 30 Q45 28 43 25" stroke="url(#bodyGrad)" stroke-width="3" fill="none" stroke-linecap="round" transform="rotate(15, 42, 30)"/>
+    
+    <!-- Feet (crossed, lotus) -->
+    <ellipse cx="24" cy="50" rx="5" ry="3" fill="url(#accentGrad)" transform="rotate(-10, 24, 50)"/>
+    <ellipse cx="36" cy="50" rx="5" ry="3" fill="url(#accentGrad)" transform="rotate(10, 36, 50)"/>
+    
+    <!-- Subtle glow / aura ring -->
+    <circle cx="30" cy="30" r="27" fill="none" stroke="#6C47FF" stroke-width="0.5" opacity="0.3"/>
+  </g>
+
+  <!-- Wordmark -->
+  <g id="wordmark" transform="translate(66, 0)">
+    <text x="0" y="32" font-family="'Montserrat', system-ui, sans-serif" font-size="24" font-weight="700" fill="#1E2235" letter-spacing="-0.5">
+      Vipa
+    </text>
+    <text x="70" y="32" font-family="'Montserrat', system-ui, sans-serif" font-size="24" font-weight="300" fill="#6B7280" letter-spacing="-0.5">
+      Cursos
+    </text>
+    <!-- Tagline -->
+    <text x="0" y="48" font-family="'Montserrat', system-ui, sans-serif" font-size="9" font-weight="400" fill="#9CA3AF" letter-spacing="2" text-transform="uppercase">
+      TU VIAJE INTERIOR
+    </text>
+  </g>
+</svg>

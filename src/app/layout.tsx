@@ -34,7 +34,15 @@ export const metadata: Metadata = {
   authors: [{ name: "Vipa Cursos" }],
   creator: "Vipa Cursos",
   icons: {
-    icon: "/favicon.png",
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.png", type: "image/png", sizes: "32x32" },
+    ],
+    apple: "/favicon.png",
+  },
+  manifest: "/site.webmanifest",
+  other: {
+    "theme-color": "#6C47FF",
   },
   robots: {
     index: true,
@@ -68,7 +76,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main className="flex-1">{children}</main>
           <SiteFooter />
         </Providers>
-        <Toaster richColors position="top-right" />
+        <Toaster richColors position="bottom-right" />
       </body>
     </html>
   );

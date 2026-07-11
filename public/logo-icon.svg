@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Vipa Cursos icon">
+  <defs>
+    <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6C47FF"/>
+      <stop offset="100%" stop-color="#4A30CC"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8B9D5B"/>
+      <stop offset="100%" stop-color="#6B7D3B"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="0.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Subtle lotus base -->
+  <ellipse cx="32" cy="56" rx="18" ry="5" fill="url(#accentGrad)" opacity="0.25"/>
+  <ellipse cx="32" cy="55" rx="15" ry="3.5" fill="url(#accentGrad)" opacity="0.12"/>
+
+  <!-- Penguin body -->
+  <ellipse cx="32" cy="38" rx="13" ry="17" fill="url(#bodyGrad)" filter="url(#glow)"/>
+  <ellipse cx="32" cy="41" rx="8" ry="11" fill="#FFFFFF"/>
+
+  <!-- Head -->
+  <circle cx="32" cy="20" r="10.5" fill="#1E2235"/>
+  <ellipse cx="32" cy="19" rx="7.5" ry="6" fill="#FFFFFF"/>
+
+  <!-- Peaceful eyes -->
+  <path d="M28 18 Q29 16 30 18" stroke="#1E2235" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M34 18 Q35 16 36 18" stroke="#1E2235" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Beak -->
+  <polygon points="30.5,20 33.5,20 32,22.5" fill="url(#accentGrad)"/>
+
+  <!-- Wings in meditation -->
+  <path d="M19 33 Q16 31 18 28" stroke="url(#bodyGrad)" stroke-width="3.5" fill="none" stroke-linecap="round" transform="rotate(-15, 19, 33)"/>
+  <path d="M45 33 Q48 31 46 28" stroke="url(#bodyGrad)" stroke-width="3.5" fill="none" stroke-linecap="round" transform="rotate(15, 45, 33)"/>
+
+  <!-- Feet (lotus) -->
+  <ellipse cx="26" cy="53" rx="5.5" ry="3.5" fill="url(#accentGrad)" transform="rotate(-10, 26, 53)"/>
+  <ellipse cx="38" cy="53" rx="5.5" ry="3.5" fill="url(#accentGrad)" transform="rotate(10, 38, 53)"/>
+</svg>

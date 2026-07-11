@@ -41,7 +41,7 @@ export function AppSidebar({ activeView, onNavigate }: AppSidebarProps) {
     <Sidebar>
       <SidebarHeader>
         <div className="px-2 py-2">
-          <h2 className="text-lg font-semibold tracking-tight">Vipa Cursos</h2>
+          <img src="/logo-icon.svg" alt="Vipa Cursos" className="mx-auto h-8 w-auto" />
         </div>
       </SidebarHeader>
 
