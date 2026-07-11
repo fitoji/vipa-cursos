@@ -13,6 +13,7 @@ import {
   courseFormSchema,
   type CourseFormValues,
   DAY_PRESETS,
+  COURSE_NAMES,
   defaultCourseFormValues,
   daysFromFormValues,
 } from "@/lib/course-form";
@@ -196,7 +197,7 @@ export default function CursosPage() {
                   <SelectContent>
                     {DAY_PRESETS.map((d) => (
                       <SelectItem key={d} value={String(d)}>
-                        {d} días
+                        {d} días{COURSE_NAMES[d] ? ` — ${COURSE_NAMES[d]}` : ""}
                       </SelectItem>
                     ))}
                     <SelectItem value="other">Otro…</SelectItem>

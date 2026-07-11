@@ -11,6 +11,7 @@ import {
   type Course,
   type CourseFormValues,
   DAY_PRESETS,
+  COURSE_NAMES,
   defaultCourseFormValues,
   daysFromFormValues,
   toFormValues,
@@ -162,7 +163,7 @@ export function EditCourseDialog({
               <SelectContent>
                 {DAY_PRESETS.map((d) => (
                   <SelectItem key={d} value={String(d)}>
-                    {d} días
+                    {d} días{COURSE_NAMES[d] ? ` — ${COURSE_NAMES[d]}` : ""}
                   </SelectItem>
                 ))}
                 <SelectItem value="other">Otro…</SelectItem>

@@ -3,7 +3,17 @@ import { listCourses } from "@/app/actions/courses";
 
 export type Course = Awaited<ReturnType<typeof listCourses>>[number];
 
-export const DAY_PRESETS = [1, 3, 10, 20, 30, 45, 60] as const;
+export const DAY_PRESETS = [1, 3, 8, 10, 20, 30, 45, 60] as const;
+
+/** Course names for known Vipassana course lengths */
+export const COURSE_NAMES: Record<number, string> = {
+  8: "Sati (Satipaṭṭhāna)",
+  10: "curso estándar",
+  20: "curso de 20 días",
+  30: "curso de 30 días",
+  45: "curso de 45 días",
+  60: "curso de 60 días",
+};
 
 export const courseFormSchema = z
   .object({
