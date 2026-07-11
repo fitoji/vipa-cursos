@@ -55,8 +55,10 @@ export const defaultCourseFormValues: CourseFormValues = {
 
 export function toFormValues(c: Course): CourseFormValues {
   const isPreset = (DAY_PRESETS as readonly number[]).includes(c.days);
+  const raw = c.start_date;
+  const dateStr = typeof raw === "string" ? raw.slice(0, 10) : new Date(raw).toISOString().slice(0, 10);
   return {
-    start_date: c.start_date.slice(0, 10),
+    start_date: dateStr,
     place: c.place,
     teacher: c.teacher ?? "",
     country: c.country ?? "",
