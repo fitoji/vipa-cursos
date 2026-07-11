@@ -1,8 +1,13 @@
 "use server";
 
 import { neon } from "@neondatabase/serverless";
+import { unstable_cache } from "next/cache";
 
 const sql = neon(process.env.DATABASE_URL!);
+
+// Shared cache config — centers data is static, seeded from JSON
+const LOCATIONS_TAG = "locations";
+const ONE_DAY = 86400;
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -32,8 +37,9 @@ export type LocationRow = {
 
 // ── Queries ────────────────────────────────────────────────────────────────
 
-export async function listContinents(): Promise<ContinentRow[]> {
-  const rows = await sql`
+export const listContinents = unstable_cache(
+  async (): Promise<ContinentRow[]> => {
+    const rows = await sql`
     SELECT
       c.id,
       c.name,
@@ -44,12 +50,16 @@ export async function listContinents(): Promise<ContinentRow[]> {
     GROUP BY c.id, c.name
     ORDER BY c.name
   `;
-  return rows as ContinentRow[];
-}
+    return rows as ContinentRow[];
+  },
+  ["continents"],
+  { revalidate: ONE_DAY, tags: [LOCATIONS_TAG] },
+);
 
-export async function listCountries(continentId?: number): Promise<CountryRow[]> {
-  const rows = continentId
-    ? await sql`
+export const listCountries = unstable_cache(
+  async (continentId?: number): Promise<CountryRow[]> => {
+    const rows = continentId
+      ? await sql`
         SELECT
           co.id,
           co.name,
@@ -61,7 +71,7 @@ export async function listCountries(continentId?: number): Promise<CountryRow[]>
         GROUP BY co.id, co.name, co.region
         ORDER BY co.name
       `
-    : await sql`
+      : await sql`
         SELECT
           co.id,
           co.name,
@@ -72,92 +82,96 @@ export async function listCountries(continentId?: number): Promise<CountryRow[]>
         GROUP BY co.id, co.name, co.region
         ORDER BY co.name
       `;
-  return rows as CountryRow[];
-}
+    return rows as CountryRow[];
+  },
+  ["countries-all"],
+  { revalidate: ONE_DAY, tags: [LOCATIONS_TAG] },
+);
 
-export async function searchLocations(opts: {
-  continentId?: number;
-  countryId?: number;
-  type?: "Center" | "Non-Centre";
-  query?: string;
-  limit?: number;
-  offset?: number;
-}): Promise<{ locations: LocationRow[]; total: number }> {
-  const { continentId, countryId, type, query, limit = 50, offset = 0 } = opts;
+export const searchLocations = unstable_cache(
+  async (opts: {
+    continentId?: number;
+    countryId?: number;
+    type?: "Center" | "Non-Centre";
+    query?: string;
+    limit?: number;
+    offset?: number;
+  }): Promise<{ locations: LocationRow[]; total: number }> => {
+    const { continentId, countryId, type, query, limit = 50, offset = 0 } = opts;
 
-  const whereParts: string[] = ["1=1"];
-  if (continentId) whereParts.push(`co.continent_id = ${continentId}`);
-  if (countryId) whereParts.push(`l.country_id = ${countryId}`);
-  if (type) whereParts.push(`l.type = '${type}'`);
-  if (query) {
-    const safe = query.replace(/'/g, "''");
-    whereParts.push(
-      `(l.name ILIKE '%${safe}%' OR l.city ILIKE '%${safe}%' OR co.name ILIKE '%${safe}%')`,
-    );
-  }
-  const whereClause = whereParts.join(" AND ");
+    const whereParts: string[] = ["1=1"];
+    if (continentId) whereParts.push(`co.continent_id = ${continentId}`);
+    if (countryId) whereParts.push(`l.country_id = ${countryId}`);
+    if (type) whereParts.push(`l.type = '${type}'`);
+    if (query) {
+      const safe = query.replace(/'/g, "''");
+      whereParts.push(
+        `(l.name ILIKE '%${safe}%' OR l.city ILIKE '%${safe}%' OR co.name ILIKE '%${safe}%')`,
+      );
+    }
+    const whereClause = whereParts.join(" AND ");
 
-  const countRows = (await sql.unsafe(
-    `SELECT COUNT(*)::int AS total
-     FROM locations l
-     JOIN countries co ON co.id = l.country_id
-     JOIN continents c ON c.id = co.continent_id
-     WHERE ${whereClause}`,
-  )) as unknown as { total: number }[];
-  const total = countRows[0].total;
+    const countRows = (await sql.unsafe(
+      `SELECT COUNT(*)::int AS total
+       FROM locations l
+       JOIN countries co ON co.id = l.country_id
+       JOIN continents c ON c.id = co.continent_id
+       WHERE ${whereClause}`,
+    )) as unknown as { total: number }[];
+    const total = countRows[0].total;
 
-  const dataRows = (await sql.unsafe(
-    `SELECT
-       l.id,
-       l.name,
-       l.type,
-       l.city,
-       l.state,
-       l.province,
-       co.name AS country_name,
-       c.name AS continent_name
-     FROM locations l
-     JOIN countries co ON co.id = l.country_id
-     JOIN continents c ON c.id = co.continent_id
-     WHERE ${whereClause}
-     ORDER BY c.name, co.name, l.name
-     LIMIT ${limit} OFFSET ${offset}`,
-  )) as unknown as LocationRow[];
+    const dataRows = (await sql.unsafe(
+      `SELECT
+         l.id,
+         l.name,
+         l.type,
+         l.city,
+         l.state,
+         l.province,
+         co.name AS country_name,
+         c.name AS continent_name
+       FROM locations l
+       JOIN countries co ON co.id = l.country_id
+       JOIN continents c ON c.id = co.continent_id
+       WHERE ${whereClause}
+       ORDER BY c.name, co.name, l.name
+       LIMIT ${limit} OFFSET ${offset}`,
+    )) as unknown as LocationRow[];
 
-  return { locations: dataRows, total };
-}
+    return { locations: dataRows, total };
+  },
+  ["search-locations"],
+  { revalidate: ONE_DAY, tags: [LOCATIONS_TAG] },
+);
 
-export async function listCountryNames(): Promise<string[]> {
-  const { neon } = await import("@neondatabase/serverless");
-  const sql = neon(process.env.DATABASE_URL!);
-  const rows = await sql`
+export const listCountryNames = unstable_cache(
+  async (): Promise<string[]> => {
+    const rows = await sql`
     SELECT DISTINCT name FROM countries ORDER BY name
   `;
-  return (rows as { name: string }[]).map((r) => r.name);
-}
+    return (rows as { name: string }[]).map((r) => r.name);
+  },
+  ["country-names"],
+  { revalidate: ONE_DAY, tags: [LOCATIONS_TAG] },
+);
 
-export async function listLocationNames(): Promise<string[]> {
-  const { neon } = await import("@neondatabase/serverless");
-  const sql = neon(process.env.DATABASE_URL!);
-  const rows = await sql`
-    SELECT DISTINCT name FROM locations ORDER BY name
-  `;
-  return (rows as { name: string }[]).map((r) => r.name);
-}
-
-export async function listLocationNamesByCountry(country?: string): Promise<string[]> {
-  if (!country) {
-    const rows = await sql`
+export const listLocationNamesByCountry = unstable_cache(
+  async (country?: string): Promise<string[]> => {
+    if (!country) {
+      const rows = await sql`
       SELECT DISTINCT l.name FROM locations l ORDER BY l.name
     `;
-    return (rows as { name: string }[]).map((r) => r.name);
-  }
-  const rows = await sql`
+      return (rows as { name: string }[]).map((r) => r.name);
+    }
+    const rows = await sql`
     SELECT DISTINCT l.name
     FROM locations l
     JOIN countries co ON co.id = l.country_id
     WHERE co.name = ${country}
     ORDER BY l.name
   `;
-  return (rows as { name: string }[]).map((r) => r.name);
-}
+    return (rows as { name: string }[]).map((r) => r.name);
+  },
+  ["location-names"],
+  { revalidate: ONE_DAY, tags: [LOCATIONS_TAG] },
+);
