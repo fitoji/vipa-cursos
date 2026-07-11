@@ -5,14 +5,23 @@ export type Course = Awaited<ReturnType<typeof listCourses>>[number];
 
 export const DAY_PRESETS = [1, 3, 8, 10, 20, 30, 45, 60] as const;
 
+export const SPECIAL_COURSES = [
+  { value: "special-10", days: 10, label: "10 días (especial)" },
+  { value: "kids-1", days: 1, label: "Niños (1 día)" },
+] as const;
+
 /** Course names for known Vipassana course lengths */
-export const COURSE_NAMES: Record<number, string> = {
-  8: "Sati (Satipaṭṭhāna)",
-  10: "curso estándar",
-  20: "curso de 20 días",
-  30: "curso de 30 días",
-  45: "curso de 45 días",
-  60: "curso de 60 días",
+export const COURSE_NAMES: Record<string, string> = {
+  "1": "Anapana",
+  "3": "curso corto",
+  "8": "Sati (Satipaṭṭhāna)",
+  "10": "curso estándar",
+  "20": "curso de 20 días",
+  "30": "curso de 30 días",
+  "45": "curso de 45 días",
+  "60": "curso de 60 días",
+  "special-10": "especial",
+  "kids-1": "niños",
 };
 
 export const courseFormSchema = z
@@ -59,7 +68,10 @@ export function toFormValues(c: Course): CourseFormValues {
 }
 
 export function daysFromFormValues(values: CourseFormValues): number {
-  return values.daysPreset === "other" ? Number(values.daysCustom) : Number(values.daysPreset);
+  if (values.daysPreset === "other") return Number(values.daysCustom);
+  const special = SPECIAL_COURSES.find((s) => s.value === values.daysPreset);
+  if (special) return special.days;
+  return Number(values.daysPreset);
 }
 
 export const courseImportSchema = z.object({

@@ -13,6 +13,7 @@ import {
   courseFormSchema,
   type CourseFormValues,
   DAY_PRESETS,
+  SPECIAL_COURSES,
   COURSE_NAMES,
   defaultCourseFormValues,
   daysFromFormValues,
@@ -27,6 +28,7 @@ import {
   Select,
   SelectContent,
   SelectItem,
+  SelectSeparator,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -197,7 +199,13 @@ export default function CursosPage() {
                   <SelectContent>
                     {DAY_PRESETS.map((d) => (
                       <SelectItem key={d} value={String(d)}>
-                        {d} días{COURSE_NAMES[d] ? ` — ${COURSE_NAMES[d]}` : ""}
+                        {d} días{COURSE_NAMES[String(d)] ? ` — ${COURSE_NAMES[String(d)]}` : ""}
+                      </SelectItem>
+                    ))}
+                    <SelectSeparator />
+                    {SPECIAL_COURSES.map((s) => (
+                      <SelectItem key={s.value} value={s.value}>
+                        {s.label}
                       </SelectItem>
                     ))}
                     <SelectItem value="other">Otro…</SelectItem>
