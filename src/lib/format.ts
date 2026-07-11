@@ -1,4 +1,4 @@
-export function formatDate(value: string | Date): string {
+export function formatDate(value: string | Date, locale = "es-AR"): string {
   const d = typeof value === "string" ? new Date(value) : value;
-  return d.toLocaleDateString("es-AR", { timeZone: "UTC" });
+  return d.toLocaleDateString(locale, { timeZone: "UTC" });
 }
