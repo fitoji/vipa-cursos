@@ -193,6 +193,10 @@ export function ImportCoursesPanel({ onImported }: { onImported?: () => void }) 
           <li>
             <code>teacher</code>, <code>country</code>, <code>obs</code>: opcionales.
           </li>
+          <li className="font-medium text-amber-600 dark:text-amber-400">
+            Campos sin información: usá <code>"unknown"</code> en vez de <code>""</code>. Si una IA
+            rellena campos vacíos con string vacío, la importación falla.
+          </li>
         </ul>
       </div>
 
