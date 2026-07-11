@@ -20,6 +20,18 @@ export function SiteHeader() {
 
   const { data: session } = authClient.useSession();
   const email = session?.user?.email;
+  const name = session?.user?.name;
+  const image = session?.user?.image;
+
+  // Get initials from name or email
+  const initials = name
+    ? name
+        .split(" ")
+        .map((n) => n[0])
+        .slice(0, 2)
+        .join("")
+        .toUpperCase()
+    : email?.[0]?.toUpperCase() ?? "?";
 
   const handleLogout = async () => {
     await authClient.signOut();
@@ -34,7 +46,19 @@ export function SiteHeader() {
             <img src="/logo.svg" alt="Vipa Cursos" className="h-7 w-auto" />
           </Link>
         <div className="flex items-center gap-3">
-          {email && <span className="text-sm text-muted-foreground">{email}</span>}
+          {email && (
+            <div
+              className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-primary/10 text-xs font-medium text-primary ring-1 ring-primary/20 anim-scale-in hover:ring-primary/40 transition-shadow"
+              title={email}
+            >
+              {image ? (
+                <img src={image} alt={name ?? email} className="h-full w-full object-cover" />
+              ) : (
+                initials
+              )}
+            </div>
+          )}
+          {email && <span className="hidden text-sm text-muted-foreground sm:inline">{email}</span>}
           <Button
             variant="ghost"
             size="icon"
