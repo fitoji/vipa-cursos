@@ -241,8 +241,19 @@ export function DashboardView() {
     <SidebarProvider>
       <AppSidebar activeView={view} onNavigate={navigate} />
       <SidebarInset>
-        <div className="min-h-screen bg-background">
-          <div className="mx-auto max-w-6xl px-4 py-10">
+        <div className="relative min-h-screen">
+          {/* bosque.webp background */}
+          <div
+            className="pointer-events-none fixed inset-0 bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: "url('/bosque.webp')",
+              backgroundAttachment: "fixed",
+            }}
+          />
+          {/* overlay for readability */}
+          <div className="pointer-events-none fixed inset-0 bg-background/55 backdrop-blur-sm" />
+
+          <div className="relative z-10 mx-auto max-w-6xl px-4 py-10">
             {/* Header */}
             <div className="mb-6 flex items-center justify-between gap-4">
               <div className="flex items-center gap-3">

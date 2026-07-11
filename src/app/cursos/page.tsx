@@ -98,8 +98,19 @@ export default function CursosPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="mx-auto max-w-4xl px-4 py-10">
+    <div className="relative min-h-screen">
+      {/* bosque.webp background */}
+      <div
+        className="pointer-events-none fixed inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: "url('/bosque.webp')",
+          backgroundAttachment: "fixed",
+        }}
+      />
+      {/* overlay for readability */}
+      <div className="pointer-events-none fixed inset-0 bg-background/55 backdrop-blur-sm" />
+
+      <div className="relative z-10 mx-auto max-w-4xl px-4 py-10">
         <header className="mb-8 flex items-start justify-between gap-4">
           <div>
             <h1 className="text-3xl font-semibold tracking-tight">Mis cursos de Vipassana</h1>

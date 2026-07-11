@@ -40,17 +40,21 @@ export function LandingView() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero */}
-      <section className="relative overflow-hidden px-4 pb-20 pt-24 text-center">
-        <div ref={heroRef} className="mx-auto max-w-2xl">
-          <img
-            src="/logo-icon.svg"
-            alt="Vipa Cursos"
-            className={cn("mx-auto mb-6 h-28 w-28 drop-shadow-lg", heroInView && "anim-fade-up")}
-          />
+      {/* Hero — hero.jpg as background */}
+      <section
+        className="relative flex min-h-[85vh] items-center justify-center overflow-hidden px-4 py-24"
+        style={{
+          backgroundImage: "url('/hero.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        {/* Dark overlay for readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-background" />
+        <div ref={heroRef} className="relative z-10 mx-auto max-w-2xl text-center">
           <h1
             className={cn(
-              "text-4xl font-bold tracking-tight sm:text-5xl",
+              "text-4xl font-bold tracking-tight text-white drop-shadow-lg sm:text-5xl",
               heroInView && "anim-fade-up",
             )}
             style={heroInView ? staggerDelay(1) : undefined}
@@ -58,7 +62,10 @@ export function LandingView() {
             Vipa <span className="text-primary">Cursos</span>
           </h1>
           <p
-            className={cn("mt-4 text-lg text-muted-foreground", heroInView && "anim-fade-up")}
+            className={cn(
+              "mt-4 text-lg text-white/80 drop-shadow",
+              heroInView && "anim-fade-up",
+            )}
             style={heroInView ? staggerDelay(2) : undefined}
           >
             Tu registro personal de cursos de meditación Vipassana. Guardá cada sit y serve, y
@@ -89,9 +96,19 @@ export function LandingView() {
         </div>
       </section>
 
-      {/* Features */}
-      <section className="border-t bg-muted/30 px-4 py-20">
-        <div ref={featuresRef} className="mx-auto max-w-4xl">
+      {/* Features — bosque.webp as subtle background */}
+      <section
+        className="relative border-t px-4 py-24"
+        style={{
+          backgroundImage: "url('/bosque.webp')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed",
+        }}
+      >
+        {/* Soft overlay so cards remain readable */}
+        <div className="absolute inset-0 bg-background/80 backdrop-blur-[2px]" />
+        <div ref={featuresRef} className="relative z-10 mx-auto max-w-4xl">
           <h2 className="mb-12 text-center text-2xl font-semibold tracking-tight">
             Todo lo que necesitás
           </h2>
@@ -99,7 +116,10 @@ export function LandingView() {
             {features.map((f, i) => (
               <Card
                 key={f.title}
-                className={cn("hover-lift", featuresInView && "anim-fade-up")}
+                className={cn(
+                  "hover-lift border-white/10 bg-white/90 shadow-lg backdrop-blur-sm dark:bg-black/80",
+                  featuresInView && "anim-fade-up",
+                )}
                 style={featuresInView ? staggerDelay(i) : undefined}
               >
                 <CardContent className="flex gap-4 p-6">
@@ -117,14 +137,14 @@ export function LandingView() {
 
       {/* CTA — hidden when logged in */}
       {!isLoggedIn && (
-        <section className="px-4 py-20 text-center">
+        <section className="px-4 py-24 text-center">
           <div ref={ctaRef} className="mx-auto max-w-lg">
             <img
-              src="/logo-icon.svg"
-              alt="Vipa Cursos"
+              src="/pagoda.webp"
+              alt="Pagoda Vipassana"
               className={cn(
-                "mx-auto mb-4 h-12 w-12 opacity-60 anim-float",
-                ctaInView && "anim-fade-in",
+                "mx-auto mb-6 h-36 w-36 rounded-full object-cover shadow-lg",
+                ctaInView && "anim-fade-up",
               )}
             />
             <h2

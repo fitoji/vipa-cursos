@@ -39,7 +39,7 @@ export function SiteHeader() {
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 bg-background/60 backdrop-blur-xl border-b border-border/30">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
           <Link href="/" className="flex items-center gap-2 hover-scale">
             <img src="/logo.svg" alt="Vipa Cursos" className="h-7 w-auto" />
