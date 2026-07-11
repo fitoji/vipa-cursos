@@ -1,15 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 import { BookOpen, Clock, BarChart3, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useInView, staggerDelay } from "@/lib/animations";
 import { cn } from "@/lib/utils";
 import { authClient } from "@/lib/auth-client";
-import { listCourses } from "@/app/actions/courses";
 
 const features = [
   {
@@ -35,23 +32,11 @@ const features = [
 ];
 
 export function LandingView() {
-  const router = useRouter();
-  const { data: session, isPending } = authClient.useSession();
+  const { data: session } = authClient.useSession();
   const isLoggedIn = !!session;
   const [heroRef, heroInView] = useInView(0.1);
   const [featuresRef, featuresInView] = useInView(0.1);
   const [ctaRef, ctaInView] = useInView(0.2);
-
-  // If logged in, check courses and redirect accordingly
-  useEffect(() => {
-    if (isPending || !session) return;
-    listCourses().then((courses) => {
-      router.replace(courses.length > 0 ? "/dashboard" : "/cursos");
-    });
-  }, [session, isPending, router]);
-
-  // Don't flash the landing for logged-in users
-  if (isPending || isLoggedIn) return null;
 
   return (
     <div className="min-h-screen bg-background">
@@ -87,9 +72,14 @@ export function LandingView() {
             style={heroInView ? staggerDelay(3) : undefined}
           >
             {isLoggedIn ? (
-              <Button size="lg" className="hover-scale" asChild>
-                <Link href="/cursos">Ir a mis cursos</Link>
-              </Button>
+              <>
+                <Button size="lg" className="hover-scale" asChild>
+                  <Link href="/dashboard">Panel de control</Link>
+                </Button>
+                <Button size="lg" variant="outline" asChild>
+                  <Link href="/cursos">Nuevo curso</Link>
+                </Button>
+              </>
             ) : (
               <>
                 <Button size="lg" className="hover-scale" asChild>
