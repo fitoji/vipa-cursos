@@ -18,12 +18,8 @@ export default function Error({
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          Oops!
-        </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Algo salió mal.
-        </p>
+        <h1 className="text-xl font-semibold tracking-tight text-foreground">Oops!</h1>
+        <p className="mt-2 text-sm text-muted-foreground">Algo salió mal.</p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <Button
             onClick={() => {
