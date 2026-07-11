@@ -59,6 +59,7 @@ export default function CursosPage() {
   }, [submitted]);
 
   const daysPreset = form.watch("daysPreset");
+  const mode = form.watch("mode");
   const [formRef, formInView] = useInView(0.1);
   const { data: countries } = useCachedData("countries", listCountryNames);
   const selectedCountry = form.watch("country");
@@ -208,14 +209,18 @@ export default function CursosPage() {
                         {s.label}
                       </SelectItem>
                     ))}
-                    <SelectItem value="other">Otro…</SelectItem>
+                    <SelectItem value="other">
+                      {mode === "serve" ? "LTS (servicio largo)" : "Otro…"}
+                    </SelectItem>
                   </SelectContent>
                 </Select>
               </div>
 
               {daysPreset === "other" && (
                 <div className="grid gap-1.5">
-                  <Label htmlFor="daysCustom">Días (personalizado)</Label>
+                  <Label htmlFor="daysCustom">
+                    {mode === "serve" ? "Días de LTS" : "Días (personalizado)"}
+                  </Label>
                   <Input id="daysCustom" type="number" min={1} {...form.register("daysCustom")} />
                   {form.formState.errors.daysCustom && (
                     <p className="text-xs text-destructive">

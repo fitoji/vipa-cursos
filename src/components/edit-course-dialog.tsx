@@ -71,6 +71,7 @@ export function EditCourseDialog({
   }, [course, form]);
 
   const daysPreset = form.watch("daysPreset");
+  const mode = form.watch("mode");
 
   const onSubmit = async (values: CourseFormValues) => {
     if (!course) return;
@@ -174,13 +175,17 @@ export function EditCourseDialog({
                     {s.label}
                   </SelectItem>
                 ))}
-                <SelectItem value="other">Otro…</SelectItem>
+                <SelectItem value="other">
+                  {mode === "serve" ? "LTS (servicio largo)" : "Otro…"}
+                </SelectItem>
               </SelectContent>
             </Select>
           </div>
           {daysPreset === "other" && (
             <div className="grid gap-1.5 anim-fade-up" style={staggerDelay(6)}>
-              <Label htmlFor="e_custom">Días (personalizado)</Label>
+               <Label htmlFor="e_custom">
+                  {mode === "serve" ? "Días de LTS" : "Días (personalizado)"}
+                </Label>
               <Input id="e_custom" type="number" min={1} {...form.register("daysCustom")} />
             </div>
           )}
