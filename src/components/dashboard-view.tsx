@@ -82,12 +82,13 @@ type FilterPreset = {
 const coursesQuery = queryOptions({
   queryKey: ["courses"],
   queryFn: () => listCourses(),
+  staleTime: 30_000,
 });
 
 const columnHelper = createColumnHelper<Course>();
 
 export function DashboardView() {
-  const { data: courses = [] } = useQuery(coursesQuery);
+  const { data: courses = [], isLoading } = useQuery(coursesQuery);
   const qc = useQueryClient();
   const del = deleteCourse;
   const [globalFilter, setGlobalFilter] = useState("");
@@ -260,7 +261,23 @@ export function DashboardView() {
               </Button>
             </div>
 
-            {view === "stats" ? (
+            {isLoading ? (
+              <div className="space-y-8">
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                  {Array.from({ length: 4 }).map((_, i) => (
+                    <Card key={i} className="card-interactive">
+                      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                        <div className="h-4 w-24 animate-pulse rounded bg-muted" />
+                        <div className="h-4 w-4 animate-pulse rounded bg-muted" />
+                      </CardHeader>
+                      <CardContent>
+                        <div className="h-8 w-16 animate-pulse rounded bg-muted" />
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            ) : view === "stats" ? (
               <StatsView
                 {...stats}
                 courses={courses}
