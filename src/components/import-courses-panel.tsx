@@ -9,6 +9,7 @@ import { courseImportSchema, type CourseImport } from "@/lib/course-form";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -17,6 +18,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useInView, staggerDelay } from "@/lib/animations";
+import { cn } from "@/lib/utils";
 
 const EXAMPLE = `[
   {
@@ -41,6 +44,7 @@ export function ImportCoursesPanel({ onImported }: { onImported?: () => void }) 
   const [parseError, setParseError] = useState<string | null>(null);
   const [importing, setImporting] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [tableRef, tableInView] = useInView(0.05);
 
   const validate = (value: string) => {
     setText(value);
@@ -75,7 +79,13 @@ export function ImportCoursesPanel({ onImported }: { onImported?: () => void }) 
     setResults(rowResults);
   };
 
+  const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB
+
   const readFile = async (file: File) => {
+    if (file.size > MAX_FILE_SIZE) {
+      setParseError("El archivo es demasiado grande (máximo 5 MB)");
+      return;
+    }
     if (!file.name.endsWith(".json") && file.type !== "application/json") {
       setParseError("El archivo debe ser .json");
       return;
@@ -129,6 +139,7 @@ export function ImportCoursesPanel({ onImported }: { onImported?: () => void }) 
       <div
         role="button"
         tabIndex={0}
+        aria-label="Arrastra un archivo JSON aquí o haz clic para seleccionarlo"
         onClick={() => fileInputRef.current?.click()}
         onKeyDown={(e) => e.key === "Enter" && fileInputRef.current?.click()}
         onDragOver={(e) => {
@@ -137,9 +148,12 @@ export function ImportCoursesPanel({ onImported }: { onImported?: () => void }) 
         }}
         onDragLeave={() => setIsDragging(false)}
         onDrop={onDrop}
-        className={`flex cursor-pointer flex-col items-center justify-center gap-1 rounded-md border-2 border-dashed p-6 text-center text-sm text-muted-foreground transition-colors ${
-          isDragging ? "border-primary bg-primary/5" : "border-border"
-        }`}
+        className={cn(
+          "flex cursor-pointer flex-col items-center justify-center gap-1 rounded-md border-2 border-dashed p-6 text-center text-sm text-muted-foreground transition-all duration-200",
+          isDragging
+            ? "border-primary bg-primary/5 scale-[1.02] shadow-lg shadow-primary/20"
+            : "border-border",
+        )}
       >
         <span className="font-medium text-foreground">Arrastrá tu archivo .json acá</span>
         <span>o hacé clic para seleccionarlo</span>
@@ -201,7 +215,7 @@ export function ImportCoursesPanel({ onImported }: { onImported?: () => void }) 
             </span>
           </p>
 
-          <div className="rounded-md border">
+          <div ref={tableRef} className="card-interactive rounded-md border">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -218,7 +232,14 @@ export function ImportCoursesPanel({ onImported }: { onImported?: () => void }) 
                   const res = results[i];
                   const raw = item as Record<string, unknown>;
                   return (
-                    <TableRow key={String(raw.start_date ?? "") + "-" + String(raw.place ?? "") + "-" + String(raw.teacher ?? "")} className={res.ok ? "" : "bg-destructive/5 text-destructive"}>
+                    <TableRow
+                      key={`${i}-${raw.start_date}-${raw.place}`}
+                      className={cn(
+                        res.ok ? "" : "bg-destructive/5 text-destructive",
+                        tableInView && "anim-fade-up",
+                      )}
+                      style={tableInView ? staggerDelay(i, 50) : undefined}
+                    >
                       <TableCell>{String(raw.start_date ?? "—")}</TableCell>
                       <TableCell>{String(raw.place ?? "—")}</TableCell>
                       <TableCell>

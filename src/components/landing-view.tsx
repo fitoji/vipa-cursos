@@ -4,6 +4,9 @@ import Link from "next/link";
 import { BookOpen, Clock, BarChart3, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { useInView, staggerDelay } from "@/lib/animations";
+import { cn } from "@/lib/utils";
+import { authClient } from "@/lib/auth-client";
 
 function PenguinIcon({ className }: { className?: string }) {
   return (
@@ -66,39 +69,74 @@ const features = [
 ];
 
 export function LandingView() {
+  const { data: session } = authClient.useSession();
+  const isLoggedIn = !!session;
+  const [heroRef, heroInView] = useInView(0.1);
+  const [featuresRef, featuresInView] = useInView(0.1);
+  const [ctaRef, ctaInView] = useInView(0.2);
+
   return (
     <div className="min-h-screen bg-background">
       {/* Hero */}
       <section className="relative overflow-hidden px-4 pb-20 pt-24 text-center">
-        <div className="mx-auto max-w-2xl">
-          <PenguinIcon className="mx-auto mb-6 h-28 w-28 drop-shadow-lg" />
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
+        <div ref={heroRef} className="mx-auto max-w-2xl">
+          <PenguinIcon
+            className={cn("mx-auto mb-6 h-28 w-28 drop-shadow-lg", heroInView && "anim-fade-up")}
+          />
+          <h1
+            className={cn(
+              "text-4xl font-bold tracking-tight sm:text-5xl",
+              heroInView && "anim-fade-up",
+            )}
+            style={heroInView ? staggerDelay(1) : undefined}
+          >
             Vipa <span className="text-primary">Cursos</span>
           </h1>
-          <p className="mt-4 text-lg text-muted-foreground">
+          <p
+            className={cn("mt-4 text-lg text-muted-foreground", heroInView && "anim-fade-up")}
+            style={heroInView ? staggerDelay(2) : undefined}
+          >
             Tu registro personal de cursos de meditación Vipassana. Guardá cada sit y serve, y
             revisá tu camino cuando lo necesites.
           </p>
-          <div className="mt-8 flex items-center justify-center gap-4">
-            <Button size="lg" asChild>
-              <Link href="/login">Empezar ahora</Link>
-            </Button>
-            <Button size="lg" variant="ghost" asChild>
-              <Link href="/cursos">Ir a mis cursos</Link>
-            </Button>
+          <div
+            className={cn(
+              "mt-8 flex items-center justify-center gap-4",
+              heroInView && "anim-fade-up",
+            )}
+            style={heroInView ? staggerDelay(3) : undefined}
+          >
+            {isLoggedIn ? (
+              <Button size="lg" className="hover-scale" asChild>
+                <Link href="/cursos">Ir a mis cursos</Link>
+              </Button>
+            ) : (
+              <>
+                <Button size="lg" className="hover-scale" asChild>
+                  <Link href="/login">Empezar ahora</Link>
+                </Button>
+                <Button size="lg" variant="ghost" asChild>
+                  <Link href="/cursos">Ir a mis cursos</Link>
+                </Button>
+              </>
+            )}
           </div>
         </div>
       </section>
 
       {/* Features */}
       <section className="border-t bg-muted/30 px-4 py-20">
-        <div className="mx-auto max-w-4xl">
+        <div ref={featuresRef} className="mx-auto max-w-4xl">
           <h2 className="mb-12 text-center text-2xl font-semibold tracking-tight">
             Todo lo que necesitás
           </h2>
           <div className="grid gap-6 sm:grid-cols-2">
-            {features.map((f) => (
-              <Card key={f.title}>
+            {features.map((f, i) => (
+              <Card
+                key={f.title}
+                className={cn("hover-lift", featuresInView && "anim-fade-up")}
+                style={featuresInView ? staggerDelay(i) : undefined}
+              >
                 <CardContent className="flex gap-4 p-6">
                   <f.icon className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
                   <div>
@@ -112,19 +150,39 @@ export function LandingView() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="px-4 py-20 text-center">
-        <div className="mx-auto max-w-lg">
-          <PenguinIcon className="mx-auto mb-4 h-12 w-12 opacity-60" />
-          <h2 className="text-2xl font-semibold tracking-tight">Caminá tu camino con atención</h2>
-          <p className="mt-2 text-muted-foreground">
-            Llevá registro de tu práctica de Vipassana de forma simple y organizada.
-          </p>
-          <Button size="lg" className="mt-6" asChild>
-            <Link href="/login">Registrarse gratis</Link>
-          </Button>
-        </div>
-      </section>
+      {/* CTA — hidden when logged in */}
+      {!isLoggedIn && (
+        <section className="px-4 py-20 text-center">
+          <div ref={ctaRef} className="mx-auto max-w-lg">
+            <PenguinIcon
+              className={cn(
+                "mx-auto mb-4 h-12 w-12 opacity-60 anim-float",
+                ctaInView && "anim-fade-in",
+              )}
+            />
+            <h2
+              className={cn("text-2xl font-semibold tracking-tight", ctaInView && "anim-fade-up")}
+              style={ctaInView ? staggerDelay(1) : undefined}
+            >
+              Caminá tu camino con atención
+            </h2>
+            <p
+              className={cn("mt-2 text-muted-foreground", ctaInView && "anim-fade-up")}
+              style={ctaInView ? staggerDelay(2) : undefined}
+            >
+              Llevá registro de tu práctica de Vipassana de forma simple y organizada.
+            </p>
+            <Button
+              size="lg"
+              className={cn("mt-6 hover-scale", ctaInView && "anim-fade-up")}
+              style={ctaInView ? staggerDelay(3) : undefined}
+              asChild
+            >
+              <Link href="/login">Registrarse gratis</Link>
+            </Button>
+          </div>
+        </section>
+      )}
     </div>
   );
 }

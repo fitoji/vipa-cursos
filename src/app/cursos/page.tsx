@@ -1,14 +1,14 @@
 "use client";
 
-import { useQuery, useQueryClient, queryOptions } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
-import { redirect } from "next/navigation";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import Link from "next/link";
 
-import { createCourse, listCourses } from "@/app/actions/courses";
+import { createCourse } from "@/app/actions/courses";
+import { listCountryNames, listLocationNamesByCountry } from "@/app/actions/locations";
 import {
   courseFormSchema,
   type CourseFormValues,
@@ -17,7 +17,6 @@ import {
   daysFromFormValues,
 } from "@/lib/course-form";
 import { authClient } from "@/lib/auth-client";
-import { formatDate } from "@/lib/format";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -31,19 +30,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Badge } from "@/components/ui/badge";
 import { DatePicker } from "@/components/ui/date-picker";
 import { ImportCoursesDialog } from "@/components/import-courses-dialog";
-
-const coursesQuery = queryOptions({
-  queryKey: ["courses"],
-  queryFn: () => listCourses(),
-});
+import { useInView } from "@/lib/animations";
+import { useCachedData } from "@/hooks/use-cached-data";
+import { cn } from "@/lib/utils";
 
 export default function CursosPage() {
   const { data: session, isPending } = authClient.useSession();
   const qc = useQueryClient();
-  const { data: courses = [] } = useQuery(coursesQuery);
   const create = createCourse;
 
   const form = useForm<CourseFormValues>({
@@ -52,11 +47,22 @@ export default function CursosPage() {
   });
 
   const [submitting, setSubmitting] = useState(false);
-  const daysPreset = form.watch("daysPreset");
+  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
-    if (!isPending && !session) redirect("/login");
-  }, [isPending, session]);
+    if (!submitted) return;
+    const id = setTimeout(() => setSubmitted(false), 1500);
+    return () => clearTimeout(id);
+  }, [submitted]);
+
+  const daysPreset = form.watch("daysPreset");
+  const [formRef, formInView] = useInView(0.1);
+  const { data: countries } = useCachedData("countries", listCountryNames);
+  const selectedCountry = form.watch("country");
+  const { data: locations } = useCachedData(
+    selectedCountry ? `locations-${selectedCountry}` : "locations-all",
+    () => listLocationNamesByCountry(selectedCountry || undefined),
+  );
 
   if (isPending || !session) return null;
 
@@ -76,6 +82,7 @@ export default function CursosPage() {
         },
       });
       toast.success("Curso guardado");
+      setSubmitted(true);
       form.reset(defaultCourseFormValues);
       await qc.invalidateQueries({ queryKey: ["courses"] });
     } catch (e) {
@@ -102,7 +109,7 @@ export default function CursosPage() {
           <ImportCoursesDialog />
         </header>
 
-        <Card>
+        <Card ref={formRef} className={cn(formInView && "anim-fade-up")}>
           <CardHeader>
             <CardTitle>Nuevo curso</CardTitle>
           </CardHeader>
@@ -123,7 +130,17 @@ export default function CursosPage() {
 
               <div className="grid gap-1.5">
                 <Label htmlFor="place">Lugar / Centro</Label>
-                <Input id="place" placeholder="Dhamma..." {...form.register("place")} />
+                <Input
+                  id="place"
+                  list="place-options"
+                  placeholder="Dhamma..."
+                  {...form.register("place")}
+                />
+                <datalist id="place-options">
+                  {locations.map((l) => (
+                    <option key={l} value={l} />
+                  ))}
+                </datalist>
                 {form.formState.errors.place && (
                   <p className="text-xs text-destructive">{form.formState.errors.place.message}</p>
                 )}
@@ -136,7 +153,17 @@ export default function CursosPage() {
 
               <div className="grid gap-1.5">
                 <Label htmlFor="country">País</Label>
-                <Input id="country" placeholder="ej.: Argentina" {...form.register("country")} />
+                <Input
+                  id="country"
+                  list="country-options"
+                  placeholder="ej.: Argentina"
+                  {...form.register("country")}
+                />
+                <datalist id="country-options">
+                  {countries.map((c) => (
+                    <option key={c} value={c} />
+                  ))}
+                </datalist>
               </div>
 
               <div className="grid gap-1.5 sm:col-span-2">
@@ -199,43 +226,26 @@ export default function CursosPage() {
                 />
               </div>
 
-              <div className="sm:col-span-2 flex justify-end">
-                <Button type="submit" disabled={submitting}>
+              <div className="sm:col-span-2 flex justify-end gap-2">
+                {submitted && (
+                  <span className="anim-scale-in flex items-center gap-1 text-sm text-emerald-600">
+                    <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    Guardado
+                  </span>
+                )}
+                <Button type="submit" disabled={submitting} className="press-effect">
                   {submitting ? "Guardando…" : "Guardar curso"}
                 </Button>
               </div>
             </form>
           </CardContent>
         </Card>
-
-        <section className="mt-10">
-          <h2 className="mb-4 text-xl font-semibold">Historial ({courses.length})</h2>
-          {courses.length === 0 ? (
-            <p className="text-sm text-muted-foreground">Aún no hay cursos registrados.</p>
-          ) : (
-            <div className="grid gap-3">
-              {courses.map((c) => (
-                <Card key={c.id}>
-                  <CardContent className="flex flex-wrap items-start justify-between gap-3 py-4">
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <span className="font-medium">{c.place}</span>
-                        <Badge variant={c.mode === "sit" ? "default" : "secondary"}>{c.mode}</Badge>
-                        <Badge variant="outline">{c.days} días</Badge>
-                      </div>
-                      <p className="mt-1 text-sm text-muted-foreground">
-                        {formatDate(c.start_date)}
-                        {c.teacher ? ` · ${c.teacher}` : ""}
-                        {c.country ? ` · ${c.country}` : ""}
-                      </p>
-                      {c.obs && <p className="mt-2 text-sm">{c.obs}</p>}
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          )}
-        </section>
       </div>
     </div>
   );

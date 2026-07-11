@@ -85,72 +85,79 @@ export async function searchLocations(opts: {
 }): Promise<{ locations: LocationRow[]; total: number }> {
   const { continentId, countryId, type, query, limit = 50, offset = 0 } = opts;
 
-  const conditions: string[] = [];
-  const params: unknown[] = [];
-  let idx = 1;
-
-  if (continentId) {
-    conditions.push(`co.continent_id = $${idx++}`);
-    params.push(continentId);
-  }
-  if (countryId) {
-    conditions.push(`l.country_id = $${idx++}`);
-    params.push(countryId);
-  }
-  if (type) {
-    conditions.push(`l.type = $${idx++}`);
-    params.push(type);
-  }
+  const whereParts: string[] = ["1=1"];
+  if (continentId) whereParts.push(`co.continent_id = ${continentId}`);
+  if (countryId) whereParts.push(`l.country_id = ${countryId}`);
+  if (type) whereParts.push(`l.type = '${type}'`);
   if (query) {
-    conditions.push(`(
-      l.name ILIKE $${idx} OR
-      l.city ILIKE $${idx} OR
-      co.name ILIKE $${idx}
-    )`);
-    params.push(`%${query}%`);
-    idx++;
-  }
-
-  const where = conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";
-
-  const { Pool } = await import("pg");
-  const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: { rejectUnauthorized: true },
-  });
-
-  try {
-    const countResult = await pool.query(
-      `SELECT COUNT(*)::int AS total
-       FROM locations l
-       JOIN countries co ON co.id = l.country_id
-       JOIN continents c ON c.id = co.continent_id
-       ${where}`,
-      params,
+    const safe = query.replace(/'/g, "''");
+    whereParts.push(
+      `(l.name ILIKE '%${safe}%' OR l.city ILIKE '%${safe}%' OR co.name ILIKE '%${safe}%')`,
     );
-    const total = countResult.rows[0].total;
-
-    const dataResult = await pool.query(
-      `SELECT
-         l.id,
-         l.name,
-         l.type,
-         l.city,
-         l.state,
-         l.province,
-         co.name AS country_name,
-         c.name AS continent_name
-       FROM locations l
-       JOIN countries co ON co.id = l.country_id
-       JOIN continents c ON c.id = co.continent_id
-       ${where}
-       ORDER BY c.name, co.name, l.name
-       LIMIT $${idx++} OFFSET $${idx++}`,
-      [...params, limit, offset],
-    );
-
-    return { locations: dataResult.rows as LocationRow[], total };
-  } finally {
-    await pool.end();
   }
+  const whereClause = whereParts.join(" AND ");
+
+  const countRows = (await sql.unsafe(
+    `SELECT COUNT(*)::int AS total
+     FROM locations l
+     JOIN countries co ON co.id = l.country_id
+     JOIN continents c ON c.id = co.continent_id
+     WHERE ${whereClause}`,
+  )) as unknown as { total: number }[];
+  const total = countRows[0].total;
+
+  const dataRows = (await sql.unsafe(
+    `SELECT
+       l.id,
+       l.name,
+       l.type,
+       l.city,
+       l.state,
+       l.province,
+       co.name AS country_name,
+       c.name AS continent_name
+     FROM locations l
+     JOIN countries co ON co.id = l.country_id
+     JOIN continents c ON c.id = co.continent_id
+     WHERE ${whereClause}
+     ORDER BY c.name, co.name, l.name
+     LIMIT ${limit} OFFSET ${offset}`,
+  )) as unknown as LocationRow[];
+
+  return { locations: dataRows, total };
+}
+
+export async function listCountryNames(): Promise<string[]> {
+  const { neon } = await import("@neondatabase/serverless");
+  const sql = neon(process.env.DATABASE_URL!);
+  const rows = await sql`
+    SELECT DISTINCT name FROM countries ORDER BY name
+  `;
+  return (rows as { name: string }[]).map((r) => r.name);
+}
+
+export async function listLocationNames(): Promise<string[]> {
+  const { neon } = await import("@neondatabase/serverless");
+  const sql = neon(process.env.DATABASE_URL!);
+  const rows = await sql`
+    SELECT DISTINCT name FROM locations ORDER BY name
+  `;
+  return (rows as { name: string }[]).map((r) => r.name);
+}
+
+export async function listLocationNamesByCountry(country?: string): Promise<string[]> {
+  if (!country) {
+    const rows = await sql`
+      SELECT DISTINCT l.name FROM locations l ORDER BY l.name
+    `;
+    return (rows as { name: string }[]).map((r) => r.name);
+  }
+  const rows = await sql`
+    SELECT DISTINCT l.name
+    FROM locations l
+    JOIN countries co ON co.id = l.country_id
+    WHERE co.name = ${country}
+    ORDER BY l.name
+  `;
+  return (rows as { name: string }[]).map((r) => r.name);
 }

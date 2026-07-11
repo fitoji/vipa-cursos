@@ -23,6 +23,9 @@ import {
   Clock,
   Users,
   BookOpen,
+  FileText,
+  MessageSquare,
+  Upload,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -49,16 +52,14 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import {
-  SidebarProvider,
-  SidebarInset,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
+import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 import { EditCourseDialog } from "@/components/edit-course-dialog";
 import { ImportCoursesPanel } from "@/components/import-courses-panel";
 import { LocationsExplorer } from "@/components/locations-explorer";
 import { AppSidebar } from "@/components/app-sidebar";
 import { formatDate } from "@/lib/format";
+import { useInView, useCountUp, staggerDelay } from "@/lib/animations";
+import { cn } from "@/lib/utils";
 
 type Course = Awaited<ReturnType<typeof listCourses>>[number];
 type View = "stats" | "courses" | "locations" | "import";
@@ -122,7 +123,15 @@ export function DashboardView() {
       .sort((a, b) => new Date(b.start_date).getTime() - new Date(a.start_date).getTime())
       .slice(0, 5);
 
-    return { totalCourses, totalDaysSit, totalDaysServe, countries, sitCount, serveCount, recentCourses };
+    return {
+      totalCourses,
+      totalDaysSit,
+      totalDaysServe,
+      countries,
+      sitCount,
+      serveCount,
+      recentCourses,
+    };
   }, [courses]);
 
   // --- Table ---
@@ -250,8 +259,8 @@ export function DashboardView() {
             <AlertDialogHeader>
               <AlertDialogTitle>¿Eliminar este curso?</AlertDialogTitle>
               <AlertDialogDescription>
-                {deleting ? `${deleting.place} — ${deleting.days} días (${deleting.mode})` : ""}. Esta
-                acción no se puede deshacer.
+                {deleting ? `${deleting.place} — ${deleting.days} días (${deleting.mode})` : ""}.
+                Esta acción no se puede deshacer.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
@@ -274,152 +283,254 @@ export function DashboardView() {
   );
 }
 
-// -- StatsView --
-function StatsView({
-    totalCourses,
-    totalDaysSit,
-    totalDaysServe,
-    countries,
-    sitCount,
-    serveCount,
-    recentCourses,
-  }: {
-    totalCourses: number;
-    totalDaysSit: number;
-    totalDaysServe: number;
-    countries: number;
-    sitCount: number;
-    serveCount: number;
-    recentCourses: Course[];
-  }) {
+// -- EmptyState --
+function EmptyState() {
+  const [emptyRef, emptyInView] = useInView(0.1);
+  const [copied, setCopied] = useState(false);
+
+  const promptText = `Convierte estos datos de cursos de Vipassana al siguiente formato JSON:
+[{"date":"YYYY-MM-DD","type":"sit","country":"...","location":"...","notes":"..."}]
+mis datos son: [PEGAR AQUÍ]`;
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(promptText);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
-    <div className="space-y-8">
-      {/* Summary cards */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total cursos</CardTitle>
-            <BookOpen className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{totalCourses.toLocaleString()}</div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Días sentados</CardTitle>
-            <Clock className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{totalDaysSit.toLocaleString()}</div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Días sirviendo</CardTitle>
-            <Users className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{totalDaysServe.toLocaleString()}</div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Países distintos</CardTitle>
-            <Globe className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{countries.toLocaleString()}</div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Mode breakdown */}
+    <div ref={emptyRef} className={cn("space-y-6", emptyInView && "anim-fade-up")}>
       <Card>
-        <CardHeader>
-          <CardTitle className="text-sm font-medium">Desglose por modo</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <Badge variant="default">sit</Badge>
-              <span className="text-sm text-muted-foreground">
-                {sitCount} curso{sitCount === 1 ? "" : "s"}
-              </span>
-            </div>
-            <div className="flex-1">
-              <div className="h-2 w-full overflow-hidden rounded-full bg-secondary">
-                <div
-                  className="h-full bg-primary transition-all"
-                  style={{
-                    width: totalCourses > 0
-                      ? `${(sitCount / totalCourses) * 100}%`
-                      : "0%",
-                  }}
-                />
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <Badge variant="secondary">serve</Badge>
-              <span className="text-sm text-muted-foreground">
-                {serveCount} curso{serveCount === 1 ? "" : "s"}
-              </span>
-            </div>
+        <CardContent className="flex flex-col items-center py-12 text-center">
+          <BookOpen className="mb-4 h-12 w-12 text-muted-foreground/50" />
+          <h2 className="text-xl font-semibold">No hay cursos registrados</h2>
+          <p className="mt-2 max-w-md text-sm text-muted-foreground">
+            Importá tus datos desde un archivo JSON o ingresá tus cursos manualmente.
+          </p>
+          <div className="mt-6 flex gap-3">
+            <Button variant="outline" asChild>
+              <Link href="/cursos">
+                <Upload className="mr-2 h-4 w-4" /> Agregar curso
+              </Link>
+            </Button>
           </div>
         </CardContent>
       </Card>
 
-      {/* Recent courses */}
-      <Card>
+      <Card
+        className={cn(emptyInView && "anim-fade-up")}
+        style={emptyInView ? staggerDelay(1) : undefined}
+      >
         <CardHeader>
-          <CardTitle className="text-sm font-medium">Cursos recientes</CardTitle>
+          <CardTitle className="flex items-center gap-2 text-sm font-medium">
+            <FileText className="h-4 w-4" />
+            ¿Tenés datos en Excel o Word?
+          </CardTitle>
         </CardHeader>
-        <CardContent>
-          {recentCourses.length === 0 ? (
-            <p className="text-sm text-muted-foreground">Sin cursos registrados.</p>
-          ) : (
-            <div className="space-y-3">
-              {recentCourses.map((course) => (
-                <div
-                  key={course.id}
-                  className="flex items-center justify-between rounded-lg border p-3"
-                >
-                  <div className="flex items-center gap-3">
-                    <Calendar className="h-4 w-4 text-muted-foreground" />
-                    <div>
-                      <p className="text-sm font-medium">{course.place}</p>
-                      <p className="text-xs text-muted-foreground">
-                        {formatDate(course.start_date)} ·{" "}
-                        {course.teacher || "Sin profesor"} · {course.days} días
-                      </p>
-                    </div>
-                  </div>
-                  <Badge variant={course.mode === "sit" ? "default" : "secondary"}>
-                    {course.mode}
-                  </Badge>
-                </div>
-              ))}
-            </div>
-          )}
+        <CardContent className="space-y-3">
+          <p className="text-sm text-muted-foreground">
+            Copiá tus datos y pegalos en ChatGPT con este prompt:
+          </p>
+          <div className="relative rounded-lg border bg-muted/50 p-4 font-mono text-xs">
+            <pre className="whitespace-pre-wrap">{promptText}</pre>
+            <Button
+              size="sm"
+              variant="ghost"
+              className="absolute right-2 top-2"
+              onClick={handleCopy}
+            >
+              {copied ? (
+                <span className="text-xs text-emerald-600">Copiado</span>
+              ) : (
+                <span className="text-xs">Copiar</span>
+              )}
+            </Button>
+          </div>
         </CardContent>
       </Card>
     </div>
   );
 }
 
+// -- StatsView --
+function StatsView({
+  totalCourses,
+  totalDaysSit,
+  totalDaysServe,
+  countries,
+  sitCount,
+  serveCount,
+  recentCourses,
+}: {
+  totalCourses: number;
+  totalDaysSit: number;
+  totalDaysServe: number;
+  countries: number;
+  sitCount: number;
+  serveCount: number;
+  recentCourses: Course[];
+}) {
+  const [statsRef, statsInView] = useInView(0.1);
+  const [listRef, listInView] = useInView(0.1);
+
+  const animTotalCourses = useCountUp(totalCourses, 800, statsInView);
+  const animTotalDaysSit = useCountUp(totalDaysSit, 800, statsInView);
+  const animTotalDaysServe = useCountUp(totalDaysServe, 800, statsInView);
+  const animCountries = useCountUp(countries, 800, statsInView);
+
+  return (
+    <div className="space-y-8">
+      {totalCourses === 0 ? (
+        <EmptyState />
+      ) : (
+        <>
+          {/* Summary cards */}
+          <div ref={statsRef} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <Card
+              className={cn("card-interactive", statsInView && "anim-fade-up")}
+              style={statsInView ? staggerDelay(0) : undefined}
+            >
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Total cursos</CardTitle>
+                <BookOpen className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{animTotalCourses.toLocaleString()}</div>
+              </CardContent>
+            </Card>
+
+            <Card
+              className={cn("card-interactive", statsInView && "anim-fade-up")}
+              style={statsInView ? staggerDelay(1) : undefined}
+            >
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Días sentados</CardTitle>
+                <Clock className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{animTotalDaysSit.toLocaleString()}</div>
+              </CardContent>
+            </Card>
+
+            <Card
+              className={cn("card-interactive", statsInView && "anim-fade-up")}
+              style={statsInView ? staggerDelay(2) : undefined}
+            >
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Días sirviendo</CardTitle>
+                <Users className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{animTotalDaysServe.toLocaleString()}</div>
+              </CardContent>
+            </Card>
+
+            <Card
+              className={cn("card-interactive", statsInView && "anim-fade-up")}
+              style={statsInView ? staggerDelay(3) : undefined}
+            >
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Países distintos</CardTitle>
+                <Globe className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{animCountries.toLocaleString()}</div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Mode breakdown */}
+          <Card
+            className={cn(statsInView && "anim-fade-up")}
+            style={statsInView ? staggerDelay(4) : undefined}
+          >
+            <CardHeader>
+              <CardTitle className="text-sm font-medium">Desglose por modo</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2">
+                  <Badge variant="default">sit</Badge>
+                  <span className="text-sm text-muted-foreground">
+                    {sitCount} curso{sitCount === 1 ? "" : "s"}
+                  </span>
+                </div>
+                <div className="flex-1">
+                  <div className="h-2 w-full overflow-hidden rounded-full bg-secondary">
+                    <div
+                      className="h-full bg-primary transition-all"
+                      style={{
+                        width: totalCourses > 0 ? `${(sitCount / totalCourses) * 100}%` : "0%",
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Badge variant="secondary">serve</Badge>
+                  <span className="text-sm text-muted-foreground">
+                    {serveCount} curso{serveCount === 1 ? "" : "s"}
+                  </span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Recent courses */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-sm font-medium">Cursos recientes</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {recentCourses.length === 0 ? (
+                <p className="text-sm text-muted-foreground">Sin cursos registrados.</p>
+              ) : (
+                <div ref={listRef} className="space-y-3">
+                  {recentCourses.map((course, i) => (
+                    <div
+                      key={course.id}
+                      className={cn(
+                        "flex items-center justify-between rounded-lg border p-3",
+                        listInView && "anim-fade-up",
+                      )}
+                      style={listInView ? staggerDelay(i) : undefined}
+                    >
+                      <div className="flex items-center gap-3">
+                        <Calendar className="h-4 w-4 text-muted-foreground" />
+                        <div>
+                          <p className="text-sm font-medium">{course.place}</p>
+                          <p className="text-xs text-muted-foreground">
+                            {formatDate(course.start_date)} · {course.teacher || "Sin profesor"} ·{" "}
+                            {course.days} días
+                          </p>
+                        </div>
+                      </div>
+                      <Badge variant={course.mode === "sit" ? "default" : "secondary"}>
+                        {course.mode}
+                      </Badge>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </>
+      )}
+    </div>
+  );
+}
+
 // -- CoursesTableView --
-  function CoursesTableView({
-    table,
-    globalFilter,
-    onGlobalFilterChange,
-  }: {
-    table: ReturnType<typeof useReactTable<Course>>;
-    globalFilter: string;
-    onGlobalFilterChange: (value: string) => void;
-  }) {
+function CoursesTableView({
+  table,
+  globalFilter,
+  onGlobalFilterChange,
+}: {
+  table: ReturnType<typeof useReactTable<Course>>;
+  globalFilter: string;
+  onGlobalFilterChange: (value: string) => void;
+}) {
+  const [tableRef, tableInView] = useInView(0.05);
+
   return (
     <>
       <div className="mb-4 relative max-w-sm">
@@ -432,7 +543,7 @@ function StatsView({
         />
       </div>
 
-      <div className="rounded-md border">
+      <div ref={tableRef} className="rounded-md border">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((hg) => (
@@ -446,9 +557,7 @@ function StatsView({
                         className="inline-flex items-center gap-1 hover:text-foreground"
                       >
                         {flexRender(h.column.columnDef.header, h.getContext())}
-                        {h.column.getCanSort() && (
-                          <ArrowUpDown className="h-3 w-3 opacity-50" />
-                        )}
+                        {h.column.getCanSort() && <ArrowUpDown className="h-3 w-3 opacity-50" />}
                       </button>
                     )}
                   </TableHead>
@@ -467,8 +576,12 @@ function StatsView({
                 </TableCell>
               </TableRow>
             ) : (
-              table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id}>
+              table.getRowModel().rows.map((row, i) => (
+                <TableRow
+                  key={row.id}
+                  className={cn(tableInView && "anim-fade-up")}
+                  style={tableInView ? staggerDelay(i, 40) : undefined}
+                >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}

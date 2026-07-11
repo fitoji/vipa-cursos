@@ -5,6 +5,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 import { updateCourse } from "@/app/actions/courses";
+import { listCountryNames, listLocationNamesByCountry } from "@/app/actions/locations";
 import {
   courseFormSchema,
   type Course,
@@ -34,6 +35,8 @@ import {
 } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { DatePicker } from "@/components/ui/date-picker";
+import { useCachedData } from "@/hooks/use-cached-data";
+import { staggerDelay } from "@/lib/animations";
 
 export function EditCourseDialog({
   course,
@@ -52,6 +55,13 @@ export function EditCourseDialog({
     resolver: zodResolver(courseFormSchema),
     defaultValues: course ? toFormValues(course) : defaultCourseFormValues,
   });
+
+  const { data: countries } = useCachedData("countries", listCountryNames);
+  const selectedCountry = form.watch("country");
+  const { data: locations } = useCachedData(
+    selectedCountry ? `locations-${selectedCountry}` : "locations-all",
+    () => listLocationNamesByCountry(selectedCountry || undefined),
+  );
 
   useEffect(() => {
     if (course) form.reset(toFormValues(course));
@@ -94,26 +104,36 @@ export function EditCourseDialog({
           <DialogTitle>Editar curso</DialogTitle>
         </DialogHeader>
         <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 sm:grid-cols-2">
-          <div className="grid gap-1.5">
+          <div className="grid gap-1.5 anim-fade-up" style={staggerDelay(0)}>
             <Label htmlFor="e_start">Fecha</Label>
             <DatePicker
               value={form.watch("start_date")}
               onChange={(v) => form.setValue("start_date", v)}
             />
           </div>
-          <div className="grid gap-1.5">
+          <div className="grid gap-1.5 anim-fade-up" style={staggerDelay(1)}>
             <Label htmlFor="e_place">Lugar</Label>
-            <Input id="e_place" {...form.register("place")} />
+            <Input id="e_place" list="e_place-options" {...form.register("place")} />
+            <datalist id="e_place-options">
+              {locations.map((l) => (
+                <option key={l} value={l} />
+              ))}
+            </datalist>
           </div>
-          <div className="grid gap-1.5">
+          <div className="grid gap-1.5 anim-fade-up" style={staggerDelay(2)}>
             <Label htmlFor="e_teacher">Profesor</Label>
             <Input id="e_teacher" {...form.register("teacher")} />
           </div>
-          <div className="grid gap-1.5">
+          <div className="grid gap-1.5 anim-fade-up" style={staggerDelay(3)}>
             <Label htmlFor="e_country">País</Label>
-            <Input id="e_country" {...form.register("country")} />
+            <Input id="e_country" list="e_country-options" {...form.register("country")} />
+            <datalist id="e_country-options">
+              {countries.map((c) => (
+                <option key={c} value={c} />
+              ))}
+            </datalist>
           </div>
-          <div className="grid gap-1.5 sm:col-span-2">
+          <div className="grid gap-1.5 sm:col-span-2 anim-fade-up" style={staggerDelay(4)}>
             <Label>Modo</Label>
             <RadioGroup
               value={form.watch("mode")}
@@ -130,7 +150,7 @@ export function EditCourseDialog({
               </label>
             </RadioGroup>
           </div>
-          <div className="grid gap-1.5">
+          <div className="grid gap-1.5 anim-fade-up" style={staggerDelay(5)}>
             <Label>Días</Label>
             <Select
               value={form.watch("daysPreset")}
@@ -150,12 +170,12 @@ export function EditCourseDialog({
             </Select>
           </div>
           {daysPreset === "other" && (
-            <div className="grid gap-1.5">
+            <div className="grid gap-1.5 anim-fade-up" style={staggerDelay(6)}>
               <Label htmlFor="e_custom">Días (personalizado)</Label>
               <Input id="e_custom" type="number" min={1} {...form.register("daysCustom")} />
             </div>
           )}
-          <div className="grid gap-1.5 sm:col-span-2">
+          <div className="grid gap-1.5 sm:col-span-2 anim-fade-up" style={staggerDelay(7)}>
             <Label htmlFor="e_obs">Observaciones</Label>
             <Textarea id="e_obs" rows={3} {...form.register("obs")} />
           </div>
@@ -163,7 +183,7 @@ export function EditCourseDialog({
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
               Cancelar
             </Button>
-            <Button type="submit" disabled={saving}>
+            <Button type="submit" disabled={saving} className="press-effect">
               {saving ? "Guardando…" : "Guardar cambios"}
             </Button>
           </DialogFooter>

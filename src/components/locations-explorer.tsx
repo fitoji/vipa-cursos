@@ -8,14 +8,7 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import {
-  Search,
-  Globe,
-  MapPin,
-  Building2,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
+import { Search, Globe, MapPin, Building2, ChevronLeft, ChevronRight } from "lucide-react";
 
 import {
   listContinents,
@@ -45,6 +38,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useInView, staggerDelay } from "@/lib/animations";
+import { cn } from "@/lib/utils";
 
 // ── Queries ────────────────────────────────────────────────────────────────
 
@@ -92,10 +87,9 @@ const PAGE_SIZE = 20;
 export function LocationsExplorer() {
   const [filters, setFilters] = useState<Filters>({ query: "" });
   const [page, setPage] = useState(1);
+  const [tableRef, tableInView] = useInView(0.05);
 
-  const { data: continents = [], isLoading: loadingContinents } = useQuery(
-    continentsQuery(),
-  );
+  const { data: continents = [], isLoading: loadingContinents } = useQuery(continentsQuery());
 
   const { data: countries = [], isLoading: loadingCountries } = useQuery(
     countriesQuery(filters.continentId),
@@ -142,9 +136,7 @@ export function LocationsExplorer() {
     () => [
       columnHelper.accessor("name", {
         header: "Nombre",
-        cell: (i) => (
-          <span className="font-medium">{i.getValue()}</span>
-        ),
+        cell: (i) => <span className="font-medium">{i.getValue()}</span>,
       }),
       columnHelper.accessor("type", {
         header: "Tipo",
@@ -165,9 +157,7 @@ export function LocationsExplorer() {
       }),
       columnHelper.accessor("continent_name", {
         header: "Continente",
-        cell: (i) => (
-          <span className="text-muted-foreground">{i.getValue()}</span>
-        ),
+        cell: (i) => <span className="text-muted-foreground">{i.getValue()}</span>,
       }),
     ],
     [],
@@ -185,9 +175,7 @@ export function LocationsExplorer() {
     <div className="space-y-6">
       {/* Continents */}
       <div>
-        <h3 className="mb-3 text-sm font-medium text-muted-foreground">
-          Continente
-        </h3>
+        <h3 className="mb-3 text-sm font-medium text-muted-foreground">Continente</h3>
         {loadingContinents ? (
           <div className="flex flex-wrap gap-2">
             {Array.from({ length: 6 }).map((_, i) => (
@@ -199,7 +187,7 @@ export function LocationsExplorer() {
             <Button
               size="sm"
               variant={!filters.continentId ? "default" : "outline"}
-              className="rounded-full"
+              className="rounded-full card-interactive"
               onClick={() => setContinent(undefined)}
             >
               Todos
@@ -209,14 +197,11 @@ export function LocationsExplorer() {
                 key={c.id}
                 size="sm"
                 variant={filters.continentId === c.id ? "default" : "outline"}
-                className="rounded-full"
+                className="rounded-full card-interactive"
                 onClick={() => setContinent(c.id)}
               >
                 {c.name}
-                <Badge
-                  variant="secondary"
-                  className="ml-1.5 h-5 min-w-5 px-1 text-xs"
-                >
+                <Badge variant="secondary" className="ml-1.5 h-5 min-w-5 px-1 text-xs">
                   {c.location_count}
                 </Badge>
               </Button>
@@ -242,9 +227,7 @@ export function LocationsExplorer() {
         <div className="min-w-[200px]">
           <Select
             value={filters.countryId?.toString() ?? "all"}
-            onValueChange={(v) =>
-              setCountry(v === "all" ? undefined : Number(v))
-            }
+            onValueChange={(v) => setCountry(v === "all" ? undefined : Number(v))}
           >
             <SelectTrigger>
               <SelectValue placeholder="Todos los países" />
@@ -254,9 +237,7 @@ export function LocationsExplorer() {
               {countries.map((c) => (
                 <SelectItem key={c.id} value={c.id.toString()}>
                   {c.name}
-                  <span className="ml-1 text-muted-foreground">
-                    ({c.location_count})
-                  </span>
+                  <span className="ml-1 text-muted-foreground">({c.location_count})</span>
                 </SelectItem>
               ))}
             </SelectContent>
@@ -267,11 +248,7 @@ export function LocationsExplorer() {
         <div className="min-w-[160px]">
           <Select
             value={filters.type ?? "all"}
-            onValueChange={(v) =>
-              setType(
-                v === "all" ? undefined : (v as "Center" | "Non-Centre"),
-              )
-            }
+            onValueChange={(v) => setType(v === "all" ? undefined : (v as "Center" | "Non-Centre"))}
           >
             <SelectTrigger>
               <SelectValue placeholder="Todos los tipos" />
@@ -290,25 +267,25 @@ export function LocationsExplorer() {
         <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
           <span>Filtros activos:</span>
           {selectedContinent && (
-            <Badge variant="outline" className="gap-1">
+            <Badge variant="outline" className="gap-1 anim-slide-left">
               <Globe className="h-3 w-3" />
               {selectedContinent.name}
             </Badge>
           )}
           {selectedCountry && (
-            <Badge variant="outline" className="gap-1">
+            <Badge variant="outline" className="gap-1 anim-slide-left" style={staggerDelay(1)}>
               <MapPin className="h-3 w-3" />
               {selectedCountry.name}
             </Badge>
           )}
           {filters.type && (
-            <Badge variant="outline" className="gap-1">
+            <Badge variant="outline" className="gap-1 anim-slide-left" style={staggerDelay(2)}>
               <Building2 className="h-3 w-3" />
               {filters.type === "Center" ? "Centros" : "Non-Centres"}
             </Badge>
           )}
           {filters.query && (
-            <Badge variant="outline" className="gap-1">
+            <Badge variant="outline" className="gap-1 anim-slide-left" style={staggerDelay(3)}>
               <Search className="h-3 w-3" />"{filters.query}"
             </Badge>
           )}
@@ -342,7 +319,7 @@ export function LocationsExplorer() {
             </div>
           ) : (
             <>
-              <div className="rounded-md border">
+              <div ref={tableRef} className="rounded-md border">
                 <Table>
                   <TableHeader>
                     {table.getHeaderGroups().map((hg) => (
@@ -351,24 +328,22 @@ export function LocationsExplorer() {
                           <TableHead key={h.id}>
                             {h.isPlaceholder
                               ? null
-                              : flexRender(
-                                  h.column.columnDef.header,
-                                  h.getContext(),
-                                )}
+                              : flexRender(h.column.columnDef.header, h.getContext())}
                           </TableHead>
                         ))}
                       </TableRow>
                     ))}
                   </TableHeader>
                   <TableBody>
-                    {table.getRowModel().rows.map((row) => (
-                      <TableRow key={row.id}>
+                    {table.getRowModel().rows.map((row, i) => (
+                      <TableRow
+                        key={row.id}
+                        className={cn(tableInView && "anim-fade-up")}
+                        style={tableInView ? staggerDelay(i, 40) : undefined}
+                      >
                         {row.getVisibleCells().map((cell) => (
                           <TableCell key={cell.id}>
-                            {flexRender(
-                              cell.column.columnDef.cell,
-                              cell.getContext(),
-                            )}
+                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
                           </TableCell>
                         ))}
                       </TableRow>
@@ -393,6 +368,7 @@ export function LocationsExplorer() {
                     <Button
                       variant="outline"
                       size="sm"
+                      className="hover-scale"
                       disabled={page <= 1}
                       onClick={() => setPage((p) => p - 1)}
                     >
@@ -401,6 +377,7 @@ export function LocationsExplorer() {
                     <Button
                       variant="outline"
                       size="sm"
+                      className="hover-scale"
                       disabled={page >= totalPages}
                       onClick={() => setPage((p) => p + 1)}
                     >

@@ -184,3 +184,201 @@
     transform: translateY(0);
   }
 }
+
+/* === Entrance Animations === */
+@keyframes fade-up-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 oklch(0.5676 0.2021 283.0838 / 0);
+  }
+  50% {
+    box-shadow: 0 0 20px 4px oklch(0.5676 0.2021 283.0838 / 0.15);
+  }
+}
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-3deg);
+  }
+  75% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes border-dance {
+  0% {
+    border-color: oklch(0.5676 0.2021 283.0838 / 0.3);
+  }
+  50% {
+    border-color: oklch(0.5676 0.2021 283.0838 / 0.6);
+  }
+  100% {
+    border-color: oklch(0.5676 0.2021 283.0838 / 0.3);
+  }
+}
+
+/* Utility classes */
+.anim-fade-up {
+  animation: fade-up-in 0.5s ease-out both;
+}
+.anim-fade-in {
+  animation: fade-in 0.4s ease-out both;
+}
+.anim-scale-in {
+  animation: scale-in 0.3s ease-out both;
+}
+.anim-slide-left {
+  animation: slide-in-left 0.4s ease-out both;
+}
+.anim-slide-right {
+  animation: slide-in-right 0.4s ease-out both;
+}
+.anim-float {
+  animation: float 3s ease-in-out infinite;
+}
+.anim-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+.anim-wiggle {
+  animation: wiggle 0.5s ease-in-out;
+}
+
+/* Hover effects */
+.hover-lift {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px oklch(0 0 0 / 0.12);
+}
+.dark .hover-lift:hover {
+  box-shadow: 0 8px 30px oklch(0 0 0 / 0.4);
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px oklch(0.5676 0.2021 283.0838 / 0.2);
+}
+
+.hover-scale {
+  transition: transform 0.15s ease;
+}
+.hover-scale:hover {
+  transform: scale(1.03);
+}
+.hover-scale:active {
+  transform: scale(0.98);
+}
+
+/* Button press effect */
+.press-effect {
+  transition: transform 0.1s ease;
+}
+.press-effect:active {
+  transform: scale(0.96);
+}
+
+/* Card interactive */
+.card-interactive {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+.card-interactive:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px oklch(0 0 0 / 0.1);
+  border-color: oklch(0.5676 0.2021 283.0838 / 0.2);
+}
+.dark .card-interactive:hover {
+  box-shadow: 0 8px 30px oklch(0 0 0 / 0.3);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .anim-fade-up,
+  .anim-fade-in,
+  .anim-scale-in,
+  .anim-slide-left,
+  .anim-slide-right,
+  .anim-float,
+  .anim-pulse-glow,
+  .anim-wiggle {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .hover-lift:hover,
+  .hover-scale:hover,
+  .card-interactive:hover {
+    transform: none !important;
+  }
+}

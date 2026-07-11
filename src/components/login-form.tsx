@@ -91,7 +91,7 @@ export function LoginForm() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <Card className="w-full max-w-sm">
+      <Card className="w-full max-w-sm anim-scale-in">
         <CardHeader>
           <CardTitle>Accede a tu cuenta</CardTitle>
         </CardHeader>
@@ -100,6 +100,7 @@ export function LoginForm() {
             <Button
               variant={mode === "signin" ? "default" : "outline"}
               size="sm"
+              className="press-effect"
               onClick={() => setMode("signin")}
               type="button"
             >
@@ -108,6 +109,7 @@ export function LoginForm() {
             <Button
               variant={mode === "signup" ? "default" : "outline"}
               size="sm"
+              className="press-effect"
               onClick={() => setMode("signup")}
               type="button"
             >
@@ -117,7 +119,7 @@ export function LoginForm() {
 
           <Button
             variant="outline"
-            className="mb-4 w-full"
+            className="mb-4 w-full hover-glow"
             onClick={handleGoogle}
             disabled={busy}
             type="button"
@@ -144,17 +146,22 @@ export function LoginForm() {
           </Button>
 
           <form onSubmit={handleSubmit} className="grid gap-4">
-            {mode === "signup" && (
-              <div className="grid gap-1.5">
-                <Label htmlFor="name">Nombre</Label>
-                <Input
-                  id="name"
-                  autoComplete="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </div>
-            )}
+            <div
+              className="grid gap-1.5 overflow-hidden transition-all duration-300"
+              style={{
+                maxHeight: mode === "signup" ? "100px" : "0",
+                opacity: mode === "signup" ? 1 : 0,
+                marginTop: mode === "signup" ? undefined : "-0.5rem",
+              }}
+            >
+              <Label htmlFor="name">Nombre</Label>
+              <Input
+                id="name"
+                autoComplete="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
             <div className="grid gap-1.5">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -178,7 +185,6 @@ export function LoginForm() {
                 />
                 <button
                   type="button"
-                  tabIndex={-1}
                   onClick={() => setShowPassword((v) => !v)}
                   className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                   aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
@@ -187,7 +193,7 @@ export function LoginForm() {
                 </button>
               </div>
             </div>
-            <Button type="submit" disabled={busy}>
+            <Button type="submit" disabled={busy} className="press-effect">
               {busy ? "Procesando…" : mode === "signin" ? "Iniciar sesión" : "Registrarse"}
             </Button>
           </form>
