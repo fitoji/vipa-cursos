@@ -68,6 +68,11 @@ import { cn } from "@/lib/utils";
 type Course = Awaited<ReturnType<typeof listCourses>>[number];
 type View = "stats" | "courses" | "locations" | "import";
 
+type FilterPreset = {
+  label: string;
+  filter: (c: Course) => boolean;
+} | null;
+
 const coursesQuery = queryOptions({
   queryKey: ["courses"],
   queryFn: () => listCourses(),
@@ -85,8 +90,11 @@ export function DashboardView() {
   const [deleting, setDeleting] = useState<Course | null>(null);
   const [busyDelete, setBusyDelete] = useState(false);
   const [view, setViewState] = useState<View>("stats");
+  const [filterPreset, setFilterPreset] = useState<FilterPreset>(null);
 
-  const setView = (v: View) => {
+  const navigate = (v: View, filter?: FilterPreset) => {
+    if (filter) setFilterPreset(filter);
+    else setFilterPreset(null);
     if (v === view) return;
     if (typeof document !== "undefined" && document.startViewTransition) {
       document.startViewTransition(() => setViewState(v));
@@ -207,8 +215,10 @@ export function DashboardView() {
     [],
   );
 
+  const filteredCourses = filterPreset ? courses.filter(filterPreset.filter) : courses;
+
   const table = useReactTable({
-    data: courses,
+    data: filteredCourses,
     columns,
     state: { globalFilter, sorting },
     onGlobalFilterChange: setGlobalFilter,
@@ -221,7 +231,7 @@ export function DashboardView() {
 
   return (
     <SidebarProvider>
-      <AppSidebar activeView={view} onNavigate={setView} />
+      <AppSidebar activeView={view} onNavigate={navigate} />
       <SidebarInset>
         <div className="min-h-screen bg-background">
           <div className="mx-auto max-w-6xl px-4 py-10">
@@ -245,17 +255,23 @@ export function DashboardView() {
             </div>
 
             {view === "stats" ? (
-              <StatsView {...stats} />
+              <StatsView
+                {...stats}
+                courses={courses}
+                onFilterClick={(preset) => navigate("courses", preset)}
+              />
             ) : view === "courses" ? (
               <CoursesTableView
                 table={table}
                 globalFilter={globalFilter}
                 onGlobalFilterChange={setGlobalFilter}
+                filterPreset={filterPreset}
+                onClearFilter={() => setFilterPreset(null)}
               />
             ) : view === "locations" ? (
               <LocationsExplorer />
             ) : (
-              <ImportCoursesPanel onImported={() => setView("courses")} />
+              <ImportCoursesPanel onImported={() => navigate("courses")} />
             )}
           </div>
         </div>
@@ -377,6 +393,8 @@ function StatsView({
   longServe,
   longCourses,
   recentCourses,
+  courses,
+  onFilterClick,
 }: {
   totalCourses: number;
   totalDaysSit: number;
@@ -389,6 +407,8 @@ function StatsView({
   longServe: number;
   longCourses: number;
   recentCourses: Course[];
+  courses: Course[];
+  onFilterClick: (preset: FilterPreset) => void;
 }) {
   const [statsRef, statsInView] = useInView(0.1);
   const [listRef, listInView] = useInView(0.1);
@@ -411,8 +431,9 @@ function StatsView({
           {/* Summary cards */}
           <div ref={statsRef} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <Card
-              className={cn("card-interactive", statsInView && "anim-fade-up")}
+              className={cn("card-interactive cursor-pointer", statsInView && "anim-fade-up")}
               style={statsInView ? staggerDelay(0) : undefined}
+              onClick={() => onFilterClick(null)}
             >
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Total cursos</CardTitle>
@@ -424,8 +445,9 @@ function StatsView({
             </Card>
 
             <Card
-              className={cn("card-interactive", statsInView && "anim-fade-up")}
+              className={cn("card-interactive cursor-pointer", statsInView && "anim-fade-up")}
               style={statsInView ? staggerDelay(1) : undefined}
+              onClick={() => onFilterClick({ label: "Modo: sit", filter: (c) => c.mode === "sit" })}
             >
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Días sentados</CardTitle>
@@ -437,8 +459,9 @@ function StatsView({
             </Card>
 
             <Card
-              className={cn("card-interactive", statsInView && "anim-fade-up")}
+              className={cn("card-interactive cursor-pointer", statsInView && "anim-fade-up")}
               style={statsInView ? staggerDelay(2) : undefined}
+              onClick={() => onFilterClick({ label: "Modo: serve", filter: (c) => c.mode === "serve" })}
             >
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Días sirviendo</CardTitle>
@@ -450,8 +473,14 @@ function StatsView({
             </Card>
 
             <Card
-              className={cn("card-interactive", statsInView && "anim-fade-up")}
+              className={cn("card-interactive cursor-pointer", statsInView && "anim-fade-up")}
               style={statsInView ? staggerDelay(3) : undefined}
+              onClick={() => {
+                const uniqueCountries = [...new Set(courses.flatMap((c) => (c.country ? [c.country] : [])))]
+                  .filter(Boolean)
+                  .sort();
+                alert(uniqueCountries.length > 0 ? uniqueCountries.join(", ") : "Sin países registrados");
+              }}
             >
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Países distintos</CardTitle>
@@ -463,8 +492,9 @@ function StatsView({
             </Card>
 
             <Card
-              className={cn("card-interactive", statsInView && "anim-fade-up")}
+              className={cn("card-interactive cursor-pointer", statsInView && "anim-fade-up")}
               style={statsInView ? staggerDelay(4) : undefined}
+              onClick={() => onFilterClick({ label: "Sentados (10d)", filter: (c) => c.mode === "sit" && c.days === 10 })}
             >
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Cursos sentados (10d)</CardTitle>
@@ -476,8 +506,9 @@ function StatsView({
             </Card>
 
             <Card
-              className={cn("card-interactive", statsInView && "anim-fade-up")}
+              className={cn("card-interactive cursor-pointer", statsInView && "anim-fade-up")}
               style={statsInView ? staggerDelay(5) : undefined}
+              onClick={() => onFilterClick({ label: "Sirviendo (10d)", filter: (c) => c.mode === "serve" && c.days === 10 })}
             >
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Cursos sirviendo (10d)</CardTitle>
@@ -489,8 +520,9 @@ function StatsView({
             </Card>
 
             <Card
-              className={cn("card-interactive", statsInView && "anim-fade-up")}
+              className={cn("card-interactive cursor-pointer", statsInView && "anim-fade-up")}
               style={statsInView ? staggerDelay(6) : undefined}
+              onClick={() => onFilterClick({ label: "Largos sirviendo (20d+)", filter: (c) => c.mode === "serve" && (c.days ?? 0) >= 20 })}
             >
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Largos sirviendo (20d+)</CardTitle>
@@ -502,8 +534,9 @@ function StatsView({
             </Card>
 
             <Card
-              className={cn("card-interactive", statsInView && "anim-fade-up")}
+              className={cn("card-interactive cursor-pointer", statsInView && "anim-fade-up")}
               style={statsInView ? staggerDelay(7) : undefined}
+              onClick={() => onFilterClick({ label: "Cursos largos (20d+)", filter: (c) => (c.days ?? 0) >= 20 })}
             >
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Cursos largos (20d+)</CardTitle>
@@ -600,15 +633,40 @@ function CoursesTableView({
   table,
   globalFilter,
   onGlobalFilterChange,
+  filterPreset,
+  onClearFilter,
 }: {
   table: ReturnType<typeof useReactTable<Course>>;
   globalFilter: string;
   onGlobalFilterChange: (value: string) => void;
+  filterPreset: FilterPreset;
+  onClearFilter: () => void;
 }) {
   const [tableRef, tableInView] = useInView(0.05);
 
   return (
     <>
+      {filterPreset && (
+        <div className="mb-4 flex items-center gap-2">
+          <Badge variant="secondary" className="gap-1 px-2 py-1">
+            {filterPreset.label}
+            <button
+              type="button"
+              onClick={onClearFilter}
+              className="ml-1 rounded-full hover:bg-muted-foreground/20 p-0.5"
+              aria-label="Quitar filtro"
+            >
+              <svg className="h-3 w-3" viewBox="0 0 12 12" fill="currentColor">
+                <path d="M3.5 3.5l5 5M8.5 3.5l-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              </svg>
+            </button>
+          </Badge>
+          <span className="text-xs text-muted-foreground">
+            {table.getRowModel().rows.length} curso{table.getRowModel().rows.length === 1 ? "" : "s"}
+          </span>
+        </div>
+      )}
+
       <div className="mb-4 relative max-w-sm">
         <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <Input
