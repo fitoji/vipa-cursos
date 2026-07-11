@@ -35,7 +35,7 @@ export function SiteHeader() {
   const handleLogout = async () => {
     await authClient.signOut();
     qc.removeQueries({ queryKey: ["courses"] });
-    router.refresh();
+    router.push("/");
   };
 
   return (
