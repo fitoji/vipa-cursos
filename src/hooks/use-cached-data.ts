@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 interface CachedEntry<T> {
   data: T[];
@@ -22,6 +22,13 @@ export function useCachedData<T>(
 ) {
   const [data, setData] = useState<T[]>([]);
   const [loading, setLoading] = useState(true);
+
+  // Stabilize fetchFn so inline callbacks don't cause infinite re-fetches
+  const fetchRef = useRef(fetchFn);
+  fetchRef.current = fetchFn;
+
+  // Shared flag so the effect cleanup can prevent setState after unmount
+  const mountedRef = useRef(true);
 
   const safeGetItem = (k: string): string | null => {
     try {
@@ -45,8 +52,10 @@ export function useCachedData<T>(
       if (raw) {
         const entry: CachedEntry<T> = JSON.parse(raw);
         if (Date.now() - entry.timestamp < ttlMs) {
-          setData(entry.data);
-          setLoading(false);
+          if (mountedRef.current) {
+            setData(entry.data);
+            setLoading(false);
+          }
           return;
         }
       }
@@ -55,19 +64,26 @@ export function useCachedData<T>(
     }
 
     try {
-      const fresh = await fetchFn();
+      const fresh = await fetchRef.current();
+      if (!mountedRef.current) return;
       const entry: CachedEntry<T> = { data: fresh, timestamp: Date.now() };
       safeSetItem(`cache:${key}`, JSON.stringify(entry));
       setData(fresh);
     } catch (err) {
-      console.error(`Failed to fetch data for cache key "${key}":`, err);
+      if (mountedRef.current) {
+        console.error(`Failed to fetch data for cache key "${key}":`, err);
+      }
     } finally {
-      setLoading(false);
+      if (mountedRef.current) setLoading(false);
     }
-  }, [key, fetchFn, ttlMs]);
+  }, [key, ttlMs]);
 
   useEffect(() => {
+    mountedRef.current = true;
     load();
+    return () => {
+      mountedRef.current = false;
+    };
   }, [load]);
 
   return { data, loading, refresh: load };
