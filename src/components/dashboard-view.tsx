@@ -56,6 +56,12 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 import { EditCourseDialog } from "@/components/edit-course-dialog";
 import { ImportCoursesPanel } from "@/components/import-courses-panel";
@@ -412,6 +418,11 @@ function StatsView({
 }) {
   const [statsRef, statsInView] = useInView(0.1);
   const [listRef, listInView] = useInView(0.1);
+  const [showCountries, setShowCountries] = useState(false);
+
+  const uniqueCountries = [...new Set(courses.flatMap((c) => (c.country ? [c.country] : [])))]
+    .filter(Boolean)
+    .sort();
 
   const animTotalCourses = useCountUp(totalCourses, 800, statsInView);
   const animTotalDaysSit = useCountUp(totalDaysSit, 800, statsInView);
@@ -475,12 +486,7 @@ function StatsView({
             <Card
               className={cn("card-interactive cursor-pointer", statsInView && "anim-fade-up")}
               style={statsInView ? staggerDelay(3) : undefined}
-              onClick={() => {
-                const uniqueCountries = [...new Set(courses.flatMap((c) => (c.country ? [c.country] : [])))]
-                  .filter(Boolean)
-                  .sort();
-                alert(uniqueCountries.length > 0 ? uniqueCountries.join(", ") : "Sin países registrados");
-              }}
+              onClick={() => setShowCountries(true)}
             >
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Países distintos</CardTitle>
@@ -624,6 +630,26 @@ function StatsView({
           </Card>
         </>
       )}
+
+      <Dialog open={showCountries} onOpenChange={setShowCountries}>
+        <DialogContent className="max-w-sm">
+          <DialogHeader>
+            <DialogTitle>Países visitados</DialogTitle>
+          </DialogHeader>
+          {uniqueCountries.length > 0 ? (
+            <ul className="space-y-1 text-sm">
+              {uniqueCountries.map((c) => (
+                <li key={c} className="flex items-center gap-2">
+                  <Globe className="h-3 w-3 text-muted-foreground shrink-0" />
+                  {c}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-sm text-muted-foreground">Sin países registrados</p>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
