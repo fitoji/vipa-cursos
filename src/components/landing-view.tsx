@@ -81,14 +81,9 @@ export function LandingView() {
                 </Button>
               </>
             ) : (
-              <>
-                <Button size="lg" className="hover-scale" asChild>
-                  <Link href="/login">Empezar ahora</Link>
-                </Button>
-                <Button size="lg" variant="ghost" asChild>
-                  <Link href="/cursos">Ir a mis cursos</Link>
-                </Button>
-              </>
+              <Button size="lg" className="hover-scale" asChild>
+                <Link href="/login">Empezar ahora</Link>
+              </Button>
             )}
           </div>
         </div>
