@@ -233,7 +233,9 @@
       "daysCustomSit": "Days (custom)",
       "daysCustomServe": "LTS days",
       "obs": "Notes",
-      "obsPlaceholder": "Add additional information..."
+      "obsPlaceholder": "Add additional information...",
+      "sit": "Sitting",
+      "serve": "Serving"
     },
     "days": {
       "other": "Other…",

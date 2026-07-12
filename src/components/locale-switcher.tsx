@@ -1,6 +1,7 @@
 "use client";
 
-import { useRouter, getPathname, usePathname } from "@/i18n/navigation";
+import { useRouter } from "next/navigation";
+import { getPathname, usePathname } from "@/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import {
   Select,
@@ -16,7 +17,8 @@ export function LocaleSwitcher() {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
-  const t = useTranslations("common");
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const t = useTranslations("common") as any;
 
   const locales = [
     { code: "es", label: "Español" },
@@ -26,7 +28,6 @@ export function LocaleSwitcher() {
   const handleLocaleChange = (newLocale: string) => {
     const path = getPathname({ locale: newLocale, href: pathname });
     router.push(path);
-    router.refresh();
   };
 
   return (

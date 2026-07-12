@@ -233,7 +233,9 @@
       "daysCustomSit": "Días (personalizado)",
       "daysCustomServe": "Días de LTS",
       "obs": "Observaciones",
-      "obsPlaceholder": "Agrega información adicional..."
+      "obsPlaceholder": "Agrega información adicional...",
+      "sit": "Sentar",
+      "serve": "Servir"
     },
     "days": {
       "other": "Otro…",
