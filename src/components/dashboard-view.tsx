@@ -270,7 +270,7 @@ export function DashboardView() {
               <div className="flex items-center gap-3">
                 <SidebarTrigger />
                 <div>
-                  <h1 className="text-3xl font-semibold tracking-tight">{t("header.title")}</h1>
+                  <h1 className="font-serif text-3xl font-semibold tracking-tight">{t("header.title")}</h1>
                   <p className="mt-1 text-sm text-muted-foreground">
                     {t("header.coursesCount", { count: courses.length })}
                   </p>
@@ -510,7 +510,7 @@ function StatsView({
                 <BookOpen className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{animTotalCourses.toLocaleString()}</div>
+                <div className="text-2xl font-bold tabular-nums">{animTotalCourses.toLocaleString()}</div>
               </CardContent>
             </Card>
 
@@ -529,7 +529,7 @@ function StatsView({
                 <Clock className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{animTotalDaysSit.toLocaleString()}</div>
+                <div className="text-2xl font-bold tabular-nums">{animTotalDaysSit.toLocaleString()}</div>
               </CardContent>
             </Card>
 
@@ -548,7 +548,7 @@ function StatsView({
                 <Users className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{animTotalDaysServe.toLocaleString()}</div>
+                <div className="text-2xl font-bold tabular-nums">{animTotalDaysServe.toLocaleString()}</div>
               </CardContent>
             </Card>
 
@@ -562,7 +562,7 @@ function StatsView({
                 <Globe className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{animCountries.toLocaleString()}</div>
+                <div className="text-2xl font-bold tabular-nums">{animCountries.toLocaleString()}</div>
               </CardContent>
             </Card>
 
@@ -581,7 +581,7 @@ function StatsView({
                 <UserCheck className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{animSit10.toLocaleString()}</div>
+                <div className="text-2xl font-bold tabular-nums">{animSit10.toLocaleString()}</div>
               </CardContent>
             </Card>
 
@@ -600,7 +600,7 @@ function StatsView({
                 <HeartHandshake className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{animServe10.toLocaleString()}</div>
+                <div className="text-2xl font-bold tabular-nums">{animServe10.toLocaleString()}</div>
               </CardContent>
             </Card>
 
@@ -619,7 +619,7 @@ function StatsView({
                 <TrendingUp className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{animLongServe.toLocaleString()}</div>
+                <div className="text-2xl font-bold tabular-nums">{animLongServe.toLocaleString()}</div>
               </CardContent>
             </Card>
 
@@ -638,7 +638,7 @@ function StatsView({
                 <Award className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{animLongCourses.toLocaleString()}</div>
+                <div className="text-2xl font-bold tabular-nums">{animLongCourses.toLocaleString()}</div>
               </CardContent>
             </Card>
           </div>
