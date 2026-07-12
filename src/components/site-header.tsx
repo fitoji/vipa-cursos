@@ -67,14 +67,13 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-border/40 bg-background/80">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-        <Link href="/" className="flex items-center gap-2 hover-scale">
+        <Link href="/" className="flex items-center gap-2 transition-opacity hover:opacity-80">
           <img src="/logo.svg" alt="Vipa Cursos" className="h-7 w-auto" />
         </Link>
         <div className="flex items-center gap-3">
           <Button
             variant="ghost"
             size="icon"
-            className="hover-scale"
             onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
             aria-label={t("themeLabel")}
           >

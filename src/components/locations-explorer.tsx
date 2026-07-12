@@ -9,6 +9,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { Search, Globe, MapPin, Building2, ChevronLeft, ChevronRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import {
   listContinents,
@@ -88,6 +89,7 @@ export function LocationsExplorer() {
   const [filters, setFilters] = useState<Filters>({ query: "" });
   const [page, setPage] = useState(1);
   const [tableRef, tableInView] = useInView(0.05);
+  const t = useTranslations("LocationsExplorer");
 
   const { data: continents = [], isLoading: loadingContinents } = useQuery(continentsQuery());
 
@@ -135,32 +137,32 @@ export function LocationsExplorer() {
   const columns = useMemo(
     () => [
       columnHelper.accessor("name", {
-        header: "Nombre",
+        header: t("table.header.name"),
         cell: (i) => <span className="font-medium">{i.getValue()}</span>,
       }),
       columnHelper.accessor("type", {
-        header: "Tipo",
+        header: t("table.header.type"),
         cell: (i) => (
           <Badge variant={i.getValue() === "Center" ? "default" : "secondary"}>
-            {i.getValue() === "Center" ? "Centro" : "Non-Centre"}
+            {i.getValue() === "Center" ? t("typeCenter") : t("typeNonCentre")}
           </Badge>
         ),
       }),
-      columnHelper.accessor("country_name", { header: "País" }),
+      columnHelper.accessor("country_name", { header: t("table.header.country") }),
       columnHelper.accessor("city", {
-        header: "Ciudad",
+        header: t("table.header.city"),
         cell: (i) => i.getValue() || "—",
       }),
       columnHelper.accessor("state", {
-        header: "Estado/Provincia",
+        header: t("table.header.state"),
         cell: (i) => i.getValue() || i.row.original.province || "—",
       }),
       columnHelper.accessor("continent_name", {
-        header: "Continente",
+        header: t("table.header.continent"),
         cell: (i) => <span className="text-muted-foreground">{i.getValue()}</span>,
       }),
     ],
-    [],
+    [t],
   );
 
   const table = useReactTable({
@@ -175,7 +177,7 @@ export function LocationsExplorer() {
     <div className="space-y-6">
       {/* Continents */}
       <div>
-        <h3 className="mb-3 text-sm font-medium text-muted-foreground">Continente</h3>
+        <h3 className="mb-3 text-sm font-medium text-muted-foreground">{t("continentLabel")}</h3>
         {loadingContinents ? (
           <div className="flex flex-wrap gap-2">
             {Array.from({ length: 6 }).map((_, i) => (
@@ -190,7 +192,7 @@ export function LocationsExplorer() {
               className="rounded-full card-interactive"
               onClick={() => setContinent(undefined)}
             >
-              Todos
+              {t("allContinents")}
             </Button>
             {continents.map((c) => (
               <Button
@@ -218,7 +220,7 @@ export function LocationsExplorer() {
           <Input
             value={filters.query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Buscar por nombre, ciudad o país…"
+            placeholder={t("searchPlaceholder")}
             className="pl-9"
           />
         </div>
@@ -230,10 +232,10 @@ export function LocationsExplorer() {
             onValueChange={(v) => setCountry(v === "all" ? undefined : Number(v))}
           >
             <SelectTrigger>
-              <SelectValue placeholder="Todos los países" />
+              <SelectValue placeholder={t("countrySelectPlaceholder")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">Todos los países</SelectItem>
+              <SelectItem value="all">{t("allCountries")}</SelectItem>
               {countries.map((c) => (
                 <SelectItem key={c.id} value={c.id.toString()}>
                   {c.name}
@@ -251,11 +253,11 @@ export function LocationsExplorer() {
             onValueChange={(v) => setType(v === "all" ? undefined : (v as "Center" | "Non-Centre"))}
           >
             <SelectTrigger>
-              <SelectValue placeholder="Todos los tipos" />
+              <SelectValue placeholder={t("typeSelectPlaceholder")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">Todos los tipos</SelectItem>
-              <SelectItem value="Center">Centros</SelectItem>
+              <SelectItem value="all">{t("allTypes")}</SelectItem>
+              <SelectItem value="Center">{t("typeCenter")}</SelectItem>
               <SelectItem value="Non-Centre">Non-Centres</SelectItem>
             </SelectContent>
           </Select>
@@ -265,7 +267,7 @@ export function LocationsExplorer() {
       {/* Active filters summary */}
       {(selectedContinent || selectedCountry || filters.type || filters.query) && (
         <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-          <span>Filtros activos:</span>
+          <span>{t("activeFilters")}</span>
           {selectedContinent && (
             <Badge variant="outline" className="gap-1 anim-slide-left">
               <Globe className="h-3 w-3" />
@@ -281,7 +283,7 @@ export function LocationsExplorer() {
           {filters.type && (
             <Badge variant="outline" className="gap-1 anim-slide-left" style={staggerDelay(2)}>
               <Building2 className="h-3 w-3" />
-              {filters.type === "Center" ? "Centros" : "Non-Centres"}
+              {filters.type === "Center" ? t("typeCenter") : t("typeNonCentre")}
             </Badge>
           )}
           {filters.query && (
@@ -298,7 +300,7 @@ export function LocationsExplorer() {
               setPage(1);
             }}
           >
-            Limpiar
+            {t("clearFilters")}
           </Button>
         </div>
       )}
@@ -315,7 +317,7 @@ export function LocationsExplorer() {
           ) : locations.length === 0 ? (
             <div className="flex flex-col items-center gap-2 py-16 text-muted-foreground">
               <MapPin className="h-8 w-8 opacity-40" />
-              <p className="text-sm">No se encontraron centros con esos filtros.</p>
+              <p className="text-sm">{t("noResults")}</p>
             </div>
           ) : (
             <>
@@ -355,11 +357,11 @@ export function LocationsExplorer() {
               {/* Pagination */}
               <div className="flex items-center justify-between px-4 py-3">
                 <p className="text-sm text-muted-foreground">
-                  {total} resultado{total === 1 ? "" : "s"}
+                  {t("pagination.resultCount", { total, tplural: total === 1 ? "" : "s" })}
                   {totalPages > 1 && (
                     <>
                       {" "}
-                      — página {page} de {totalPages}
+                      {t("pagination.pageInfo", { page, totalPages })}
                     </>
                   )}
                 </p>
@@ -368,7 +370,6 @@ export function LocationsExplorer() {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="hover-scale"
                       disabled={page <= 1}
                       onClick={() => setPage((p) => p - 1)}
                     >
@@ -377,7 +378,6 @@ export function LocationsExplorer() {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="hover-scale"
                       disabled={page >= totalPages}
                       onClick={() => setPage((p) => p + 1)}
                     >

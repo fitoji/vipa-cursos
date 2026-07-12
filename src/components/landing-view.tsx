@@ -36,8 +36,6 @@ export function LandingView() {
   const { data: session } = authClient.useSession();
   const isLoggedIn = !!session;
   const [heroRef, heroInView] = useInView(0.1);
-  const [featuresRef, featuresInView] = useInView(0.1);
-  const [ctaRef, ctaInView] = useInView(0.2);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const t = useTranslations("Landing") as any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -88,15 +86,15 @@ export function LandingView() {
             >
               {isLoggedIn ? (
                 <>
-                  <Button size="lg" className="hover-scale" asChild>
-                    <Link href="/dashboard">{t("hero.loggedInCta")}</Link>
-                  </Button>
+                <Button size="lg" asChild>
+                  <Link href="/dashboard">{t("hero.loggedInCta")}</Link>
+                </Button>
                   <Button size="lg" variant="outline" asChild>
                     <Link href="/cursos">{t("hero.newCourse")}</Link>
                   </Button>
                 </>
               ) : (
-                <Button size="lg" className="hover-scale" asChild>
+                <Button size="lg" className="hover:bg-primary/90" asChild>
                   <Link href="/login">{t("hero.cta")}</Link>
                 </Button>
               )}
@@ -112,24 +110,19 @@ export function LandingView() {
           backgroundImage: "url('/bosque.webp')",
           backgroundSize: "cover",
           backgroundPosition: "center",
-          backgroundAttachment: "fixed",
         }}
       >
         {/* Soft overlay so cards remain readable */}
         <div className="absolute inset-0 bg-background/80 backdrop-blur-[2px]" />
-        <div ref={featuresRef} className="relative z-10 mx-auto max-w-6xl px-6 py-20 sm:py-28">
+        <div className="relative z-10 mx-auto max-w-6xl px-6 py-20 sm:py-28">
           <h2 className="mb-12 font-serif text-2xl font-semibold tracking-tight sm:text-3xl">
             {t("features.heading")}
           </h2>
           <div className="grid gap-5 sm:grid-cols-2">
-            {features.map((f, i) => (
+            {features.map((f) => (
               <Card
                 key={f.titleKey}
-                className={cn(
-                  "hover-lift border-white/10 bg-white/90 shadow-lg backdrop-blur-sm dark:bg-black/80",
-                  featuresInView && "anim-fade-up",
-                )}
-                style={featuresInView ? staggerDelay(i) : undefined}
+                className="hover-lift border-white/10 bg-white/90 shadow-lg backdrop-blur-sm dark:bg-black/80"
               >
                 <CardContent className="flex gap-4 p-6">
                   <f.icon className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
@@ -149,41 +142,21 @@ export function LandingView() {
       {/* CTA — hidden when logged in */}
       {!isLoggedIn && (
         <section className="border-t">
-          <div ref={ctaRef} className="mx-auto max-w-6xl px-6 py-24 sm:py-32">
+          <div className="mx-auto max-w-6xl px-6 py-24 sm:py-32">
             <div className="flex flex-col items-start gap-8 sm:flex-row sm:items-center">
               <img
                 src="/pagoda.webp"
                 alt={t("cta.alt")}
-                className={cn(
-                  "h-28 w-28 shrink-0 rounded-full object-cover shadow-lg sm:h-36 sm:w-36",
-                  ctaInView && "anim-fade-up",
-                )}
+                className="h-28 w-28 shrink-0 rounded-full object-cover shadow-lg sm:h-36 sm:w-36"
               />
               <div className="text-left">
-                <h2
-                  className={cn(
-                    "font-serif text-2xl font-semibold tracking-tight sm:text-3xl",
-                    ctaInView && "anim-fade-up",
-                  )}
-                  style={ctaInView ? staggerDelay(1) : undefined}
-                >
+                <h2 className="font-serif text-2xl font-semibold tracking-tight sm:text-3xl">
                   {t("cta.title")}
                 </h2>
-                <p
-                  className={cn(
-                    "mt-2 max-w-md text-muted-foreground",
-                    ctaInView && "anim-fade-up",
-                  )}
-                  style={ctaInView ? staggerDelay(2) : undefined}
-                >
+                <p className="mt-2 max-w-md text-muted-foreground">
                   {t("cta.description")}
                 </p>
-                <Button
-                  size="lg"
-                  className={cn("mt-6 hover-scale", ctaInView && "anim-fade-up")}
-                  style={ctaInView ? staggerDelay(3) : undefined}
-                  asChild
-                >
+                <Button size="lg" className="mt-6 hover:bg-primary/90" asChild>
                   <Link href="/login">{t("cta.button")}</Link>
                 </Button>
               </div>

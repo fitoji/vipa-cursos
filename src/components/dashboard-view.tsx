@@ -23,18 +23,9 @@ import {
   Globe,
   Clock,
   Users,
-  UserCheck,
-  HeartHandshake,
-  TrendingUp,
-  Award,
   BookOpen,
   FileText,
-  MessageSquare,
   Upload,
-  Download,
-  Loader2,
-  MapPin,
-  BarChart3,
 } from "lucide-react";
 import { toast } from "sonner";
 import { useLocale, useTranslations } from "next-intl";
@@ -69,8 +60,7 @@ import { ImportCoursesPanel } from "@/components/import-courses-panel";
 import { LocationsExplorer } from "@/components/locations-explorer";
 import { AppSidebar } from "@/components/app-sidebar";
 import { formatDate } from "@/lib/format";
-import { useInView, useCountUp, staggerDelay } from "@/lib/animations";
-import { cn } from "@/lib/utils";
+import { useCountUp } from "@/lib/animations";
 
 type Course = Awaited<ReturnType<typeof listCourses>>[number];
 type View = "stats" | "courses" | "locations" | "import";
@@ -258,7 +248,6 @@ export function DashboardView() {
             className="pointer-events-none fixed inset-0 bg-cover bg-center bg-no-repeat"
             style={{
               backgroundImage: "url('/bosque.webp')",
-              backgroundAttachment: "fixed",
             }}
           />
           {/* overlay for readability */}
@@ -372,7 +361,6 @@ export function DashboardView() {
 
 // -- EmptyState --
 function EmptyState() {
-  const [emptyRef, emptyInView] = useInView(0.1);
   const [copied, setCopied] = useState(false);
 
   const t = useTranslations("Dashboard.empty");
@@ -389,7 +377,7 @@ mis datos son: [PEGAR AQUÍ]`;
   };
 
   return (
-    <div ref={emptyRef} className={cn("space-y-6", emptyInView && "anim-fade-up")}>
+    <div className="space-y-6">
       <Card>
         <CardContent className="flex flex-col items-center py-12 text-center">
           <BookOpen className="mb-4 h-12 w-12 text-muted-foreground/50" />
@@ -405,10 +393,7 @@ mis datos son: [PEGAR AQUÍ]`;
         </CardContent>
       </Card>
 
-      <Card
-        className={cn(emptyInView && "anim-fade-up")}
-        style={emptyInView ? staggerDelay(1) : undefined}
-      >
+      <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-sm font-medium">
             <FileText className="h-4 w-4" />
@@ -468,8 +453,6 @@ function StatsView({
   courses: Course[];
   onFilterClick: (preset: FilterPreset) => void;
 }) {
-  const [statsRef, statsInView] = useInView(0.1);
-  const [listRef, listInView] = useInView(0.1);
   const [showCountries, setShowCountries] = useState(false);
 
   const t = useTranslations("Dashboard.stats");
@@ -483,14 +466,53 @@ function StatsView({
     .filter(Boolean)
     .sort();
 
-  const animTotalCourses = useCountUp(totalCourses, 800, statsInView);
-  const animTotalDaysSit = useCountUp(totalDaysSit, 800, statsInView);
-  const animTotalDaysServe = useCountUp(totalDaysServe, 800, statsInView);
-  const animCountries = useCountUp(countries, 800, statsInView);
-  const animSit10 = useCountUp(sit10, 800, statsInView);
-  const animServe10 = useCountUp(serve10, 800, statsInView);
-  const animLongServe = useCountUp(longServe, 800, statsInView);
-  const animLongCourses = useCountUp(longCourses, 800, statsInView);
+  const animTotalCourses = useCountUp(totalCourses, 800, true);
+  const animTotalDaysSit = useCountUp(totalDaysSit, 800, true);
+  const animTotalDaysServe = useCountUp(totalDaysServe, 800, true);
+  const animCountries = useCountUp(countries, 800, true);
+  const animSit10 = useCountUp(sit10, 800, true);
+  const animServe10 = useCountUp(serve10, 800, true);
+  const animLongServe = useCountUp(longServe, 800, true);
+  const animLongCourses = useCountUp(longCourses, 800, true);
+
+  const secondaryMetrics = [
+    {
+      label: t("coursesSitting10d"),
+      value: animSit10,
+      onClick: () =>
+        onFilterClick({
+          label: tfilters("presets.sit10d"),
+          filter: (c) => c.mode === "sit" && c.days === 10,
+        }),
+    },
+    {
+      label: t("coursesServing10d"),
+      value: animServe10,
+      onClick: () =>
+        onFilterClick({
+          label: tfilters("presets.serve10d"),
+          filter: (c) => c.mode === "serve" && c.days === 10,
+        }),
+    },
+    {
+      label: t("longServing20d"),
+      value: animLongServe,
+      onClick: () =>
+        onFilterClick({
+          label: tfilters("presets.longServe20d"),
+          filter: (c) => c.mode === "serve" && (c.days ?? 0) >= 20,
+        }),
+    },
+    {
+      label: t("longCourses20d"),
+      value: animLongCourses,
+      onClick: () =>
+        onFilterClick({
+          label: tfilters("presets.longCourses20d"),
+          filter: (c) => (c.days ?? 0) >= 20,
+        }),
+    },
+  ];
 
   return (
     <div className="space-y-8">
@@ -498,11 +520,10 @@ function StatsView({
         <EmptyState />
       ) : (
         <>
-          {/* Summary cards */}
-          <div ref={statsRef} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {/* Summary cards — 4 hero stat cards */}
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <Card
-              className={cn("card-interactive cursor-pointer", statsInView && "anim-fade-up")}
-              style={statsInView ? staggerDelay(0) : undefined}
+              className="card-interactive cursor-pointer"
               onClick={() => onFilterClick(null)}
             >
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -515,8 +536,7 @@ function StatsView({
             </Card>
 
             <Card
-              className={cn("card-interactive cursor-pointer", statsInView && "anim-fade-up")}
-              style={statsInView ? staggerDelay(1) : undefined}
+              className="card-interactive cursor-pointer"
               onClick={() =>
                 onFilterClick({
                   label: tfilters("presets.modeSit"),
@@ -534,8 +554,7 @@ function StatsView({
             </Card>
 
             <Card
-              className={cn("card-interactive cursor-pointer", statsInView && "anim-fade-up")}
-              style={statsInView ? staggerDelay(2) : undefined}
+              className="card-interactive cursor-pointer"
               onClick={() =>
                 onFilterClick({
                   label: tfilters("presets.modeServe"),
@@ -553,8 +572,7 @@ function StatsView({
             </Card>
 
             <Card
-              className={cn("card-interactive cursor-pointer", statsInView && "anim-fade-up")}
-              style={statsInView ? staggerDelay(3) : undefined}
+              className="card-interactive cursor-pointer"
               onClick={() => setShowCountries(true)}
             >
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -565,89 +583,25 @@ function StatsView({
                 <div className="text-2xl font-bold tabular-nums">{animCountries.toLocaleString()}</div>
               </CardContent>
             </Card>
+          </div>
 
-            <Card
-              className={cn("card-interactive cursor-pointer", statsInView && "anim-fade-up")}
-              style={statsInView ? staggerDelay(4) : undefined}
-              onClick={() =>
-                onFilterClick({
-                  label: tfilters("presets.sit10d"),
-                  filter: (c) => c.mode === "sit" && c.days === 10,
-                })
-              }
-            >
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">{t("coursesSitting10d")}</CardTitle>
-                <UserCheck className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold tabular-nums">{animSit10.toLocaleString()}</div>
-              </CardContent>
-            </Card>
-
-            <Card
-              className={cn("card-interactive cursor-pointer", statsInView && "anim-fade-up")}
-              style={statsInView ? staggerDelay(5) : undefined}
-              onClick={() =>
-                onFilterClick({
-                  label: tfilters("presets.serve10d"),
-                  filter: (c) => c.mode === "serve" && c.days === 10,
-                })
-              }
-            >
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">{t("coursesServing10d")}</CardTitle>
-                <HeartHandshake className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold tabular-nums">{animServe10.toLocaleString()}</div>
-              </CardContent>
-            </Card>
-
-            <Card
-              className={cn("card-interactive cursor-pointer", statsInView && "anim-fade-up")}
-              style={statsInView ? staggerDelay(6) : undefined}
-              onClick={() =>
-                onFilterClick({
-                  label: tfilters("presets.longServe20d"),
-                  filter: (c) => c.mode === "serve" && (c.days ?? 0) >= 20,
-                })
-              }
-            >
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">{t("longServing20d")}</CardTitle>
-                <TrendingUp className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold tabular-nums">{animLongServe.toLocaleString()}</div>
-              </CardContent>
-            </Card>
-
-            <Card
-              className={cn("card-interactive cursor-pointer", statsInView && "anim-fade-up")}
-              style={statsInView ? staggerDelay(7) : undefined}
-              onClick={() =>
-                onFilterClick({
-                  label: tfilters("presets.longCourses20d"),
-                  filter: (c) => (c.days ?? 0) >= 20,
-                })
-              }
-            >
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">{t("longCourses20d")}</CardTitle>
-                <Award className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold tabular-nums">{animLongCourses.toLocaleString()}</div>
-              </CardContent>
-            </Card>
+          {/* Secondary metrics — compact inline row */}
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-3 rounded-lg border bg-card/50 px-5 py-3">
+            {secondaryMetrics.map((m) => (
+              <button
+                key={m.label}
+                type="button"
+                onClick={m.onClick}
+                className="text-left transition-colors hover:text-primary"
+              >
+                <p className="text-xs text-muted-foreground">{m.label}</p>
+                <p className="text-lg font-semibold tabular-nums">{m.value.toLocaleString()}</p>
+              </button>
+            ))}
           </div>
 
           {/* Mode breakdown */}
-          <Card
-            className={cn(statsInView && "anim-fade-up")}
-            style={statsInView ? staggerDelay(8) : undefined}
-          >
+          <Card>
             <CardHeader>
               <CardTitle className="text-sm font-medium">{t("modeBreakdown")}</CardTitle>
             </CardHeader>
@@ -688,15 +642,11 @@ function StatsView({
               {recentCourses.length === 0 ? (
                 <p className="text-sm text-muted-foreground">{t("noCourses")}</p>
               ) : (
-                <div ref={listRef} className="space-y-3">
-                  {recentCourses.map((course, i) => (
+                <div className="space-y-3">
+                  {recentCourses.map((course) => (
                     <div
                       key={course.id}
-                      className={cn(
-                        "flex items-center justify-between rounded-lg border p-3",
-                        listInView && "anim-fade-up",
-                      )}
-                      style={listInView ? staggerDelay(i) : undefined}
+                      className="flex items-center justify-between rounded-lg border p-3"
                     >
                       <div className="flex items-center gap-3">
                         <Calendar className="h-4 w-4 text-muted-foreground" />
@@ -758,8 +708,6 @@ function CoursesTableView({
   filterPreset: FilterPreset;
   onClearFilter: () => void;
 }) {
-  const [tableRef, tableInView] = useInView(0.05);
-
   const t = useTranslations("Dashboard.table");
   const tt = useTranslations("Dashboard.table");
   const tfilters = useTranslations("Dashboard.filters");
@@ -802,7 +750,7 @@ function CoursesTableView({
         />
       </div>
 
-      <div ref={tableRef} className="rounded-md border">
+      <div className="rounded-md border">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((hg) => (
@@ -835,11 +783,9 @@ function CoursesTableView({
                 </TableCell>
               </TableRow>
             ) : (
-              table.getRowModel().rows.map((row, i) => (
+              table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  className={cn(tableInView && "anim-fade-up")}
-                  style={tableInView ? staggerDelay(i, 40) : undefined}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>

@@ -10,7 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Globe } from "lucide-react";
+import { Globe, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function LocaleSwitcher() {
@@ -51,7 +51,7 @@ export function LocaleSwitcher() {
             className={cn("flex items-center gap-2", locale === l.code && "bg-primary/10")}
           >
             <span>{l.label}</span>
-            {locale === l.code && <span className="ml-auto text-primary">✓</span>}
+            {locale === l.code && <Check className="h-4 w-4 text-primary ml-auto" />}
           </SelectItem>
         ))}
       </SelectContent>
