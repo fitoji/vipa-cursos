@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 import { createCourse } from "@/app/actions/courses";
 import { listCountryNames, listLocationNamesByCountry } from "@/app/actions/locations";
@@ -43,6 +44,10 @@ export default function CursosPage() {
   const { data: session, isPending } = authClient.useSession();
   const qc = useQueryClient();
   const create = createCourse;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const t = useTranslations("CursosPage") as any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const tc = useTranslations("common") as any;
 
   const form = useForm<CourseFormValues>({
     resolver: zodResolver(courseFormSchema),
@@ -85,13 +90,13 @@ export default function CursosPage() {
           obs: values.obs ?? "",
         },
       });
-      toast.success("Curso guardado");
+      toast.success(t("toast.saved"));
       setSubmitted(true);
       form.reset(defaultCourseFormValues);
       await qc.invalidateQueries({ queryKey: ["courses"] });
     } catch (e) {
       console.error(e);
-      toast.error("No se pudo guardar");
+      toast.error(t("toast.saveError"));
     } finally {
       setSubmitting(false);
     }
@@ -113,25 +118,23 @@ export default function CursosPage() {
       <div className="relative z-10 mx-auto max-w-4xl px-4 py-10">
         <header className="mb-8 flex items-start justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-semibold tracking-tight">Mis cursos de Vipassana</h1>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Guarda tus cursos sentados y servicios en un solo lugar.
-            </p>
+            <h1 className="text-3xl font-semibold tracking-tight">{t("title")}</h1>
+            <p className="mt-1 text-sm text-muted-foreground">{t("subtitle")}</p>
           </div>
           <Button variant="outline" asChild>
-            <Link href="/dashboard">Panel de Control</Link>
+            <Link href="/dashboard">{t("dashboardLink")}</Link>
           </Button>
           <ImportCoursesDialog />
         </header>
 
         <Card ref={formRef} className={cn(formInView && "anim-fade-up")}>
           <CardHeader>
-            <CardTitle>Nuevo curso</CardTitle>
+            <CardTitle>{t("formTitle")}</CardTitle>
           </CardHeader>
           <CardContent>
             <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 sm:grid-cols-2">
               <div className="grid gap-1.5">
-                <Label htmlFor="start_date">Fecha de inicio</Label>
+                <Label htmlFor="start_date">{t("labels.startDate")}</Label>
                 <DatePicker
                   value={form.watch("start_date")}
                   onChange={(v) => form.setValue("start_date", v)}
@@ -144,11 +147,11 @@ export default function CursosPage() {
               </div>
 
               <div className="grid gap-1.5">
-                <Label htmlFor="place">Lugar / Centro</Label>
+                <Label htmlFor="place">{t("labels.place")}</Label>
                 <Input
                   id="place"
                   list="place-options"
-                  placeholder="Dhamma..."
+                  placeholder={t("labels.placePlaceholder")}
                   {...form.register("place")}
                 />
                 <datalist id="place-options">
@@ -162,16 +165,20 @@ export default function CursosPage() {
               </div>
 
               <div className="grid gap-1.5">
-                <Label htmlFor="teacher">Profesor/a</Label>
-                <Input id="teacher" placeholder="ej.: S.N.Goenka" {...form.register("teacher")} />
+                <Label htmlFor="teacher">{t("labels.teacher")}</Label>
+                <Input
+                  id="teacher"
+                  placeholder={t("labels.teacherPlaceholder")}
+                  {...form.register("teacher")}
+                />
               </div>
 
               <div className="grid gap-1.5">
-                <Label htmlFor="country">País</Label>
+                <Label htmlFor="country">{t("labels.country")}</Label>
                 <Input
                   id="country"
                   list="country-options"
-                  placeholder="ej.: Argentina"
+                  placeholder={t("labels.countryPlaceholder")}
                   {...form.register("country")}
                 />
                 <datalist id="country-options">
@@ -182,7 +189,7 @@ export default function CursosPage() {
               </div>
 
               <div className="grid gap-1.5 sm:col-span-2">
-                <Label>Modo</Label>
+                <Label>{t("labels.mode")}</Label>
                 <RadioGroup
                   value={form.watch("mode")}
                   onValueChange={(v) => form.setValue("mode", v as "sit" | "serve")}
@@ -190,38 +197,44 @@ export default function CursosPage() {
                 >
                   <label className="flex items-center gap-2">
                     <RadioGroupItem value="sit" id="mode-sit" />
-                    <span>Sentar</span>
+                    <span>{t("labels.sit")}</span>
                   </label>
                   <label className="flex items-center gap-2">
                     <RadioGroupItem value="serve" id="mode-serve" />
-                    <span>Servir</span>
+                    <span>{t("labels.serve")}</span>
                   </label>
                 </RadioGroup>
               </div>
 
               <div className="grid gap-1.5">
-                <Label>Días</Label>
+                <Label>{t("labels.days")}</Label>
                 <Select
                   value={form.watch("daysPreset")}
                   onValueChange={(v) => form.setValue("daysPreset", v)}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Selecciona" />
+                    <SelectValue placeholder={t("labels.daysPlaceholder")} />
                   </SelectTrigger>
                   <SelectContent>
-                    {DAY_PRESETS.map((d) => (
-                      <SelectItem key={d} value={String(d)}>
-                        {d} días{COURSE_NAMES[String(d)] ? ` — ${COURSE_NAMES[String(d)]}` : ""}
-                      </SelectItem>
-                    ))}
+                    {DAY_PRESETS.map((d) => {
+                      const name = COURSE_NAMES[String(d)];
+                      return (
+                        <SelectItem key={d} value={String(d)}>
+                          {name
+                            ? t("days.labelWithName", { days: d, name })
+                            : t("days.label", { days: d })}
+                        </SelectItem>
+                      );
+                    })}
                     <SelectSeparator />
-                    {SPECIAL_COURSES.map((s) => (
-                      <SelectItem key={s.value} value={s.value}>
-                        {s.label}
-                      </SelectItem>
-                    ))}
+                    <SelectItem value="special-10">
+                      {t("days.labelWithName", { days: 10, name: "especial" })}
+                    </SelectItem>
+                    <SelectItem value="kids-1">
+                      {t("days.labelWithName", { days: 1, name: "niños" })}
+                    </SelectItem>
                     <SelectItem value="other">
-                      {mode === "serve" ? "LTS (servicio largo)" : "Otro…"}
+                      {mode === "serve" ? t("labels.daysCustomServe") : t("labels.daysCustomSit")}
                     </SelectItem>
                   </SelectContent>
                 </Select>
@@ -230,7 +243,7 @@ export default function CursosPage() {
               {daysPreset === "other" && (
                 <div className="grid gap-1.5">
                   <Label htmlFor="daysCustom">
-                    {mode === "serve" ? "Días de LTS" : "Días (personalizado)"}
+                    {mode === "serve" ? t("labels.daysCustomServe") : t("labels.daysCustomSit")}
                   </Label>
                   <Input id="daysCustom" type="number" min={1} {...form.register("daysCustom")} />
                   {form.formState.errors.daysCustom && (
@@ -242,10 +255,10 @@ export default function CursosPage() {
               )}
 
               <div className="grid gap-1.5 sm:col-span-2">
-                <Label htmlFor="obs">Observaciones</Label>
+                <Label htmlFor="obs">{t("labels.obs")}</Label>
                 <Textarea
                   id="obs"
-                  placeholder="Agrega información adicional..."
+                  placeholder={t("labels.obsPlaceholder")}
                   rows={3}
                   {...form.register("obs")}
                 />
@@ -261,11 +274,11 @@ export default function CursosPage() {
                         clipRule="evenodd"
                       />
                     </svg>
-                    Guardado
+                    {t("submit.saved")}
                   </span>
                 )}
                 <Button type="submit" disabled={submitting} className="press-effect">
-                  {submitting ? "Guardando…" : "Guardar curso"}
+                  {submitting ? t("submit.saving") : t("submit.save")}
                 </Button>
               </div>
             </form>

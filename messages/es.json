@@ -362,6 +362,7 @@
     "delete": "Eliminar",
     "loading": "Cargando…",
     "copy": "Copiar",
-    "copied": "Copiado"
+    "copied": "Copiado",
+    "locale": "Español"
   }
 }
