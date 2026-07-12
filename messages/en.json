@@ -255,9 +255,9 @@
   },
   "ImportCourses": {
     "pageTitle": "Import courses (JSON)",
-    "pageDescription": "Paste or drag a {code} file with an array of courses. You'll see the details below before importing.",
+    "pageDescription": "Paste or drag a JSON file with an array of courses. You'll see the details below before importing.",
     "dialogTitle": "Import courses (JSON)",
-    "dialogDescription": "Paste or drag a {code} file with an array of courses.",
+    "dialogDescription": "Paste or drag a JSON file with an array of courses.",
     "dropzone": {
       "dragLabel": "Drag your .json file here",
       "clickLabel": "or click to select it",
