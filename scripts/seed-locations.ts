@@ -86,7 +86,14 @@ async function main() {
           await client.query(
             `INSERT INTO locations (name, type, country_id, city, state, province)
              VALUES ($1, $2, $3, $4, $5, $6)`,
-            [loc.name, loc.type, countryId, loc.city || null, loc.state || null, loc.province || null],
+            [
+              loc.name,
+              loc.type,
+              countryId,
+              loc.city || null,
+              loc.state || null,
+              loc.province || null,
+            ],
           );
           totalLocations++;
         }

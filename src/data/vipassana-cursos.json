@@ -88,7 +88,11 @@
             { "name": "Dhamma Vasudhā", "city": "Wardha", "state": "Maharashtra" },
             { "name": "Dhamma Jalgaon", "city": "Jalgaon", "state": "Maharashtra" },
             { "name": "Dhamma Vāhini", "city": "Kalyan", "state": "Maharashtra" },
-            { "name": "Dragon Palace Vipassana Meditation Centre", "city": "Nagpur", "state": "Maharashtra" },
+            {
+              "name": "Dragon Palace Vipassana Meditation Centre",
+              "city": "Nagpur",
+              "state": "Maharashtra"
+            },
             { "name": "Dhamma Ālaya", "city": "Kolhapur", "state": "Maharashtra" },
             { "name": "Dhamma Ᾱvāsa", "city": "Latur", "state": "Maharashtra" },
             { "name": "Dhamma Manjusha", "city": "Manju", "state": "Maharashtra" },
@@ -172,9 +176,7 @@
             { "name": "Dhamma Dhaka", "city": "Dhaka" },
             { "name": "Dhamma Bangladesh", "city": "Chittagong" }
           ],
-          "non_centers": [
-            { "name": "Bangladesh Vipassana Society", "city": "Khagrachari" }
-          ]
+          "non_centers": [{ "name": "Bangladesh Vipassana Society", "city": "Khagrachari" }]
         },
         {
           "name": "Nepal",
@@ -272,26 +274,18 @@
             { "name": "Dhamma Laṭṭhikā", "city": "Battambang" },
             { "name": "Dhamma Kamboja", "city": "Kampong Cham" }
           ],
-          "non_centers": [
-            { "name": "Vipassana Cambodia", "city": "Phnom Penh" }
-          ]
+          "non_centers": [{ "name": "Vipassana Cambodia", "city": "Phnom Penh" }]
         },
         {
           "name": "Vietnam",
           "region": "Southeast Asia",
-          "centers": [
-            { "name": "Dhamma Bhāsura", "city": "Tây Ninh" }
-          ],
-          "non_centers": [
-            { "name": "Vipassana Việt Nam", "city": "Ho Chi Minh City" }
-          ]
+          "centers": [{ "name": "Dhamma Bhāsura", "city": "Tây Ninh" }],
+          "non_centers": [{ "name": "Vipassana Việt Nam", "city": "Ho Chi Minh City" }]
         },
         {
           "name": "Indonesia",
           "region": "Southeast Asia",
-          "centers": [
-            { "name": "Dhamma Geha", "city": "Bali" }
-          ],
+          "centers": [{ "name": "Dhamma Geha", "city": "Bali" }],
           "non_centers": [
             { "name": "Vipassana Meditation in Java", "city": "Gadog-Puncak" },
             { "name": "Vipassana Meditation in Indonesia" }
@@ -304,32 +298,24 @@
             { "name": "Dhamma Malaya", "city": "Pahang" },
             { "name": "Dhamma Sundara", "city": "Kuala Ketil" }
           ],
-          "non_centers": [
-            { "name": "Johor Vipassana", "city": "Johor" }
-          ]
+          "non_centers": [{ "name": "Johor Vipassana", "city": "Johor" }]
         },
         {
           "name": "Singapore",
           "region": "Southeast Asia",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Meditation in Singapore", "city": "Singapore" }
-          ]
+          "non_centers": [{ "name": "Vipassana Meditation in Singapore", "city": "Singapore" }]
         },
         {
           "name": "Philippines",
           "region": "Southeast Asia",
-          "centers": [
-            { "name": "Dhamma Phala", "city": "Tiaong, Quezon Province" }
-          ],
+          "centers": [{ "name": "Dhamma Phala", "city": "Tiaong, Quezon Province" }],
           "non_centers": []
         },
         {
           "name": "Hong Kong",
           "region": "Eastern Asia",
-          "centers": [
-            { "name": "Vipassana Hong Kong", "city": "Tung Wan, Lantau Island" }
-          ],
+          "centers": [{ "name": "Vipassana Hong Kong", "city": "Tung Wan, Lantau Island" }],
           "non_centers": []
         },
         {
@@ -344,125 +330,92 @@
         {
           "name": "Mongolia",
           "region": "Eastern Asia",
-          "centers": [
-            { "name": "Dhamma Mahana", "city": "Ulaanbaatar" }
-          ],
+          "centers": [{ "name": "Dhamma Mahana", "city": "Ulaanbaatar" }],
           "non_centers": []
         },
         {
           "name": "South Korea",
           "region": "Eastern Asia",
-          "centers": [
-            { "name": "Dhamma Korea", "city": "Jinan-gun" }
-          ],
+          "centers": [{ "name": "Dhamma Korea", "city": "Jinan-gun" }],
           "non_centers": []
         },
         {
           "name": "Taiwan",
           "region": "Eastern Asia",
-          "centers": [
-            { "name": "Dhamma Vikāsa" },
-            { "name": "Dhammodaya", "city": "Taichung" }
-          ],
-          "non_centers": [
-            { "name": "Vipassana in Taiwan" }
-          ]
+          "centers": [{ "name": "Dhamma Vikāsa" }, { "name": "Dhammodaya", "city": "Taichung" }],
+          "non_centers": [{ "name": "Vipassana in Taiwan" }]
         },
         {
           "name": "Iran",
           "region": "Central and Western Asia",
-          "centers": [
-            { "name": "Dhamma Iran", "city": "Mehrshahr" }
-          ],
+          "centers": [{ "name": "Dhamma Iran", "city": "Mehrshahr" }],
           "non_centers": []
         },
         {
           "name": "Israel",
           "region": "Central and Western Asia",
-          "centers": [
-            { "name": "Dhamma Pamoda", "city": "Deganya Bet" }
-          ],
+          "centers": [{ "name": "Dhamma Pamoda", "city": "Deganya Bet" }],
           "non_centers": []
         },
         {
           "name": "Turkey",
           "region": "Central and Western Asia",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Meditation in Turkey", "city": "Aydın, Izmir" }
-          ]
+          "non_centers": [{ "name": "Vipassana Meditation in Turkey", "city": "Aydın, Izmir" }]
         },
         {
           "name": "Uzbekistan",
           "region": "Central and Western Asia",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Association of Uzbekistan" }
-          ]
+          "non_centers": [{ "name": "Vipassana Association of Uzbekistan" }]
         },
         {
           "name": "Armenia",
           "region": "Central and Western Asia",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Meditation in Armenia" }
-          ]
+          "non_centers": [{ "name": "Vipassana Meditation in Armenia" }]
         },
         {
           "name": "Jordan",
           "region": "Central and Western Asia",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Meditation in Jordan", "city": "As-Salt" }
-          ]
+          "non_centers": [{ "name": "Vipassana Meditation in Jordan", "city": "As-Salt" }]
         },
         {
           "name": "Lebanon",
           "region": "Central and Western Asia",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Meditation in Lebanon" }
-          ]
+          "non_centers": [{ "name": "Vipassana Meditation in Lebanon" }]
         },
         {
           "name": "Oman",
           "region": "Central and Western Asia",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Meditation in Sultanate of Oman" }
-          ]
+          "non_centers": [{ "name": "Vipassana Meditation in Sultanate of Oman" }]
         },
         {
           "name": "Palestine",
           "region": "Central and Western Asia",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Meditation in Palestine", "city": "Zababida" }
-          ]
+          "non_centers": [{ "name": "Vipassana Meditation in Palestine", "city": "Zababida" }]
         },
         {
           "name": "Bahrain",
           "region": "Central and Western Asia",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Meditation in Bahrain" }
-          ]
+          "non_centers": [{ "name": "Vipassana Meditation in Bahrain" }]
         },
         {
           "name": "United Arab Emirates",
           "region": "Central and Western Asia",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana UAE" }
-          ]
+          "non_centers": [{ "name": "Vipassana UAE" }]
         },
         {
           "name": "Kazakhstan",
           "region": "Central and Western Asia",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Kazakhstan" }
-          ]
+          "non_centers": [{ "name": "Vipassana Kazakhstan" }]
         }
       ]
     },
@@ -471,16 +424,12 @@
       "countries": [
         {
           "name": "Austria",
-          "centers": [
-            { "name": "Dhamma Mudita", "city": "Oberösterreich" }
-          ],
+          "centers": [{ "name": "Dhamma Mudita", "city": "Oberösterreich" }],
           "non_centers": []
         },
         {
           "name": "Belgium",
-          "centers": [
-            { "name": "Dhamma Pajjota", "city": "Dilsen-Stokkem" }
-          ],
+          "centers": [{ "name": "Dhamma Pajjota", "city": "Dilsen-Stokkem" }],
           "non_centers": []
         },
         {
@@ -514,9 +463,7 @@
         },
         {
           "name": "Italy",
-          "centers": [
-            { "name": "Dhamma Aṭala", "city": "Lutirano (Florence)" }
-          ],
+          "centers": [{ "name": "Dhamma Aṭala", "city": "Lutirano (Florence)" }],
           "non_centers": []
         },
         {
@@ -546,53 +493,37 @@
         },
         {
           "name": "Sweden",
-          "centers": [
-            { "name": "Dhamma Sobhana", "city": "Ödeshög" }
-          ],
+          "centers": [{ "name": "Dhamma Sobhana", "city": "Ödeshög" }],
           "non_centers": []
         },
         {
           "name": "Switzerland",
-          "centers": [
-            { "name": "Dhamma Sumeru", "city": "Mont Soleil" }
-          ],
+          "centers": [{ "name": "Dhamma Sumeru", "city": "Mont Soleil" }],
           "non_centers": []
         },
         {
           "name": "Netherlands",
-          "centers": [
-            { "name": "Dhamma Taḷāka", "city": "Almere" }
-          ],
+          "centers": [{ "name": "Dhamma Taḷāka", "city": "Almere" }],
           "non_centers": []
         },
         {
           "name": "Latvia",
-          "centers": [
-            { "name": "Dhamma Laṭṭhi", "city": "Sigulda" }
-          ],
+          "centers": [{ "name": "Dhamma Laṭṭhi", "city": "Sigulda" }],
           "non_centers": []
         },
         {
           "name": "Lithuania",
-          "centers": [
-            { "name": "Dhamma Līḷhā", "city": "Varėna" }
-          ],
+          "centers": [{ "name": "Dhamma Līḷhā", "city": "Varėna" }],
           "non_centers": []
         },
         {
           "name": "Poland",
-          "centers": [
-            { "name": "Dhamma Pallava", "city": "Dziadowice" }
-          ],
-          "non_centers": [
-            { "name": "Vipassana Meditation in Poland", "city": "Krutyń" }
-          ]
+          "centers": [{ "name": "Dhamma Pallava", "city": "Dziadowice" }],
+          "non_centers": [{ "name": "Vipassana Meditation in Poland", "city": "Krutyń" }]
         },
         {
           "name": "Russia",
-          "centers": [
-            { "name": "Dhamma Dullabha" }
-          ],
+          "centers": [{ "name": "Dhamma Dullabha" }],
           "non_centers": [
             { "name": "Vipassana Meditation in Moscow Region", "city": "Moscow" },
             { "name": "Novosibirsk Vipassana Courses", "city": "Novosibirsk" },
@@ -604,142 +535,102 @@
         {
           "name": "Croatia",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Croatia", "city": "Zagreb" }
-          ]
+          "non_centers": [{ "name": "Vipassana Croatia", "city": "Zagreb" }]
         },
         {
           "name": "Greece",
           "centers": [],
-          "non_centers": [
-            { "name": "Greek Vipassana Association", "city": "Crete" }
-          ]
+          "non_centers": [{ "name": "Greek Vipassana Association", "city": "Crete" }]
         },
         {
           "name": "Portugal",
           "centers": [],
-          "non_centers": [
-            { "name": "Associação Vipassana Portugal", "city": "Faro, Rogil" }
-          ]
+          "non_centers": [{ "name": "Associação Vipassana Portugal", "city": "Faro, Rogil" }]
         },
         {
           "name": "Serbia",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Serbia", "city": "Belgrade" }
-          ]
+          "non_centers": [{ "name": "Vipassana Serbia", "city": "Belgrade" }]
         },
         {
           "name": "Slovenia",
           "centers": [],
-          "non_centers": [
-            { "name": "Fundacija Vipassana", "city": "Ljubljana" }
-          ]
+          "non_centers": [{ "name": "Fundacija Vipassana", "city": "Ljubljana" }]
         },
         {
           "name": "Macedonia",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Meditation in Macedonia" }
-          ]
+          "non_centers": [{ "name": "Vipassana Meditation in Macedonia" }]
         },
         {
           "name": "Denmark",
           "centers": [],
-          "non_centers": [
-            { "name": "Denmark Vipassana", "city": "Copenhagen" }
-          ]
+          "non_centers": [{ "name": "Denmark Vipassana", "city": "Copenhagen" }]
         },
         {
           "name": "Estonia",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Meditation in Estonia", "city": "Tallinn" }
-          ]
+          "non_centers": [{ "name": "Vipassana Meditation in Estonia", "city": "Tallinn" }]
         },
         {
           "name": "Finland",
           "centers": [],
-          "non_centers": [
-            { "name": "Finland Vipassana", "city": "Helsinki" }
-          ]
+          "non_centers": [{ "name": "Finland Vipassana", "city": "Helsinki" }]
         },
         {
           "name": "Ireland",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Meditation in Ireland" }
-          ]
+          "non_centers": [{ "name": "Vipassana Meditation in Ireland" }]
         },
         {
           "name": "Norway",
           "centers": [],
-          "non_centers": [
-            { "name": "Norway Vipassana", "city": "Gol" }
-          ]
+          "non_centers": [{ "name": "Norway Vipassana", "city": "Gol" }]
         },
         {
           "name": "Belarus",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Meditation in Belarus", "city": "Minsk" }
-          ]
+          "non_centers": [{ "name": "Vipassana Meditation in Belarus", "city": "Minsk" }]
         },
         {
           "name": "Bulgaria",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Bulgaria", "city": "Troyan" }
-          ]
+          "non_centers": [{ "name": "Vipassana Bulgaria", "city": "Troyan" }]
         },
         {
           "name": "Czech Republic",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Czech Republic and Slovakia", "city": "Praha" }
-          ]
+          "non_centers": [{ "name": "Vipassana Czech Republic and Slovakia", "city": "Praha" }]
         },
         {
           "name": "Georgia",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Georgia" }
-          ]
+          "non_centers": [{ "name": "Vipassana Georgia" }]
         },
         {
           "name": "Hungary",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Meditation in Hungary", "city": "Salgótarján" }
-          ]
+          "non_centers": [{ "name": "Vipassana Meditation in Hungary", "city": "Salgótarján" }]
         },
         {
           "name": "Moldova",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Meditation Moldova", "city": "Chişinău" }
-          ]
+          "non_centers": [{ "name": "Vipassana Meditation Moldova", "city": "Chişinău" }]
         },
         {
           "name": "Romania",
           "centers": [],
-          "non_centers": [
-            { "name": "Fundația Vipassana România", "city": "Cluj-Napoca" }
-          ]
+          "non_centers": [{ "name": "Fundația Vipassana România", "city": "Cluj-Napoca" }]
         },
         {
           "name": "Slovakia",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Slovakia", "city": "Bratislava" }
-          ]
+          "non_centers": [{ "name": "Vipassana Slovakia", "city": "Bratislava" }]
         },
         {
           "name": "Ukraine",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Meditation in Ukraine", "city": "Kyiv" }
-          ]
+          "non_centers": [{ "name": "Vipassana Meditation in Ukraine", "city": "Kyiv" }]
         }
       ]
     },
@@ -757,8 +648,16 @@
           ],
           "non_centers": [
             { "name": "Atlantic Canada Vipassana Meditation", "province": "Atlantic Canada" },
-            { "name": "Po Lam Meditation Vihara", "city": "Chilliwack", "province": "British Columbia" },
-            { "name": "Vipassana Meditation in Manitoba", "city": "Winnipeg", "province": "Manitoba" }
+            {
+              "name": "Po Lam Meditation Vihara",
+              "city": "Chilliwack",
+              "province": "British Columbia"
+            },
+            {
+              "name": "Vipassana Meditation in Manitoba",
+              "city": "Winnipeg",
+              "province": "Manitoba"
+            }
           ]
         },
         {
@@ -785,14 +684,16 @@
             { "name": "Michigan Vipassana Association", "city": "Ann Arbor", "state": "Michigan" },
             { "name": "Montana Vipassana Association", "city": "Missoula", "state": "Montana" },
             { "name": "New York Vipassana Association", "city": "New York", "state": "New York" },
-            { "name": "Ohio Vipassana Association", "city": "Cleveland & Columbus", "state": "Ohio" }
+            {
+              "name": "Ohio Vipassana Association",
+              "city": "Cleveland & Columbus",
+              "state": "Ohio"
+            }
           ]
         },
         {
           "name": "Mexico",
-          "centers": [
-            { "name": "Dhamma Makaranda", "city": "San Bartolo Amanalco" }
-          ],
+          "centers": [{ "name": "Dhamma Makaranda", "city": "San Bartolo Amanalco" }],
           "non_centers": [
             { "name": "All Mexico Courses" },
             { "name": "México Vipassana - Monterrey", "city": "Monterrey" },
@@ -805,16 +706,12 @@
         {
           "name": "Cuba",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Cuba", "city": "La Habana" }
-          ]
+          "non_centers": [{ "name": "Vipassana Cuba", "city": "La Habana" }]
         },
         {
           "name": "Puerto Rico",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Puerto Rico" }
-          ]
+          "non_centers": [{ "name": "Vipassana Puerto Rico" }]
         }
       ]
     },
@@ -835,14 +732,16 @@
         {
           "name": "Bolivia",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Meditation in Bolivia" }
-          ]
+          "non_centers": [{ "name": "Vipassana Meditation in Bolivia" }]
         },
         {
           "name": "Brazil",
           "centers": [
-            { "name": "Dhamma Santi", "city": "Engenheiro Paulo de Frontin", "province": "Rio de Janeiro" },
+            {
+              "name": "Dhamma Santi",
+              "city": "Engenheiro Paulo de Frontin",
+              "province": "Rio de Janeiro"
+            },
             { "name": "Dhamma Uyyāna", "city": "Pirenópolis", "province": "Goiás" },
             { "name": "Dhamma Saraṇa", "city": "Santana de Parnaíba", "province": "São Paulo" }
           ],
@@ -851,7 +750,11 @@
             { "name": "Vipassana Brasil - Minas Gerais", "province": "Minas Gerais" },
             { "name": "Vipassana Brasil - Nordeste", "province": "Nordeste" },
             { "name": "Vipassana Brasil - Parana", "province": "Paraná" },
-            { "name": "Vipassana Brasil - Santa Catarina", "city": "Florianópolis", "province": "Santa Catarina" }
+            {
+              "name": "Vipassana Brasil - Santa Catarina",
+              "city": "Florianópolis",
+              "province": "Santa Catarina"
+            }
           ]
         },
         {
@@ -859,15 +762,17 @@
           "centers": [
             { "name": "Dhamma Pasanna", "city": "Melipilla", "province": "Región Metropolitana" }
           ],
-          "non_centers": [
-            { "name": "Vipassana Chile" }
-          ]
+          "non_centers": [{ "name": "Vipassana Chile" }]
         },
         {
           "name": "Colombia",
           "centers": [
             { "name": "Dhamma Gutti", "city": "Medellín", "province": "Antioquia" },
-            { "name": "Dhamma Nandanavana", "city": "San Antonio del Tequendama", "province": "Cundinamarca" }
+            {
+              "name": "Dhamma Nandanavana",
+              "city": "San Antonio del Tequendama",
+              "province": "Cundinamarca"
+            }
           ],
           "non_centers": [
             { "name": "Vipassana Colombia - Bogotá", "city": "Bogotá" },
@@ -876,24 +781,18 @@
         },
         {
           "name": "Costa Rica",
-          "centers": [
-            { "name": "Dhamma Ariya", "city": "Cartago" }
-          ],
+          "centers": [{ "name": "Dhamma Ariya", "city": "Cartago" }],
           "non_centers": []
         },
         {
           "name": "Curaçao",
           "centers": [],
-          "non_centers": [
-            { "name": "Curaçao Vipassana" }
-          ]
+          "non_centers": [{ "name": "Curaçao Vipassana" }]
         },
         {
           "name": "Dominican Republic",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Dominican Republic", "city": "Gasper Hernandez" }
-          ]
+          "non_centers": [{ "name": "Vipassana Dominican Republic", "city": "Gasper Hernandez" }]
         },
         {
           "name": "Ecuador",
@@ -907,57 +806,41 @@
         {
           "name": "El Salvador",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana El Salvador" }
-          ]
+          "non_centers": [{ "name": "Vipassana El Salvador" }]
         },
         {
           "name": "Guatemala",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Guatemala" }
-          ]
+          "non_centers": [{ "name": "Vipassana Guatemala" }]
         },
         {
           "name": "Haiti",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Haiti", "city": "Port-au-Prince" }
-          ]
+          "non_centers": [{ "name": "Vipassana Haiti", "city": "Port-au-Prince" }]
         },
         {
           "name": "Honduras",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Honduras" }
-          ]
+          "non_centers": [{ "name": "Vipassana Honduras" }]
         },
         {
           "name": "Nicaragua",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Nicaragua" }
-          ]
+          "non_centers": [{ "name": "Vipassana Nicaragua" }]
         },
         {
           "name": "Panama",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Panamá" }
-          ]
+          "non_centers": [{ "name": "Vipassana Panamá" }]
         },
         {
           "name": "Paraguay",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Paraguay", "city": "Asunción" }
-          ]
+          "non_centers": [{ "name": "Vipassana Paraguay", "city": "Asunción" }]
         },
         {
           "name": "Peru",
-          "centers": [
-            { "name": "Dhamma Suriya", "city": "Lima" }
-          ],
+          "centers": [{ "name": "Dhamma Suriya", "city": "Lima" }],
           "non_centers": [
             { "name": "Vipassana Perú - Cusco", "city": "Cusco" },
             { "name": "Vipassana Meditation in Peru" }
@@ -966,22 +849,16 @@
         {
           "name": "Suriname",
           "centers": [],
-          "non_centers": [
-            { "name": "Suriname Vipassana", "city": "Paramaribo" }
-          ]
+          "non_centers": [{ "name": "Suriname Vipassana", "city": "Paramaribo" }]
         },
         {
           "name": "Uruguay",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Uruguay" }
-          ]
+          "non_centers": [{ "name": "Vipassana Uruguay" }]
         },
         {
           "name": "Venezuela",
-          "centers": [
-            { "name": "Dhamma Veṇuvana", "city": "Aragua" }
-          ],
+          "centers": [{ "name": "Dhamma Veṇuvana", "city": "Aragua" }],
           "non_centers": [
             { "name": "Vipassana Venezuela - Occidente" },
             { "name": "Vipassana Meditation in Venezuela" }
@@ -995,51 +872,37 @@
         {
           "name": "Ethiopia",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Ethiopia", "city": "Addis Ababa" }
-          ]
+          "non_centers": [{ "name": "Vipassana Ethiopia", "city": "Addis Ababa" }]
         },
         {
           "name": "Kenya",
           "centers": [],
-          "non_centers": [
-            { "name": "Kenya Vipassana Meditation Courses", "city": "Nairobi" }
-          ]
+          "non_centers": [{ "name": "Kenya Vipassana Meditation Courses", "city": "Nairobi" }]
         },
         {
           "name": "Madagascar",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Madagascar", "city": "Antsirabé" }
-          ]
+          "non_centers": [{ "name": "Vipassana Madagascar", "city": "Antsirabé" }]
         },
         {
           "name": "Mauritius",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Meditation in Mauritius" }
-          ]
+          "non_centers": [{ "name": "Vipassana Meditation in Mauritius" }]
         },
         {
           "name": "Morocco",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Meditation in Morocco", "city": "Marrakech" }
-          ]
+          "non_centers": [{ "name": "Vipassana Meditation in Morocco", "city": "Marrakech" }]
         },
         {
           "name": "Mozambique",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Meditation in Mozambique" }
-          ]
+          "non_centers": [{ "name": "Vipassana Meditation in Mozambique" }]
         },
         {
           "name": "Namibia",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Meditation in Namibia" }
-          ]
+          "non_centers": [{ "name": "Vipassana Meditation in Namibia" }]
         },
         {
           "name": "Reunion",
@@ -1051,30 +914,22 @@
         {
           "name": "Senegal",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Meditation in Senegal" }
-          ]
+          "non_centers": [{ "name": "Vipassana Meditation in Senegal" }]
         },
         {
           "name": "South Africa",
-          "centers": [
-            { "name": "Dhamma Patākā", "city": "Worcester", "province": "Western Cape" }
-          ],
+          "centers": [{ "name": "Dhamma Patākā", "city": "Worcester", "province": "Western Cape" }],
           "non_centers": []
         },
         {
           "name": "Tunisia",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Meditation in Tunisia" }
-          ]
+          "non_centers": [{ "name": "Vipassana Meditation in Tunisia" }]
         },
         {
           "name": "Uganda",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Meditation in Uganda" }
-          ]
+          "non_centers": [{ "name": "Vipassana Meditation in Uganda" }]
         }
       ]
     },
@@ -1094,23 +949,27 @@
             { "name": "Dhamma Padīpa", "city": "Brookton", "state": "Western Australia" }
           ],
           "non_centers": [
-            { "name": "Dhamma Passaddhi", "city": "Northern Rivers Gold Coast", "state": "New South Wales" },
-            { "name": "Vipassana Meditation Northern Territory", "city": "Darwin", "state": "Northern Territory" }
+            {
+              "name": "Dhamma Passaddhi",
+              "city": "Northern Rivers Gold Coast",
+              "state": "New South Wales"
+            },
+            {
+              "name": "Vipassana Meditation Northern Territory",
+              "city": "Darwin",
+              "state": "Northern Territory"
+            }
           ]
         },
         {
           "name": "New Caledonia",
           "centers": [],
-          "non_centers": [
-            { "name": "New Caledonia Vipassana" }
-          ]
+          "non_centers": [{ "name": "New Caledonia Vipassana" }]
         },
         {
           "name": "French Polynesia",
           "centers": [],
-          "non_centers": [
-            { "name": "Vipassana Meditation in French Polynesia", "city": "Tahiti" }
-          ]
+          "non_centers": [{ "name": "Vipassana Meditation in French Polynesia", "city": "Tahiti" }]
         }
       ]
     }

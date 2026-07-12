@@ -1,3 +1,9 @@
+[ ] realizar seo de la pagina
+[ ] accesiblidad de la pagina
+[ ] agregar fotos a cursos (link en base de datos, y imagenes en el servidor)
+[ ] posibilidad de compartir o ver cursos de amigos
+[ ] revisar mobile responsive
+11/07/26
 [x] agregar modo dark / light
 [x] utilizar los estilos de midnight.css
 [x] agregar header y footer

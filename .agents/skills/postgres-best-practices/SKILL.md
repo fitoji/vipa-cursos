@@ -9,6 +9,6 @@ Guidelines and best practices for working with Postgres, covering schema design,
 
 ## References
 
-| Area           | Resource                          | When to Use                                      |
-| -------------- | --------------------------------- | ------------------------------------------------ |
-| Schema Design  | `references/schema-design.md`     | Designing tables, choosing data types, normalizing |
+| Area          | Resource                      | When to Use                                        |
+| ------------- | ----------------------------- | -------------------------------------------------- |
+| Schema Design | `references/schema-design.md` | Designing tables, choosing data types, normalizing |

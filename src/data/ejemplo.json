@@ -1,0 +1,20 @@
+[
+  {
+    "start_date": "2023-04-10",
+    "place": "Dhamma Medini",
+    "teacher": "S.N. Goenka",
+    "country": "Argentina",
+    "mode": "sit",
+    "days": 10,
+    "obs": "Mi primer curso, ¡increíble!"
+  },
+  {
+    "start_date": "2023-04-10",
+    "place": "Dhamma Neru",
+    "teacher": "S.N. Goenka",
+    "country": "Argentina",
+    "mode": "sit",
+    "days": 20,
+    "obs": "probando..."
+  }
+]

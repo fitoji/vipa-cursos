@@ -156,7 +156,7 @@ function CalendarDayButton({
       ref={ref}
       variant="ghost"
       size="icon"
-                 data-day={formatDate(day.date)}
+      data-day={formatDate(day.date)}
       data-selected-single={
         modifiers.selected &&
         !modifiers.range_start &&

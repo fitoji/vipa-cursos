@@ -133,10 +133,7 @@
           "city": "Lima"
         }
       ],
-      "non_centers": [
-        { "name": "Cusco" },
-        { "name": "Vipassana Meditation in Peru" }
-      ]
+      "non_centers": [{ "name": "Cusco" }, { "name": "Vipassana Meditation in Peru" }]
     },
     {
       "country": "Venezuela",

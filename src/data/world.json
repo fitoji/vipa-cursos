@@ -13,16 +13,15 @@
     "non_centers": 9,
     "countries": [
       {
-            "country": "Canada",
-            "centers": 5,
-            "non_centers": 3
-          },
-          {
-            "country": "United States",
-            "centers": 14,
-            "non_centers": 6
-          }
+        "country": "Canada",
+        "centers": 5,
+        "non_centers": 3
+      },
+      {
+        "country": "United States",
+        "centers": 14,
+        "non_centers": 6
+      }
     ]
   }
-
 }
