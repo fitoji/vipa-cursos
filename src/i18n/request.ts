@@ -13,8 +13,6 @@ export default getRequestConfig(async ({ requestLocale }) => {
 
   return {
     locale,
-    // Messages will be loaded from JSON catalogs in Phase 3.
-    // Phase 1 returns empty messages — no components use useTranslations yet.
-    messages: {},
+    messages: (await import(`../../messages/${locale}.json`)).default,
   };
 });

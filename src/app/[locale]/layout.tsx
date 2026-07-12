@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat, Playfair_Display, Source_Code_Pro } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getMessages, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
@@ -38,15 +38,16 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const basePath = locale === "en" ? "/en" : "";
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const t = (await getTranslations("layout.meta")) as any;
 
   return {
     metadataBase: new URL(siteUrl),
     title: {
-      default: "Vipa Cursos — Registro de Cursos de Vipassana",
+      default: t("title"),
       template: "%s | Vipa Cursos",
     },
-    description:
-      "App personal para registrar y organizar tus cursos de meditación Vipassana. Guarda fechas, lugares, profesores y duración de cada sit y serve.",
+    description: t("description"),
     authors: [{ name: "Vipa Cursos" }],
     creator: "Vipa Cursos",
     icons: {
@@ -75,13 +76,13 @@ export async function generateMetadata({
       locale: locale === "en" ? "en_US" : "es_AR",
       url: basePath ? `${siteUrl}/en` : siteUrl,
       siteName: "Vipa Cursos",
-      title: "Vipa Cursos — Registro de Cursos de Vipassana",
-      description: "App personal para registrar y organizar tus cursos de meditación Vipassana.",
+      title: t("title"),
+      description: t("ogDescription"),
     },
     twitter: {
       card: "summary",
-      title: "Vipa Cursos — Registro de Cursos de Vipassana",
-      description: "App personal para registrar y organizar tus cursos de meditación Vipassana.",
+      title: t("title"),
+      description: t("ogDescription"),
     },
   };
 }
