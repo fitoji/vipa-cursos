@@ -180,7 +180,12 @@
         "days": "Días",
         "obs": "Observaciones",
         "sit": "Sit",
-        "serve": "Serve"
+        "serve": "Serve",
+        "startDate": "Fecha",
+        "daysPlaceholder": "Selecciona",
+        "daysLabel": "{days} días",
+        "daysCustomSit": "Días (personalizado)",
+        "daysCustomServe": "Días de LTS"
       }
     },
     "filters": {
@@ -355,6 +360,8 @@
     "cancel": "Cancelar",
     "save": "Guardar",
     "delete": "Eliminar",
-    "loading": "Cargando…"
+    "loading": "Cargando…",
+    "copy": "Copiar",
+    "copied": "Copiado"
   }
 }

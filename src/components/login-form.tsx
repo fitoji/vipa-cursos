@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { toast } from "sonner";
 import { Eye, EyeOff } from "lucide-react";
 
@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useTranslations } from "next-intl";
 
 type Mode = "signin" | "signup";
 
@@ -22,10 +23,14 @@ export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [busy, setBusy] = useState(false);
 
+  const t = useTranslations("LoginForm");
+  const te = useTranslations("LoginForm.errors");
+  const ts = useTranslations("LoginForm.success");
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !password) {
-      toast.error("Completa email y contraseña");
+      toast.error(te("missingFields"));
       return;
     }
     setBusy(true);
@@ -37,12 +42,12 @@ export function LoginForm() {
           callbackURL: "/cursos",
         });
         if (error) {
-          toast.error(error.message ?? "No se pudo iniciar sesión");
+          toast.error(mapAuthError(error.code));
           return;
         }
       } else {
         if (!name) {
-          toast.error("Ingresa tu nombre");
+          toast.error(te("missingName"));
           return;
         }
         const { error } = await authClient.signUp.email({
@@ -52,23 +57,35 @@ export function LoginForm() {
           callbackURL: "/cursos",
         });
         if (error) {
-          toast.error(error.message ?? "No se pudo registrar");
+          toast.error(mapAuthError(error.code));
           return;
         }
       }
       // Wait for session to be fully established before navigating
       const { data: sess } = await authClient.getSession();
       if (!sess?.session) {
-        toast.error("Sesión no establecida, intenta de nuevo");
+        toast.error(te("sessionNotReady"));
         return;
       }
-      toast.success("Sesión iniciada");
+      toast.success(ts("signedIn"));
       router.push("/cursos");
       router.refresh();
     } catch {
-      toast.error("Ocurrió un error inesperado");
+      toast.error(te("unexpected"));
     } finally {
       setBusy(false);
+    }
+  };
+
+  const mapAuthError = (code: string | undefined) => {
+    switch (code) {
+      case "USER_NOT_FOUND":
+      case "INVALID_PASSWORD":
+        return te("signInFailed");
+      case "EMAIL_ALREADY_EXISTS":
+        return te("signUpFailed");
+      default:
+        return te("unexpected");
     }
   };
 
@@ -80,10 +97,10 @@ export function LoginForm() {
         callbackURL: "/cursos",
       });
       if (error) {
-        toast.error(error.message ?? "No se pudo iniciar sesión con Google");
+        toast.error(mapAuthError(error.code));
       }
     } catch {
-      toast.error("Ocurrió un error inesperado");
+      toast.error(te("unexpected"));
     } finally {
       setBusy(false);
     }
@@ -93,7 +110,7 @@ export function LoginForm() {
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <Card className="w-full max-w-sm anim-scale-in">
         <CardHeader>
-          <CardTitle>Accede a tu cuenta</CardTitle>
+          <CardTitle>{t("title")}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="mb-4 flex gap-2">
@@ -104,7 +121,7 @@ export function LoginForm() {
               onClick={() => setMode("signin")}
               type="button"
             >
-              Iniciar sesión
+              {t("mode.signIn")}
             </Button>
             <Button
               variant={mode === "signup" ? "default" : "outline"}
@@ -113,7 +130,7 @@ export function LoginForm() {
               onClick={() => setMode("signup")}
               type="button"
             >
-              Registrarse
+              {t("mode.signUp")}
             </Button>
           </div>
 
@@ -142,7 +159,7 @@ export function LoginForm() {
                 fill="#EA4335"
               />
             </svg>
-            Continuar con Google
+            {t("oauth")}
           </Button>
 
           <form onSubmit={handleSubmit} className="grid gap-4">
@@ -154,7 +171,7 @@ export function LoginForm() {
                 marginTop: mode === "signup" ? undefined : "-0.5rem",
               }}
             >
-              <Label htmlFor="name">Nombre</Label>
+              <Label htmlFor="name">{t("form.name")}</Label>
               <Input
                 id="name"
                 autoComplete="name"
@@ -163,7 +180,7 @@ export function LoginForm() {
               />
             </div>
             <div className="grid gap-1.5">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">{t("form.email")}</Label>
               <Input
                 id="email"
                 type="email"
@@ -173,7 +190,7 @@ export function LoginForm() {
               />
             </div>
             <div className="grid gap-1.5">
-              <Label htmlFor="password">Contraseña</Label>
+              <Label htmlFor="password">{t("form.password")}</Label>
               <div className="relative">
                 <Input
                   id="password"
@@ -187,14 +204,18 @@ export function LoginForm() {
                   type="button"
                   onClick={() => setShowPassword((v) => !v)}
                   className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-                  aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+                  aria-label={showPassword ? t("form.hidePassword") : t("form.showPassword")}
                 >
                   {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
               </div>
             </div>
             <Button type="submit" disabled={busy} className="press-effect">
-              {busy ? "Procesando…" : mode === "signin" ? "Iniciar sesión" : "Registrarse"}
+              {busy
+                ? t("form.processing")
+                : mode === "signin"
+                  ? t("form.submitSignIn")
+                  : t("form.submitSignUp")}
             </Button>
           </form>
         </CardContent>

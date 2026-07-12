@@ -180,7 +180,12 @@
         "days": "Days",
         "obs": "Notes",
         "sit": "Sit",
-        "serve": "Serve"
+        "serve": "Serve",
+        "startDate": "Date",
+        "daysPlaceholder": "Select",
+        "daysLabel": "{days} days",
+        "daysCustomSit": "Days (custom)",
+        "daysCustomServe": "LTS days"
       }
     },
     "filters": {
@@ -355,6 +360,8 @@
     "cancel": "Cancel",
     "save": "Save",
     "delete": "Delete",
-    "loading": "Loading…"
+    "loading": "Loading…",
+    "copy": "Copy",
+    "copied": "Copied"
   }
 }

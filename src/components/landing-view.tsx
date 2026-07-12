@@ -1,33 +1,34 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { BookOpen, Clock, BarChart3, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useInView, staggerDelay } from "@/lib/animations";
 import { cn } from "@/lib/utils";
 import { authClient } from "@/lib/auth-client";
+import { useTranslations } from "next-intl";
 
 const features = [
   {
     icon: BookOpen,
-    title: "Registra cada curso",
-    description: "Fecha, lugar, profesor, país, modo (sit o serve) y duración.",
+    titleKey: "features.items.register.title",
+    descriptionKey: "features.items.register.description",
   },
   {
     icon: Clock,
-    title: "Historial completo",
-    description: "Visualizá todos los cursos que has realizado en un solo lugar.",
+    titleKey: "features.items.history.title",
+    descriptionKey: "features.items.history.description",
   },
   {
     icon: BarChart3,
-    title: "Panel de control",
-    description: "Filtrá, ordená y buscá entre tus cursos con una tabla interactiva.",
+    titleKey: "features.items.dashboard.title",
+    descriptionKey: "features.items.dashboard.description",
   },
   {
     icon: Shield,
-    title: "Privado y seguro",
-    description: "Solo vos podés ver tus datos. Autenticación con Google o email.",
+    titleKey: "features.items.privacy.title",
+    descriptionKey: "features.items.privacy.description",
   },
 ];
 
@@ -37,6 +38,10 @@ export function LandingView() {
   const [heroRef, heroInView] = useInView(0.1);
   const [featuresRef, featuresInView] = useInView(0.1);
   const [ctaRef, ctaInView] = useInView(0.2);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const t = useTranslations("Landing") as any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const tc = useTranslations("common") as any;
 
   return (
     <div className="min-h-screen bg-background">
@@ -62,14 +67,10 @@ export function LandingView() {
             Vipa <span className="text-primary">Cursos</span>
           </h1>
           <p
-            className={cn(
-              "mt-4 text-lg text-white/80 drop-shadow",
-              heroInView && "anim-fade-up",
-            )}
+            className={cn("mt-4 text-lg text-white/80 drop-shadow", heroInView && "anim-fade-up")}
             style={heroInView ? staggerDelay(2) : undefined}
           >
-            Tu registro personal de cursos de meditación Vipassana. Guardá cada sit y serve, y
-            revisá tu camino cuando lo necesites.
+            {t("hero.subtitle")}
           </p>
           <div
             className={cn(
@@ -81,15 +82,15 @@ export function LandingView() {
             {isLoggedIn ? (
               <>
                 <Button size="lg" className="hover-scale" asChild>
-                  <Link href="/dashboard">Panel de control</Link>
+                  <Link href="/dashboard">{t("hero.loggedInCta")}</Link>
                 </Button>
                 <Button size="lg" variant="outline" asChild>
-                  <Link href="/cursos">Nuevo curso</Link>
+                  <Link href="/cursos">{t("hero.newCourse")}</Link>
                 </Button>
               </>
             ) : (
               <Button size="lg" className="hover-scale" asChild>
-                <Link href="/login">Empezar ahora</Link>
+                <Link href="/login">{t("hero.cta")}</Link>
               </Button>
             )}
           </div>
@@ -110,12 +111,12 @@ export function LandingView() {
         <div className="absolute inset-0 bg-background/80 backdrop-blur-[2px]" />
         <div ref={featuresRef} className="relative z-10 mx-auto max-w-4xl">
           <h2 className="mb-12 text-center text-2xl font-semibold tracking-tight">
-            Todo lo que necesitás
+            {t("features.heading")}
           </h2>
           <div className="grid gap-6 sm:grid-cols-2">
             {features.map((f, i) => (
               <Card
-                key={f.title}
+                key={f.titleKey}
                 className={cn(
                   "hover-lift border-white/10 bg-white/90 shadow-lg backdrop-blur-sm dark:bg-black/80",
                   featuresInView && "anim-fade-up",
@@ -125,8 +126,8 @@ export function LandingView() {
                 <CardContent className="flex gap-4 p-6">
                   <f.icon className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
                   <div>
-                    <h3 className="font-medium">{f.title}</h3>
-                    <p className="mt-1 text-sm text-muted-foreground">{f.description}</p>
+                    <h3 className="font-medium">{t(f.titleKey)}</h3>
+                    <p className="mt-1 text-sm text-muted-foreground">{t(f.descriptionKey)}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -141,7 +142,7 @@ export function LandingView() {
           <div ref={ctaRef} className="mx-auto max-w-lg">
             <img
               src="/pagoda.webp"
-              alt="Pagoda Vipassana"
+              alt={t("cta.alt")}
               className={cn(
                 "mx-auto mb-6 h-36 w-36 rounded-full object-cover shadow-lg",
                 ctaInView && "anim-fade-up",
@@ -151,13 +152,13 @@ export function LandingView() {
               className={cn("text-2xl font-semibold tracking-tight", ctaInView && "anim-fade-up")}
               style={ctaInView ? staggerDelay(1) : undefined}
             >
-              Caminá tu camino con atención
+              {t("cta.title")}
             </h2>
             <p
               className={cn("mt-2 text-muted-foreground", ctaInView && "anim-fade-up")}
               style={ctaInView ? staggerDelay(2) : undefined}
             >
-              Llevá registro de tu práctica de Vipassana de forma simple y organizada.
+              {t("cta.description")}
             </p>
             <Button
               size="lg"
@@ -165,7 +166,7 @@ export function LandingView() {
               style={ctaInView ? staggerDelay(3) : undefined}
               asChild
             >
-              <Link href="/login">Registrarse gratis</Link>
+              <Link href="/login">{t("cta.button")}</Link>
             </Button>
           </div>
         </section>

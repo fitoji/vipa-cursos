@@ -9,10 +9,7 @@ async function getSession() {
   const cookieStore = await cookies();
   const allCookies = cookieStore.getAll();
   const h = new Headers();
-  h.set(
-    "cookie",
-    allCookies.map((c) => `${c.name}=${c.value}`).join("; "),
-  );
+  h.set("cookie", allCookies.map((c) => `${c.name}=${c.value}`).join("; "));
   return auth.api.getSession({ headers: h });
 }
 
@@ -50,6 +47,11 @@ type CourseRow = {
   created_at: string;
 };
 
+function revalidateBoth(path: string) {
+  revalidatePath(path);
+  revalidatePath(`/en${path}`);
+}
+
 export async function createCourse({ data }: { data: CourseInput }) {
   const session = await getSession();
   if (!session?.user?.id) throw new Error("Unauthorized");
@@ -62,8 +64,8 @@ export async function createCourse({ data }: { data: CourseInput }) {
     VALUES (${data.start_date}, ${data.place}, ${data.teacher}, ${data.country}, ${data.mode}, ${data.days}, ${data.obs}, ${userId})
     RETURNING id, start_date, place, teacher, country, mode, days, obs, created_at
   `;
-  revalidatePath("/");
-  revalidatePath("/dashboard");
+  revalidateBoth("/");
+  revalidateBoth("/dashboard");
   return rows[0] as CourseRow;
 }
 
@@ -77,16 +79,17 @@ export async function importCourses({ data }: { data: ImportCourseInput[] }) {
   const { neon } = await import("@neondatabase/serverless");
   const sql = neon(process.env.DATABASE_URL!);
   const inserted = await Promise.all(
-    parsed.map((c) =>
-      sql`
+    parsed.map(
+      (c) =>
+        sql`
         INSERT INTO vipassana_courses (start_date, place, teacher, country, mode, days, obs, user_id)
         VALUES (${c.start_date}, ${c.place}, ${c.teacher}, ${c.country}, ${c.mode}, ${c.days}, ${c.obs}, ${userId})
         RETURNING id
       `,
     ),
   );
-  revalidatePath("/");
-  revalidatePath("/dashboard");
+  revalidateBoth("/");
+  revalidateBoth("/dashboard");
   return { count: inserted.length };
 }
 
@@ -127,8 +130,8 @@ export async function updateCourse({ data }: { data: z.infer<typeof updateSchema
     WHERE id = ${data.id} AND user_id = ${userId}
     RETURNING id, start_date, place, teacher, country, mode, days, obs, created_at
   `;
-  revalidatePath("/");
-  revalidatePath("/dashboard");
+  revalidateBoth("/");
+  revalidateBoth("/dashboard");
   return rows[0] as CourseRow;
 }
 
@@ -140,7 +143,7 @@ export async function deleteCourse({ data }: { data: { id: number } }) {
   const { neon } = await import("@neondatabase/serverless");
   const sql = neon(process.env.DATABASE_URL!);
   await sql`DELETE FROM vipassana_courses WHERE id = ${data.id} AND user_id = ${userId}`;
-  revalidatePath("/");
-  revalidatePath("/dashboard");
+  revalidateBoth("/");
+  revalidateBoth("/dashboard");
   return { ok: true };
 }

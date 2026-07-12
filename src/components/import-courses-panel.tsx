@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/table";
 import { useInView, staggerDelay } from "@/lib/animations";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 const EXAMPLE = `[
   {
@@ -46,6 +47,15 @@ export function ImportCoursesPanel({ onImported }: { onImported?: () => void }) 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [tableRef, tableInView] = useInView(0.05);
 
+  const t = useTranslations("ImportCourses");
+  const ttoast = useTranslations("ImportCourses.toast");
+  const tbuttons = useTranslations("ImportCourses.buttons");
+  const terrors = useTranslations("ImportCourses.errors");
+  const tdrag = useTranslations("ImportCourses.dropzone");
+  const tformat = useTranslations("ImportCourses.format");
+  const ttable = useTranslations("ImportCourses.table");
+  const tpreview = useTranslations("ImportCourses.preview");
+
   const validate = (value: string) => {
     setText(value);
     setItems(null);
@@ -57,11 +67,11 @@ export function ImportCoursesPanel({ onImported }: { onImported?: () => void }) 
     try {
       parsed = JSON.parse(value);
     } catch {
-      setParseError("JSON inválido: revisá que el contenido sea un arreglo correcto.");
+      setParseError(terrors("invalidJson"));
       return;
     }
     if (!Array.isArray(parsed)) {
-      setParseError("El JSON debe ser un arreglo de cursos.");
+      setParseError(terrors("notArray"));
       return;
     }
 
@@ -83,11 +93,11 @@ export function ImportCoursesPanel({ onImported }: { onImported?: () => void }) 
 
   const readFile = async (file: File) => {
     if (file.size > MAX_FILE_SIZE) {
-      setParseError("El archivo es demasiado grande (máximo 5 MB)");
+      setParseError(terrors("fileTooLarge"));
       return;
     }
     if (!file.name.endsWith(".json") && file.type !== "application/json") {
-      setParseError("El archivo debe ser .json");
+      setParseError(terrors("mustBeJson"));
       return;
     }
     const content = await file.text();
@@ -111,7 +121,7 @@ export function ImportCoursesPanel({ onImported }: { onImported?: () => void }) 
     setImporting(true);
     try {
       const { count } = await importCourses({ data: validData });
-      toast.success(`${count} curso${count === 1 ? "" : "s"} importado${count === 1 ? "" : "s"}`);
+      toast.success(ttoast("imported", { count, cplural: count === 1 ? "" : "s" }));
       await qc.invalidateQueries({ queryKey: ["courses"] });
       setText("");
       setItems(null);
@@ -120,7 +130,7 @@ export function ImportCoursesPanel({ onImported }: { onImported?: () => void }) 
       onImported?.();
     } catch (e) {
       console.error(e);
-      toast.error("No se pudo importar");
+      toast.error(ttoast("importError"));
     } finally {
       setImporting(false);
     }
@@ -129,17 +139,14 @@ export function ImportCoursesPanel({ onImported }: { onImported?: () => void }) 
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-xl font-semibold">Importar cursos (JSON)</h2>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Pegá o arrastrá un archivo <code>.json</code> con un arreglo de cursos. Vas a ver el
-          detalle abajo antes de importar.
-        </p>
+        <h2 className="text-xl font-semibold">{t("pageTitle")}</h2>
+        <p className="mt-1 text-sm text-muted-foreground">{t("pageDescription")}</p>
       </div>
 
       <div
         role="button"
         tabIndex={0}
-        aria-label="Arrastra un archivo JSON aquí o haz clic para seleccionarlo"
+        aria-label={tdrag("ariaLabel")}
         onClick={() => fileInputRef.current?.click()}
         onKeyDown={(e) => e.key === "Enter" && fileInputRef.current?.click()}
         onDragOver={(e) => {
@@ -155,8 +162,8 @@ export function ImportCoursesPanel({ onImported }: { onImported?: () => void }) 
             : "border-border",
         )}
       >
-        <span className="font-medium text-foreground">Arrastrá tu archivo .json acá</span>
-        <span>o hacé clic para seleccionarlo</span>
+        <span className="font-medium text-foreground">{tdrag("dragLabel")}</span>
+        <span>{tdrag("clickLabel")}</span>
         <input
           ref={fileInputRef}
           type="file"
@@ -172,30 +179,31 @@ export function ImportCoursesPanel({ onImported }: { onImported?: () => void }) 
       <Textarea
         value={text}
         onChange={(e) => validate(e.target.value)}
-        placeholder="O pegá el JSON acá…"
+        placeholder={t("textareaPlaceholder")}
         rows={6}
         className="font-mono text-xs"
       />
 
       <div className="rounded-md bg-muted p-3 text-xs">
-        <p className="mb-1 font-medium">Formato esperado</p>
+        <p className="mb-1 font-medium">{tformat("title")}</p>
         <pre className="overflow-x-auto text-muted-foreground">{EXAMPLE}</pre>
         <ul className="mt-2 list-disc space-y-0.5 pl-4 text-muted-foreground">
           <li>
-            <code>start_date</code>, <code>place</code>: obligatorios.
+            <code>start_date</code>, <code>place</code>: {tformat("required", { field: "" })}.
           </li>
           <li>
-            <code>mode</code>: solo <code>"sit"</code> o <code>"serve"</code>.
+            <code>mode</code>:{" "}
+            {tformat("modeInfo", { field: "mode", values: tformat("modeValues") })}.
           </li>
           <li>
-            <code>days</code>: número entero positivo.
+            <code>days</code>: {tformat("daysInfo", { field: "days" })}.
           </li>
           <li>
-            <code>teacher</code>, <code>country</code>, <code>obs</code>: opcionales.
+            <code>teacher</code>, <code>country</code>, <code>obs</code>:{" "}
+            {tformat("optional", { fields: "" })}.
           </li>
           <li className="font-medium text-amber-600 dark:text-amber-400">
-            Campos sin información: usá <code>"unknown"</code> en vez de <code>""</code>. Si una IA
-            rellena campos vacíos con string vacío, la importación falla.
+            {tformat("unknownTip", { code: "", empty: "" })}
           </li>
         </ul>
       </div>
@@ -209,26 +217,25 @@ export function ImportCoursesPanel({ onImported }: { onImported?: () => void }) 
       {results && items && (
         <>
           <p className="text-sm">
-            Se detectaron {items.length} curso{items.length === 1 ? "" : "s"} ·{" "}
-            <span className="font-medium text-emerald-600">
-              {validData.length} válido{validData.length === 1 ? "" : "s"}
-            </span>{" "}
-            ·{" "}
-            <span className={invalidCount > 0 ? "font-medium text-destructive" : ""}>
-              {invalidCount} con errores
-            </span>
+            {tpreview("summary", {
+              total: items.length,
+              plural: items.length === 1 ? "" : "s",
+              valid: validData.length,
+              vplural: validData.length === 1 ? "" : "s",
+              invalid: invalidCount,
+            })}
           </p>
 
           <div ref={tableRef} className="card-interactive rounded-md border">
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Fecha</TableHead>
-                  <TableHead>Lugar</TableHead>
-                  <TableHead>Modo</TableHead>
-                  <TableHead>Días</TableHead>
-                  <TableHead>Profesor</TableHead>
-                  <TableHead>País</TableHead>
+                  <TableHead>{ttable("header.date")}</TableHead>
+                  <TableHead>{ttable("header.place")}</TableHead>
+                  <TableHead>{ttable("header.mode")}</TableHead>
+                  <TableHead>{ttable("header.days")}</TableHead>
+                  <TableHead>{ttable("header.teacher")}</TableHead>
+                  <TableHead>{ttable("header.country")}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -267,12 +274,12 @@ export function ImportCoursesPanel({ onImported }: { onImported?: () => void }) 
 
           {invalidCount > 0 && (
             <div className="rounded-md border border-destructive/40 bg-destructive/10 p-3 text-xs text-destructive">
-              <p className="mb-1 font-medium">Filas con errores:</p>
+              <p className="mb-1 font-medium">{tpreview("errorTitle")}</p>
               <ul className="list-disc space-y-0.5 pl-4">
                 {results.map((r, i) =>
                   !r.ok ? (
                     <li key={r.errors.join(";")}>
-                      Fila {i + 1}: {r.errors.join("; ")}
+                      {tpreview("rowError", { index: i + 1, errors: r.errors.join("; ") })}
                     </li>
                   ) : null,
                 )}
@@ -293,12 +300,15 @@ export function ImportCoursesPanel({ onImported }: { onImported?: () => void }) 
             setParseError(null);
           }}
         >
-          Limpiar
+          {tbuttons("clear")}
         </Button>
         <Button type="button" disabled={!canImport} onClick={onImport}>
           {importing
-            ? "Importando…"
-            : `Importar ${validData.length} curso${validData.length === 1 ? "" : "s"}`}
+            ? tbuttons("importing")
+            : tbuttons("importCount", {
+                count: validData.length,
+                cplural: validData.length === 1 ? "" : "s",
+              })}
         </Button>
       </div>
     </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery, useQueryClient, queryOptions } from "@tanstack/react-query";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useMemo, useState } from "react";
 import {
   createColumnHelper,
@@ -31,8 +31,13 @@ import {
   FileText,
   MessageSquare,
   Upload,
+  Download,
+  Loader2,
+  MapPin,
+  BarChart3,
 } from "lucide-react";
 import { toast } from "sonner";
+import { useLocale, useTranslations } from "next-intl";
 
 import { listCourses, deleteCourse } from "@/app/actions/courses";
 import { Input } from "@/components/ui/input";
@@ -57,12 +62,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 import { EditCourseDialog } from "@/components/edit-course-dialog";
 import { ImportCoursesPanel } from "@/components/import-courses-panel";
@@ -100,6 +100,15 @@ export function DashboardView() {
   const [view, setViewState] = useState<View>("stats");
   const [filterPreset, setFilterPreset] = useState<FilterPreset>(null);
 
+  const locale = useLocale();
+  const t = useTranslations("Dashboard");
+  const ts = useTranslations("Dashboard.stats");
+  const tt = useTranslations("Dashboard.table");
+  const ttoast = useTranslations("Dashboard.toast");
+  const tedit = useTranslations("Dashboard.edit");
+  const tfilters = useTranslations("Dashboard.filters");
+  const tsidebar = useTranslations("Dashboard.sidebar");
+
   const navigate = (v: View, filter?: FilterPreset) => {
     if (filter) setFilterPreset(filter);
     else setFilterPreset(null);
@@ -116,12 +125,12 @@ export function DashboardView() {
     setBusyDelete(true);
     try {
       await del({ data: { id: deleting.id } });
-      toast.success("Curso eliminado");
+      toast.success(ttoast("deleted"));
       await qc.invalidateQueries({ queryKey: ["courses"] });
       setDeleting(null);
     } catch (e) {
       console.error(e);
-      toast.error("No se pudo eliminar");
+      toast.error(ttoast("deleteError"));
     } finally {
       setBusyDelete(false);
     }
@@ -166,44 +175,46 @@ export function DashboardView() {
   const columns = useMemo(
     () => [
       columnHelper.accessor("start_date", {
-        header: "Fecha",
-        cell: (i) => new Date(i.getValue()).toLocaleDateString(),
+        header: tt("header.date"),
+        cell: (i) => formatDate(i.getValue(), locale),
       }),
-      columnHelper.accessor("place", { header: "Lugar" }),
+      columnHelper.accessor("place", { header: tt("header.place") }),
       columnHelper.accessor("teacher", {
-        header: "Profesor",
-        cell: (i) => i.getValue() || "—",
+        header: tt("header.teacher"),
+        cell: (i) => i.getValue() || tt("notSpecified"),
       }),
       columnHelper.accessor("country", {
-        header: "País",
-        cell: (i) => i.getValue() || "—",
+        header: tt("header.country"),
+        cell: (i) => i.getValue() || tt("notSpecified"),
       }),
       columnHelper.accessor("mode", {
-        header: "Modo",
+        header: tt("header.mode"),
         cell: (i) => (
           <Badge variant={i.getValue() === "sit" ? "default" : "secondary"}>{i.getValue()}</Badge>
         ),
       }),
       columnHelper.accessor("days", {
-        header: "Días",
-        cell: (i) => <Badge variant="outline">{i.getValue()}</Badge>,
+        header: tt("header.days"),
+        cell: (i) => <Badge variant="outline">{tt("daysLabel", { days: i.getValue() })}</Badge>,
       }),
       columnHelper.accessor("obs", {
-        header: "Observaciones",
+        header: tt("header.obs"),
         cell: (i) => (
-          <span className="line-clamp-2 text-sm text-muted-foreground">{i.getValue() || "—"}</span>
+          <span className="line-clamp-2 text-sm text-muted-foreground">
+            {i.getValue() || tt("notSpecified")}
+          </span>
         ),
       }),
       columnHelper.display({
         id: "actions",
-        header: () => <span className="sr-only">Acciones</span>,
+        header: () => <span className="sr-only">{tt("header.actions")}</span>,
         cell: (i) => (
           <div className="flex justify-end gap-1">
             <Button
               size="icon"
               variant="ghost"
               onClick={() => setEditing(i.row.original)}
-              aria-label="Editar"
+              aria-label={tt("header.actions")}
             >
               <Pencil className="h-4 w-4" />
             </Button>
@@ -211,7 +222,7 @@ export function DashboardView() {
               size="icon"
               variant="ghost"
               onClick={() => setDeleting(i.row.original)}
-              aria-label="Eliminar"
+              aria-label={tt("header.actions")}
               className="text-destructive hover:text-destructive"
             >
               <Trash2 className="h-4 w-4" />
@@ -220,7 +231,7 @@ export function DashboardView() {
         ),
       }),
     ],
-    [],
+    [locale],
   );
 
   const filteredCourses = filterPreset ? courses.filter(filterPreset.filter) : courses;
@@ -259,22 +270,21 @@ export function DashboardView() {
               <div className="flex items-center gap-3">
                 <SidebarTrigger />
                 <div>
-                  <h1 className="text-3xl font-semibold tracking-tight">Panel de Control</h1>
+                  <h1 className="text-3xl font-semibold tracking-tight">{t("header.title")}</h1>
                   <p className="mt-1 text-sm text-muted-foreground">
-                    {courses.length} curso{courses.length === 1 ? "" : "s"} registrado
-                    {courses.length === 1 ? "" : "s"}.
+                    {t("header.coursesCount", { count: courses.length })}
                   </p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <Button variant="default" size="sm" asChild>
                   <Link href="/cursos">
-                    <Plus className="mr-1 h-4 w-4" /> Nuevo curso
+                    <Plus className="mr-1 h-4 w-4" /> {t("header.newCourse")}
                   </Link>
                 </Button>
                 <Button variant="outline" asChild>
                   <Link href="/cursos">
-                    <ArrowLeft className="mr-2 h-4 w-4" /> Volver
+                    <ArrowLeft className="mr-2 h-4 w-4" /> {t("header.back")}
                   </Link>
                 </Button>
               </div>
@@ -327,14 +337,21 @@ export function DashboardView() {
         <AlertDialog open={!!deleting} onOpenChange={(v) => !v && setDeleting(null)}>
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>¿Eliminar este curso?</AlertDialogTitle>
+              <AlertDialogTitle>{tt("deleteDialog.title")}</AlertDialogTitle>
               <AlertDialogDescription>
-                {deleting ? `${deleting.place} — ${deleting.days} días (${deleting.mode})` : ""}.
-                Esta acción no se puede deshacer.
+                {deleting
+                  ? tt("deleteDialog.description", {
+                      place: deleting.place,
+                      days: deleting.days,
+                      mode: deleting.mode,
+                    })
+                  : ""}
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-              <AlertDialogCancel disabled={busyDelete}>Cancelar</AlertDialogCancel>
+              <AlertDialogCancel disabled={busyDelete}>
+                {tt("deleteDialog.cancel")}
+              </AlertDialogCancel>
               <AlertDialogAction
                 onClick={(e) => {
                   e.preventDefault();
@@ -343,7 +360,7 @@ export function DashboardView() {
                 disabled={busyDelete}
                 className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
               >
-                {busyDelete ? "Eliminando…" : "Eliminar"}
+                {busyDelete ? tt("deleteDialog.deleting") : tt("deleteDialog.delete")}
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
@@ -357,6 +374,9 @@ export function DashboardView() {
 function EmptyState() {
   const [emptyRef, emptyInView] = useInView(0.1);
   const [copied, setCopied] = useState(false);
+
+  const t = useTranslations("Dashboard.empty");
+  const tc = useTranslations("common");
 
   const promptText = `Convierte estos datos de cursos de Vipassana al siguiente formato JSON:
 [{"date":"YYYY-MM-DD","type":"sit","country":"...","location":"...","notes":"..."}]
@@ -373,14 +393,12 @@ mis datos son: [PEGAR AQUÍ]`;
       <Card>
         <CardContent className="flex flex-col items-center py-12 text-center">
           <BookOpen className="mb-4 h-12 w-12 text-muted-foreground/50" />
-          <h2 className="text-xl font-semibold">No hay cursos registrados</h2>
-          <p className="mt-2 max-w-md text-sm text-muted-foreground">
-            Importá tus datos desde un archivo JSON o ingresá tus cursos manualmente.
-          </p>
+          <h2 className="text-xl font-semibold">{t("title")}</h2>
+          <p className="mt-2 max-w-md text-sm text-muted-foreground">{t("description")}</p>
           <div className="mt-6 flex gap-3">
             <Button variant="outline" asChild>
               <Link href="/cursos">
-                <Upload className="mr-2 h-4 w-4" /> Agregar curso
+                <Upload className="mr-2 h-4 w-4" /> {t("addCourse")}
               </Link>
             </Button>
           </div>
@@ -394,13 +412,11 @@ mis datos son: [PEGAR AQUÍ]`;
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-sm font-medium">
             <FileText className="h-4 w-4" />
-            ¿Tenés datos en Excel o Word?
+            {t("excelTip")}
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
-          <p className="text-sm text-muted-foreground">
-            Copiá tus datos y pegalos en ChatGPT con este prompt:
-          </p>
+          <p className="text-sm text-muted-foreground">{t("excelTipDesc")}</p>
           <div className="relative rounded-lg border bg-muted/50 p-4 font-mono text-xs">
             <pre className="whitespace-pre-wrap">{promptText}</pre>
             <Button
@@ -410,9 +426,9 @@ mis datos son: [PEGAR AQUÍ]`;
               onClick={handleCopy}
             >
               {copied ? (
-                <span className="text-xs text-emerald-600">Copiado</span>
+                <span className="text-xs text-emerald-600">{tc("copied")}</span>
               ) : (
-                <span className="text-xs">Copiar</span>
+                <span className="text-xs">{tc("copy")}</span>
               )}
             </Button>
           </div>
@@ -456,6 +472,13 @@ function StatsView({
   const [listRef, listInView] = useInView(0.1);
   const [showCountries, setShowCountries] = useState(false);
 
+  const t = useTranslations("Dashboard.stats");
+  const ts = useTranslations("Dashboard.stats");
+  const tt = useTranslations("Dashboard.table");
+  const tfilters = useTranslations("Dashboard.filters");
+  const tempty = useTranslations("Dashboard.empty");
+  const trecent = useTranslations("Dashboard.recent");
+
   const uniqueCountries = [...new Set(courses.flatMap((c) => (c.country ? [c.country] : [])))]
     .filter(Boolean)
     .sort();
@@ -483,7 +506,7 @@ function StatsView({
               onClick={() => onFilterClick(null)}
             >
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Total cursos</CardTitle>
+                <CardTitle className="text-sm font-medium">{t("totalCourses")}</CardTitle>
                 <BookOpen className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
@@ -494,10 +517,15 @@ function StatsView({
             <Card
               className={cn("card-interactive cursor-pointer", statsInView && "anim-fade-up")}
               style={statsInView ? staggerDelay(1) : undefined}
-              onClick={() => onFilterClick({ label: "Modo: sit", filter: (c) => c.mode === "sit" })}
+              onClick={() =>
+                onFilterClick({
+                  label: tfilters("presets.modeSit"),
+                  filter: (c) => c.mode === "sit",
+                })
+              }
             >
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Días sentados</CardTitle>
+                <CardTitle className="text-sm font-medium">{t("daysSitting")}</CardTitle>
                 <Clock className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
@@ -508,10 +536,15 @@ function StatsView({
             <Card
               className={cn("card-interactive cursor-pointer", statsInView && "anim-fade-up")}
               style={statsInView ? staggerDelay(2) : undefined}
-              onClick={() => onFilterClick({ label: "Modo: serve", filter: (c) => c.mode === "serve" })}
+              onClick={() =>
+                onFilterClick({
+                  label: tfilters("presets.modeServe"),
+                  filter: (c) => c.mode === "serve",
+                })
+              }
             >
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Días sirviendo</CardTitle>
+                <CardTitle className="text-sm font-medium">{t("daysServing")}</CardTitle>
                 <Users className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
@@ -525,7 +558,7 @@ function StatsView({
               onClick={() => setShowCountries(true)}
             >
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Países distintos</CardTitle>
+                <CardTitle className="text-sm font-medium">{t("countriesVisited")}</CardTitle>
                 <Globe className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
@@ -536,10 +569,15 @@ function StatsView({
             <Card
               className={cn("card-interactive cursor-pointer", statsInView && "anim-fade-up")}
               style={statsInView ? staggerDelay(4) : undefined}
-              onClick={() => onFilterClick({ label: "Sentados (10d)", filter: (c) => c.mode === "sit" && c.days === 10 })}
+              onClick={() =>
+                onFilterClick({
+                  label: tfilters("presets.sit10d"),
+                  filter: (c) => c.mode === "sit" && c.days === 10,
+                })
+              }
             >
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Cursos sentados (10d)</CardTitle>
+                <CardTitle className="text-sm font-medium">{t("coursesSitting10d")}</CardTitle>
                 <UserCheck className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
@@ -550,10 +588,15 @@ function StatsView({
             <Card
               className={cn("card-interactive cursor-pointer", statsInView && "anim-fade-up")}
               style={statsInView ? staggerDelay(5) : undefined}
-              onClick={() => onFilterClick({ label: "Sirviendo (10d)", filter: (c) => c.mode === "serve" && c.days === 10 })}
+              onClick={() =>
+                onFilterClick({
+                  label: tfilters("presets.serve10d"),
+                  filter: (c) => c.mode === "serve" && c.days === 10,
+                })
+              }
             >
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Cursos sirviendo (10d)</CardTitle>
+                <CardTitle className="text-sm font-medium">{t("coursesServing10d")}</CardTitle>
                 <HeartHandshake className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
@@ -564,10 +607,15 @@ function StatsView({
             <Card
               className={cn("card-interactive cursor-pointer", statsInView && "anim-fade-up")}
               style={statsInView ? staggerDelay(6) : undefined}
-              onClick={() => onFilterClick({ label: "Largos sirviendo (20d+)", filter: (c) => c.mode === "serve" && (c.days ?? 0) >= 20 })}
+              onClick={() =>
+                onFilterClick({
+                  label: tfilters("presets.longServe20d"),
+                  filter: (c) => c.mode === "serve" && (c.days ?? 0) >= 20,
+                })
+              }
             >
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Largos sirviendo (20d+)</CardTitle>
+                <CardTitle className="text-sm font-medium">{t("longServing20d")}</CardTitle>
                 <TrendingUp className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
@@ -578,10 +626,15 @@ function StatsView({
             <Card
               className={cn("card-interactive cursor-pointer", statsInView && "anim-fade-up")}
               style={statsInView ? staggerDelay(7) : undefined}
-              onClick={() => onFilterClick({ label: "Cursos largos (20d+)", filter: (c) => (c.days ?? 0) >= 20 })}
+              onClick={() =>
+                onFilterClick({
+                  label: tfilters("presets.longCourses20d"),
+                  filter: (c) => (c.days ?? 0) >= 20,
+                })
+              }
             >
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Cursos largos (20d+)</CardTitle>
+                <CardTitle className="text-sm font-medium">{t("longCourses20d")}</CardTitle>
                 <Award className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
@@ -596,14 +649,14 @@ function StatsView({
             style={statsInView ? staggerDelay(8) : undefined}
           >
             <CardHeader>
-              <CardTitle className="text-sm font-medium">Desglose por modo</CardTitle>
+              <CardTitle className="text-sm font-medium">{t("modeBreakdown")}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-2">
-                  <Badge variant="default">sit</Badge>
+                  <Badge variant="default">{ts("sit")}</Badge>
                   <span className="text-sm text-muted-foreground">
-                    {sitCount} curso{sitCount === 1 ? "" : "s"}
+                    {sitCount} {sitCount === 1 ? t("courseSingular") : t("coursePlural")}
                   </span>
                 </div>
                 <div className="flex-1">
@@ -617,9 +670,9 @@ function StatsView({
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Badge variant="secondary">serve</Badge>
+                  <Badge variant="secondary">{ts("serve")}</Badge>
                   <span className="text-sm text-muted-foreground">
-                    {serveCount} curso{serveCount === 1 ? "" : "s"}
+                    {serveCount} {serveCount === 1 ? t("courseSingular") : t("coursePlural")}
                   </span>
                 </div>
               </div>
@@ -629,11 +682,11 @@ function StatsView({
           {/* Recent courses */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-sm font-medium">Cursos recientes</CardTitle>
+              <CardTitle className="text-sm font-medium">{t("recentCourses")}</CardTitle>
             </CardHeader>
             <CardContent>
               {recentCourses.length === 0 ? (
-                <p className="text-sm text-muted-foreground">Sin cursos registrados.</p>
+                <p className="text-sm text-muted-foreground">{t("noCourses")}</p>
               ) : (
                 <div ref={listRef} className="space-y-3">
                   {recentCourses.map((course, i) => (
@@ -650,8 +703,9 @@ function StatsView({
                         <div>
                           <p className="text-sm font-medium">{course.place}</p>
                           <p className="text-xs text-muted-foreground">
-                            {formatDate(course.start_date)} · {course.teacher || "Sin profesor"} ·{" "}
-                            {course.days} días
+                            {formatDate(course.start_date)} ·{" "}
+                            {course.teacher || trecent("noTeacher")} · {course.days}{" "}
+                            {tt("daysLabel", { days: course.days })}
                           </p>
                         </div>
                       </div>
@@ -670,7 +724,7 @@ function StatsView({
       <Dialog open={showCountries} onOpenChange={setShowCountries}>
         <DialogContent className="max-w-sm">
           <DialogHeader>
-            <DialogTitle>Países visitados</DialogTitle>
+            <DialogTitle>{t("countriesDialogTitle")}</DialogTitle>
           </DialogHeader>
           {uniqueCountries.length > 0 ? (
             <ul className="space-y-1 text-sm">
@@ -682,7 +736,7 @@ function StatsView({
               ))}
             </ul>
           ) : (
-            <p className="text-sm text-muted-foreground">Sin países registrados</p>
+            <p className="text-sm text-muted-foreground">{t("noCountries")}</p>
           )}
         </DialogContent>
       </Dialog>
@@ -706,6 +760,9 @@ function CoursesTableView({
 }) {
   const [tableRef, tableInView] = useInView(0.05);
 
+  const t = useTranslations("Dashboard.table");
+  const tt = useTranslations("Dashboard.table");
+  const tfilters = useTranslations("Dashboard.filters");
   return (
     <>
       {filterPreset && (
@@ -716,15 +773,21 @@ function CoursesTableView({
               type="button"
               onClick={onClearFilter}
               className="ml-1 rounded-full hover:bg-muted-foreground/20 p-0.5"
-              aria-label="Quitar filtro"
+              aria-label={tfilters("clear")}
             >
               <svg className="h-3 w-3" viewBox="0 0 12 12" fill="currentColor">
-                <path d="M3.5 3.5l5 5M8.5 3.5l-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                <path
+                  d="M3.5 3.5l5 5M8.5 3.5l-5 5"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
               </svg>
             </button>
           </Badge>
           <span className="text-xs text-muted-foreground">
-            {table.getRowModel().rows.length} curso{table.getRowModel().rows.length === 1 ? "" : "s"}
+            {table.getRowModel().rows.length}{" "}
+            {table.getRowModel().rows.length === 1 ? tt("courseSingular") : tt("coursePlural")}
           </span>
         </div>
       )}
@@ -734,7 +797,7 @@ function CoursesTableView({
         <Input
           value={globalFilter}
           onChange={(e) => onGlobalFilterChange(e.target.value)}
-          placeholder="Buscar por lugar, profesor, país…"
+          placeholder={t("searchPlaceholder")}
           className="pl-9"
         />
       </div>
@@ -768,7 +831,7 @@ function CoursesTableView({
                   colSpan={table.getAllColumns().length}
                   className="h-24 text-center text-muted-foreground"
                 >
-                  Sin resultados.
+                  {t("noResults")}
                 </TableCell>
               </TableRow>
             ) : (
