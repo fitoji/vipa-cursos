@@ -4,5 +4,7 @@ blockExoticSubdeps: true
 overrides:
   undici-types: 8.7.0
 allowBuilds:
+  "@parcel/watcher": true
+  "@swc/core": true
   esbuild: true
   sharp: true
