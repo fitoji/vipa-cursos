@@ -1,6 +1,7 @@
 "use client";
 
-import { useRouter, usePathname } from "@/i18n/navigation";
+import { useRouter } from "next/navigation";
+import { usePathname } from "@/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import {
   Select,
@@ -25,6 +26,8 @@ export function LocaleSwitcher() {
   ] as const;
 
   const handleLocaleChange = (newLocale: string) => {
+    // usePathname() from @/i18n/navigation returns internal path (no locale prefix)
+    // useRouter() from next/navigation pushes raw URL — no locale re-prefixing
     if (newLocale === "en") {
       router.push(`/en${pathname}`);
     } else {
