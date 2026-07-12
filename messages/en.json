@@ -93,7 +93,7 @@
   "Dashboard": {
     "header": {
       "title": "Dashboard",
-      "coursesCount": "{count} course{plural} registered.",
+      "coursesCount": "{count, plural, =1 {# course registered} other {# courses registered}}",
       "newCourse": "New course",
       "back": "Back",
       "loading": "Loading…"
@@ -111,7 +111,11 @@
       "recentCourses": "Recent courses",
       "noCourses": "No courses registered.",
       "countriesDialogTitle": "Countries visited",
-      "noCountries": "No countries registered"
+      "noCountries": "No countries registered",
+      "sit": "Sitting",
+      "serve": "Serving",
+      "courseSingular": "course",
+      "coursePlural": "courses"
     },
     "table": {
       "header": {
@@ -304,10 +308,13 @@
   },
   "SiteHeader": {
     "themeLabel": "Toggle theme",
-    "userMenu": "User",
     "signOut": "Sign out",
     "signIn": "Sign in",
-    "signUp": "Sign up"
+    "signUp": "Sign up",
+    "userMenu": {
+      "name": "User",
+      "signOut": "Sign out"
+    }
   },
   "SiteFooter": {
     "copyright": "Vipa Courses © {year}",

@@ -93,7 +93,7 @@
   "Dashboard": {
     "header": {
       "title": "Panel de Control",
-      "coursesCount": "{count} curso{plural} registrado{plural}.",
+      "coursesCount": "{count, plural, =1 {# curso registrado} other {# cursos registrados}}",
       "newCourse": "Nuevo curso",
       "back": "Volver",
       "loading": "Cargando…"
@@ -111,7 +111,11 @@
       "recentCourses": "Cursos recientes",
       "noCourses": "Sin cursos registrados.",
       "countriesDialogTitle": "Países visitados",
-      "noCountries": "Sin países registrados"
+      "noCountries": "Sin países registrados",
+      "sit": "Sentar",
+      "serve": "Servir",
+      "courseSingular": "curso",
+      "coursePlural": "cursos"
     },
     "table": {
       "header": {
@@ -304,10 +308,13 @@
   },
   "SiteHeader": {
     "themeLabel": "Cambiar tema",
-    "userMenu": "Usuario",
     "signOut": "Cerrar sesión",
     "signIn": "Iniciar sesión",
-    "signUp": "Registrarse"
+    "signUp": "Registrarse",
+    "userMenu": {
+      "name": "Usuario",
+      "signOut": "Cerrar sesión"
+    }
   },
   "SiteFooter": {
     "copyright": "Vipa Cursos © {year}",
