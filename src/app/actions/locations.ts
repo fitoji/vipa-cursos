@@ -98,47 +98,44 @@ export const searchLocations = unstable_cache(
     offset?: number;
   }): Promise<{ locations: LocationRow[]; total: number }> => {
     const { continentId, countryId, type, query, limit = 50, offset = 0 } = opts;
+    const like = query ? `%${query}%` : null;
 
-    const whereParts: string[] = ["1=1"];
-    if (continentId) whereParts.push(`co.continent_id = ${continentId}`);
-    if (countryId) whereParts.push(`l.country_id = ${countryId}`);
-    if (type) whereParts.push(`l.type = '${type}'`);
-    if (query) {
-      const safe = query.replace(/'/g, "''");
-      whereParts.push(
-        `(l.name ILIKE '%${safe}%' OR l.city ILIKE '%${safe}%' OR co.name ILIKE '%${safe}%')`,
-      );
-    }
-    const whereClause = whereParts.join(" AND ");
+    const countRows = await sql`
+      SELECT COUNT(*)::int AS total
+      FROM locations l
+      JOIN countries co ON co.id = l.country_id
+      JOIN continents c ON c.id = co.continent_id
+      WHERE true
+      ${continentId != null ? sql`AND co.continent_id = ${continentId}` : sql``}
+      ${countryId != null ? sql`AND l.country_id = ${countryId}` : sql``}
+      ${type != null ? sql`AND l.type = ${type}` : sql``}
+      ${like != null ? sql`AND (l.name ILIKE ${like} OR l.city ILIKE ${like} OR co.name ILIKE ${like})` : sql``}
+    `;
+    const total = (countRows as { total: number }[])[0].total;
 
-    const countRows = (await sql.unsafe(
-      `SELECT COUNT(*)::int AS total
-       FROM locations l
-       JOIN countries co ON co.id = l.country_id
-       JOIN continents c ON c.id = co.continent_id
-       WHERE ${whereClause}`,
-    )) as unknown as { total: number }[];
-    const total = countRows[0].total;
+    const dataRows = await sql`
+      SELECT
+        l.id,
+        l.name,
+        l.type,
+        l.city,
+        l.state,
+        l.province,
+        co.name AS country_name,
+        c.name AS continent_name
+      FROM locations l
+      JOIN countries co ON co.id = l.country_id
+      JOIN continents c ON c.id = co.continent_id
+      WHERE true
+      ${continentId != null ? sql`AND co.continent_id = ${continentId}` : sql``}
+      ${countryId != null ? sql`AND l.country_id = ${countryId}` : sql``}
+      ${type != null ? sql`AND l.type = ${type}` : sql``}
+      ${like != null ? sql`AND (l.name ILIKE ${like} OR l.city ILIKE ${like} OR co.name ILIKE ${like})` : sql``}
+      ORDER BY c.name, co.name, l.name
+      LIMIT ${limit} OFFSET ${offset}
+    `;
 
-    const dataRows = (await sql.unsafe(
-      `SELECT
-         l.id,
-         l.name,
-         l.type,
-         l.city,
-         l.state,
-         l.province,
-         co.name AS country_name,
-         c.name AS continent_name
-       FROM locations l
-       JOIN countries co ON co.id = l.country_id
-       JOIN continents c ON c.id = co.continent_id
-       WHERE ${whereClause}
-       ORDER BY c.name, co.name, l.name
-       LIMIT ${limit} OFFSET ${offset}`,
-    )) as unknown as LocationRow[];
-
-    return { locations: dataRows, total };
+    return { locations: dataRows as LocationRow[], total };
   },
   ["search-locations"],
   { revalidate: ONE_DAY, tags: [LOCATIONS_TAG] },
