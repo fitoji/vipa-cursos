@@ -309,6 +309,7 @@
     }
   },
   "SiteHeader": {
+    "siteName": "Vipa-Courses",
     "themeLabel": "Toggle theme",
     "signOut": "Sign out",
     "signIn": "Sign in",

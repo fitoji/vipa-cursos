@@ -66,7 +66,7 @@ export function LandingView() {
               )}
               style={heroInView ? staggerDelay(1) : undefined}
             >
-              Vipa <span className="text-primary">Cursos</span>
+              {t("hero.title")}
             </h1>
             <p
               className={cn(

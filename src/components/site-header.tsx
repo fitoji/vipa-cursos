@@ -68,7 +68,8 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 border-b border-border/40 bg-background/80">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
         <Link href="/" className="flex items-center gap-2 transition-opacity hover:opacity-80">
-          <img src="/logo.svg" alt="Vipa Cursos" className="h-7 w-auto" />
+          <img src="/icons8-buddha-64.png" alt="Buddha" className="h-8 w-auto" />
+          <span className="font-serif text-lg font-semibold tracking-tight">{t("siteName")}</span>
         </Link>
         <div className="flex items-center gap-3">
           <Button
