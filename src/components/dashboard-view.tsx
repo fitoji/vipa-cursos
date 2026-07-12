@@ -740,64 +740,68 @@ function CoursesTableView({
         </div>
       )}
 
-      <div className="mb-4 relative max-w-sm">
-        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-        <Input
-          value={globalFilter}
-          onChange={(e) => onGlobalFilterChange(e.target.value)}
-          placeholder={t("searchPlaceholder")}
-          className="pl-9"
-        />
-      </div>
+      <Card>
+        <CardContent className="p-0">
+          <div className="mb-4 px-6 pt-6">
+            <div className="relative max-w-sm">
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <Input
+                value={globalFilter}
+                onChange={(e) => onGlobalFilterChange(e.target.value)}
+                placeholder={t("searchPlaceholder")}
+                className="pl-9"
+              />
+            </div>
+          </div>
 
-      <div className="rounded-md border">
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((hg) => (
-              <TableRow key={hg.id}>
-                {hg.headers.map((h) => (
-                  <TableHead key={h.id}>
-                    {h.isPlaceholder ? null : (
-                      <button
-                        type="button"
-                        onClick={h.column.getToggleSortingHandler()}
-                        className="inline-flex items-center gap-1 hover:text-foreground"
-                      >
-                        {flexRender(h.column.columnDef.header, h.getContext())}
-                        {h.column.getCanSort() && <ArrowUpDown className="h-3 w-3 opacity-50" />}
-                      </button>
-                    )}
-                  </TableHead>
+          <div className="px-6 pb-6">
+            <Table>
+              <TableHeader>
+                {table.getHeaderGroups().map((hg) => (
+                  <TableRow key={hg.id}>
+                    {hg.headers.map((h) => (
+                      <TableHead key={h.id}>
+                        {h.isPlaceholder ? null : (
+                          <button
+                            type="button"
+                            onClick={h.column.getToggleSortingHandler()}
+                            className="inline-flex items-center gap-1 hover:text-foreground"
+                          >
+                            {flexRender(h.column.columnDef.header, h.getContext())}
+                            {h.column.getCanSort() && <ArrowUpDown className="h-3 w-3 opacity-50" />}
+                          </button>
+                        )}
+                      </TableHead>
+                    ))}
+                  </TableRow>
                 ))}
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {table.getRowModel().rows.length === 0 ? (
-              <TableRow>
-                <TableCell
-                  colSpan={table.getAllColumns().length}
-                  className="h-24 text-center text-muted-foreground"
-                >
-                  {t("noResults")}
-                </TableCell>
-              </TableRow>
-            ) : (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+              </TableHeader>
+              <TableBody>
+                {table.getRowModel().rows.length === 0 ? (
+                  <TableRow>
+                    <TableCell
+                      colSpan={table.getAllColumns().length}
+                      className="h-24 text-center text-muted-foreground"
+                    >
+                      {t("noResults")}
                     </TableCell>
-                  ))}
-                </TableRow>
-              ))
-            )}
-          </TableBody>
-        </Table>
-      </div>
+                  </TableRow>
+                ) : (
+                  table.getRowModel().rows.map((row) => (
+                    <TableRow key={row.id}>
+                      {row.getVisibleCells().map((cell) => (
+                        <TableCell key={cell.id}>
+                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  ))
+                )}
+              </TableBody>
+            </Table>
+          </div>
+        </CardContent>
+      </Card>
     </>
   );
 }
