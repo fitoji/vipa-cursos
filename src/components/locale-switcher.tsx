@@ -10,8 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Globe, Check } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Globe } from "lucide-react";
 
 export function LocaleSwitcher() {
   const locale = useLocale();
@@ -21,8 +20,8 @@ export function LocaleSwitcher() {
   const t = useTranslations("common") as any;
 
   const locales = [
-    { code: "es", label: "Español" },
-    { code: "en", label: "English" },
+    { code: "es", label: "ES" },
+    { code: "en", label: "EN" },
   ] as const;
 
   const handleLocaleChange = (newLocale: string) => {
@@ -37,21 +36,19 @@ export function LocaleSwitcher() {
 
   return (
     <Select value={locale} onValueChange={handleLocaleChange}>
-      <SelectTrigger className="h-8 w-[120px] justify-between gap-2" aria-label={t("locale")}>
+      <SelectTrigger className="h-8 w-[72px] justify-between gap-2" aria-label={t("locale")}>
         <span className="flex items-center gap-2">
           <Globe className="h-4 w-4 text-muted-foreground" />
           <SelectValue placeholder={t("locale")} />
         </span>
       </SelectTrigger>
-      <SelectContent className="w-[120px]" position="popper">
+      <SelectContent className="w-[72px]" position="popper">
         {locales.map((l) => (
           <SelectItem
             key={l.code}
             value={l.code}
-            className={cn("flex items-center gap-2", locale === l.code && "bg-primary/10")}
           >
             <span>{l.label}</span>
-            {locale === l.code && <Check className="h-4 w-4 text-primary ml-auto" />}
           </SelectItem>
         ))}
       </SelectContent>
