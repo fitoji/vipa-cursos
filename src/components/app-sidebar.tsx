@@ -1,9 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { BarChart3, BookOpen, ArrowLeft, Upload, Download, MapPin, Loader2 } from "lucide-react";
+import { Link } from "@/i18n/navigation";
+import {
+  BarChart3,
+  BookOpen,
+  MapPin,
+  Loader2,
+  Download,
+  Upload,
+  ArrowLeft,
+  Trash2,
+} from "lucide-react";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 import { listCourses } from "@/app/actions/courses";
 
@@ -27,15 +37,46 @@ interface AppSidebarProps {
   onNavigate: (view: View) => void;
 }
 
-const navItems: { view: View; label: string; icon: React.ComponentType<{ className?: string }> }[] =
-  [
-    { view: "stats", label: "Estadísticas", icon: BarChart3 },
-    { view: "courses", label: "Ver todos los cursos", icon: BookOpen },
-    { view: "locations", label: "Centros Vipassana", icon: MapPin },
-  ];
-
 export function AppSidebar({ activeView, onNavigate }: AppSidebarProps) {
   const [downloading, setDownloading] = useState(false);
+  const t = useTranslations("Dashboard.sidebar");
+  const ttoast = useTranslations("Dashboard.toast");
+
+  const navItems: {
+    view: View;
+    label: string;
+    icon: React.ComponentType<{ className?: string }>;
+  }[] = [
+    { view: "stats", label: t("stats"), icon: BarChart3 },
+    { view: "courses", label: t("allCourses"), icon: BookOpen },
+    { view: "locations", label: t("centers"), icon: MapPin },
+  ];
+
+  const handleDownload = async () => {
+    setDownloading(true);
+    try {
+      const courses = await listCourses();
+      if (courses.length === 0) {
+        toast.info(t("noData"));
+        return;
+      }
+      const json = JSON.stringify(courses, null, 2);
+      const blob = new Blob([json], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `vipa-cursos-${new Date().toISOString().slice(0, 10)}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      toast.success(ttoast("downloadSuccess", { count: courses.length }));
+    } catch {
+      toast.error(ttoast("downloadError"));
+    } finally {
+      setDownloading(false);
+    }
+  };
 
   return (
     <Sidebar>
@@ -72,40 +113,13 @@ export function AppSidebar({ activeView, onNavigate }: AppSidebarProps) {
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton
-              disabled={downloading}
-              onClick={async () => {
-                setDownloading(true);
-                try {
-                  const courses = await listCourses();
-                  if (courses.length === 0) {
-                    toast.info("No hay cursos para descargar");
-                    return;
-                  }
-                  const json = JSON.stringify(courses, null, 2);
-                  const blob = new Blob([json], { type: "application/json" });
-                  const url = URL.createObjectURL(blob);
-                  const a = document.createElement("a");
-                  a.href = url;
-                  a.download = `vipa-cursos-${new Date().toISOString().slice(0, 10)}.json`;
-                  document.body.appendChild(a);
-                  a.click();
-                  document.body.removeChild(a);
-                  URL.revokeObjectURL(url);
-                  toast.success(`${courses.length} cursos descargados`);
-                } catch {
-                  toast.error("Error al descargar");
-                } finally {
-                  setDownloading(false);
-                }
-              }}
-            >
+            <SidebarMenuButton disabled={downloading} onClick={handleDownload}>
               {downloading ? (
                 <Loader2 className="h-4 w-4 animate-spin" />
               ) : (
                 <Download className="h-4 w-4" />
               )}
-              <span>{downloading ? "Descargando…" : "Descargar datos"}</span>
+              <span>{downloading ? t("downloading") : t("download")}</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
@@ -114,14 +128,14 @@ export function AppSidebar({ activeView, onNavigate }: AppSidebarProps) {
               onClick={() => onNavigate("import")}
             >
               <Upload className="h-4 w-4" />
-              <span>Importar datos</span>
+              <span>{t("import")}</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
               <Link href="/cursos">
                 <ArrowLeft className="h-4 w-4" />
-                <span>Volver</span>
+                <span>{t("back")}</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>

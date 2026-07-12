@@ -1,0 +1,377 @@
+{
+  "layout": {
+    "meta": {
+      "title": "Vipa Cursos — Registro de Cursos de Vipassana",
+      "description": "App personal para registrar y organizar tus cursos de meditación Vipassana. Guarda fechas, lugares, profesores y duración de cada sit y serve.",
+      "ogDescription": "App personal para registrar y organizar tus cursos de meditación Vipassana."
+    }
+  },
+  "HomePage": {
+    "meta": {
+      "title": "Vipa Cursos — Tu registro personal de cursos de Vipassana",
+      "description": "Guardá cada curso sentado (sit) y de servicio (serve) de meditación Vipassana en un solo lugar."
+    }
+  },
+  "Landing": {
+    "hero": {
+      "title": "Vipa Cursos",
+      "subtitle": "Tu registro personal de cursos de meditación Vipassana. Guardá cada sit y serve, y revisá tu camino cuando lo necesites.",
+      "cta": "Empezar ahora",
+      "loggedInCta": "Panel de control",
+      "newCourse": "Nuevo curso"
+    },
+    "features": {
+      "heading": "Todo lo que necesitás",
+      "items": {
+        "register": {
+          "title": "Registra cada curso",
+          "description": "Fecha, lugar, profesor, país, modo (sit o serve) y duración."
+        },
+        "history": {
+          "title": "Historial completo",
+          "description": "Visualizá todos los cursos que has realizado en un solo lugar."
+        },
+        "dashboard": {
+          "title": "Panel de control",
+          "description": "Filtrá, ordená y buscá entre tus cursos con una tabla interactiva."
+        },
+        "privacy": {
+          "title": "Privado y seguro",
+          "description": "Solo vos podés ver tus datos. Autenticación con Google o email."
+        }
+      }
+    },
+    "cta": {
+      "title": "Caminá tu camino con atención",
+      "description": "Llevá registro de tu práctica de Vipassana de forma simple y organizada.",
+      "button": "Registrarse gratis",
+      "alt": "Pagoda Vipassana"
+    }
+  },
+  "LoginPage": {
+    "meta": {
+      "title": "Iniciar sesión",
+      "description": "Accedé a tu cuenta de Vipa Cursos para registrar y organizar tus cursos de meditación Vipassana."
+    }
+  },
+  "LoginForm": {
+    "title": "Accede a tu cuenta",
+    "mode": {
+      "signIn": "Iniciar sesión",
+      "signUp": "Registrarse"
+    },
+    "oauth": "Continuar con Google",
+    "form": {
+      "name": "Nombre",
+      "email": "Email",
+      "password": "Contraseña",
+      "showPassword": "Mostrar contraseña",
+      "hidePassword": "Ocultar contraseña",
+      "submitSignIn": "Iniciar sesión",
+      "submitSignUp": "Registrarse",
+      "processing": "Procesando…"
+    },
+    "errors": {
+      "missingFields": "Completa email y contraseña",
+      "missingName": "Ingresa tu nombre",
+      "signInFailed": "No se pudo iniciar sesión",
+      "signUpFailed": "No se pudo registrar",
+      "sessionNotReady": "Sesión no establecida, intenta de nuevo",
+      "googleFailed": "No se pudo iniciar sesión con Google",
+      "unexpected": "Ocurrió un error inesperado"
+    },
+    "success": {
+      "signedIn": "Sesión iniciada"
+    }
+  },
+  "DashboardPage": {
+    "meta": {
+      "title": "Panel de Control",
+      "description": "Vista completa de tus cursos de meditación Vipassana. Filtrá, ordená y gestioná tu historial."
+    }
+  },
+  "Dashboard": {
+    "header": {
+      "title": "Panel de Control",
+      "coursesCount": "{count, plural, =1 {# curso registrado} other {# cursos registrados}}",
+      "newCourse": "Nuevo curso",
+      "back": "Volver",
+      "loading": "Cargando…"
+    },
+    "stats": {
+      "totalCourses": "Total cursos",
+      "daysSitting": "Días sentados",
+      "daysServing": "Días sirviendo",
+      "countriesVisited": "Países distintos",
+      "coursesSitting10d": "Cursos sentados (10d)",
+      "coursesServing10d": "Cursos sirviendo (10d)",
+      "longServing20d": "Largos sirviendo (20d+)",
+      "longCourses20d": "Cursos largos (20d+)",
+      "modeBreakdown": "Desglose por modo",
+      "recentCourses": "Cursos recientes",
+      "noCourses": "Sin cursos registrados.",
+      "countriesDialogTitle": "Países visitados",
+      "noCountries": "Sin países registrados",
+      "sit": "Sentar",
+      "serve": "Servir",
+      "courseSingular": "curso",
+      "coursePlural": "cursos"
+    },
+    "table": {
+      "header": {
+        "date": "Fecha",
+        "place": "Lugar",
+        "teacher": "Profesor",
+        "country": "País",
+        "mode": "Modo",
+        "days": "Días",
+        "obs": "Observaciones",
+        "actions": "Acciones"
+      },
+      "notSpecified": "—",
+      "noTeacher": "Sin profesor",
+      "daysLabel": "{days} días",
+      "searchPlaceholder": "Buscar por lugar, profesor, país…",
+      "noResults": "Sin resultados.",
+      "deleteDialog": {
+        "title": "¿Eliminar este curso?",
+        "description": "{place} — {days} días ({mode}). Esta acción no se puede deshacer.",
+        "cancel": "Cancelar",
+        "delete": "Eliminar",
+        "deleting": "Eliminando…"
+      },
+      "filterBadge": "Quitar filtro"
+    },
+    "empty": {
+      "title": "No hay cursos registrados",
+      "description": "Importá tus datos desde un archivo JSON o ingresá tus cursos manualmente.",
+      "addCourse": "Agregar curso",
+      "excelTip": "¿Tenés datos en Excel o Word?",
+      "excelTipDesc": "Copiá tus datos y pegalos en ChatGPT con este prompt:",
+      "copy": "Copiar",
+      "copied": "Copiado"
+    },
+    "sidebar": {
+      "stats": "Estadísticas",
+      "allCourses": "Ver todos los cursos",
+      "centers": "Centros Vipassana",
+      "download": "Descargar datos",
+      "downloading": "Descargando…",
+      "noData": "No hay cursos para descargar",
+      "import": "Importar datos",
+      "back": "Volver"
+    },
+    "toast": {
+      "deleted": "Curso eliminado",
+      "deleteError": "No se pudo eliminar",
+      "downloadSuccess": "{count} cursos descargados",
+      "downloadError": "Error al descargar",
+      "noData": "No hay cursos para descargar"
+    },
+    "edit": {
+      "dialogTitle": "Editar curso",
+      "save": "Guardar cambios",
+      "saving": "Guardando…",
+      "cancel": "Cancelar",
+      "success": "Curso actualizado",
+      "error": "No se pudo actualizar",
+      "labels": {
+        "date": "Fecha",
+        "place": "Lugar",
+        "teacher": "Profesor",
+        "country": "País",
+        "mode": "Modo",
+        "days": "Días",
+        "obs": "Observaciones",
+        "sit": "Sit",
+        "serve": "Serve",
+        "startDate": "Fecha",
+        "daysPlaceholder": "Selecciona",
+        "daysLabel": "{days} días",
+        "daysCustomSit": "Días (personalizado)",
+        "daysCustomServe": "Días de LTS"
+      }
+    },
+    "filters": {
+      "activeFilters": "Filtros activos:",
+      "clear": "Limpiar",
+      "presets": {
+        "modeSit": "Modo: sit",
+        "modeServe": "Modo: serve",
+        "sit10d": "Sentados (10d)",
+        "serve10d": "Sirviendo (10d)",
+        "longServe20d": "Largos sirviendo (20d+)",
+        "longCourses20d": "Cursos largos (20d+)"
+      }
+    },
+    "modeBreakdown": {
+      "courses": "{count} curso{plural}"
+    },
+    "recent": {
+      "dateFormat": "{date} · {teacher} · {days} días",
+      "noTeacher": "Sin profesor"
+    }
+  },
+  "CursosPage": {
+    "title": "Mis cursos de Vipassana",
+    "subtitle": "Guarda tus cursos sentados y servicios en un solo lugar.",
+    "dashboardLink": "Panel de Control",
+    "formTitle": "Nuevo curso",
+    "labels": {
+      "startDate": "Fecha de inicio",
+      "place": "Lugar / Centro",
+      "placePlaceholder": "Dhamma...",
+      "teacher": "Profesor/a",
+      "teacherPlaceholder": "ej.: S.N.Goenka",
+      "country": "País",
+      "countryPlaceholder": "ej.: Argentina",
+      "mode": "Modo",
+      "modeSit": "Sentar",
+      "modeServe": "Servir",
+      "days": "Días",
+      "daysPlaceholder": "Selecciona",
+      "daysCustomSit": "Días (personalizado)",
+      "daysCustomServe": "Días de LTS",
+      "obs": "Observaciones",
+      "obsPlaceholder": "Agrega información adicional...",
+      "sit": "Sentar",
+      "serve": "Servir"
+    },
+    "days": {
+      "other": "Otro…",
+      "lts": "LTS (servicio largo)",
+      "label": "{days} días",
+      "labelWithName": "{days} días — {name}"
+    },
+    "submit": {
+      "save": "Guardar curso",
+      "saving": "Guardando…",
+      "saved": "Guardado"
+    },
+    "toast": {
+      "saved": "Curso guardado",
+      "saveError": "No se pudo guardar"
+    }
+  },
+  "ImportCourses": {
+    "pageTitle": "Importar cursos (JSON)",
+    "pageDescription": "Pegá o arrastrá un archivo {code} con un arreglo de cursos. Vas a ver el detalle abajo antes de importar.",
+    "dialogTitle": "Importar cursos (JSON)",
+    "dialogDescription": "Pegá o arrastrá un archivo {code} con un arreglo de cursos.",
+    "dropzone": {
+      "dragLabel": "Arrastrá tu archivo .json acá",
+      "clickLabel": "o hacé clic para seleccionarlo",
+      "ariaLabel": "Arrastra un archivo JSON aquí o haz clic para seleccionarlo",
+      "dragActive": "Soltá el archivo aquí"
+    },
+    "textareaPlaceholder": "O pegá el JSON acá…",
+    "format": {
+      "title": "Formato esperado",
+      "required": "{field}: obligatorios.",
+      "modeInfo": "{field}: solo {values}.",
+      "daysInfo": "{field}: número entero positivo.",
+      "optional": "{fields}: opcionales.",
+      "unknownTip": "Campos sin información: usá {code} en vez de {empty}. Si una IA rellena campos vacíos con string vacío, la importación falla.",
+      "modeValues": "\"sit\" o \"serve\""
+    },
+    "table": {
+      "header": {
+        "date": "Fecha",
+        "place": "Lugar",
+        "mode": "Modo",
+        "days": "Días",
+        "teacher": "Profesor",
+        "country": "País"
+      }
+    },
+    "preview": {
+      "summary": "Se detectaron {total} curso{plural} · {valid} válido{vplural} · {invalid} con errores",
+      "errorTitle": "Filas con errores:",
+      "rowError": "Fila {index}: {errors}"
+    },
+    "errors": {
+      "invalidJson": "JSON inválido: revisá que el contenido sea un arreglo correcto.",
+      "notArray": "El JSON debe ser un arreglo de cursos.",
+      "fileTooLarge": "El archivo es demasiado grande (máximo 5 MB)",
+      "mustBeJson": "El archivo debe ser .json",
+      "validationTitle": "Corregí estos errores:"
+    },
+    "buttons": {
+      "clear": "Limpiar",
+      "import": "Importar",
+      "importCount": "Importar {count} curso{cplural}",
+      "importing": "Importando…",
+      "cancel": "Cancelar"
+    },
+    "toast": {
+      "imported": "{count} curso{cplural} importado{cplural}",
+      "importError": "No se pudo importar"
+    }
+  },
+  "SiteHeader": {
+    "themeLabel": "Cambiar tema",
+    "signOut": "Cerrar sesión",
+    "signIn": "Iniciar sesión",
+    "signUp": "Registrarse",
+    "userMenu": {
+      "name": "Usuario",
+      "signOut": "Cerrar sesión"
+    }
+  },
+  "SiteFooter": {
+    "copyright": "Vipa Cursos © {year}",
+    "tagline": "Meditación Vipassana"
+  },
+  "ErrorPage": {
+    "title": "Oops!",
+    "message": "Algo salió mal.",
+    "retry": "Intentar de nuevo",
+    "goHome": "Go home"
+  },
+  "NotFoundPage": {
+    "code": "404",
+    "title": "Page not found",
+    "message": "La página que estás buscando no existe o ha sido movida.",
+    "goHome": "Ir a inicio"
+  },
+  "LocationsExplorer": {
+    "continentLabel": "Continente",
+    "allContinents": "Todos",
+    "searchPlaceholder": "Buscar por nombre, ciudad o país…",
+    "countrySelectPlaceholder": "Todos los países",
+    "allCountries": "Todos los países",
+    "typeSelectPlaceholder": "Todos los tipos",
+    "allTypes": "Todos los tipos",
+    "typeCenter": "Centros",
+    "typeNonCentre": "Non-Centres",
+    "activeFilters": "Filtros activos:",
+    "clearFilters": "Limpiar",
+    "noResults": "No se encontraron centros con esos filtros.",
+    "table": {
+      "header": {
+        "name": "Nombre",
+        "type": "Tipo",
+        "country": "País",
+        "city": "Ciudad",
+        "state": "Estado/Provincia",
+        "continent": "Continente"
+      }
+    },
+    "pagination": {
+      "resultCount": "{total} resultado{tplural}",
+      "pageInfo": "— página {page} de {totalPages}",
+      "notSpecified": "—"
+    }
+  },
+  "common": {
+    "notSpecified": "—",
+    "noResults": "Sin resultados.",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "loading": "Cargando…",
+    "copy": "Copiar",
+    "copied": "Copiado",
+    "locale": "Español"
+  }
+}

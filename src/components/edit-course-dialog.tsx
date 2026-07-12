@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -7,7 +9,7 @@ import { toast } from "sonner";
 import { updateCourse } from "@/app/actions/courses";
 import { listCountryNames, listLocationNamesByCountry } from "@/app/actions/locations";
 import {
-  courseFormSchema,
+  createCourseFormSchema,
   type Course,
   type CourseFormValues,
   DAY_PRESETS,
@@ -40,6 +42,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { DatePicker } from "@/components/ui/date-picker";
 import { useCachedData } from "@/hooks/use-cached-data";
 import { staggerDelay } from "@/lib/animations";
+import { useTranslations } from "next-intl";
 
 export function EditCourseDialog({
   course,
@@ -53,9 +56,11 @@ export function EditCourseDialog({
   const qc = useQueryClient();
   const update = updateCourse;
   const [saving, setSaving] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const t = useTranslations("Dashboard.edit") as any;
 
   const form = useForm<CourseFormValues>({
-    resolver: zodResolver(courseFormSchema),
+    resolver: zodResolver(createCourseFormSchema(t)),
     defaultValues: course ? toFormValues(course) : defaultCourseFormValues,
   });
 
@@ -90,12 +95,12 @@ export function EditCourseDialog({
           obs: values.obs,
         },
       });
-      toast.success("Curso actualizado");
+      toast.success(t("success"));
       await qc.invalidateQueries({ queryKey: ["courses"] });
       onOpenChange(false);
     } catch (e) {
       console.error(e);
-      toast.error("No se pudo actualizar");
+      toast.error(t("error"));
     } finally {
       setSaving(false);
     }
@@ -105,18 +110,18 @@ export function EditCourseDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl">
         <DialogHeader>
-          <DialogTitle>Editar curso</DialogTitle>
+          <DialogTitle>{t("dialogTitle")}</DialogTitle>
         </DialogHeader>
         <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 sm:grid-cols-2">
           <div className="grid gap-1.5 anim-fade-up" style={staggerDelay(0)}>
-            <Label htmlFor="e_start">Fecha</Label>
+            <Label htmlFor="e_start">{t("labels.date")}</Label>
             <DatePicker
               value={form.watch("start_date")}
               onChange={(v) => form.setValue("start_date", v)}
             />
           </div>
           <div className="grid gap-1.5 anim-fade-up" style={staggerDelay(1)}>
-            <Label htmlFor="e_place">Lugar</Label>
+            <Label htmlFor="e_place">{t("labels.place")}</Label>
             <Input id="e_place" list="e_place-options" {...form.register("place")} />
             <datalist id="e_place-options">
               {locations.map((l) => (
@@ -125,11 +130,11 @@ export function EditCourseDialog({
             </datalist>
           </div>
           <div className="grid gap-1.5 anim-fade-up" style={staggerDelay(2)}>
-            <Label htmlFor="e_teacher">Profesor</Label>
+            <Label htmlFor="e_teacher">{t("labels.teacher")}</Label>
             <Input id="e_teacher" {...form.register("teacher")} />
           </div>
           <div className="grid gap-1.5 anim-fade-up" style={staggerDelay(3)}>
-            <Label htmlFor="e_country">País</Label>
+            <Label htmlFor="e_country">{t("labels.country")}</Label>
             <Input id="e_country" list="e_country-options" {...form.register("country")} />
             <datalist id="e_country-options">
               {countries.map((c) => (
@@ -138,7 +143,7 @@ export function EditCourseDialog({
             </datalist>
           </div>
           <div className="grid gap-1.5 sm:col-span-2 anim-fade-up" style={staggerDelay(4)}>
-            <Label>Modo</Label>
+            <Label>{t("labels.mode")}</Label>
             <RadioGroup
               value={form.watch("mode")}
               onValueChange={(v) => form.setValue("mode", v as "sit" | "serve")}
@@ -146,16 +151,16 @@ export function EditCourseDialog({
             >
               <label className="flex items-center gap-2">
                 <RadioGroupItem value="sit" id="e_sit" />
-                <span>Sit</span>
+                <span>{t("labels.sit")}</span>
               </label>
               <label className="flex items-center gap-2">
                 <RadioGroupItem value="serve" id="e_serve" />
-                <span>Serve</span>
+                <span>{t("labels.serve")}</span>
               </label>
             </RadioGroup>
           </div>
           <div className="grid gap-1.5 anim-fade-up" style={staggerDelay(5)}>
-            <Label>Días</Label>
+            <Label>{t("labels.days")}</Label>
             <Select
               value={form.watch("daysPreset")}
               onValueChange={(v) => form.setValue("daysPreset", v)}
@@ -166,7 +171,8 @@ export function EditCourseDialog({
               <SelectContent>
                 {DAY_PRESETS.map((d) => (
                   <SelectItem key={d} value={String(d)}>
-                    {d} días{COURSE_NAMES[String(d)] ? ` — ${COURSE_NAMES[String(d)]}` : ""}
+                    {t("labels.daysLabel", { days: d })}
+                    {COURSE_NAMES[String(d)] ? ` — ${COURSE_NAMES[String(d)]}` : ""}
                   </SelectItem>
                 ))}
                 <SelectSeparator />
@@ -176,29 +182,29 @@ export function EditCourseDialog({
                   </SelectItem>
                 ))}
                 <SelectItem value="other">
-                  {mode === "serve" ? "LTS (servicio largo)" : "Otro…"}
+                  {mode === "serve" ? t("labels.daysCustomServe") : t("labels.daysCustomSit")}
                 </SelectItem>
               </SelectContent>
             </Select>
           </div>
           {daysPreset === "other" && (
             <div className="grid gap-1.5 anim-fade-up" style={staggerDelay(6)}>
-               <Label htmlFor="e_custom">
-                  {mode === "serve" ? "Días de LTS" : "Días (personalizado)"}
-                </Label>
+              <Label htmlFor="e_custom">
+                {mode === "serve" ? t("labels.daysCustomServe") : t("labels.daysCustomSit")}
+              </Label>
               <Input id="e_custom" type="number" min={1} {...form.register("daysCustom")} />
             </div>
           )}
           <div className="grid gap-1.5 sm:col-span-2 anim-fade-up" style={staggerDelay(7)}>
-            <Label htmlFor="e_obs">Observaciones</Label>
+            <Label htmlFor="e_obs">{t("labels.obs")}</Label>
             <Textarea id="e_obs" rows={3} {...form.register("obs")} />
           </div>
           <DialogFooter className="sm:col-span-2">
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
-              Cancelar
+              {t("cancel")}
             </Button>
             <Button type="submit" disabled={saving} className="press-effect">
-              {saving ? "Guardando…" : "Guardar cambios"}
+              {saving ? t("saving") : t("save")}
             </Button>
           </DialogFooter>
         </form>

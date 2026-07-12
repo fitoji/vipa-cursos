@@ -24,6 +24,7 @@ export const COURSE_NAMES: Record<string, string> = {
   "kids-1": "niños",
 };
 
+/** Server-side schema (untranslated) for use in Server Actions */
 export const courseFormSchema = z
   .object({
     start_date: z.string().min(1, "Requerido"),
@@ -39,6 +40,25 @@ export const courseFormSchema = z
     message: "Ingresa la cantidad de días",
     path: ["daysCustom"],
   });
+
+/** Client-side factory returning a translated Zod schema */
+export function createCourseFormSchema(t: ReturnType<typeof import("next-intl").useTranslations>) {
+  return z
+    .object({
+      start_date: z.string().min(1, t("labels.startDate")),
+      place: z.string().min(1, t("labels.place")),
+      teacher: z.string(),
+      country: z.string(),
+      mode: z.enum(["sit", "serve"]),
+      daysPreset: z.string().min(1, t("labels.daysPlaceholder")),
+      daysCustom: z.string(),
+      obs: z.string(),
+    })
+    .refine((v) => v.daysPreset !== "other" || (!!v.daysCustom && Number(v.daysCustom) > 0), {
+      message: t("labels.daysCustomSit"),
+      path: ["daysCustom"],
+    });
+}
 
 export type CourseFormValues = z.infer<typeof courseFormSchema>;
 
@@ -56,7 +76,8 @@ export const defaultCourseFormValues: CourseFormValues = {
 export function toFormValues(c: Course): CourseFormValues {
   const isPreset = (DAY_PRESETS as readonly number[]).includes(c.days);
   const raw = c.start_date;
-  const dateStr = typeof raw === "string" ? raw.slice(0, 10) : new Date(raw).toISOString().slice(0, 10);
+  const dateStr =
+    typeof raw === "string" ? raw.slice(0, 10) : new Date(raw).toISOString().slice(0, 10);
   return {
     start_date: dateStr,
     place: c.place,
