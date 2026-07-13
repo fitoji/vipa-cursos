@@ -36,7 +36,7 @@ No test runner is configured. No CI workflows exist.
 ## Gotchas
 
 - `pnpm-workspace.yaml` exists only for `minimumReleaseAge: 0` (supply-chain policy relaxation) — this is NOT a monorepo
-- `DATABASE_URL` env var required at runtime for all server actions (Vercel project env, or `.env.local` locally)
+- `DATABASE_URL` env var required at runtime for all server actions (Vercel project env, or `.env.local` locally). Must use `sslmode=verify-full` (NOT `require`): pg/node-postgres treats `require` as an alias for `verify-full` today, but in v9 it adopts libpq semantics and stops validating the certificate (MITM risk). Neon serves valid CA-signed certs, so `verify-full` works everywhere.
 - `next build` does not need the DB; `next dev` hits Neon only on request
 - `next-env.d.ts` is auto-generated — do not edit
 - `@tanstack/react-query` and `@tanstack/react-table` are kept (client-side state/table), but `@tanstack/react-start` and `@tanstack/react-router` are gone
