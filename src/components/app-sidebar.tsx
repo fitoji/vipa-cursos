@@ -65,7 +65,7 @@ export function AppSidebar({ activeView, onNavigate }: AppSidebarProps) {
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `vipa-cursos-${new Date().toISOString().slice(0, 10)}.json`;
+      a.download = `vipabase-${new Date().toISOString().slice(0, 10)}.json`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -82,7 +82,7 @@ export function AppSidebar({ activeView, onNavigate }: AppSidebarProps) {
     <Sidebar>
       <SidebarHeader>
         <div className="px-2 py-2">
-          <img src="/logo-icon.svg" alt="Vipa Cursos" className="h-8 w-auto" />
+          <img src="/logo-icon.svg" alt="VipaBase" className="h-8 w-auto" />
         </div>
       </SidebarHeader>
 
