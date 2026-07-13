@@ -19,6 +19,7 @@ const courseSchema = z.object({
   teacher: z.string().optional().default(""),
   country: z.string().optional().default(""),
   mode: z.enum(["sit", "serve"]),
+  is_at: z.boolean().default(false),
   days: z.number().int().positive(),
   obs: z.string().optional().default(""),
 });
@@ -31,6 +32,7 @@ type ImportCourseInput = {
   teacher?: string;
   country?: string;
   mode: "sit" | "serve";
+  is_at?: boolean;
   days: number;
   obs?: string;
 };
@@ -42,6 +44,7 @@ type CourseRow = {
   teacher: string | null;
   country: string | null;
   mode: "sit" | "serve";
+  is_at: boolean;
   days: number;
   obs: string | null;
   created_at: string;
@@ -60,9 +63,9 @@ export async function createCourse({ data }: { data: CourseInput }) {
   const { neon } = await import("@neondatabase/serverless");
   const sql = neon(process.env.DATABASE_URL!);
   const rows = await sql`
-    INSERT INTO vipassana_courses (start_date, place, teacher, country, mode, days, obs, user_id)
-    VALUES (${data.start_date}, ${data.place}, ${data.teacher}, ${data.country}, ${data.mode}, ${data.days}, ${data.obs}, ${userId})
-    RETURNING id, start_date, place, teacher, country, mode, days, obs, created_at
+    INSERT INTO vipassana_courses (start_date, place, teacher, country, mode, is_at, days, obs, user_id)
+    VALUES (${data.start_date}, ${data.place}, ${data.teacher}, ${data.country}, ${data.mode}, ${data.is_at}, ${data.days}, ${data.obs}, ${userId})
+    RETURNING id, start_date, place, teacher, country, mode, is_at, days, obs, created_at
   `;
   revalidateBoth("/");
   revalidateBoth("/dashboard");
@@ -82,8 +85,8 @@ export async function importCourses({ data }: { data: ImportCourseInput[] }) {
     parsed.map(
       (c) =>
         sql`
-        INSERT INTO vipassana_courses (start_date, place, teacher, country, mode, days, obs, user_id)
-        VALUES (${c.start_date}, ${c.place}, ${c.teacher}, ${c.country}, ${c.mode}, ${c.days}, ${c.obs}, ${userId})
+        INSERT INTO vipassana_courses (start_date, place, teacher, country, mode, is_at, days, obs, user_id)
+        VALUES (${c.start_date}, ${c.place}, ${c.teacher}, ${c.country}, ${c.mode}, ${c.is_at ?? false}, ${c.days}, ${c.obs}, ${userId})
         RETURNING id
       `,
     ),
@@ -101,7 +104,7 @@ export async function listCourses(): Promise<CourseRow[]> {
   const { neon } = await import("@neondatabase/serverless");
   const sql = neon(process.env.DATABASE_URL!);
   const rows = await sql`
-    SELECT id, start_date, place, teacher, country, mode, days, obs, created_at
+    SELECT id, start_date, place, teacher, country, mode, is_at, days, obs, created_at
     FROM vipassana_courses
     WHERE user_id = ${userId}
     ORDER BY start_date DESC, id DESC
@@ -125,10 +128,11 @@ export async function updateCourse({ data }: { data: z.infer<typeof updateSchema
         teacher = ${data.teacher},
         country = ${data.country},
         mode = ${data.mode},
+        is_at = ${data.is_at},
         days = ${data.days},
         obs = ${data.obs}
     WHERE id = ${data.id} AND user_id = ${userId}
-    RETURNING id, start_date, place, teacher, country, mode, days, obs, created_at
+    RETURNING id, start_date, place, teacher, country, mode, is_at, days, obs, created_at
   `;
   revalidateBoth("/");
   revalidateBoth("/dashboard");

@@ -12,7 +12,7 @@ export const SPECIAL_COURSES = [
 
 /** Course names for known Vipassana course lengths */
 export const COURSE_NAMES: Record<string, string> = {
-  "1": "Anapana",
+  "1": "mini curso",
   "3": "curso corto",
   "8": "Sati (Satipaṭṭhāna)",
   "10": "curso estándar",
@@ -32,6 +32,7 @@ export const courseFormSchema = z
     teacher: z.string(),
     country: z.string(),
     mode: z.enum(["sit", "serve"]),
+    isAt: z.boolean(),
     daysPreset: z.string().min(1, "Selecciona una opción"),
     daysCustom: z.string(),
     obs: z.string(),
@@ -50,6 +51,7 @@ export function createCourseFormSchema(t: ReturnType<typeof import("next-intl").
       teacher: z.string(),
       country: z.string(),
       mode: z.enum(["sit", "serve"]),
+      isAt: z.boolean(),
       daysPreset: z.string().min(1, t("labels.daysPlaceholder")),
       daysCustom: z.string(),
       obs: z.string(),
@@ -68,6 +70,7 @@ export const defaultCourseFormValues: CourseFormValues = {
   teacher: "",
   country: "",
   mode: "sit",
+  isAt: false,
   daysPreset: "10",
   daysCustom: "",
   obs: "",
@@ -84,6 +87,7 @@ export function toFormValues(c: Course): CourseFormValues {
     teacher: c.teacher ?? "",
     country: c.country ?? "",
     mode: c.mode,
+    isAt: (c as Record<string, unknown>).is_at === true,
     daysPreset: isPreset ? String(c.days) : "other",
     daysCustom: isPreset ? "" : String(c.days),
     obs: c.obs ?? "",
@@ -105,6 +109,7 @@ export const courseImportSchema = z.object({
   mode: z.enum(["sit", "serve"], {
     errorMap: () => ({ message: 'mode debe ser "sit" o "serve"' }),
   }),
+  is_at: z.boolean().default(false),
   days: z
     .number({ invalid_type_error: "days debe ser un número" })
     .int("days debe ser entero")

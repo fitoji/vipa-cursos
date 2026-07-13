@@ -142,7 +142,9 @@
         "delete": "Delete",
         "deleting": "Deleting…"
       },
-      "filterBadge": "Remove filter"
+      "filterBadge": "Remove filter",
+      "sit": "Sit",
+      "serve": "Serve"
     },
     "empty": {
       "title": "No courses registered",
@@ -185,8 +187,6 @@
         "mode": "Mode",
         "days": "Days",
         "obs": "Notes",
-        "sit": "Sit",
-        "serve": "Serve",
         "startDate": "Date",
         "daysPlaceholder": "Select",
         "daysLabel": "{days} days",
@@ -218,6 +218,7 @@
     "title": "My Vipassana Courses",
     "subtitle": "Save your sitting and service courses in one place.",
     "dashboardLink": "Dashboard",
+    "importLink": "Import",
     "formTitle": "New course",
     "labels": {
       "startDate": "Start date",
@@ -273,7 +274,7 @@
       "modeInfo": "{field}: only {values}.",
       "daysInfo": "{field}: positive integer.",
       "optional": "{fields}: optional.",
-      "unknownTip": "Fields without info: use {code} instead of {empty}. If an AI fills empty fields with empty strings, import will fail.",
+      "unknownTip": "Fields without info: use \"unknown\" instead of \"\". If an AI fills empty fields with empty strings, import will fail.",
       "modeValues": "\"sit\" or \"serve\""
     },
     "table": {
@@ -284,7 +285,9 @@
         "days": "Days",
         "teacher": "Teacher",
         "country": "Country"
-      }
+      },
+      "sit": "Sit",
+      "serve": "Serve"
     },
     "preview": {
       "summary": "{total} course{plural} detected · {valid} valid · {invalid} with errors",

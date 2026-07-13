@@ -39,6 +39,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Checkbox } from "@/components/ui/checkbox";
 import { DatePicker } from "@/components/ui/date-picker";
 import { useCachedData } from "@/hooks/use-cached-data";
 import { staggerDelay } from "@/lib/animations";
@@ -77,6 +78,7 @@ export function EditCourseDialog({
 
   const daysPreset = form.watch("daysPreset");
   const mode = form.watch("mode");
+  const isAt = form.watch("isAt");
 
   const onSubmit = async (values: CourseFormValues) => {
     if (!course) return;
@@ -91,6 +93,7 @@ export function EditCourseDialog({
           teacher: values.teacher,
           country: values.country,
           mode: values.mode,
+          is_at: values.isAt,
           days,
           obs: values.obs,
         },
@@ -146,7 +149,11 @@ export function EditCourseDialog({
             <Label>{t("labels.mode")}</Label>
             <RadioGroup
               value={form.watch("mode")}
-              onValueChange={(v) => form.setValue("mode", v as "sit" | "serve")}
+              onValueChange={(v) => {
+                const newMode = v as "sit" | "serve";
+                form.setValue("mode", newMode);
+                if (newMode === "sit") form.setValue("isAt", false);
+              }}
               className="flex gap-6"
             >
               <label className="flex items-center gap-2">
@@ -156,6 +163,18 @@ export function EditCourseDialog({
               <label className="flex items-center gap-2">
                 <RadioGroupItem value="serve" id="e_serve" />
                 <span>{t("labels.serve")}</span>
+                {mode === "serve" && (
+                  <div className="flex items-center gap-1.5 ml-2">
+                    <Checkbox
+                      id="e_is_at"
+                      checked={isAt}
+                      onCheckedChange={(v) => form.setValue("isAt", !!v)}
+                    />
+                    <Label htmlFor="e_is_at" className="text-sm">
+                      AT
+                    </Label>
+                  </div>
+                )}
               </label>
             </RadioGroup>
           </div>

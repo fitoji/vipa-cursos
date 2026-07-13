@@ -15,7 +15,6 @@ import {
 import {
   Search,
   ArrowUpDown,
-  ArrowLeft,
   Pencil,
   Plus,
   Trash2,
@@ -186,7 +185,14 @@ export function DashboardView() {
       columnHelper.accessor("mode", {
         header: tt("header.mode"),
         cell: (i) => (
-          <Badge variant={i.getValue() === "sit" ? "default" : "secondary"}>{i.getValue()}</Badge>
+          <div className="flex items-center gap-1">
+            <Badge variant={i.getValue() === "sit" ? "default" : "secondary"}>{tt(i.getValue())}</Badge>
+            {i.row.original.is_at && (
+              <Badge variant="outline" className="text-xs">
+                AT
+              </Badge>
+            )}
+          </div>
         ),
       }),
       columnHelper.accessor("days", {
@@ -275,11 +281,6 @@ export function DashboardView() {
                 <Button variant="default" size="sm" asChild>
                   <Link href="/cursos">
                     <Plus className="mr-1 h-4 w-4" /> {t("header.newCourse")}
-                  </Link>
-                </Button>
-                <Button variant="outline" asChild>
-                  <Link href="/cursos">
-                    <ArrowLeft className="mr-2 h-4 w-4" /> {t("header.back")}
                   </Link>
                 </Button>
               </div>
@@ -529,8 +530,8 @@ function StatsView({
         <EmptyState />
       ) : (
         <>
-          {/* Summary cards — 4 hero stat cards */}
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {/* Summary cards — 5 hero stat cards */}
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
             <Card
               className="card-interactive cursor-pointer"
               onClick={() => onFilterClick(null)}
@@ -679,7 +680,7 @@ function StatsView({
                         </div>
                       </div>
                       <Badge variant={course.mode === "sit" ? "default" : "secondary"}>
-                        {course.mode}
+                        {tt(course.mode)}
                       </Badge>
                     </div>
                   ))}

@@ -1,4 +1,4 @@
-[ ] realizar seo de la pagina
+[x] realizar seo de la pagina
 [ ] accesiblidad de la pagina
 [ ] agregar fotos a cursos (link en base de datos, y imagenes en el servidor)
 [ ] posibilidad de compartir o ver cursos de amigos

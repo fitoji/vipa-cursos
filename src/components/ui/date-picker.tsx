@@ -1,13 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
+import { useEffect, useState } from "react";
 
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
 
 export function DatePicker({
   value,
@@ -31,6 +31,22 @@ export function DatePicker({
 
   const date = value ? new Date(value + "T00:00:00") : undefined;
 
+  const handleMonthChange = (newMonth: Date) => {
+    setMonth(newMonth);
+
+    const currentDay = date ? date.getDate() : 1;
+    const lastDayOfNewMonth = new Date(
+      newMonth.getFullYear(),
+      newMonth.getMonth() + 1,
+      0,
+    ).getDate();
+    const safeDay = Math.min(currentDay, lastDayOfNewMonth);
+
+    const updated = new Date(newMonth.getFullYear(), newMonth.getMonth(), safeDay);
+
+    onChange(format(updated, "yyyy-MM-dd"));
+  };
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -52,7 +68,7 @@ export function DatePicker({
           mode="single"
           selected={date}
           month={month}
-          onMonthChange={setMonth}
+          onMonthChange={handleMonthChange}
           onSelect={(day) => {
             if (day) {
               onChange(format(day, "yyyy-MM-dd"));

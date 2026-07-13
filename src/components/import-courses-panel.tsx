@@ -203,7 +203,7 @@ export function ImportCoursesPanel({ onImported }: { onImported?: () => void }) 
             {tformat("optional", { fields: "" })}.
           </li>
           <li className="font-medium text-amber-600 dark:text-amber-400">
-            {tformat("unknownTip", { code: "", empty: "" })}
+            {tformat("unknownTip")}
           </li>
         </ul>
       </div>
@@ -256,7 +256,7 @@ export function ImportCoursesPanel({ onImported }: { onImported?: () => void }) 
                       <TableCell>
                         {res.ok ? (
                           <Badge variant={res.data.mode === "sit" ? "default" : "secondary"}>
-                            {res.data.mode}
+                            {ttable(res.data.mode)}
                           </Badge>
                         ) : (
                           <span>{String(raw.mode ?? "—")}</span>

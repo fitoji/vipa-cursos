@@ -142,7 +142,9 @@
         "delete": "Eliminar",
         "deleting": "Eliminando…"
       },
-      "filterBadge": "Quitar filtro"
+      "filterBadge": "Quitar filtro",
+      "sit": "Sentar",
+      "serve": "Servir"
     },
     "empty": {
       "title": "No hay cursos registrados",
@@ -185,8 +187,6 @@
         "mode": "Modo",
         "days": "Días",
         "obs": "Observaciones",
-        "sit": "Sit",
-        "serve": "Serve",
         "startDate": "Fecha",
         "daysPlaceholder": "Selecciona",
         "daysLabel": "{days} días",
@@ -218,6 +218,7 @@
     "title": "Mis cursos de Vipassana",
     "subtitle": "Guarda tus cursos sentados y servicios en un solo lugar.",
     "dashboardLink": "Panel de Control",
+    "importLink": "Importar",
     "formTitle": "Nuevo curso",
     "labels": {
       "startDate": "Fecha de inicio",
@@ -273,7 +274,7 @@
       "modeInfo": "{field}: solo {values}.",
       "daysInfo": "{field}: número entero positivo.",
       "optional": "{fields}: opcionales.",
-      "unknownTip": "Campos sin información: usá {code} en vez de {empty}. Si una IA rellena campos vacíos con string vacío, la importación falla.",
+      "unknownTip": "Campos sin información: en vez de \"\" usa \"desconocido\". Si una IA rellena campos vacíos con string vacío, la importación falla.",
       "modeValues": "\"sit\" o \"serve\""
     },
     "table": {
@@ -284,7 +285,9 @@
         "days": "Días",
         "teacher": "Profesor",
         "country": "País"
-      }
+      },
+      "sit": "Sentar",
+      "serve": "Servir"
     },
     "preview": {
       "summary": "Se detectaron {total} curso{plural} · {valid} válido{vplural} · {invalid} con errores",

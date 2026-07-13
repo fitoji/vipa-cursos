@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
+import { Upload, LayoutDashboard } from "lucide-react";
 
 import { createCourse } from "@/app/actions/courses";
 import { listCountryNames, listLocationNamesByCountry } from "@/app/actions/locations";
@@ -34,6 +35,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Checkbox } from "@/components/ui/checkbox";
 import { DatePicker } from "@/components/ui/date-picker";
 import { ImportCoursesDialog } from "@/components/import-courses-dialog";
 import { useInView } from "@/lib/animations";
@@ -65,6 +67,7 @@ export function CursosView() {
 
   const daysPreset = form.watch("daysPreset");
   const mode = form.watch("mode");
+  const isAt = form.watch("isAt");
   const [formRef, formInView] = useInView(0.1);
   const { data: countries } = useCachedData("countries", listCountryNames);
   const selectedCountry = form.watch("country");
@@ -86,6 +89,7 @@ export function CursosView() {
           teacher: values.teacher ?? "",
           country: values.country ?? "",
           mode: values.mode,
+          is_at: values.isAt,
           days,
           obs: values.obs ?? "",
         },
@@ -121,10 +125,18 @@ export function CursosView() {
             <h1 className="text-3xl font-semibold tracking-tight">{t("title")}</h1>
             <p className="mt-1 text-sm text-muted-foreground">{t("subtitle")}</p>
           </div>
-          <Button variant="outline" asChild>
-            <Link href="/dashboard">{t("dashboardLink")}</Link>
-          </Button>
-          <ImportCoursesDialog />
+          <div className="flex items-center gap-2">
+            <ImportCoursesDialog>
+              <Button variant="outline">
+                <Upload className="mr-1 h-4 w-4" /> {t("importLink")}
+              </Button>
+            </ImportCoursesDialog>
+            <Button variant="default" asChild>
+              <Link href="/dashboard">
+                <LayoutDashboard className="mr-1 h-4 w-4" /> {t("dashboardLink")}
+              </Link>
+            </Button>
+          </div>
         </header>
 
         <Card ref={formRef} className={cn(formInView && "anim-fade-up")}>
@@ -194,7 +206,11 @@ export function CursosView() {
                 <Label>{t("labels.mode")}</Label>
                 <RadioGroup
                   value={form.watch("mode")}
-                  onValueChange={(v) => form.setValue("mode", v as "sit" | "serve")}
+                  onValueChange={(v) => {
+                    const newMode = v as "sit" | "serve";
+                    form.setValue("mode", newMode);
+                    if (newMode === "sit") form.setValue("isAt", false);
+                  }}
                   className="flex gap-6"
                 >
                   <label className="flex items-center gap-2">
@@ -204,6 +220,18 @@ export function CursosView() {
                   <label className="flex items-center gap-2">
                     <RadioGroupItem value="serve" id="mode-serve" />
                     <span>{t("labels.serve")}</span>
+                    {mode === "serve" && (
+                      <div className="flex items-center gap-1.5 ml-2">
+                        <Checkbox
+                          id="is_at"
+                          checked={isAt}
+                          onCheckedChange={(v) => form.setValue("isAt", !!v)}
+                        />
+                        <Label htmlFor="is_at" className="text-sm">
+                          AT
+                        </Label>
+                      </div>
+                    )}
                   </label>
                 </RadioGroup>
               </div>
