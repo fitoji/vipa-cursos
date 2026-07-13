@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/", "/dashboard"],
       },
     ],
-    sitemap: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://vipa-cursos.vercel.app"}/sitemap.xml`,
+    sitemap: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://vipabase.vercel.app"}/sitemap.xml`,
   };
 }

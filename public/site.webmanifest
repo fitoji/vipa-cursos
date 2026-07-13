@@ -3,8 +3,8 @@
   "short_name": "VipaBase",
   "description": "Tu viaje interior — track your Vipassana meditation courses",
   "icons": [
-    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
-    { "src": "/favicon.png", "sizes": "32x32", "type": "image/png" }
+    { "src": "/favicon.png", "sizes": "32x32", "type": "image/png" },
+    { "src": "/icons8-buddha-64.png", "sizes": "64x64", "type": "image/png" }
   ],
   "theme_color": "#6C47FF",
   "background_color": "#FAFAFA",

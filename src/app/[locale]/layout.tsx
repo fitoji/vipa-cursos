@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Montserrat, Playfair_Display, Source_Code_Pro } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
@@ -9,6 +9,8 @@ import { Toaster } from "@/components/ui/sonner";
 import { Providers } from "../providers";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { SiteJsonLd } from "@/components/site-json-ld";
+import { canonicalFor, languageAlternates } from "@/lib/seo";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -25,11 +27,15 @@ const sourceCode = Source_Code_Pro({
   variable: "--font-source-code",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://vipa-cursos.vercel.app";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://vipabase.vercel.app";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
+
+export const viewport: Viewport = {
+  themeColor: "#6C47FF",
+};
 
 export async function generateMetadata({
   params,
@@ -52,15 +58,12 @@ export async function generateMetadata({
     creator: "VipaBase",
     icons: {
       icon: [
-        { url: "/favicon.svg", type: "image/svg+xml" },
+        { url: "/favicon.png", type: "image/png", sizes: "32x32" },
         { url: "/icons8-dharma-wheel-32.png", type: "image/png", sizes: "32x32" },
       ],
       apple: "/favicon.png",
     },
     manifest: "/site.webmanifest",
-    other: {
-      "theme-color": "#6C47FF",
-    },
     robots: {
       index: true,
       follow: true,
@@ -69,6 +72,7 @@ export async function generateMetadata({
       languages: {
         es: "/",
         en: "/en",
+        "x-default": "/",
       },
     },
     openGraph: {
@@ -109,6 +113,7 @@ export default async function LocaleLayout({
       suppressHydrationWarning
     >
       <body className="flex h-screen flex-col overflow-hidden">
+        <SiteJsonLd />
         <NextIntlClientProvider messages={messages}>
           <Providers>
             <SiteHeader />

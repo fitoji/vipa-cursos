@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 const locales = ["es", "en"];
-const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://vipa-cursos.vercel.app";
+const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://vipabase.vercel.app";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
