@@ -1,6 +1,6 @@
 {
-  "name": "Vipa Cursos",
-  "short_name": "VipaCursos",
+  "name": "VipaBase",
+  "short_name": "VipaBase",
   "description": "Tu viaje interior — track your Vipassana meditation courses",
   "icons": [
     { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },

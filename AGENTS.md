@@ -1,4 +1,4 @@
-# vipa-cursos
+# vipa-base
 
 Next.js 16 (App Router) + React 19 + Tailwind 4 + shadcn/ui + Neon (PostgreSQL).
 Personal Vipassana course tracker. Deployed on Vercel.

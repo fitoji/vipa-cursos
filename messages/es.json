@@ -1,20 +1,20 @@
 {
   "layout": {
     "meta": {
-      "title": "Vipa Cursos — Registro de Cursos de Vipassana",
+      "title": "VipaBase — Registro de Cursos de Vipassana",
       "description": "App personal para registrar y organizar tus cursos de meditación Vipassana. Guarda fechas, lugares, profesores y duración de cada sit y serve.",
       "ogDescription": "App personal para registrar y organizar tus cursos de meditación Vipassana."
     }
   },
   "HomePage": {
     "meta": {
-      "title": "Vipa Cursos — Tu registro personal de cursos de Vipassana",
+      "title": "VipaBase — Tu registro personal de cursos de Vipassana",
       "description": "Guardá cada curso sentado (sit) y de servicio (serve) de meditación Vipassana en un solo lugar."
     }
   },
   "Landing": {
     "hero": {
-      "title": "Vipa Cursos",
+      "title": "VipaBase",
       "subtitle": "Tu registro personal de cursos de meditación Vipassana. Guardá cada sit y serve, y revisá tu camino cuando lo necesites.",
       "cta": "Empezar ahora",
       "loggedInCta": "Panel de control",
@@ -51,8 +51,9 @@
   "LoginPage": {
     "meta": {
       "title": "Iniciar sesión",
-      "description": "Accedé a tu cuenta de Vipa Cursos para registrar y organizar tus cursos de meditación Vipassana."
-    }
+      "description": "Accedé a tu cuenta de VipaBase para registrar y organizar tus cursos de meditación Vipassana."
+    },
+    "tagline": "Seguí tu camino de Vipassana con intención y claridad."
   },
   "LoginForm": {
     "title": "Accede a tu cuenta",
@@ -309,7 +310,7 @@
     }
   },
   "SiteHeader": {
-    "siteName": "Vipa-Cursos",
+    "siteName": "VipaBase",
     "themeLabel": "Cambiar tema",
     "signOut": "Cerrar sesión",
     "signIn": "Iniciar sesión",
@@ -320,7 +321,7 @@
     }
   },
   "SiteFooter": {
-    "copyright": "Vipa Cursos © {year}",
+    "copyright": "VipaBase © {year}",
     "tagline": "Meditación Vipassana"
   },
   "ErrorPage": {

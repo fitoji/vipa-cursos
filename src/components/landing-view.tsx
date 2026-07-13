@@ -42,10 +42,10 @@ export function LandingView() {
   const tc = useTranslations("common") as any;
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="h-full bg-background">
       {/* Hero — hero.jpg as background */}
       <section
-        className="relative flex min-h-[80vh] items-center overflow-hidden"
+        className="relative flex h-full items-center overflow-hidden"
         style={{
           backgroundImage: "url('/hero.jpg')",
           backgroundSize: "cover",

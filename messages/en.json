@@ -1,20 +1,20 @@
 {
   "layout": {
     "meta": {
-      "title": "Vipa Courses — Vipassana Course Tracker",
+      "title": "VipaBase — Vipassana Course Tracker",
       "description": "Personal app to register and organize your Vipassana meditation courses. Save dates, locations, teachers, and duration of each sit and serve.",
       "ogDescription": "Personal app to register and organize your Vipassana meditation courses."
     }
   },
   "HomePage": {
     "meta": {
-      "title": "Vipa Courses — Your personal Vipassana course tracker",
+      "title": "VipaBase — Your personal Vipassana course tracker",
       "description": "Keep track of every sitting (sit) and service (serve) Vipassana meditation course in one place."
     }
   },
   "Landing": {
     "hero": {
-      "title": "Vipa Courses",
+      "title": "VipaBase",
       "subtitle": "Your personal Vipassana meditation course tracker. Log every sit and serve, and review your journey whenever you need.",
       "cta": "Get started",
       "loggedInCta": "Dashboard",
@@ -51,8 +51,9 @@
   "LoginPage": {
     "meta": {
       "title": "Sign in",
-      "description": "Access your Vipa Courses account to register and organize your Vipassana meditation courses."
-    }
+      "description": "Access your VipaBase account to register and organize your Vipassana meditation courses."
+    },
+    "tagline": "Track your Vipassana journey with intention and clarity."
   },
   "LoginForm": {
     "title": "Access your account",
@@ -309,7 +310,7 @@
     }
   },
   "SiteHeader": {
-    "siteName": "Vipa-Courses",
+    "siteName": "VipaBase",
     "themeLabel": "Toggle theme",
     "signOut": "Sign out",
     "signIn": "Sign in",
@@ -320,7 +321,7 @@
     }
   },
   "SiteFooter": {
-    "copyright": "Vipa Courses © {year}",
+    "copyright": "VipaBase © {year}",
     "tagline": "Vipassana Meditation"
   },
   "ErrorPage": {

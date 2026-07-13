@@ -45,11 +45,11 @@ export async function generateMetadata({
     metadataBase: new URL(siteUrl),
     title: {
       default: t("title"),
-      template: "%s | Vipa Cursos",
+      template: "%s | VipaBase",
     },
     description: t("description"),
-    authors: [{ name: "Vipa Cursos" }],
-    creator: "Vipa Cursos",
+    authors: [{ name: "VipaBase" }],
+    creator: "VipaBase",
     icons: {
       icon: [
         { url: "/favicon.svg", type: "image/svg+xml" },
@@ -75,7 +75,7 @@ export async function generateMetadata({
       type: "website",
       locale: locale === "en" ? "en_US" : "es_AR",
       url: basePath ? `${siteUrl}/en` : siteUrl,
-      siteName: "Vipa Cursos",
+      siteName: "VipaBase",
       title: t("title"),
       description: t("ogDescription"),
     },
@@ -108,11 +108,11 @@ export default async function LocaleLayout({
       className={`${montserrat.variable} ${playfair.variable} ${sourceCode.variable}`}
       suppressHydrationWarning
     >
-      <body className="flex min-h-screen flex-col">
+      <body className="flex h-screen flex-col overflow-hidden">
         <NextIntlClientProvider messages={messages}>
           <Providers>
             <SiteHeader />
-            <main className="flex-1">{children}</main>
+            <main className="flex-1 overflow-y-auto">{children}</main>
             <SiteFooter />
           </Providers>
           <Toaster richColors position="bottom-right" />

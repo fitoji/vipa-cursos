@@ -36,7 +36,7 @@ export function LocaleSwitcher() {
 
   return (
     <Select value={locale} onValueChange={handleLocaleChange}>
-      <SelectTrigger className="h-8 w-[72px]" aria-label={t("locale")}>
+      <SelectTrigger className="h-8 w-[84px] gap-1.5" aria-label={t("locale")}>
         <Globe className="h-3.5 w-3.5 text-muted-foreground" />
         <SelectValue placeholder={t("locale")} />
       </SelectTrigger>

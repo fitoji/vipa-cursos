@@ -26,6 +26,7 @@ export function LoginForm() {
   const t = useTranslations("LoginForm");
   const te = useTranslations("LoginForm.errors");
   const ts = useTranslations("LoginForm.success");
+  const tp = useTranslations("LoginPage");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -107,7 +108,7 @@ export function LoginForm() {
   };
 
   return (
-    <div className="flex min-h-screen bg-background">
+    <div className="flex h-full bg-background">
       {/* Left panel — brand image */}
       <div
         className="hidden w-1/2 bg-cover bg-center lg:block"
@@ -115,9 +116,9 @@ export function LoginForm() {
       >
         <div className="flex h-full items-end p-12">
           <div className="text-left">
-            <img src="/logo.svg" alt="Vipa Cursos" className="mb-4 h-10 w-auto brightness-0 invert" />
+            <img src="/logo.svg" alt="VipaBase" className="mb-4 h-10 w-auto brightness-0 invert" />
             <p className="max-w-sm text-sm leading-relaxed text-white/70">
-              Track your Vipassana journey with intention and clarity.
+              {tp("tagline")}
             </p>
           </div>
         </div>

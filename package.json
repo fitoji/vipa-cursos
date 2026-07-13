@@ -1,5 +1,5 @@
 {
-  "name": "vipa-cursos",
+  "name": "vipa-base",
   "private": true,
   "sideEffects": false,
   "type": "module",

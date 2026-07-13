@@ -103,17 +103,17 @@ export default function CursosPage() {
   };
 
   return (
-    <div className="relative min-h-screen">
+    <div className="relative h-full">
       {/* bosque.webp background */}
       <div
-        className="pointer-events-none fixed inset-0 bg-cover bg-center bg-no-repeat"
+        className="pointer-events-none absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: "url('/bosque.webp')",
           backgroundAttachment: "fixed",
         }}
       />
       {/* overlay for readability */}
-      <div className="pointer-events-none fixed inset-0 bg-background/55 backdrop-blur-sm" />
+      <div className="pointer-events-none absolute inset-0 bg-background/55 backdrop-blur-sm" />
 
       <div className="relative z-10 mx-auto max-w-4xl px-4 py-10">
         <header className="mb-8 flex items-start justify-between gap-4">

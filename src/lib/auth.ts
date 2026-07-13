@@ -20,7 +20,7 @@ export const auth = betterAuth({
     sendResetPassword: async ({ user, url }) => {
       await sendEmail({
         to: user.email,
-        subject: "Reset your password — Vipa Cursos",
+        subject: "Reset your password — VipaBase",
         text: `Click the link to reset your password: ${url}`,
       });
     },
@@ -29,7 +29,7 @@ export const auth = betterAuth({
     sendVerificationEmail: async ({ user, url }) => {
       await sendEmail({
         to: user.email,
-        subject: "Verify your email — Vipa Cursos",
+        subject: "Verify your email — VipaBase",
         text: `Click the link to verify your email: ${url}`,
       });
     },

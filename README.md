@@ -1,4 +1,4 @@
-# vipa-cursos
+# vipa-base
 
 Personal Vipassana course tracker — register your sits and services in one place.
 
