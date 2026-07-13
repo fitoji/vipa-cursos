@@ -26,6 +26,7 @@ import {
   BookOpen,
   FileText,
   Upload,
+  Hourglass,
 } from "lucide-react";
 import { toast } from "sonner";
 import { useLocale, useTranslations } from "next-intl";
@@ -145,6 +146,10 @@ export function DashboardView() {
     const recentCourses = [...courses]
       .sort((a, b) => new Date(b.start_date).getTime() - new Date(a.start_date).getTime())
       .slice(0, 5);
+    const firstYear = courses.length
+      ? Math.min(...courses.map((c) => new Date(c.start_date).getFullYear()))
+      : new Date().getFullYear();
+    const yearsMeditating = courses.length ? new Date().getFullYear() - firstYear : 0;
 
     return {
       totalCourses,
@@ -157,6 +162,7 @@ export function DashboardView() {
       serve10,
       longServe,
       longCourses,
+      yearsMeditating,
       recentCourses,
     };
   }, [courses]);
@@ -281,7 +287,7 @@ export function DashboardView() {
 
             {isLoading ? (
               <div className="space-y-8">
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
                   {Array.from({ length: 4 }).map((_, i) => (
                     <Card key={i} className="card-interactive">
                       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -435,6 +441,7 @@ function StatsView({
   serve10,
   longServe,
   longCourses,
+  yearsMeditating,
   recentCourses,
   courses,
   onFilterClick,
@@ -449,6 +456,7 @@ function StatsView({
   serve10: number;
   longServe: number;
   longCourses: number;
+  yearsMeditating: number;
   recentCourses: Course[];
   courses: Course[];
   onFilterClick: (preset: FilterPreset) => void;
@@ -474,6 +482,7 @@ function StatsView({
   const animServe10 = useCountUp(serve10, 800, true);
   const animLongServe = useCountUp(longServe, 800, true);
   const animLongCourses = useCountUp(longCourses, 800, true);
+  const animYearsMeditating = useCountUp(yearsMeditating, 800, true);
 
   const secondaryMetrics = [
     {
@@ -581,6 +590,16 @@ function StatsView({
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold tabular-nums">{animCountries.toLocaleString()}</div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">{t("yearsMeditating")}</CardTitle>
+                <Hourglass className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold tabular-nums">{animYearsMeditating.toLocaleString()}</div>
               </CardContent>
             </Card>
           </div>
