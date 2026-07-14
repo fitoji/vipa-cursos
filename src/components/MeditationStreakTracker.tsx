@@ -4,6 +4,8 @@ import { Calendar, Check, Flame, Plus, Trash2, X } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLocale, useTranslations } from "next-intl";
+import { useQuery, useQueryClient, queryOptions } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -13,12 +15,15 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
+import { listStreaks, createStreak, deleteStreak } from "@/app/actions/streaks";
 
 type Streak = {
-  id: string;
+  id: number;
+  user_id: string;
   start_date: string;
   end_date: string;
   is_active: boolean;
+  created_at: string;
 };
 
 type FormValues = {
@@ -32,9 +37,17 @@ function daysBetween(a: string, b: string) {
   return Math.floor((new Date(b).getTime() - new Date(a).getTime()) / 86_400_000) + 1;
 }
 
+const streaksQuery = queryOptions({
+  queryKey: ["streaks"],
+  queryFn: () => listStreaks(),
+  staleTime: 30_000,
+});
+
 export default function MeditationStreakTracker() {
-  const [streaks, setStreaks] = useState<Streak[]>([]);
   const [showForm, setShowForm] = useState(false);
+  const qc = useQueryClient();
+
+  const { data: streaks = [], isLoading } = useQuery(streaksQuery);
 
   const locale = useLocale();
   const t = useTranslations("Racha");
@@ -65,18 +78,15 @@ export default function MeditationStreakTracker() {
       year: "numeric",
     });
 
-  const onSubmit = (values: FormValues) => {
-    setStreaks((prev) => [
-      {
-        id: crypto.randomUUID(),
-        start_date: values.start_date,
-        end_date: values.end_date,
-        is_active: values.end_date === todayStr(),
-      },
-      ...prev,
-    ]);
-    reset({ start_date: todayStr(), end_date: todayStr() });
-    setShowForm(false);
+  const onSubmit = async (values: FormValues) => {
+    try {
+      await createStreak({ data: values });
+      await qc.invalidateQueries({ queryKey: ["streaks"] });
+      reset({ start_date: todayStr(), end_date: todayStr() });
+      setShowForm(false);
+    } catch {
+      toast.error("Error al guardar la racha");
+    }
   };
 
   const openNewForm = () => {
@@ -84,8 +94,13 @@ export default function MeditationStreakTracker() {
     setShowForm(true);
   };
 
-  const deleteStreak = (id: string) => {
-    setStreaks((prev) => prev.filter((s) => s.id !== id));
+  const handleDelete = async (id: number) => {
+    try {
+      await deleteStreak({ data: { id } });
+      await qc.invalidateQueries({ queryKey: ["streaks"] });
+    } catch {
+      toast.error("Error al eliminar la racha");
+    }
   };
 
   const activeStreaks = streaks.filter((s) => s.is_active);
@@ -272,7 +287,7 @@ export default function MeditationStreakTracker() {
                   <StreakRow
                     key={s.id}
                     streak={s}
-                    onDelete={deleteStreak}
+                    onDelete={handleDelete}
                     formatDate={formatDate}
                     tStreak={tStreak}
                   />
@@ -289,7 +304,7 @@ export default function MeditationStreakTracker() {
                   <StreakRow
                     key={s.id}
                     streak={s}
-                    onDelete={deleteStreak}
+                    onDelete={handleDelete}
                     formatDate={formatDate}
                     tStreak={tStreak}
                   />
@@ -334,7 +349,7 @@ function StreakRow({
   tStreak,
 }: {
   streak: Streak;
-  onDelete: (id: string) => void;
+  onDelete: (id: number) => void;
   formatDate: (d: string) => string;
   tStreak: ReturnType<typeof useTranslations<"Racha.streak">>;
 }) {
