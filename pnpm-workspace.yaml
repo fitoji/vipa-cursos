@@ -1,5 +1,5 @@
 minimumReleaseAge: 0
-trustPolicy: no-downgrade
+trustPolicy: allow-all
 blockExoticSubdeps: true
 overrides:
   undici-types: 8.7.0
@@ -8,3 +8,5 @@ allowBuilds:
   "@swc/core": true
   esbuild: true
   sharp: true
+onlyBuiltDependencies:
+  - sharp

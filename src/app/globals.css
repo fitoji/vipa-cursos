@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @source "../";
+@import "shadcn/tailwind.css";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
@@ -285,27 +286,6 @@
 }
 .anim-pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
-}
-
-/* Shimmer effect (shadcn compatible) */
-.shimmer {
-  background-clip: text;
-  animation: tw-shimmer var(--shimmer-duration, 2s) linear infinite;
-}
-
-@keyframes tw-shimmer {
-  0% {
-    background-position: calc(-1 * var(--shimmer-spread, calc(3ch + 40px))) 0;
-  }
-  100% {
-    background-position: calc(100% + var(--shimmer-spread, calc(3ch + 40px))) 0;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .shimmer {
-    animation: none;
-  }
 }
 
 /* Hover effects */
