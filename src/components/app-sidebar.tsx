@@ -34,8 +34,8 @@ import {
 type View = "stats" | "courses" | "locations" | "import";
 
 interface AppSidebarProps {
-  activeView: View;
-  onNavigate: (view: View) => void;
+  activeView?: View;
+  onNavigate?: (view: View) => void;
 }
 
 export function AppSidebar({ activeView, onNavigate }: AppSidebarProps) {
@@ -95,13 +95,22 @@ export function AppSidebar({ activeView, onNavigate }: AppSidebarProps) {
             <SidebarMenu>
               {navItems.map((item) => (
                 <SidebarMenuItem key={item.view}>
-                  <SidebarMenuButton
-                    isActive={activeView === item.view}
-                    onClick={() => onNavigate(item.view)}
-                  >
-                    <item.icon className="h-4 w-4" />
-                    <span>{item.label}</span>
-                  </SidebarMenuButton>
+                  {onNavigate ? (
+                    <SidebarMenuButton
+                      isActive={activeView === item.view}
+                      onClick={() => onNavigate(item.view)}
+                    >
+                      <item.icon className="h-4 w-4" />
+                      <span>{item.label}</span>
+                    </SidebarMenuButton>
+                  ) : (
+                    <SidebarMenuButton asChild isActive={false}>
+                      <Link href="/dashboard">
+                        <item.icon className="h-4 w-4" />
+                        <span>{item.label}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  )}
                 </SidebarMenuItem>
               ))}
               <SidebarMenuItem>
@@ -132,13 +141,22 @@ export function AppSidebar({ activeView, onNavigate }: AppSidebarProps) {
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <SidebarMenuButton
-              isActive={activeView === "import"}
-              onClick={() => onNavigate("import")}
-            >
-              <Upload className="h-4 w-4" />
-              <span>{t("import")}</span>
-            </SidebarMenuButton>
+            {onNavigate ? (
+              <SidebarMenuButton
+                isActive={activeView === "import"}
+                onClick={() => onNavigate("import")}
+              >
+                <Upload className="h-4 w-4" />
+                <span>{t("import")}</span>
+              </SidebarMenuButton>
+            ) : (
+              <SidebarMenuButton asChild isActive={false}>
+                <Link href="/dashboard">
+                  <Upload className="h-4 w-4" />
+                  <span>{t("import")}</span>
+                </Link>
+              </SidebarMenuButton>
+            )}
           </SidebarMenuItem>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>

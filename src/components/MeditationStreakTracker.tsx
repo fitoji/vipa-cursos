@@ -100,7 +100,7 @@ export default function MeditationStreakTracker() {
 
   return (
     <SidebarProvider>
-      <AppSidebar activeView="stats" onNavigate={() => {}} />
+      <AppSidebar />
       <SidebarInset>
         <div className="relative h-full">
           <div
