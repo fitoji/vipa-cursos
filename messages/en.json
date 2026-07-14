@@ -16,7 +16,8 @@
     "hero": {
       "title": "VipaBase",
       "subtitle": "Your personal Vipassana meditation course tracker. Log every sit and serve, and review your journey whenever you need.",
-      "cta": "Get started",
+      "signIn": "Sign in",
+      "signUp": "Sign up",
       "loggedInCta": "Dashboard",
       "newCourse": "New course"
     },

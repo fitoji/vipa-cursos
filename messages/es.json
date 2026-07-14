@@ -16,7 +16,8 @@
     "hero": {
       "title": "VipaBase",
       "subtitle": "Tu registro personal de cursos de meditación Vipassana. Guardá cada sit y serve, y revisá tu camino cuando lo necesites.",
-      "cta": "Empezar ahora",
+      "signIn": "Iniciar sesión",
+      "signUp": "Registrarse",
       "loggedInCta": "Panel de control",
       "newCourse": "Nuevo curso"
     },

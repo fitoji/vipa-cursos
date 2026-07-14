@@ -94,9 +94,14 @@ export function LandingView() {
                   </Button>
                 </>
               ) : (
-                <Button size="lg" className="hover:bg-primary/90" asChild>
-                  <Link href="/login">{t("hero.cta")}</Link>
-                </Button>
+                <>
+                  <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10" asChild>
+                    <Link href="/login">{t("hero.signIn")}</Link>
+                  </Button>
+                  <Button size="lg" asChild>
+                    <Link href="/login">{t("hero.signUp")}</Link>
+                  </Button>
+                </>
               )}
             </div>
           </div>

@@ -126,16 +126,7 @@ export function SiteHeader() {
                 </button>
               </div>
             </div>
-          ) : (
-            <div className="flex items-center gap-2">
-              <Button variant="ghost" size="sm" asChild>
-                <Link href="/login">{t("signIn")}</Link>
-              </Button>
-              <Button variant="outline" size="sm" asChild>
-                <Link href="/login">{t("signUp")}</Link>
-              </Button>
-            </div>
-          )}
+          ) : null}
         </div>
       </div>
     </header>
