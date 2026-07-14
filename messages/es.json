@@ -139,6 +139,7 @@
       "noTeacher": "Sin profesor",
       "daysLabel": "{days} días",
       "searchPlaceholder": "Buscar por lugar, profesor, país…",
+      "tableCaption": "Lista de cursos",
       "noResults": "Sin resultados.",
       "deleteDialog": {
         "title": "¿Eliminar este curso?",

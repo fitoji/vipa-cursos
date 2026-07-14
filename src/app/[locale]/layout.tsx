@@ -113,11 +113,19 @@ export default async function LocaleLayout({
       suppressHydrationWarning
     >
       <body className="flex h-screen flex-col overflow-hidden">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-primary focus:text-primary-foreground focus:rounded-md"
+        >
+          Saltar al contenido principal
+        </a>
         <SiteJsonLd />
         <NextIntlClientProvider messages={messages}>
           <Providers>
             <SiteHeader />
-            <main className="flex-1 overflow-y-auto">{children}</main>
+            <main id="main-content" className="flex-1 overflow-y-auto">
+              {children}
+            </main>
             <SiteFooter />
           </Providers>
           <Toaster richColors position="bottom-right" />

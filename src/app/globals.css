@@ -353,4 +353,11 @@
   .card-interactive:hover {
     transform: none !important;
   }
+  .hover-lift,
+  .hover-scale,
+  .hover-glow,
+  .press-effect,
+  .card-interactive {
+    transition: none !important;
+  }
 }

@@ -545,6 +545,14 @@ function StatsView({
             <Card
               className="card-interactive cursor-pointer"
               onClick={() => onFilterClick(null)}
+              tabIndex={0}
+              role="button"
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  onFilterClick(null);
+                }
+              }}
             >
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">{t("totalCourses")}</CardTitle>
@@ -564,6 +572,17 @@ function StatsView({
                     filter: (c) => c.mode === "sit",
                   })
                 }
+                tabIndex={0}
+                role="button"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    onFilterClick({
+                      label: tfilters("presets.modeSit"),
+                      filter: (c) => c.mode === "sit",
+                    });
+                  }
+                }}
               >
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">{t("daysSitting")}</CardTitle>
@@ -584,6 +603,17 @@ function StatsView({
                     filter: (c) => c.mode === "serve",
                   })
                 }
+                tabIndex={0}
+                role="button"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    onFilterClick({
+                      label: tfilters("presets.modeServe"),
+                      filter: (c) => c.mode === "serve",
+                    });
+                  }
+                }}
               >
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">{t("daysServing")}</CardTitle>
@@ -599,6 +629,14 @@ function StatsView({
               <Card
                 className="card-interactive cursor-pointer"
                 onClick={() => setShowCountries(true)}
+                tabIndex={0}
+                role="button"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setShowCountries(true);
+                  }
+                }}
               >
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">{t("countriesVisited")}</CardTitle>
@@ -802,12 +840,14 @@ function CoursesTableView({
                 onChange={(e) => onGlobalFilterChange(e.target.value)}
                 placeholder={t("searchPlaceholder")}
                 className="pl-9"
+                aria-label={t("searchPlaceholder")}
               />
             </div>
           </div>
 
           <div className="px-6 pb-6">
             <Table>
+              <caption className="sr-only">{tt("tableCaption")}</caption>
               <TableHeader>
                 {table.getHeaderGroups().map((hg) => (
                   <TableRow key={hg.id}>

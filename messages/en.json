@@ -139,6 +139,7 @@
       "noTeacher": "No teacher",
       "daysLabel": "{days} days",
       "searchPlaceholder": "Search by place, teacher, country…",
+      "tableCaption": "Course list",
       "noResults": "No results.",
       "deleteDialog": {
         "title": "Delete this course?",

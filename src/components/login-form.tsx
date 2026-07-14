@@ -22,6 +22,7 @@ export function LoginForm() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
 
   const t = useTranslations("LoginForm");
   const te = useTranslations("LoginForm.errors");
@@ -31,9 +32,14 @@ export function LoginForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !password) {
+      const newErrors: { email?: string; password?: string } = {};
+      if (!email) newErrors.email = te("missingFields");
+      if (!password) newErrors.password = te("missingFields");
+      setErrors(newErrors);
       toast.error(te("missingFields"));
       return;
     }
+    setErrors({});
     setBusy(true);
     try {
       if (mode === "signin") {
@@ -204,8 +210,18 @@ export function LoginForm() {
                   type="email"
                   autoComplete="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (errors.email) setErrors((prev) => ({ ...prev, email: undefined }));
+                  }}
+                  aria-invalid={!!errors.email}
+                  aria-describedby={errors.email ? "email-error" : undefined}
                 />
+                {errors.email && (
+                  <p id="email-error" className="text-sm text-destructive" role="alert">
+                    {errors.email}
+                  </p>
+                )}
               </div>
               <div className="grid gap-1.5">
                 <Label htmlFor="password">{t("form.password")}</Label>
@@ -215,8 +231,13 @@ export function LoginForm() {
                     type={showPassword ? "text" : "password"}
                     autoComplete={mode === "signin" ? "current-password" : "new-password"}
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                      if (errors.password) setErrors((prev) => ({ ...prev, password: undefined }));
+                    }}
                     className="pr-10"
+                    aria-invalid={!!errors.password}
+                    aria-describedby={errors.password ? "password-error" : undefined}
                   />
                   <button
                     type="button"
@@ -227,6 +248,11 @@ export function LoginForm() {
                     {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                   </button>
                 </div>
+                {errors.password && (
+                  <p id="password-error" className="text-sm text-destructive" role="alert">
+                    {errors.password}
+                  </p>
+                )}
               </div>
               <Button type="submit" disabled={busy} className="press-effect">
                 {busy
