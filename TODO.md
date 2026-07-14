@@ -1,5 +1,5 @@
 [x] realizar seo de la pagina
-[ ] accesiblidad de la pagina
+[x] accesiblidad de la pagina (WCAG 2.2 AA — 32 issues resueltos)
 [ ] agregar fotos a cursos (link en base de datos, y imagenes en el servidor)
 [ ] posibilidad de compartir o ver cursos de amigos
 [ ] revisar mobile responsive
@@ -16,3 +16,5 @@
 [x] hacer lo mismo con lugar: buscar en nuestra db los lugares donde se hacen los cursos y mostrarlos en el formulario, cacheando los lugares ya cargados en memoria o en el localStorage, tenemos una tabla de lugares en nuestra db, y dejar la posibilidad de ingresar un nuevo lugar en el formulario. Ahora los lugares se filtran por el pais seleccionado.
 [x] cachea los paises y lugares y la seccion centros de vipassana ya cargados en memoria o en el localStorage, para evitar hacer consultas a la db cada vez que se cargue la pagina.
 [x] en mis cursos, el boton panel de control a la derecha de importar json.
+
+

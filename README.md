@@ -98,6 +98,24 @@ src/
 - Tailwind 4 is CSS-first (`@theme inline` + oklch tokens in `globals.css`) — no `tailwind.config` file
 - `cn()` (clsx + tailwind-merge) for conditional classes
 
+## Accessibility (WCAG 2.2 AA)
+
+The app targets WCAG 2.2 Level AA compliance. An audit of 32 issues was completed across all pages:
+
+**Critical fixes:** Skip navigation link, keyboard-accessible stat cards, form labels, error identification with `aria-invalid`/`aria-describedby`, `prefers-reduced-motion` for all transitions, table caption.
+
+**Serious fixes:** Distinct aria-labels on table actions, sort state announcements, progress bar ARIA semantics, loading skeleton announcements, `<nav>` landmark in sidebar, localized `aria-label` on SidebarTrigger, focus-visible restore on hidden buttons, RadioGroup/Select label associations, password toggle min 24px hit area.
+
+**Moderate fixes:** Landing section landmarks, decorative icon `aria-hidden`, hero contrast improvement, form `aria-labelledby`, focus-visible box-shadow fallback.
+
+Key patterns used:
+- `sr-only` + `focus:not-sr-only` for skip links
+- `role="button"` + `tabIndex={0}` + `onKeyDown` for clickable non-interactive elements
+- `aria-live="assertive"` + `role="alert"` for form errors
+- `role="progressbar"` + `aria-valuenow/min/max` for visual indicators
+- `aria-labelledby` for RadioGroup and Select label associations
+- `@media (prefers-reduced-motion: reduce)` with `transition: none !important`
+
 ## Gotchas
 
 - `pnpm-workspace.yaml` exists **only** for two pnpm 11 settings: `minimumReleaseAge: 0` (relaxes the supply-chain release-age guard) and `dangerouslyAllowAllBuilds: true` (lets `sharp`'s build script run so `pnpm build`/`pnpm dev` don't abort). This is **not** a monorepo.
