@@ -1,6 +1,6 @@
 "use client";
 
-import { Calendar, Check, Flame, Plus, Trash2, X } from "lucide-react";
+import { Check, Flame, Plus, Trash2, X } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLocale, useTranslations } from "next-intl";
@@ -11,8 +11,8 @@ import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { DatePicker } from "@/components/ui/date-picker";
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import { listStreaks, createStreak, deleteStreak } from "@/app/actions/streaks";
@@ -62,6 +62,7 @@ export default function MeditationStreakTracker() {
     handleSubmit,
     reset,
     watch,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<FormValues>({
     defaultValues: { start_date: todayStr(), end_date: todayStr() },
@@ -198,15 +199,12 @@ export default function MeditationStreakTracker() {
                         <Label htmlFor="start_date" className="mb-1.5">
                           {tForm("startDate")}
                         </Label>
-                        <div className="relative">
-                          <Calendar className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                          <Input
-                            id="start_date"
-                            type="date"
-                            {...register("start_date", { required: tForm("dateRequired") })}
-                            className="pl-9"
-                          />
-                        </div>
+                        <DatePicker
+                          value={watch("start_date")}
+                          onChange={(v) => {
+                            setValue("start_date", v, { shouldValidate: true });
+                          }}
+                        />
                         {errors.start_date && (
                           <p className="mt-1 text-xs text-destructive">
                             {errors.start_date.message}
@@ -218,19 +216,12 @@ export default function MeditationStreakTracker() {
                         <Label htmlFor="end_date" className="mb-1.5">
                           {tForm("endDate")}
                         </Label>
-                        <div className="relative">
-                          <Calendar className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                          <Input
-                            id="end_date"
-                            type="date"
-                            {...register("end_date", {
-                              required: tForm("dateRequired"),
-                              validate: (v) =>
-                                new Date(v) >= new Date(startDate) || tForm("endDateError"),
-                            })}
-                            className="pl-9"
-                          />
-                        </div>
+                        <DatePicker
+                          value={watch("end_date")}
+                          onChange={(v) => {
+                            setValue("end_date", v, { shouldValidate: true });
+                          }}
+                        />
                         {errors.end_date && (
                           <p className="mt-1 text-xs text-destructive">{errors.end_date.message}</p>
                         )}
