@@ -8,8 +8,6 @@ import {
   Flame,
   Upload,
   MessageSquare,
-  FileText,
-  ChevronRight,
   Sparkles,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -23,105 +21,12 @@ import {
 } from "@/components/ui/accordion";
 
 const sections = [
-  {
-    id: "intro",
-    icon: BookOpen,
-    contentKeys: {
-      title: "sections.intro.title",
-      intro: "sections.intro.intro",
-      items: [
-        "sections.intro.item1",
-        "sections.intro.item2",
-        "sections.intro.item3",
-        "sections.intro.item4",
-        "sections.intro.item5",
-      ],
-    },
-  },
-  {
-    id: "courses",
-    icon: Clock,
-    contentKeys: {
-      title: "sections.courses.title",
-      steps: [
-        "sections.courses.step1",
-        "sections.courses.step2",
-        "sections.courses.step3",
-        "sections.courses.step4",
-        "sections.courses.step5",
-        "sections.courses.step6",
-        "sections.courses.step7",
-        "sections.courses.step8",
-        "sections.courses.step9",
-        "sections.courses.step10",
-      ],
-      faq: {
-        title: "sections.courses.faq.title",
-        q1: "sections.courses.faq.q1",
-        a1: "sections.courses.faq.a1",
-        q2: "sections.courses.faq.q2",
-        a2: "sections.courses.faq.a2",
-      },
-    },
-  },
-  {
-    id: "dashboard",
-    icon: BarChart3,
-    contentKeys: {
-      title: "sections.dashboard.title",
-      intro: "sections.dashboard.intro",
-      items: [
-        "sections.dashboard.item1",
-        "sections.dashboard.item2",
-        "sections.dashboard.item3",
-        "sections.dashboard.item4",
-      ],
-    },
-  },
-  {
-    id: "racha",
-    icon: Flame,
-    contentKeys: {
-      title: "sections.racha.title",
-      intro: "sections.racha.intro",
-      items: [
-        "sections.racha.item1",
-        "sections.racha.item2",
-        "sections.racha.item3",
-        "sections.racha.item4",
-      ],
-    },
-  },
-  {
-    id: "chatgpt",
-    icon: Sparkles,
-    contentKeys: {
-      title: "sections.chatgpt.title",
-      intro: "sections.chatgpt.intro",
-      steps: [
-        "sections.chatgpt.step1",
-        "sections.chatgpt.step2",
-        "sections.chatgpt.step3",
-        "sections.chatgpt.step4",
-        "sections.chatgpt.step5",
-        "sections.chatgpt.step6",
-      ],
-      tip: "sections.chatgpt.tip",
-    },
-  },
-  {
-    id: "export",
-    icon: Upload,
-    contentKeys: {
-      title: "sections.export.title",
-      intro: "sections.export.intro",
-      steps: [
-        "sections.export.step1",
-        "sections.export.step2",
-        "sections.export.step3",
-      ],
-    },
-  },
+  { id: "intro", icon: BookOpen },
+  { id: "courses", icon: Clock },
+  { id: "dashboard", icon: BarChart3 },
+  { id: "racha", icon: Flame },
+  { id: "chatgpt", icon: Sparkles },
+  { id: "export", icon: Upload },
 ];
 
 function SectionIcon({ icon: Icon }: { icon: typeof BookOpen }) {
@@ -134,45 +39,36 @@ export function HelpView() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
-      {/* Header — always visible */}
-      <div className="mb-12">
+      {/* Header */}
+      <div className="mb-10">
         <h1 className="font-serif text-3xl font-bold tracking-tight sm:text-4xl">
           {t("title")}
         </h1>
         <p className="mt-3 text-muted-foreground">{t("subtitle")}</p>
       </div>
 
-      {/* Quick nav — always visible */}
-      <nav aria-label={t("navLabel")} className="mb-12 rounded-lg border bg-card p-4 sm:p-6">
-        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-          {t("navLabel")}
-        </h2>
-        <ul className="space-y-2">
+      {/* Quick nav — icons + text, no chevron */}
+      <nav aria-label={t("navLabel")} className="mb-14">
+        <ul className="flex flex-wrap gap-x-6 gap-y-2">
           {sections.map((s) => (
             <li key={s.id}>
               <Link
                 href={`#${s.id}`}
-                className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                className="flex items-center gap-1.5 text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
               >
                 <SectionIcon icon={s.icon} />
-                <span>{t(s.contentKeys.title)}</span>
-                <ChevronRight className="ml-auto h-3.5 w-3.5" aria-hidden="true" />
+                <span>{t(`sections.${s.id}.title`)}</span>
               </Link>
             </li>
           ))}
         </ul>
       </nav>
 
-      {/* Scrollable content with scroll-fade */}
-      <div className="scroll-fade overflow-y-auto max-h-[calc(100dvh-24rem)]" tabIndex={0} role="region" aria-label={t("contentLabel")}>
-        {/* Section: Introducción */}
-        <section id="intro" className="mb-16 scroll-mt-4" aria-label={t("sections.intro.title")}>
-        <div className="mb-6 flex items-center gap-3">
-          <SectionIcon icon={BookOpen} />
-          <h2 className="font-serif text-2xl font-semibold tracking-tight">
-            {t("sections.intro.title")}
-          </h2>
-        </div>
+      {/* Section: Introducción — text only */}
+      <section id="intro" className="mb-12 scroll-mt-4" aria-label={t("sections.intro.title")}>
+        <h2 className="mb-4 font-serif text-2xl font-semibold tracking-tight">
+          {t("sections.intro.title")}
+        </h2>
         <div className="space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
           <p>{t("sections.intro.intro")}</p>
           <ul className="list-disc space-y-2 pl-5">
@@ -183,10 +79,10 @@ export function HelpView() {
         </div>
       </section>
 
-      {/* Section: Cursos */}
-      <section id="courses" className="mb-16 scroll-mt-20" aria-label={t("sections.courses.title")}>
-        <div className="mb-6 flex items-center gap-3">
-          <SectionIcon icon={Clock} />
+      {/* Section: Cursos — icon inline */}
+      <section id="courses" className="mb-16 scroll-mt-4" aria-label={t("sections.courses.title")}>
+        <div className="mb-4 flex items-center gap-2">
+          <Clock className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
           <h2 className="font-serif text-2xl font-semibold tracking-tight">
             {t("sections.courses.title")}
           </h2>
@@ -220,14 +116,11 @@ export function HelpView() {
         </div>
       </section>
 
-      {/* Section: Dashboard */}
-      <section id="dashboard" className="mb-16 scroll-mt-20" aria-label={t("sections.dashboard.title")}>
-        <div className="mb-6 flex items-center gap-3">
-          <SectionIcon icon={BarChart3} />
-          <h2 className="font-serif text-2xl font-semibold tracking-tight">
-            {t("sections.dashboard.title")}
-          </h2>
-        </div>
+      {/* Section: Dashboard — no icon */}
+      <section id="dashboard" className="mb-12 scroll-mt-4" aria-label={t("sections.dashboard.title")}>
+        <h2 className="mb-4 font-serif text-2xl font-semibold tracking-tight">
+          {t("sections.dashboard.title")}
+        </h2>
         <div className="space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
           <p>{t("sections.dashboard.intro")}</p>
           <ul className="list-disc space-y-2 pl-5">
@@ -238,10 +131,10 @@ export function HelpView() {
         </div>
       </section>
 
-      {/* Section: Racha */}
-      <section id="racha" className="mb-16 scroll-mt-20" aria-label={t("sections.racha.title")}>
-        <div className="mb-6 flex items-center gap-3">
-          <SectionIcon icon={Flame} />
+      {/* Section: Racha — icon inline */}
+      <section id="racha" className="mb-14 scroll-mt-4" aria-label={t("sections.racha.title")}>
+        <div className="mb-4 flex items-center gap-2">
+          <Flame className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
           <h2 className="font-serif text-2xl font-semibold tracking-tight">
             {t("sections.racha.title")}
           </h2>
@@ -256,40 +149,39 @@ export function HelpView() {
         </div>
       </section>
 
-      {/* Section: ChatGPT */}
-      <section id="chatgpt" className="mb-16 scroll-mt-20" aria-label={t("sections.chatgpt.title")}>
-        <div className="mb-6 flex items-center gap-3">
-          <SectionIcon icon={Sparkles} />
-          <h2 className="font-serif text-2xl font-semibold tracking-tight">
-            {t("sections.chatgpt.title")}
-          </h2>
-        </div>
-        <div className="space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
-          <p>{t("sections.chatgpt.intro")}</p>
-          <ol className="list-decimal space-y-3 pl-5">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
-              <li key={i}>{t(`sections.chatgpt.step${i}`)}</li>
-            ))}
-          </ol>
+      {/* Section: ChatGPT — distinct callout */}
+      <section id="chatgpt" className="mb-16 scroll-mt-4" aria-label={t("sections.chatgpt.title")}>
+        <div className="rounded-xl border border-primary/20 bg-primary/5 p-6 sm:p-8">
+          <div className="mb-4 flex items-center gap-2">
+            <Sparkles className="h-5 w-5 text-primary" aria-hidden="true" />
+            <h2 className="font-serif text-2xl font-semibold tracking-tight">
+              {t("sections.chatgpt.title")}
+            </h2>
+          </div>
+          <div className="space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+            <p>{t("sections.chatgpt.intro")}</p>
+            <ol className="list-decimal space-y-3 pl-5">
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <li key={i}>{t(`sections.chatgpt.step${i}`)}</li>
+              ))}
+            </ol>
 
-          <div className="mt-6 rounded-lg border bg-muted/50 p-4">
-            <div className="mb-1 flex items-center gap-2 text-sm font-medium text-foreground">
-              <MessageSquare className="h-4 w-4 text-primary" aria-hidden="true" />
-              <span>{t("sections.chatgpt.tipTitle")}</span>
+            <div className="mt-4 rounded-lg bg-muted/50 p-4">
+              <div className="mb-1 flex items-center gap-2 text-sm font-medium text-foreground">
+                <MessageSquare className="h-4 w-4 text-primary" aria-hidden="true" />
+                <span>{t("sections.chatgpt.tipTitle")}</span>
+              </div>
+              <p className="text-sm text-muted-foreground">{t("sections.chatgpt.tip")}</p>
             </div>
-            <p className="text-sm text-muted-foreground">{t("sections.chatgpt.tip")}</p>
           </div>
         </div>
       </section>
 
-      {/* Section: Exportar / Importar */}
-      <section id="export" className="mb-16 scroll-mt-20" aria-label={t("sections.export.title")}>
-        <div className="mb-6 flex items-center gap-3">
-          <SectionIcon icon={Upload} />
-          <h2 className="font-serif text-2xl font-semibold tracking-tight">
-            {t("sections.export.title")}
-          </h2>
-        </div>
+      {/* Section: Exportar / Importar — no icon */}
+      <section id="export" className="scroll-mt-4" aria-label={t("sections.export.title")}>
+        <h2 className="mb-4 font-serif text-2xl font-semibold tracking-tight">
+          {t("sections.export.title")}
+        </h2>
         <div className="space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
           <p>{t("sections.export.intro")}</p>
           <ol className="list-decimal space-y-3 pl-5">
@@ -308,7 +200,6 @@ export function HelpView() {
           </div>
         </div>
       </section>
-      </div>{/* end scroll-fade container */}
     </div>
   );
 }
