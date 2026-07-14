@@ -35,6 +35,10 @@
           "title": "Dashboard",
           "description": "Filter, sort, and search your courses with an interactive table."
         },
+        "streak": {
+          "title": "Daily practice",
+          "description": "Track your daily meditation streak and maintain the habit."
+        },
         "privacy": {
           "title": "Private and secure",
           "description": "Only you can see your data. Authentication with Google or email."

@@ -35,6 +35,10 @@
           "title": "Panel de control",
           "description": "Filtrá, ordená y buscá entre tus cursos con una tabla interactiva."
         },
+        "streak": {
+          "title": "Práctica diaria",
+          "description": "Registrá tu racha de meditación diaria y mantené el hábito."
+        },
         "privacy": {
           "title": "Privado y seguro",
           "description": "Solo vos podés ver tus datos. Autenticación con Google o email."

@@ -1,7 +1,7 @@
 "use client";
 
 import { Link } from "@/i18n/navigation";
-import { BookOpen, Clock, BarChart3, Shield } from "lucide-react";
+import { BookOpen, Clock, BarChart3, Shield, Flame } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useInView, staggerDelay } from "@/lib/animations";
@@ -24,6 +24,11 @@ const features = [
     icon: BarChart3,
     titleKey: "features.items.dashboard.title",
     descriptionKey: "features.items.dashboard.description",
+  },
+  {
+    icon: Flame,
+    titleKey: "features.items.streak.title",
+    descriptionKey: "features.items.streak.description",
   },
   {
     icon: Shield,
