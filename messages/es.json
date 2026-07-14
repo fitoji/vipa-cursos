@@ -328,6 +328,25 @@
     "recent": {
       "dateFormat": "{date} · {teacher} · {days} días",
       "noTeacher": "Sin profesor"
+    },
+    "detail": {
+      "title": "Detalles del curso",
+      "startDate": "Fecha de inicio",
+      "place": "Lugar",
+      "teacher": "Profesor",
+      "country": "País",
+      "mode": "Modo",
+      "days": "Días",
+      "notes": "Notas",
+      "at": "Profesor Asistente",
+      "yes": "Sí",
+      "no": "No",
+      "previousCourse": "Curso anterior",
+      "nextCourse": "Curso siguiente",
+      "noPrevious": "Primer curso",
+      "noNext": "Último curso",
+      "sit": "Sentar",
+      "serve": "Servir"
     }
   },
   "CursosPage": {

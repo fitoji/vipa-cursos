@@ -328,6 +328,25 @@
     "recent": {
       "dateFormat": "{date} · {teacher} · {days} days",
       "noTeacher": "No teacher"
+    },
+    "detail": {
+      "title": "Course Details",
+      "startDate": "Start Date",
+      "place": "Place",
+      "teacher": "Teacher",
+      "country": "Country",
+      "mode": "Mode",
+      "days": "Days",
+      "notes": "Notes",
+      "at": "Assistant Teacher",
+      "yes": "Yes",
+      "no": "No",
+      "previousCourse": "Previous course",
+      "nextCourse": "Next course",
+      "noPrevious": "First course",
+      "noNext": "Last course",
+      "sit": "Sit",
+      "serve": "Serve"
     }
   },
   "CursosPage": {

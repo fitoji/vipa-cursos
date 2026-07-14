@@ -58,6 +58,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 import { Skeleton } from "@/components/ui/skeleton";
 import { EditCourseDialog } from "@/components/edit-course-dialog";
+import { CourseDetailDialog } from "@/components/course-detail-dialog";
 import { ImportCoursesPanel } from "@/components/import-courses-panel";
 import { LocationsExplorer } from "@/components/locations-explorer";
 import { AppSidebar } from "@/components/app-sidebar";
@@ -87,6 +88,7 @@ export function DashboardView() {
   const [globalFilter, setGlobalFilter] = useState("");
   const [sorting, setSorting] = useState<SortingState>([{ id: "start_date", desc: true }]);
   const [editing, setEditing] = useState<Course | null>(null);
+  const [viewing, setViewing] = useState<Course | null>(null);
   const [deleting, setDeleting] = useState<Course | null>(null);
   const [busyDelete, setBusyDelete] = useState(false);
   const [view, setViewState] = useState<View>("stats");
@@ -385,6 +387,7 @@ export function DashboardView() {
                 onGlobalFilterChange={setGlobalFilter}
                 filterPreset={filterPreset}
                 onClearFilter={() => setFilterPreset(null)}
+                onView={setViewing}
               />
             ) : view === "locations" ? (
               <LocationsExplorer />
@@ -398,6 +401,13 @@ export function DashboardView() {
           course={editing}
           open={!!editing}
           onOpenChange={(v) => !v && setEditing(null)}
+        />
+
+        <CourseDetailDialog
+          course={viewing}
+          courses={courses}
+          open={!!viewing}
+          onOpenChange={(v) => !v && setViewing(null)}
         />
 
         <AlertDialog open={!!deleting} onOpenChange={(v) => !v && setDeleting(null)}>
@@ -875,12 +885,14 @@ function CoursesTableView({
   onGlobalFilterChange,
   filterPreset,
   onClearFilter,
+  onView,
 }: {
   table: ReturnType<typeof useReactTable<Course>>;
   globalFilter: string;
   onGlobalFilterChange: (value: string) => void;
   filterPreset: FilterPreset;
   onClearFilter: () => void;
+  onView: (course: Course) => void;
 }) {
   const t = useTranslations("Dashboard.table");
   const tt = useTranslations("Dashboard.table");
@@ -977,7 +989,11 @@ function CoursesTableView({
                   </TableRow>
                 ) : (
                   table.getRowModel().rows.map((row) => (
-                    <TableRow key={row.id}>
+                    <TableRow
+                      key={row.id}
+                      className="cursor-pointer hover:bg-muted/50"
+                      onClick={() => onView(row.original)}
+                    >
                       {row.getVisibleCells().map((cell) => (
                         <TableCell key={cell.id}>
                           {flexRender(cell.column.columnDef.cell, cell.getContext())}
