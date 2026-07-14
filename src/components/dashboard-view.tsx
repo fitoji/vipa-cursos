@@ -193,7 +193,9 @@ export function DashboardView() {
         header: tt("header.mode"),
         cell: (i) => (
           <div className="flex items-center gap-1">
-            <Badge variant={i.getValue() === "sit" ? "default" : "secondary"}>{tt(i.getValue())}</Badge>
+            <Badge variant={i.getValue() === "sit" ? "default" : "secondary"}>
+              {tt(i.getValue())}
+            </Badge>
             {i.row.original.is_at && (
               <Badge variant="outline" className="text-xs">
                 AT
@@ -223,7 +225,7 @@ export function DashboardView() {
               size="icon"
               variant="ghost"
               onClick={() => setEditing(i.row.original)}
-              aria-label={tt("header.actions")}
+              aria-label={tt("edit")}
             >
               <Pencil className="h-4 w-4" />
             </Button>
@@ -231,7 +233,7 @@ export function DashboardView() {
               size="icon"
               variant="ghost"
               onClick={() => setDeleting(i.row.original)}
-              aria-label={tt("header.actions")}
+              aria-label={tt("delete")}
               className="text-destructive hover:text-destructive"
             >
               <Trash2 className="h-4 w-4" />
@@ -276,9 +278,11 @@ export function DashboardView() {
             {/* Header */}
             <div className="mb-6 flex items-center justify-between gap-4">
               <div className="flex items-center gap-3">
-                <SidebarTrigger />
+                <SidebarTrigger aria-label={tsidebar("toggleSidebar")} />
                 <div>
-                  <h1 className="font-serif text-3xl font-semibold tracking-tight">{t("header.title")}</h1>
+                  <h1 className="font-serif text-3xl font-semibold tracking-tight">
+                    {t("header.title")}
+                  </h1>
                   <p className="mt-1 text-sm text-muted-foreground">
                     {t("header.coursesCount", { count: courses.length })}
                   </p>
@@ -294,8 +298,9 @@ export function DashboardView() {
             </div>
 
             {isLoading ? (
-              <div className="space-y-8">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+              <div className="space-y-8" role="status" aria-busy="true">
+                <span className="sr-only">{t("loading")}</span>
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
                   {Array.from({ length: 4 }).map((_, i) => (
                     <Card key={i} className="card-interactive">
                       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -394,7 +399,7 @@ mis datos son: [PEGAR AQUÍ]`;
     <div className="space-y-6">
       <Card>
         <CardContent className="flex flex-col items-center py-12 text-center">
-          <BookOpen className="mb-4 h-12 w-12 text-muted-foreground/50" />
+          <BookOpen className="mb-4 h-12 w-12 text-muted-foreground/50" aria-hidden="true" />
           <h2 className="text-xl font-semibold">{t("title")}</h2>
           <p className="mt-2 max-w-md text-sm text-muted-foreground">{t("description")}</p>
           <div className="mt-6 flex gap-3">
@@ -559,7 +564,9 @@ function StatsView({
                 <BookOpen className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold tabular-nums">{animTotalCourses.toLocaleString()}</div>
+                <div className="text-2xl font-bold tabular-nums">
+                  {animTotalCourses.toLocaleString()}
+                </div>
               </CardContent>
             </Card>
 
@@ -589,7 +596,9 @@ function StatsView({
                   <Clock className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold tabular-nums">{animTotalDaysSit.toLocaleString()}</div>
+                  <div className="text-2xl font-bold tabular-nums">
+                    {animTotalDaysSit.toLocaleString()}
+                  </div>
                 </CardContent>
               </Card>
             )}
@@ -620,7 +629,9 @@ function StatsView({
                   <Users className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold tabular-nums">{animTotalDaysServe.toLocaleString()}</div>
+                  <div className="text-2xl font-bold tabular-nums">
+                    {animTotalDaysServe.toLocaleString()}
+                  </div>
                 </CardContent>
               </Card>
             )}
@@ -643,7 +654,9 @@ function StatsView({
                   <Globe className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold tabular-nums">{animCountries.toLocaleString()}</div>
+                  <div className="text-2xl font-bold tabular-nums">
+                    {animCountries.toLocaleString()}
+                  </div>
                 </CardContent>
               </Card>
             )}
@@ -655,7 +668,9 @@ function StatsView({
                   <Hourglass className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold tabular-nums">{animYearsMeditating.toLocaleString()}</div>
+                  <div className="text-2xl font-bold tabular-nums">
+                    {animYearsMeditating.toLocaleString()}
+                  </div>
                 </CardContent>
               </Card>
             )}
@@ -667,7 +682,9 @@ function StatsView({
                   <GraduationCap className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold tabular-nums">{animYearsAT.toLocaleString()}</div>
+                  <div className="text-2xl font-bold tabular-nums">
+                    {animYearsAT.toLocaleString()}
+                  </div>
                 </CardContent>
               </Card>
             )}
@@ -704,7 +721,16 @@ function StatsView({
                   </span>
                 </div>
                 <div className="flex-1">
-                  <div className="h-2 w-full overflow-hidden rounded-full bg-secondary">
+                  <div
+                    className="h-2 w-full overflow-hidden rounded-full bg-secondary"
+                    role="progressbar"
+                    aria-valuenow={
+                      totalCourses > 0 ? Math.round((sitCount / totalCourses) * 100) : 0
+                    }
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    aria-label={t("progressLabel")}
+                  >
                     <div
                       className="h-full bg-primary transition-all"
                       style={{
@@ -739,7 +765,7 @@ function StatsView({
                       className="flex items-center justify-between rounded-lg border p-3"
                     >
                       <div className="flex items-center gap-3">
-                        <Calendar className="h-4 w-4 text-muted-foreground" />
+                        <Calendar className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
                         <div>
                           <p className="text-sm font-medium">{course.place}</p>
                           <p className="text-xs text-muted-foreground">
@@ -858,9 +884,22 @@ function CoursesTableView({
                             type="button"
                             onClick={h.column.getToggleSortingHandler()}
                             className="inline-flex items-center gap-1 hover:text-foreground"
+                            aria-label={
+                              h.column.getCanSort()
+                                ? `${typeof h.column.columnDef.header === "string" ? h.column.columnDef.header : ""} — ${
+                                    h.column.getIsSorted() === "asc"
+                                      ? tt("sortAscending")
+                                      : h.column.getIsSorted() === "desc"
+                                        ? tt("sortDescending")
+                                        : tt("sortNone")
+                                  }`
+                                : undefined
+                            }
                           >
                             {flexRender(h.column.columnDef.header, h.getContext())}
-                            {h.column.getCanSort() && <ArrowUpDown className="h-3 w-3 opacity-50" />}
+                            {h.column.getCanSort() && (
+                              <ArrowUpDown className="h-3 w-3 opacity-50" />
+                            )}
                           </button>
                         )}
                       </TableHead>

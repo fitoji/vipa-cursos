@@ -153,6 +153,9 @@
   :focus-visible {
     outline: 2px solid var(--ring);
     outline-offset: 2px;
+    box-shadow:
+      0 0 0 2px var(--background),
+      0 0 0 4px var(--ring);
   }
 }
 
@@ -350,8 +353,10 @@
   }
   .hover-lift:hover,
   .hover-scale:hover,
+  .hover-glow:hover,
   .card-interactive:hover {
     transform: none !important;
+    box-shadow: none !important;
   }
   .hover-lift,
   .hover-scale,
@@ -359,5 +364,8 @@
   .press-effect,
   .card-interactive {
     transition: none !important;
+  }
+  .press-effect:active {
+    transform: none !important;
   }
 }

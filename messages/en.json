@@ -149,9 +149,16 @@
         "deleting": "Deleting…"
       },
       "filterBadge": "Remove filter",
+      "edit": "Edit",
+      "delete": "Delete",
+      "sortAscending": "sort ascending",
+      "sortDescending": "sort descending",
+      "sortNone": "unsorted",
       "sit": "Sit",
       "serve": "Serve"
     },
+    "progressLabel": "Sit/Serve mode percentage",
+    "loading": "Loading courses…",
     "empty": {
       "title": "No courses registered",
       "description": "Import your data from a JSON file or add courses manually.",
@@ -162,6 +169,8 @@
       "copied": "Copied"
     },
     "sidebar": {
+      "toggleSidebar": "Toggle sidebar",
+      "mainNav": "Main navigation",
       "stats": "Statistics",
       "allCourses": "View all courses",
       "centers": "Vipassana Centers",

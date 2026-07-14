@@ -139,10 +139,14 @@ export function CursosView() {
 
         <Card ref={formRef} className={cn(formInView && "anim-fade-up")}>
           <CardHeader>
-            <CardTitle>{t("formTitle")}</CardTitle>
+            <CardTitle id="cursos-form-title">{t("formTitle")}</CardTitle>
           </CardHeader>
           <CardContent>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 sm:grid-cols-2">
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="grid gap-4 sm:grid-cols-2"
+              aria-labelledby="cursos-form-title"
+            >
               <div className="grid gap-1.5">
                 <Label htmlFor="start_date">{t("labels.startDate")}</Label>
                 <DatePicker
@@ -170,9 +174,7 @@ export function CursosView() {
                   ))}
                 </datalist>
                 {form.formState.errors.place && (
-                  <p className="text-xs text-destructive">
-                    {form.formState.errors.place.message}
-                  </p>
+                  <p className="text-xs text-destructive">{form.formState.errors.place.message}</p>
                 )}
               </div>
 
@@ -201,9 +203,10 @@ export function CursosView() {
               </div>
 
               <div className="grid gap-1.5 sm:col-span-2">
-                <Label>{t("labels.mode")}</Label>
+                <Label id="cursos-mode-label">{t("labels.mode")}</Label>
                 <RadioGroup
                   value={form.watch("mode")}
+                  aria-labelledby="cursos-mode-label"
                   onValueChange={(v) => {
                     const newMode = v as "sit" | "serve";
                     form.setValue("mode", newMode);
@@ -235,12 +238,12 @@ export function CursosView() {
               </div>
 
               <div className="grid gap-1.5">
-                <Label>{t("labels.days")}</Label>
+                <Label id="cursos-days-label">{t("labels.days")}</Label>
                 <Select
                   value={form.watch("daysPreset")}
                   onValueChange={(v) => form.setValue("daysPreset", v)}
                 >
-                  <SelectTrigger>
+                  <SelectTrigger aria-labelledby="cursos-days-label">
                     <SelectValue placeholder={t("labels.daysPlaceholder")} />
                   </SelectTrigger>
                   <SelectContent>
@@ -256,14 +259,15 @@ export function CursosView() {
                     })}
                     <SelectSeparator />
                     <SelectItem value="special-10">
-                      {t("days.labelWithName", { days: 10, name: t("days.courseNames.special-10") })}
+                      {t("days.labelWithName", {
+                        days: 10,
+                        name: t("days.courseNames.special-10"),
+                      })}
                     </SelectItem>
                     <SelectItem value="kids-1">
                       {t("days.labelWithName", { days: 1, name: t("days.courseNames.kids-1") })}
                     </SelectItem>
-                    <SelectItem value="tsc">
-                      {t("days.courseNames.tsc")}
-                    </SelectItem>
+                    <SelectItem value="tsc">{t("days.courseNames.tsc")}</SelectItem>
                     <SelectItem value="other">
                       {mode === "serve" ? t("labels.daysCustomServe") : t("labels.daysCustomSit")}
                     </SelectItem>

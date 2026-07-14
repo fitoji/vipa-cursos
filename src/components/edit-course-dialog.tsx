@@ -145,9 +145,10 @@ export function EditCourseDialog({
             </datalist>
           </div>
           <div className="grid gap-1.5 sm:col-span-2 anim-fade-up" style={staggerDelay(4)}>
-            <Label>{t("labels.mode")}</Label>
+            <Label id="e_mode-label">{t("labels.mode")}</Label>
             <RadioGroup
               value={form.watch("mode")}
+              aria-labelledby="e_mode-label"
               onValueChange={(v) => {
                 const newMode = v as "sit" | "serve";
                 form.setValue("mode", newMode);
@@ -178,12 +179,12 @@ export function EditCourseDialog({
             </RadioGroup>
           </div>
           <div className="grid gap-1.5 anim-fade-up" style={staggerDelay(5)}>
-            <Label>{t("labels.days")}</Label>
+            <Label id="e_days-label">{t("labels.days")}</Label>
             <Select
               value={form.watch("daysPreset")}
               onValueChange={(v) => form.setValue("daysPreset", v)}
             >
-              <SelectTrigger>
+              <SelectTrigger aria-labelledby="e_days-label">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -211,7 +212,7 @@ export function EditCourseDialog({
               </SelectContent>
             </Select>
           </div>
-            {(daysPreset === "other" || daysPreset === "tsc") && (
+          {(daysPreset === "other" || daysPreset === "tsc") && (
             <div className="grid gap-1.5 anim-fade-up" style={staggerDelay(6)}>
               <Label htmlFor="e_custom">
                 {mode === "serve" ? t("labels.daysCustomServe") : t("labels.daysCustomSit")}

@@ -123,9 +123,7 @@ export function LoginForm() {
         <div className="flex h-full items-end p-12">
           <div className="text-left">
             <img src="/logo.svg" alt="VipaBase" className="mb-4 h-10 w-auto brightness-0 invert" />
-            <p className="max-w-sm text-sm leading-relaxed text-white/70">
-              {tp("tagline")}
-            </p>
+            <p className="max-w-sm text-sm leading-relaxed text-white/70">{tp("tagline")}</p>
           </div>
         </div>
       </div>
@@ -242,7 +240,7 @@ export function LoginForm() {
                   <button
                     type="button"
                     onClick={() => setShowPassword((v) => !v)}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground focus-visible:text-foreground"
+                    className="absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center text-muted-foreground hover:text-foreground focus-visible:text-foreground"
                     aria-label={showPassword ? t("form.hidePassword") : t("form.showPassword")}
                   >
                     {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}

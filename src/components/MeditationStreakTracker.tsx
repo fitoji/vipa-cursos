@@ -63,6 +63,7 @@ export default function MeditationStreakTracker() {
   const tSection = useTranslations("Racha.section");
   const tEmpty = useTranslations("Racha.empty");
   const tStreak = useTranslations("Racha.streak");
+  const tSidebar = useTranslations("Dashboard.sidebar");
 
   const {
     register,
@@ -138,7 +139,7 @@ export default function MeditationStreakTracker() {
             {/* Header */}
             <div className="mb-8 flex items-center justify-between gap-4">
               <div className="flex items-center gap-3">
-                <SidebarTrigger />
+                <SidebarTrigger aria-label={tSidebar("toggleSidebar")} />
                 <div>
                   <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 ring-1 ring-primary/20">
                     <Flame className="h-5 w-5 text-primary" />
@@ -391,7 +392,7 @@ function StreakRow({
         variant="ghost"
         size="icon"
         onClick={() => onDelete(streak.id)}
-        className="opacity-0 transition-opacity group-hover:opacity-100 text-muted-foreground hover:text-destructive"
+        className="opacity-0 transition-opacity group-hover:opacity-100 focus-visible:opacity-100 text-muted-foreground hover:text-destructive"
         aria-label={tStreak("delete")}
       >
         <Trash2 className="h-4 w-4" />

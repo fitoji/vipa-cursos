@@ -51,6 +51,7 @@ export function LandingView() {
       {/* Hero — hero.jpg as background */}
       <section
         className="relative flex h-full items-center overflow-hidden"
+        aria-label={t("aria.hero")}
         style={{
           backgroundImage: "url('/hero.jpg')",
           backgroundSize: "cover",
@@ -59,10 +60,7 @@ export function LandingView() {
       >
         {/* Dark overlay for readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
-        <div
-          ref={heroRef}
-          className="relative z-10 mx-auto w-full max-w-6xl px-6 py-16 sm:py-20"
-        >
+        <div ref={heroRef} className="relative z-10 mx-auto w-full max-w-6xl px-6 py-16 sm:py-20">
           <div className="max-w-xl">
             <h1
               className={cn(
@@ -75,7 +73,7 @@ export function LandingView() {
             </h1>
             <p
               className={cn(
-                "mt-4 text-lg leading-relaxed text-white/80 drop-shadow",
+                "mt-4 text-lg leading-relaxed text-white/90 drop-shadow",
                 heroInView && "anim-fade-up",
               )}
               style={heroInView ? staggerDelay(2) : undefined}
@@ -83,17 +81,14 @@ export function LandingView() {
               {t("hero.subtitle")}
             </p>
             <div
-              className={cn(
-                "mt-8 flex items-center gap-4",
-                heroInView && "anim-fade-up",
-              )}
+              className={cn("mt-8 flex items-center gap-4", heroInView && "anim-fade-up")}
               style={heroInView ? staggerDelay(3) : undefined}
             >
               {isLoggedIn ? (
                 <>
-                <Button size="lg" asChild>
-                  <Link href="/dashboard">{t("hero.loggedInCta")}</Link>
-                </Button>
+                  <Button size="lg" asChild>
+                    <Link href="/dashboard">{t("hero.loggedInCta")}</Link>
+                  </Button>
                   <Button size="lg" variant="outline" asChild>
                     <Link href="/cursos">{t("hero.newCourse")}</Link>
                   </Button>
@@ -111,6 +106,7 @@ export function LandingView() {
       {/* Features — bosque.webp as subtle background */}
       <section
         className="relative border-t"
+        aria-label={t("aria.features")}
         style={{
           backgroundImage: "url('/bosque.webp')",
           backgroundSize: "cover",
@@ -130,7 +126,7 @@ export function LandingView() {
                 className="hover-lift border-white/10 bg-white/90 shadow-lg backdrop-blur-sm dark:bg-black/80"
               >
                 <CardContent className="flex gap-4 p-6">
-                  <f.icon className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                  <f.icon className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
                   <div>
                     <h3 className="font-serif font-medium">{t(f.titleKey)}</h3>
                     <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
@@ -146,7 +142,7 @@ export function LandingView() {
 
       {/* CTA — hidden when logged in */}
       {!isLoggedIn && (
-        <section className="border-t">
+        <section className="border-t" aria-label={t("aria.cta")}>
           <div className="mx-auto max-w-6xl px-6 py-24 sm:py-32">
             <div className="flex flex-col items-start gap-8 sm:flex-row sm:items-center">
               <img
@@ -158,9 +154,7 @@ export function LandingView() {
                 <h2 className="font-serif text-2xl font-semibold tracking-tight sm:text-3xl">
                   {t("cta.title")}
                 </h2>
-                <p className="mt-2 max-w-md text-muted-foreground">
-                  {t("cta.description")}
-                </p>
+                <p className="mt-2 max-w-md text-muted-foreground">{t("cta.description")}</p>
                 <Button size="lg" className="mt-6 hover:bg-primary/90" asChild>
                   <Link href="/login">{t("cta.button")}</Link>
                 </Button>

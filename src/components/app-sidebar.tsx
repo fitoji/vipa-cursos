@@ -92,36 +92,38 @@ export function AppSidebar({ activeView, onNavigate }: AppSidebarProps) {
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
-            <SidebarMenu>
-              {navItems.map((item) => (
-                <SidebarMenuItem key={item.view}>
-                  {onNavigate ? (
-                    <SidebarMenuButton
-                      isActive={activeView === item.view}
-                      onClick={() => onNavigate(item.view)}
-                    >
-                      <item.icon className="h-4 w-4" />
-                      <span>{item.label}</span>
-                    </SidebarMenuButton>
-                  ) : (
-                    <SidebarMenuButton asChild isActive={false}>
-                      <Link href="/dashboard">
+            <nav aria-label={t("mainNav")}>
+              <SidebarMenu>
+                {navItems.map((item) => (
+                  <SidebarMenuItem key={item.view}>
+                    {onNavigate ? (
+                      <SidebarMenuButton
+                        isActive={activeView === item.view}
+                        onClick={() => onNavigate(item.view)}
+                      >
                         <item.icon className="h-4 w-4" />
                         <span>{item.label}</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  )}
+                      </SidebarMenuButton>
+                    ) : (
+                      <SidebarMenuButton asChild isActive={false}>
+                        <Link href="/dashboard">
+                          <item.icon className="h-4 w-4" />
+                          <span>{item.label}</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    )}
+                  </SidebarMenuItem>
+                ))}
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild>
+                    <Link href="/racha">
+                      <Flame className="h-4 w-4" />
+                      <span>{t("racha")}</span>
+                    </Link>
+                  </SidebarMenuButton>
                 </SidebarMenuItem>
-              ))}
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <Link href="/racha">
-                    <Flame className="h-4 w-4" />
-                    <span>{t("racha")}</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
+              </SidebarMenu>
+            </nav>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>

@@ -149,9 +149,16 @@
         "deleting": "Eliminando…"
       },
       "filterBadge": "Quitar filtro",
+      "edit": "Editar",
+      "delete": "Eliminar",
+      "sortAscending": "orden ascendente",
+      "sortDescending": "orden descendente",
+      "sortNone": "sin ordenar",
       "sit": "Sentar",
       "serve": "Servir"
     },
+    "progressLabel": "Porcentaje de modo sentar/servir",
+    "loading": "Cargando cursos…",
     "empty": {
       "title": "No hay cursos registrados",
       "description": "Importá tus datos desde un archivo JSON o ingresá tus cursos manualmente.",
@@ -162,6 +169,8 @@
       "copied": "Copiado"
     },
     "sidebar": {
+      "toggleSidebar": "Alternar barra lateral",
+      "mainNav": "Navegación principal",
       "stats": "Estadísticas",
       "allCourses": "Ver todos los cursos",
       "centers": "Centros Vipassana",
