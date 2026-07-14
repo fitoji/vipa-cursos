@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery, useQueryClient, queryOptions } from "@tanstack/react-query";
-import { Link } from "@/i18n/navigation";
+import { TransitionLink as Link } from "@/components/transition-link";
 import { useMemo, useState } from "react";
 import {
   createColumnHelper,

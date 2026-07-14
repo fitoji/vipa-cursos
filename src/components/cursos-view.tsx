@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
-import { Link } from "@/i18n/navigation";
+import { TransitionLink as Link } from "@/components/transition-link";
 import { useTranslations } from "next-intl";
 import { Upload, LayoutDashboard } from "lucide-react";
 

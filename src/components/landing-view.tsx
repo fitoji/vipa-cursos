@@ -1,6 +1,6 @@
 "use client";
 
-import { Link } from "@/i18n/navigation";
+import { TransitionLink as Link } from "@/components/transition-link";
 import { BookOpen, Clock, BarChart3, BookText, Flame } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";

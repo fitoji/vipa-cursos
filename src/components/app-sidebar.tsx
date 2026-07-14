@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Link } from "@/i18n/navigation";
+import { TransitionLink as Link } from "@/components/transition-link";
 import {
   BarChart3,
   BookOpen,

@@ -5,7 +5,7 @@ import { useRouter } from "@/i18n/navigation";
 import { useTheme } from "next-themes";
 import { Moon, Sun, LogOut, CircleHelp } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { Link } from "@/i18n/navigation";
+import { TransitionLink as Link } from "@/components/transition-link";
 import { authClient } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
