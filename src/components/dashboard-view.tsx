@@ -171,7 +171,7 @@ export function DashboardView() {
     const activeStreak = streaks.find((s) => s.is_active) ?? null;
     const activeStreakDays = activeStreak
       ? Math.floor(
-          (new Date(new Date().toISOString().slice(0, 10)).getTime() -
+          (new Date(activeStreak.end_date.toString().slice(0, 10)).getTime() -
             new Date(activeStreak.start_date.toString().slice(0, 10)).getTime()) /
             86_400_000,
         ) + 1
@@ -782,7 +782,7 @@ function StatsView({
             )}
 
             {activeStreak && (
-              <Card className="border-primary/20 bg-primary/5">
+              <Card className="border-primary/20 bg-primary/50">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">{t("activeStreak")}</CardTitle>
                   <Flame className="h-4 w-4 text-primary" />
