@@ -2,7 +2,7 @@
 
 ## In Progress / Pending
 
-- [ ] Skeleton actualizar en dashboard
+- [x] Skeleton actualizar en dashboard
 - [ ] Agregar fotos a cursos (link en base de datos, y imagenes en el servidor)
 - [ ] Revisar mobile responsive
 
