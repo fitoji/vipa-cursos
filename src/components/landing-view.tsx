@@ -87,19 +87,19 @@ export function LandingView() {
               {isLoggedIn ? (
                 <>
                   <Button size="lg" asChild>
-                    <Link href="/dashboard">{t("hero.loggedInCta")}</Link>
+                    <Link href="/dashboard"><span className="shimmer">{t("hero.loggedInCta")}</span></Link>
                   </Button>
                   <Button size="lg" variant="outline" asChild>
-                    <Link href="/cursos">{t("hero.newCourse")}</Link>
+                    <Link href="/cursos"><span className="shimmer">{t("hero.newCourse")}</span></Link>
                   </Button>
                 </>
               ) : (
                 <>
                   <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10" asChild>
-                    <Link href="/login">{t("hero.signIn")}</Link>
+                    <Link href="/login"><span className="shimmer">{t("hero.signIn")}</span></Link>
                   </Button>
                   <Button size="lg" asChild>
-                    <Link href="/login">{t("hero.signUp")}</Link>
+                    <Link href="/login"><span className="shimmer">{t("hero.signUp")}</span></Link>
                   </Button>
                 </>
               )}
