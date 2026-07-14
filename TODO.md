@@ -1,43 +1,47 @@
-[x]agregar efecto scroll fade a ayuda page: https://ui.shadcn.com/docs/utils/scroll-fade
-[ ]skeleton actualizar en dashboard
+# TODO — vipa-base
 
-[x] realizar seo de la pagina
-[x] accesiblidad de la pagina (WCAG 2.2 AA — 32 issues resueltos)
-[ ] agregar fotos a cursos (link en base de datos, y imagenes en el servidor)
-[ ] posibilidad de compartir o ver cursos de amigos
-[ ] revisar mobile responsive
+## In Progress / Pending
+
+- [ ] Skeleton actualizar en dashboard
+- [ ] Agregar fotos a cursos (link en base de datos, y imagenes en el servidor)
+- [ ] Revisar mobile responsive
 
 ## Future Features
 
-### PWA (Progressive Web App)
-- [ ] Agregar manifest.json con iconos (192, 512, maskable)
-- [ ] Configurar service worker con serwist (next-pwa está deprecated)
-- [ ] Agregar meta tags: theme-color, apple-mobile-web-app-capable
-- [ ] Implementar push notifications para recordatorios de racha diaria
-- **Beneficio real**: push notifications para mantener la racha. Lo demás es cosmético.
-- **Nota**: la app necesita Neon para todo, así que offline no aplica.
+### Tier 1 — Alto impacto, alta factibilidad
 
-### localStorage Cache (React Query Persist)
-- [ ] Instalar @tanstack/query-persist-client-core
-- [ ] Configurar createSyncStoragePersister con localStorage
-- [ ] Persistir cache de cursos y dashboard (lecturas)
-- [ ] Las escrituras van a DB y refrescan el cache
-- **Beneficio**: carga instantánea al abrir la app, sin consultar Neon cada vez.
-- **Tradeoff**: no sync entre dispositivos (Neon lo da gratis).
-- **Idea**: usar staleTime alto para cursos (ej. 1 hora) ya que no cambian seguido.
-- **Referencia**: https://tanstack.com/query/latest/docs/framework/react/plugins/persistQueryClient
-11/07/26
-[x] agregar modo dark / light
-[x] utilizar los estilos de midnight.css
-[x] agregar header y footer
-[x] si esta logeado el boton empezar ahora en landing (hide)
-[x] si no hay sesion, ocultar boton cerrar sesion, y mostrar boton iniciar sesion o registrarse
-[x] sacar historial en mis cursos
-[x] en sidebar de panel de control, boton de descargar datos en json (descarga todos los cursos ingresados por el usuario en formato json)
-[x] si no hay ningun curso ingresado, mostrar mensaje de "no hay cursos" en lugar de la lista vacia. ademas agregar un ayuda si el usuario tiene datos cargados en un excel o documento word con un prompt para con chatgpt convertir esos datos al formato json y cargarlos en la aplicacion.
-[x] quiero que en el formulario en la parte de pais cargue los paises donde se hacen los cursos, en nuestra db tenemos una tabla de paises donde se almacenan los paises donde se hacen los cursos.(hazlo de la manera mas eficiente posible, cacheando los paises ya cargados en memoria o en el localStorage,tenemos una tabla de paises en nuestra db, tambien dejar la posibilidad de ingresar un nuevo pais en el formulario.
-[x] hacer lo mismo con lugar: buscar en nuestra db los lugares donde se hacen los cursos y mostrarlos en el formulario, cacheando los lugares ya cargados en memoria o en el localStorage, tenemos una tabla de lugares en nuestra db, y dejar la posibilidad de ingresar un nuevo lugar en el formulario. Ahora los lugares se filtran por el pais seleccionado.
-[x] cachea los paises y lugares y la seccion centros de vipassana ya cargados en memoria o en el localStorage, para evitar hacer consultas a la db cada vez que se cargue la pagina.
-[x] en mis cursos, el boton panel de control a la derecha de importar json.
+- [ ] **Gráficos en el Dashboard** (recharts) — Timeline de cursos (scatter: fecha vs días, color por modo), barras por año, pie sit/serve. `recharts` ya instalado.
+- [ ] **Heatmap de rachas** (estilo GitHub) — Grid de contribución mostrando días activos/omitidos. `date-fns` ya instalado.
+- [ ] **Detalle de curso** (modal o página) — Click en fila de la tabla para ver todos los campos, contexto temporal, y eventualmente fotos.
+- [ ] **Export CSV/Excel** — Export directo de la tabla filtrada. El prompt de ChatGPT en el empty state es un workaround.
 
+### Tier 2 — Alto impacto, factibilidad media
 
+- [ ] **Command Palette (cmd+k)** — `cmdk` ya instalado. Buscar cursos por lugar, profesor, país desde cualquier parte del app.
+- [ ] **Auto-detectar rachas desde cursos** — Al crear una racha, sugerir rangos basados en cursos contiguos. Elimina doble carga.
+- [ ] **PWA + notificaciones push** — Manifest + service worker con serwist. Push notifications para recordatorios diarios de racha.
+- [ ] **Fotos de cursos** — Campo de imagen opcional + upload a Vercel Blob. Thumbnails en tabla, full en detalle.
+
+### Tier 3 — Impacto medio, factibilidad media
+
+- [ ] **Metas/objetivos** — Tabla `meditation_goals`: objetivo de días por mes, cursos por año. Progress bars con `@radix-ui/react-progress`.
+- [ ] **Perfiles de profesores** — Agregar cursos por profesor: cuántos, dónde, cuándo. Insight para practicantes dedicados.
+- [ ] **Recordatorios por email** — Integrar `email.ts` con Resend/Postmark. Email diario/semanal para extender la racha.
+- [ ] **Mapa de centros** — Leaflet/Mapbox mostrando centros en mapa. La tabla `locations` ya tiene los datos.
+
+### Tier 4 — Horizonte más largo
+
+- [ ] **Vista compartida/social** — Perfil público de solo lectura para compartir historial de cursos.
+- [ ] **Responsive mobile-first** — Sidebar → bottom nav/drawer en mobile. Tablas con scroll horizontal. `vaul` ya instalado.
+- [ ] **Diario de cursos** — Expandir `obs` a entrada de rich-text por curso. Markdown + editor liviano.
+
+### Almacenamiento
+
+- [ ] **localStorage Cache (React Query Persist)** — Instalar `@tanstack/query-persist-client-core`, configurar `createSyncStoragePersister`, persistir cache de cursos y dashboard. Carga instantánea al abrir la app.
+  - Tradeoff: no sync entre dispositivos (Neon lo da gratis).
+  - Referencia: https://tanstack.com/query/latest/docs/framework/react/plugins/persistQueryClient
+
+### Infra / Auth
+
+- [ ] **Email real** — `sendEmail` es un console.log placeholder. Integrar con Resend o Postmark para password reset.
+- [ ] **Skeleton loading consistente** — Actualizar skeleton del dashboard y otras vistas.
