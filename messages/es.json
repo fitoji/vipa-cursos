@@ -164,7 +164,8 @@
       "downloading": "Descargando…",
       "noData": "No hay cursos para descargar",
       "import": "Importar datos",
-      "back": "Volver"
+      "back": "Volver",
+      "racha": "Meditación diaria"
     },
     "toast": {
       "deleted": "Curso eliminado",
@@ -396,6 +397,49 @@
       "resultCount": "{total} resultado{tplural}",
       "pageInfo": "— página {page} de {totalPages}",
       "notSpecified": "—"
+    }
+  },
+  "Racha": {
+    "meta": {
+      "title": "Rachas de Meditación — VipaBase",
+      "description": "Registra tu constancia diaria. Marca el inicio y el fin de cada racha."
+    },
+    "header": {
+      "title": "Práctica de meditación diaria",
+      "description": "Registra tu constancia diaria. Marca el inicio y el fin de cada racha."
+    },
+    "stats": {
+      "current": "Racha actual",
+      "best": "Mejor racha",
+      "total": "Total de rachas",
+      "days": "{count} día(s)"
+    },
+    "form": {
+      "newStreak": "Nueva racha",
+      "startDate": "Fecha de inicio",
+      "endDate": "Fecha de fin",
+      "save": "Guardar racha",
+      "cancel": "Cancelar",
+      "activeToday": "Racha activa (hoy)",
+      "finished": "Racha finalizada",
+      "duration": "Duración: {count} día(s)",
+      "addButton": "Sumar nueva racha",
+      "dateRequired": "Selecciona una fecha",
+      "endDateError": "La fecha de fin no puede ser anterior al inicio"
+    },
+    "section": {
+      "active": "En curso",
+      "finished": "Finalizadas"
+    },
+    "empty": {
+      "active": "No hay rachas activas. ¡Empieza una hoy!",
+      "finished": "Aún no has finalizado ninguna racha."
+    },
+    "streak": {
+      "day": "día",
+      "days": "días",
+      "active": "activa",
+      "delete": "Eliminar racha"
     }
   },
   "common": {

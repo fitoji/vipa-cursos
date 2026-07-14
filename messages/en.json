@@ -164,7 +164,8 @@
       "downloading": "Downloading…",
       "noData": "No courses to download",
       "import": "Import data",
-      "back": "Back"
+      "back": "Back",
+      "racha": "Daily meditation"
     },
     "toast": {
       "deleted": "Course deleted",
@@ -396,6 +397,49 @@
       "resultCount": "{total} result{tplural}",
       "pageInfo": "— page {page} of {totalPages}",
       "notSpecified": "—"
+    }
+  },
+  "Racha": {
+    "meta": {
+      "title": "Meditation Streaks — VipaBase",
+      "description": "Track your daily consistency. Mark the start and end of each streak."
+    },
+    "header": {
+      "title": "Daily meditation practice",
+      "description": "Track your daily consistency. Mark the start and end of each streak."
+    },
+    "stats": {
+      "current": "Current streak",
+      "best": "Best streak",
+      "total": "Total streaks",
+      "days": "{count} day(s)"
+    },
+    "form": {
+      "newStreak": "New streak",
+      "startDate": "Start date",
+      "endDate": "End date",
+      "save": "Save streak",
+      "cancel": "Cancel",
+      "activeToday": "Active streak (today)",
+      "finished": "Finished streak",
+      "duration": "Duration: {count} day(s)",
+      "addButton": "Add new streak",
+      "dateRequired": "Select a date",
+      "endDateError": "End date cannot be before start date"
+    },
+    "section": {
+      "active": "In progress",
+      "finished": "Finished"
+    },
+    "empty": {
+      "active": "No active streaks. Start one today!",
+      "finished": "You haven't finished any streaks yet."
+    },
+    "streak": {
+      "day": "day",
+      "days": "days",
+      "active": "active",
+      "delete": "Delete streak"
     }
   },
   "common": {

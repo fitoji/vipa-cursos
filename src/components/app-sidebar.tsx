@@ -11,6 +11,7 @@ import {
   Upload,
   ArrowLeft,
   Trash2,
+  Flame,
 } from "lucide-react";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
@@ -103,6 +104,14 @@ export function AppSidebar({ activeView, onNavigate }: AppSidebarProps) {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link href="/racha">
+                    <Flame className="h-4 w-4" />
+                    <span>{t("racha")}</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
