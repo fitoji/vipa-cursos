@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, Flame, Plus, Trash2, X } from "lucide-react";
+import { Check, Flame, Pencil, Plus, Trash2, X } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLocale, useTranslations } from "next-intl";
@@ -13,9 +13,10 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
 import { DatePicker } from "@/components/ui/date-picker";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
-import { listStreaks, createStreak, deleteStreak } from "@/app/actions/streaks";
+import { listStreaks, createStreak, deleteStreak, updateStreak } from "@/app/actions/streaks";
 
 type Streak = {
   id: number;
@@ -52,6 +53,7 @@ const streaksQuery = queryOptions({
 
 export default function MeditationStreakTracker() {
   const [showForm, setShowForm] = useState(false);
+  const [editing, setEditing] = useState<Streak | null>(null);
   const qc = useQueryClient();
 
   const { data: streaks = [], isLoading } = useQuery(streaksQuery);
@@ -111,6 +113,18 @@ export default function MeditationStreakTracker() {
       await qc.invalidateQueries({ queryKey: ["streaks"] });
     } catch {
       toast.error("Error al eliminar la racha");
+    }
+  };
+
+  const handleEdit = async (values: FormValues) => {
+    if (!editing) return;
+    try {
+      await updateStreak({ data: { id: editing.id, ...values } });
+      await qc.invalidateQueries({ queryKey: ["streaks"] });
+      setEditing(null);
+      toast.success(tStreak("updated"));
+    } catch {
+      toast.error("Error al actualizar la racha");
     }
   };
 
@@ -288,6 +302,7 @@ export default function MeditationStreakTracker() {
                   <StreakRow
                     key={s.id}
                     streak={s}
+                    onEdit={setEditing}
                     onDelete={handleDelete}
                     formatDate={formatDate}
                     tStreak={tStreak}
@@ -305,6 +320,7 @@ export default function MeditationStreakTracker() {
                   <StreakRow
                     key={s.id}
                     streak={s}
+                    onEdit={setEditing}
                     onDelete={handleDelete}
                     formatDate={formatDate}
                     tStreak={tStreak}
@@ -315,6 +331,23 @@ export default function MeditationStreakTracker() {
           </div>
         </div>
       </SidebarInset>
+
+      {/* Edit streak dialog */}
+      <Dialog open={!!editing} onOpenChange={(v) => !v && setEditing(null)}>
+        <DialogContent className="max-w-sm">
+          <DialogHeader>
+            <DialogTitle>{tStreak("edit")}</DialogTitle>
+          </DialogHeader>
+          {editing && (
+            <EditStreakForm
+              streak={editing}
+              onSubmit={handleEdit}
+              onCancel={() => setEditing(null)}
+              tForm={tForm}
+            />
+          )}
+        </DialogContent>
+      </Dialog>
     </SidebarProvider>
   );
 }
@@ -345,11 +378,13 @@ function Section({
 
 function StreakRow({
   streak,
+  onEdit,
   onDelete,
   formatDate,
   tStreak,
 }: {
   streak: Streak;
+  onEdit: (streak: Streak) => void;
   onDelete: (id: number) => void;
   formatDate: (d: string | Date) => string;
   tStreak: ReturnType<typeof useTranslations<"Racha.streak">>;
@@ -388,16 +423,78 @@ function StreakRow({
           </p>
         </div>
       </div>
-      <Button
-        variant="ghost"
-        size="icon"
-        onClick={() => onDelete(streak.id)}
-        className="opacity-0 transition-opacity group-hover:opacity-100 focus-visible:opacity-100 text-muted-foreground hover:text-destructive"
-        aria-label={tStreak("delete")}
-      >
-        <Trash2 className="h-4 w-4" />
-      </Button>
+      <div className="flex items-center gap-1">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => onEdit(streak)}
+          className="opacity-0 transition-opacity group-hover:opacity-100 focus-visible:opacity-100 text-muted-foreground hover:text-foreground"
+          aria-label={tStreak("edit")}
+        >
+          <Pencil className="h-4 w-4" />
+        </Button>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => onDelete(streak.id)}
+          className="opacity-0 transition-opacity group-hover:opacity-100 focus-visible:opacity-100 text-muted-foreground hover:text-destructive"
+          aria-label={tStreak("delete")}
+        >
+          <Trash2 className="h-4 w-4" />
+        </Button>
+      </div>
     </div>
+  );
+}
+
+function EditStreakForm({
+  streak,
+  onSubmit,
+  onCancel,
+  tForm,
+}: {
+  streak: Streak;
+  onSubmit: (values: FormValues) => void;
+  onCancel: () => void;
+  tForm: ReturnType<typeof useTranslations<"Racha.form">>;
+}) {
+  const {
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { isSubmitting },
+  } = useForm<FormValues>({
+    defaultValues: {
+      start_date: toDateStr(streak.start_date),
+      end_date: toDateStr(streak.end_date),
+    },
+  });
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <div className="space-y-2">
+        <Label>{tForm("startDate")}</Label>
+        <DatePicker
+          value={watch("start_date")}
+          onChange={(v) => v && setValue("start_date", v, { shouldValidate: true })}
+        />
+      </div>
+      <div className="space-y-2">
+        <Label>{tForm("endDate")}</Label>
+        <DatePicker
+          value={watch("end_date")}
+          onChange={(v) => v && setValue("end_date", v, { shouldValidate: true })}
+        />
+      </div>
+      <DialogFooter>
+        <Button type="button" variant="ghost" onClick={onCancel}>
+          {tForm("cancel")}
+        </Button>
+        <Button type="submit" disabled={isSubmitting}>
+          {tForm("save")}
+        </Button>
+      </DialogFooter>
+    </form>
   );
 }
 

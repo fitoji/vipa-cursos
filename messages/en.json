@@ -555,6 +555,8 @@
       "day": "day",
       "days": "days",
       "active": "active",
+      "edit": "Edit streak",
+      "updated": "Streak updated",
       "delete": "Delete streak"
     }
   },

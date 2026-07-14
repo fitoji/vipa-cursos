@@ -89,18 +89,20 @@ export async function deleteStreak({ data }: { data: { id: number } }) {
 export async function updateStreak({
   data,
 }: {
-  data: { id: number; end_date: string };
+  data: { id: number; start_date: string; end_date: string };
 }) {
   const session = await getSession();
   if (!session?.user?.id) throw new Error("Unauthorized");
   const userId = session.user.id;
 
+  const parsed = streakSchema.parse(data);
+
   const { neon } = await import("@neondatabase/serverless");
   const sql = neon(process.env.DATABASE_URL!);
-  const active = isStreakActive(data.end_date);
+  const active = isStreakActive(parsed.end_date);
   const rows = await sql`
     UPDATE meditation_streaks
-    SET end_date = ${data.end_date}, is_active = ${active}
+    SET start_date = ${parsed.start_date}, end_date = ${parsed.end_date}, is_active = ${active}
     WHERE id = ${data.id} AND user_id = ${userId}
     RETURNING id, user_id, start_date, end_date, is_active, created_at
   `;
