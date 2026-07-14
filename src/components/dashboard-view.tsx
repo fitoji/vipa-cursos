@@ -168,7 +168,25 @@ export function DashboardView() {
       : new Date().getFullYear();
     const yearsMeditating = courses.length ? new Date().getFullYear() - firstYear : 0;
 
-    const activeStreak = streaks.find((s) => s.is_active) ?? null;
+    const activeStreaks = streaks.filter((s) => s.is_active);
+    const activeStreak =
+      activeStreaks.length > 0
+        ? activeStreaks.reduce((longest, s) => {
+            const longestDays =
+              Math.floor(
+                (new Date(longest.end_date.toString().slice(0, 10)).getTime() -
+                  new Date(longest.start_date.toString().slice(0, 10)).getTime()) /
+                  86_400_000,
+              ) + 1;
+            const sDays =
+              Math.floor(
+                (new Date(s.end_date.toString().slice(0, 10)).getTime() -
+                  new Date(s.start_date.toString().slice(0, 10)).getTime()) /
+                  86_400_000,
+              ) + 1;
+            return sDays > longestDays ? s : longest;
+          })
+        : null;
     const activeStreakDays = activeStreak
       ? Math.floor(
           (new Date(activeStreak.end_date.toString().slice(0, 10)).getTime() -
