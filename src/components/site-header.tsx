@@ -3,7 +3,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "@/i18n/navigation";
 import { useTheme } from "next-themes";
-import { Moon, Sun, LogOut, BookOpen } from "lucide-react";
+import { Moon, Sun, LogOut, CircleHelp } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import { authClient } from "@/lib/auth-client";
@@ -74,7 +74,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-3">
           <Button variant="ghost" size="icon" asChild aria-label={t("help")}>
             <Link href="/ayuda">
-              <BookOpen className="h-4 w-4" />
+              <CircleHelp className="h-4 w-4" />
             </Link>
           </Button>
           <Button
