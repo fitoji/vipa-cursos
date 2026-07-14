@@ -40,15 +40,14 @@ export function HelpView() {
 
   return (
     <div className="relative h-full">
-      {/* bosque.webp background */}
+      {/* gradient background */}
       <div
-        className="pointer-events-none absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="pointer-events-none absolute inset-0"
         style={{
-          backgroundImage: "url('/bosque.webp')",
+          background:
+            "radial-gradient(ellipse 80% 50% at 50% -20%, oklch(0.5676 0.2021 283.0838 / 0.08), transparent), linear-gradient(to bottom, oklch(0.9821 0.005 117), oklch(0.96 0.005 117))",
         }}
       />
-      {/* overlay for readability */}
-      <div className="pointer-events-none absolute inset-0 bg-background/55 backdrop-blur-sm" />
 
       <div className="relative z-10 mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
       {/* Back to dashboard */}
