@@ -39,7 +39,18 @@ export function HelpView() {
   const t = useTranslations("HelpPage") as any;
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
+    <div className="relative h-full">
+      {/* bosque.webp background */}
+      <div
+        className="pointer-events-none absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: "url('/bosque.webp')",
+        }}
+      />
+      {/* overlay for readability */}
+      <div className="pointer-events-none absolute inset-0 bg-background/55 backdrop-blur-sm" />
+
+      <div className="relative z-10 mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
       {/* Back to dashboard */}
       <div className="mb-8">
         <Button variant="ghost" size="sm" asChild>
@@ -211,6 +222,7 @@ export function HelpView() {
           </div>
         </div>
       </section>
+      </div>
     </div>
   );
 }
