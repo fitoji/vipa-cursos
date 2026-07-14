@@ -25,7 +25,7 @@
       "items": {
         "register": {
           "title": "Registra cada curso",
-          "description": "Fecha, lugar, profesor, país, modo (sit o serve) y duración."
+          "description": "Fecha, lugar, profesor, país, modo (sentar o servir) y duración."
         },
         "history": {
           "title": "Historial completo",
