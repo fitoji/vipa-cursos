@@ -1,7 +1,7 @@
 "use client";
 
 import { Link } from "@/i18n/navigation";
-import { BookOpen, Clock, BarChart3, Shield, Flame } from "lucide-react";
+import { BookOpen, Clock, BarChart3, BookText, Flame } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useInView, staggerDelay } from "@/lib/animations";
@@ -31,9 +31,9 @@ const features = [
     descriptionKey: "features.items.streak.description",
   },
   {
-    icon: Shield,
-    titleKey: "features.items.privacy.title",
-    descriptionKey: "features.items.privacy.description",
+    icon: BookText,
+    titleKey: "features.items.help.title",
+    descriptionKey: "features.items.help.description",
   },
 ];
 
@@ -125,22 +125,31 @@ export function LandingView() {
             {t("features.heading")}
           </h2>
           <div className="grid gap-5 sm:grid-cols-2">
-            {features.map((f) => (
-              <Card
-                key={f.titleKey}
-                className="hover-lift border-white/10 bg-white/90 shadow-lg backdrop-blur-sm dark:bg-black/80"
-              >
-                <CardContent className="flex gap-4 p-6">
-                  <f.icon className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
-                  <div>
-                    <h3 className="font-serif font-medium">{t(f.titleKey)}</h3>
-                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                      {t(f.descriptionKey)}
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+            {features.map((f) => {
+              const isHelp = f.icon === BookText;
+              const Wrapper = isHelp ? Link : "div";
+              const wrapperProps = isHelp ? { href: "/ayuda", className: "block" } : {};
+              return (
+                <Wrapper key={f.titleKey} {...wrapperProps}>
+                  <Card
+                    className={cn(
+                      "hover-lift border-white/10 bg-white/90 shadow-lg backdrop-blur-sm dark:bg-black/80",
+                      isHelp && "cursor-pointer transition-colors hover:bg-white/70 dark:hover:bg-black/60",
+                    )}
+                  >
+                    <CardContent className="flex gap-4 p-6">
+                      <f.icon className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
+                      <div>
+                        <h3 className="font-serif font-medium">{t(f.titleKey)}</h3>
+                        <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                          {t(f.descriptionKey)}
+                        </p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Wrapper>
+              );
+            })}
           </div>
         </div>
       </section>

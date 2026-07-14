@@ -6,6 +6,88 @@
       "ogDescription": "App personal para registrar y organizar tus cursos de meditación Vipassana."
     }
   },
+  "HelpPage": {
+    "meta": {
+      "title": "Ayuda — VipaBase",
+      "description": "Guía de uso de VipaBase. Aprendé a registrar cursos de Vipassana, mantener tu racha diaria, y convertir tus Excel o Word a formato VipaBase.",
+      "chatgptTitle": "Ayuda — Convertir datos con ChatGPT"
+    },
+    "title": "Ayuda",
+    "subtitle": "Todo lo que necesitás saber para usar VipaBase: desde el primer curso hasta la exportación de datos.",
+    "navLabel": "Secciones",
+    "sections": {
+      "intro": {
+        "title": "Introducción",
+        "intro": "VipaBase es tu registro personal de cursos de meditación Vipassana. Podés guardar cada curso que hagas, ya sea un sit (sentado) o un serve (servicio), y tener todo organizado en un solo lugar.",
+        "item1": "Registrar cursos con fecha, lugar, profesor, modo y duración.",
+        "item2": "Ver tu historial completo con una tabla filtrable y ordenable.",
+        "item3": "Mantener una racha diaria de meditación.",
+        "item4": "Exportar e importar datos en JSON, o migrar desde Excel o Word.",
+        "item5": "Todo sincronizado en la nube con tu cuenta."
+      },
+      "courses": {
+        "title": "Registrar un curso",
+        "step1": "Iniciá sesión en VipaBase.",
+        "step2": "Andá a la página de Cursos desde el menú lateral del panel de control.",
+        "step3": "Completá la fecha de inicio del curso usando el calendario.",
+        "step4": "Seleccioná el país donde se realizó el curso. Si no aparece, empezalo a escribir y se agregará solo.",
+        "step5": "Seleccioná el lugar — solo se muestran centros del país que elegiste. También podés escribir uno nuevo.",
+        "step6": "Indicá el profesor (opcional).",
+        "step7": "Elegí el modo: sit (sentado) o serve (servicio).",
+        "step8": "Indicá cuántos días duró el curso.",
+        "step9": "Agregá comentarios o notas si querés (opcional).",
+        "step10": "Hacé clic en Guardar y el curso aparecerá automáticamente en tu panel.",
+        "faq": {
+          "title": "Preguntas frecuentes",
+          "q1": "¿Puedo editar o eliminar un curso después de guardarlo?",
+          "a1": "Sí. En la tabla del panel de control encontrás los botones de Editar (icono lápiz) y Eliminar (icono papelera) a la derecha de cada fila. Al editar podés cambiar cualquier campo; al eliminar se borra permanentemente.",
+          "q2": "¿Puedo tener dos cursos con la misma fecha?",
+          "a2": "Sí. VipaBase permite fechas duplicadas. Si hiciste dos cursos en paralelo (uno sentado y el otro sirviendo), registralos por separado."
+        }
+      },
+      "dashboard": {
+        "title": "Panel de control",
+        "intro": "El panel de control te da una vista general de tu práctica y el acceso a todas las funciones.",
+        "item1": "Cards de resumen: total de cursos, días sentado, días sirviendo, países visitados.",
+        "item2": "Tabla de cursos: ordená por cualquier columna, buscá por texto, filtrá por modo.",
+        "item3": "Botón \"Descargar JSON\": exportá todos tus cursos en un archivo JSON.",
+        "item4": "Botón \"Importar JSON\": cargá cursos desde un archivo JSON previamente exportado."
+      },
+      "racha": {
+        "title": "Racha de meditación diaria",
+        "intro": "La página Meditación diaria te permite registrar tu práctica de meditación de cada día y mantener el hábito.",
+        "item1": "Cada racha tiene una fecha de inicio y una fecha de finalización.",
+        "item2": "Las rachas activas no tienen fecha de finalización y se marcan con la etiqueta \"activa\".",
+        "item3": "Podés tener una sola racha activa a la vez. Al crear una nueva, la anterior se cierra automáticamente.",
+        "item4": "Usá el selector de fecha (DatePicker) para elegir día, mes y año exactos."
+      },
+      "chatgpt": {
+        "title": "Convertir Excel o Word con ChatGPT",
+        "intro": "Si tenés cursos anotados en un Excel, Word, Google Sheets, Notion o cualquier otro formato, podés usar ChatGPT para convertirlos al formato JSON de VipaBase.",
+        "step1": "Copiá el contenido de tu documento (la tabla de Excel, la lista de Word, lo que sea).",
+        "step2": "Andá a ChatGPT (chatgpt.com).",
+        "step3": "Pegá este prompt exacto (reemplazá SOLO los campos entre [corchetes]):",
+        "step4": "Pegá el contenido de tu documento debajo del prompt y envialo.",
+        "step5": "ChatGPT te devolverá un JSON. Copiá ese JSON al portapapeles.",
+        "step6": "Volvé a VipaBase, andá a la página de Cursos, y usá el botón \"Importar JSON\".",
+        "tip": "Antes de empezar, asegurate de que las fechas en tu documento estén en un formato uniforme (ej: DD/MM/AAAA o MM/DD/AAAA) para evitar errores de conversión.",
+        "tipTitle": "Consejo",
+        "promptLabel": "Prompt de ejemplo",
+        "prompt": "Te voy a pasar una lista de cursos de meditación Vipassana que hice, en varios formatos. Necesito que la conviertas a un array JSON con esta estructura exacta, sin nada más:\n\n[{\n  \"start_date\": \"YYYY-MM-DD\",\n  \"teacher\": \"Nombre del profesor\",\n  \"country\": \"País\",\n  \"place\": \"Nombre del centro\",\n  \"mode\": \"sit\" o \"serve\",\n  \"days\": NÚMERO,\n  \"obs\": \"Notas opcionales\"\n}]\n\nReglas:\n- start_date en formato YYYY-MM-DD\n- mode: \"sit\" para cursos sentados, \"serve\" para cursos de servicio\n- days: solo el número\n- Si un campo no está disponible, usa null\n\nAcá están mis datos:"
+      },
+      "export": {
+        "title": "Exportar e importar datos",
+        "intro": "VipaBase te permite descargar todos tus cursos en formato JSON y volver a importarlos cuando quieras.",
+        "step1": "En el panel de control, hacé clic en \"Descargar JSON\". Se descargará un archivo cursos.json.",
+        "step2": "Para importar, andá a la página de Cursos y usá el botón \"Importar JSON\". Seleccioná el archivo y los cursos se cargarán automáticamente.",
+        "step3": "También podés convertir datos desde Excel, Word u otros formatos usando ChatGPT (sección anterior)."
+      }
+    },
+    "cta": {
+      "courses": "Ir a Cursos",
+      "dashboard": "Ir al Panel de control"
+    }
+  },
   "HomePage": {
     "meta": {
       "title": "VipaBase — Tu registro personal de cursos de Vipassana",
@@ -41,8 +123,8 @@
           "description": "Registrá tu racha de meditación diaria y mantené el hábito."
         },
         "privacy": {
-          "title": "Privado y seguro",
-          "description": "Solo vos podés ver tus datos. Autenticación con Google o email."
+          "title": "Ayuda y documentación",
+          "description": "Guía completa con instrucciones, FAQ y cómo convertir tus Excel o Word al formato de VipaBase."
         }
       }
     },
@@ -361,9 +443,7 @@
   "SiteHeader": {
     "siteName": "VipaBase",
     "themeLabel": "Cambiar tema",
-    "signOut": "Cerrar sesión",
-    "signIn": "Iniciar sesión",
-    "signUp": "Registrarse",
+    "help": "Ayuda",
     "userMenu": {
       "name": "Usuario",
       "signOut": "Cerrar sesión"

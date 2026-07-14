@@ -72,6 +72,9 @@ export function SiteHeader() {
           <span className="font-serif text-lg font-semibold tracking-tight">{t("siteName")}</span>
         </Link>
         <div className="flex items-center gap-3">
+          <Button variant="ghost" size="sm" asChild>
+            <Link href="/ayuda">{t("help")}</Link>
+          </Button>
           <Button
             variant="ghost"
             size="icon"

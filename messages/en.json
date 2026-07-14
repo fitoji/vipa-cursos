@@ -6,6 +6,88 @@
       "ogDescription": "Personal app to register and organize your Vipassana meditation courses."
     }
   },
+  "HelpPage": {
+    "meta": {
+      "title": "Help — VipaBase",
+      "description": "VipaBase user guide. Learn how to log Vipassana courses, maintain your daily streak, and convert Excel or Word data to VipaBase format.",
+      "chatgptTitle": "Help — Converting data with ChatGPT"
+    },
+    "title": "Help",
+    "subtitle": "Everything you need to know about VipaBase: from your first course to data export.",
+    "navLabel": "Sections",
+    "sections": {
+      "intro": {
+        "title": "Introduction",
+        "intro": "VipaBase is your personal Vipassana meditation course tracker. Log every sit or serve course you take and keep everything organized in one place.",
+        "item1": "Register courses with date, place, teacher, mode and duration.",
+        "item2": "View your full history with a filterable, sortable table.",
+        "item3": "Maintain a daily meditation streak.",
+        "item4": "Export and import data as JSON, or migrate from Excel or Word.",
+        "item5": "Everything synced to the cloud with your account."
+      },
+      "courses": {
+        "title": "Registering a course",
+        "step1": "Sign in to VipaBase.",
+        "step2": "Go to the Courses page from the dashboard sidebar menu.",
+        "step3": "Fill in the course start date using the date picker.",
+        "step4": "Select the country where the course took place. If it doesn't appear, start typing and it will be added automatically.",
+        "step5": "Select the venue — only centers in your chosen country are shown. You can also type a new one.",
+        "step6": "Enter the teacher's name (optional).",
+        "step7": "Choose the mode: sit or serve.",
+        "step8": "Enter how many days the course lasted.",
+        "step9": "Add notes or comments if you like (optional).",
+        "step10": "Click Save and the course will appear in your dashboard automatically.",
+        "faq": {
+          "title": "FAQ",
+          "q1": "Can I edit or delete a course after saving it?",
+          "a1": "Yes. In the dashboard table you'll find Edit (pencil icon) and Delete (trash icon) buttons on the right side of each row. Editing lets you change any field; deleting removes it permanently.",
+          "q2": "Can I have two courses on the same date?",
+          "a2": "Yes. VipaBase allows duplicate dates. If you took two parallel courses (one sit and one serve, for example), just log them separately."
+        }
+      },
+      "dashboard": {
+        "title": "Dashboard",
+        "intro": "The dashboard gives you an overview of your practice and access to all features.",
+        "item1": "Summary cards: total courses, days sitting, days serving, countries visited.",
+        "item2": "Courses table: sort by any column, search by text, filter by mode.",
+        "item3": "\"Download JSON\" button: export all your courses as a JSON file.",
+        "item4": "\"Import JSON\" button: load courses from a previously exported JSON file."
+      },
+      "racha": {
+        "title": "Daily meditation streak",
+        "intro": "The Daily Practice page lets you track your meditation sessions day by day and build the habit.",
+        "item1": "Each streak has a start date and an end date.",
+        "item2": "Active streaks have no end date and are marked with the \"active\" badge.",
+        "item3": "You can only have one active streak at a time. Starting a new one automatically closes the previous one.",
+        "item4": "Use the DatePicker to select the exact day, month and year."
+      },
+      "chatgpt": {
+        "title": "Convert Excel or Word with ChatGPT",
+        "intro": "If you have courses logged in Excel, Word, Google Sheets, Notion or any other format, use ChatGPT to convert them to VipaBase JSON format.",
+        "step1": "Copy the content from your document (Excel table, Word list, whatever format).",
+        "step2": "Go to ChatGPT (chatgpt.com).",
+        "step3": "Paste this exact prompt (replace ONLY the fields in [brackets]):",
+        "step4": "Paste your document content below the prompt and send it.",
+        "step5": "ChatGPT will return a JSON. Copy that JSON to your clipboard.",
+        "step6": "Go back to VipaBase, navigate to the Courses page, and use the \"Import JSON\" button.",
+        "tip": "Before you start, make sure the dates in your document use a consistent format (e.g., YYYY-MM-DD or DD/MM/YYYY) to avoid conversion errors.",
+        "tipTitle": "Tip",
+        "promptLabel": "Example prompt",
+        "prompt": "I'll give you a list of Vipassana meditation courses I've taken, in various formats. I need you to convert them into a JSON array with this exact structure, nothing else:\n\n[{\n  \"start_date\": \"YYYY-MM-DD\",\n  \"teacher\": \"Teacher name\",\n  \"country\": \"Country\",\n  \"place\": \"Center name\",\n  \"mode\": \"sit\" or \"serve\",\n  \"days\": NUMBER,\n  \"obs\": \"Optional notes\"\n}]\n\nRules:\n- start_date in YYYY-MM-DD format\n- mode: \"sit\" for sitting courses, \"serve\" for service courses\n- days: number only\n- If a field is not available, use null\n\nHere are my records:"
+      },
+      "export": {
+        "title": "Exporting and importing data",
+        "intro": "VipaBase lets you download all your courses as JSON and re-import them whenever you need.",
+        "step1": "On the dashboard, click \"Download JSON\". A courses.json file will be downloaded.",
+        "step2": "To import, go to the Courses page and use the \"Import JSON\" button. Select the file and courses will be loaded automatically.",
+        "step3": "You can also convert data from Excel, Word or other formats using ChatGPT (see previous section)."
+      }
+    },
+    "cta": {
+      "courses": "Go to Courses",
+      "dashboard": "Go to Dashboard"
+    }
+  },
   "HomePage": {
     "meta": {
       "title": "VipaBase — Your personal Vipassana course tracker",
@@ -41,8 +123,8 @@
           "description": "Track your daily meditation streak and maintain the habit."
         },
         "privacy": {
-          "title": "Private and secure",
-          "description": "Only you can see your data. Authentication with Google or email."
+          "title": "Help & docs",
+          "description": "Full user guide with step-by-step instructions, FAQ, and how to convert your Excel or Word records to VipaBase format."
         }
       }
     },
@@ -361,9 +443,7 @@
   "SiteHeader": {
     "siteName": "VipaBase",
     "themeLabel": "Toggle theme",
-    "signOut": "Sign out",
-    "signIn": "Sign in",
-    "signUp": "Sign up",
+    "help": "Help",
     "userMenu": {
       "name": "User",
       "signOut": "Sign out"
