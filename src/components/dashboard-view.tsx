@@ -56,6 +56,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
+import { Skeleton } from "@/components/ui/skeleton";
 import { EditCourseDialog } from "@/components/edit-course-dialog";
 import { ImportCoursesPanel } from "@/components/import-courses-panel";
 import { LocationsExplorer } from "@/components/locations-explorer";
@@ -300,19 +301,76 @@ export function DashboardView() {
             {isLoading ? (
               <div className="space-y-8" role="status" aria-busy="true">
                 <span className="sr-only">{t("loading")}</span>
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-                  {Array.from({ length: 4 }).map((_, i) => (
-                    <Card key={i} className="card-interactive">
+
+                {/* Stat cards skeleton */}
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+                  {Array.from({ length: 6 }).map((_, i) => (
+                    <Card key={i}>
                       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <div className="h-4 w-24 animate-pulse rounded bg-muted" />
-                        <div className="h-4 w-4 animate-pulse rounded bg-muted" />
+                        <Skeleton className="h-4 w-24" />
+                        <Skeleton className="h-4 w-4 rounded" />
                       </CardHeader>
                       <CardContent>
-                        <div className="h-8 w-16 animate-pulse rounded bg-muted" />
+                        <Skeleton className="h-8 w-16" />
                       </CardContent>
                     </Card>
                   ))}
                 </div>
+
+                {/* Secondary metrics skeleton */}
+                <div className="flex flex-wrap items-center gap-x-6 gap-y-3 rounded-lg border bg-card/50 px-5 py-3">
+                  {Array.from({ length: 4 }).map((_, i) => (
+                    <div key={i} className="space-y-1">
+                      <Skeleton className="h-3 w-20" />
+                      <Skeleton className="h-6 w-10" />
+                    </div>
+                  ))}
+                </div>
+
+                {/* Mode breakdown skeleton */}
+                <Card>
+                  <CardHeader>
+                    <Skeleton className="h-4 w-32" />
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-2">
+                        <Skeleton className="h-5 w-12 rounded-md" />
+                        <Skeleton className="h-4 w-20" />
+                      </div>
+                      <div className="flex-1">
+                        <Skeleton className="h-2 w-full rounded-full" />
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Skeleton className="h-5 w-16 rounded-md" />
+                        <Skeleton className="h-4 w-20" />
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Recent courses skeleton */}
+                <Card>
+                  <CardHeader>
+                    <Skeleton className="h-4 w-36" />
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <div key={i} className="flex items-center justify-between rounded-lg border p-3">
+                          <div className="flex items-center gap-3">
+                            <Skeleton className="h-4 w-4 rounded" />
+                            <div className="space-y-1">
+                              <Skeleton className="h-4 w-32" />
+                              <Skeleton className="h-3 w-48" />
+                            </div>
+                          </div>
+                          <Skeleton className="h-5 w-14 rounded-md" />
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
             ) : view === "stats" ? (
               <StatsView
