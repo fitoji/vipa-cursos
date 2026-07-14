@@ -19,6 +19,7 @@ import {
   Plus,
   Trash2,
   Calendar,
+  Flame,
   Globe,
   Clock,
   Users,
@@ -32,6 +33,7 @@ import { toast } from "sonner";
 import { useLocale, useTranslations } from "next-intl";
 
 import { listCourses, deleteCourse } from "@/app/actions/courses";
+import { listStreaks } from "@/app/actions/streaks";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -79,10 +81,17 @@ const coursesQuery = queryOptions({
   staleTime: 30_000,
 });
 
+const streaksQuery = queryOptions({
+  queryKey: ["streaks"],
+  queryFn: () => listStreaks(),
+  staleTime: 30_000,
+});
+
 const columnHelper = createColumnHelper<Course>();
 
 export function DashboardView() {
   const { data: courses = [], isLoading } = useQuery(coursesQuery);
+  const { data: streaks = [] } = useQuery(streaksQuery);
   const qc = useQueryClient();
   const del = deleteCourse;
   const [globalFilter, setGlobalFilter] = useState("");
@@ -159,6 +168,15 @@ export function DashboardView() {
       : new Date().getFullYear();
     const yearsMeditating = courses.length ? new Date().getFullYear() - firstYear : 0;
 
+    const activeStreak = streaks.find((s) => s.is_active) ?? null;
+    const activeStreakDays = activeStreak
+      ? Math.floor(
+          (new Date(new Date().toISOString().slice(0, 10)).getTime() -
+            new Date(activeStreak.start_date.toString().slice(0, 10)).getTime()) /
+            86_400_000,
+        ) + 1
+      : 0;
+
     return {
       totalCourses,
       totalDaysSit,
@@ -173,8 +191,10 @@ export function DashboardView() {
       yearsMeditating,
       yearsAT,
       recentCourses,
+      activeStreak,
+      activeStreakDays,
     };
-  }, [courses]);
+  }, [courses, streaks]);
 
   // --- Table ---
   const columns = useMemo(
@@ -526,6 +546,8 @@ function StatsView({
   yearsAT,
   recentCourses,
   courses,
+  activeStreak,
+  activeStreakDays,
   onFilterClick,
 }: {
   totalCourses: number;
@@ -542,6 +564,8 @@ function StatsView({
   yearsAT: number;
   recentCourses: Course[];
   courses: Course[];
+  activeStreak: { id: number; start_date: string | Date; end_date: string | Date } | null;
+  activeStreakDays: number;
   onFilterClick: (preset: FilterPreset) => void;
 }) {
   const [showCountries, setShowCountries] = useState(false);
@@ -753,6 +777,23 @@ function StatsView({
                   <div className="text-2xl font-bold tabular-nums">
                     {animYearsAT.toLocaleString()}
                   </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {activeStreak && (
+              <Card className="border-primary/20 bg-primary/5">
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">{t("activeStreak")}</CardTitle>
+                  <Flame className="h-4 w-4 text-primary" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold tabular-nums text-primary">
+                    {activeStreakDays}
+                  </div>
+                  <p className="mt-0.5 text-xs text-muted-foreground">
+                    {activeStreakDays === 1 ? t("streakDay") : t("streakDays")}
+                  </p>
                 </CardContent>
               </Card>
             )}
