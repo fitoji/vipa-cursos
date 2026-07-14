@@ -75,6 +75,17 @@ type FilterPreset = {
   filter: (c: Course) => boolean;
 } | null;
 
+function toDateStr(d: string | Date): string {
+  if (typeof d === "string") return d.split("T")[0];
+  return d.toISOString().slice(0, 10);
+}
+
+function daysBetween(a: string | Date, b: string | Date) {
+  const aStr = toDateStr(a);
+  const bStr = toDateStr(b);
+  return Math.floor((new Date(bStr).getTime() - new Date(aStr).getTime()) / 86_400_000) + 1;
+}
+
 const coursesQuery = queryOptions({
   queryKey: ["courses"],
   queryFn: () => listCourses(),
@@ -172,27 +183,13 @@ export function DashboardView() {
     const activeStreak =
       activeStreaks.length > 0
         ? activeStreaks.reduce((longest, s) => {
-            const longestDays =
-              Math.floor(
-                (new Date(longest.end_date.toString().slice(0, 10)).getTime() -
-                  new Date(longest.start_date.toString().slice(0, 10)).getTime()) /
-                  86_400_000,
-              ) + 1;
-            const sDays =
-              Math.floor(
-                (new Date(s.end_date.toString().slice(0, 10)).getTime() -
-                  new Date(s.start_date.toString().slice(0, 10)).getTime()) /
-                  86_400_000,
-              ) + 1;
+            const longestDays = daysBetween(longest.start_date, longest.end_date);
+            const sDays = daysBetween(s.start_date, s.end_date);
             return sDays > longestDays ? s : longest;
           })
         : null;
     const activeStreakDays = activeStreak
-      ? Math.floor(
-          (new Date(activeStreak.end_date.toString().slice(0, 10)).getTime() -
-            new Date(activeStreak.start_date.toString().slice(0, 10)).getTime()) /
-            86_400_000,
-        ) + 1
+      ? daysBetween(activeStreak.start_date, activeStreak.end_date)
       : 0;
 
     return {
