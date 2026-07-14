@@ -14,7 +14,6 @@ import {
   type CourseFormValues,
   DAY_PRESETS,
   SPECIAL_COURSES,
-  COURSE_NAMES,
   defaultCourseFormValues,
   daysFromFormValues,
   toFormValues,
@@ -188,25 +187,31 @@ export function EditCourseDialog({
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                {DAY_PRESETS.map((d) => (
-                  <SelectItem key={d} value={String(d)}>
-                    {t("labels.daysLabel", { days: d })}
-                    {COURSE_NAMES[String(d)] ? ` — ${COURSE_NAMES[String(d)]}` : ""}
-                  </SelectItem>
-                ))}
+                {DAY_PRESETS.map((d) => {
+                  const name = t(`labels.courseNames.${d}`) as string;
+                  return (
+                    <SelectItem key={d} value={String(d)}>
+                      {t("labels.daysLabel", { days: d })}
+                      {name ? ` — ${name}` : ""}
+                    </SelectItem>
+                  );
+                })}
                 <SelectSeparator />
-                {SPECIAL_COURSES.map((s) => (
-                  <SelectItem key={s.value} value={s.value}>
-                    {s.label}
-                  </SelectItem>
-                ))}
+                {SPECIAL_COURSES.map((s) => {
+                  const name = t(`labels.courseNames.${s.value}`) as string;
+                  return (
+                    <SelectItem key={s.value} value={s.value}>
+                      {s.days > 0 ? `${t("labels.daysLabel", { days: s.days })} — ${name}` : name}
+                    </SelectItem>
+                  );
+                })}
                 <SelectItem value="other">
                   {mode === "serve" ? t("labels.daysCustomServe") : t("labels.daysCustomSit")}
                 </SelectItem>
               </SelectContent>
             </Select>
           </div>
-          {daysPreset === "other" && (
+            {(daysPreset === "other" || daysPreset === "tsc") && (
             <div className="grid gap-1.5 anim-fade-up" style={staggerDelay(6)}>
               <Label htmlFor="e_custom">
                 {mode === "serve" ? t("labels.daysCustomServe") : t("labels.daysCustomSit")}

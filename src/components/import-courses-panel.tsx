@@ -140,7 +140,7 @@ export function ImportCoursesPanel({ onImported }: { onImported?: () => void }) 
     <div className="space-y-4">
       <div>
         <h2 className="text-xl font-semibold">{t("pageTitle")}</h2>
-        <p className="mt-1 text-sm text-muted-foreground">{t("pageDescription")}</p>
+        <p className="mt-1 text-sm text-muted-foreground">{t("pageDescription", { code: ".json" })}</p>
       </div>
 
       <div

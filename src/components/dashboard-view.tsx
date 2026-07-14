@@ -26,6 +26,7 @@ import {
   FileText,
   Upload,
   Hourglass,
+  GraduationCap,
 } from "lucide-react";
 import { toast } from "sonner";
 import { useLocale, useTranslations } from "next-intl";
@@ -142,6 +143,11 @@ export function DashboardView() {
     const serve10 = courses.filter((c) => c.mode === "serve" && c.days === 10).length;
     const longServe = courses.filter((c) => c.mode === "serve" && (c.days ?? 0) >= 20).length;
     const longCourses = courses.filter((c) => (c.days ?? 0) >= 20).length;
+    const atCourses = courses.filter((c) => c.is_at && c.mode === "serve");
+    const firstAtYear = atCourses.length
+      ? Math.min(...atCourses.map((c) => new Date(c.start_date).getFullYear()))
+      : 0;
+    const yearsAT = firstAtYear ? new Date().getFullYear() - firstAtYear : 0;
     const recentCourses = [...courses]
       .sort((a, b) => new Date(b.start_date).getTime() - new Date(a.start_date).getTime())
       .slice(0, 5);
@@ -162,6 +168,7 @@ export function DashboardView() {
       longServe,
       longCourses,
       yearsMeditating,
+      yearsAT,
       recentCourses,
     };
   }, [courses]);
@@ -443,6 +450,7 @@ function StatsView({
   longServe,
   longCourses,
   yearsMeditating,
+  yearsAT,
   recentCourses,
   courses,
   onFilterClick,
@@ -458,6 +466,7 @@ function StatsView({
   longServe: number;
   longCourses: number;
   yearsMeditating: number;
+  yearsAT: number;
   recentCourses: Course[];
   courses: Course[];
   onFilterClick: (preset: FilterPreset) => void;
@@ -484,6 +493,7 @@ function StatsView({
   const animLongServe = useCountUp(longServe, 800, true);
   const animLongCourses = useCountUp(longCourses, 800, true);
   const animYearsMeditating = useCountUp(yearsMeditating, 800, true);
+  const animYearsAT = useCountUp(yearsAT, 800, true);
 
   const secondaryMetrics = [
     {
@@ -530,8 +540,8 @@ function StatsView({
         <EmptyState />
       ) : (
         <>
-          {/* Summary cards — 5 hero stat cards */}
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          {/* Summary cards — hero stat cards (hidden when value is 0) */}
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
             <Card
               className="card-interactive cursor-pointer"
               onClick={() => onFilterClick(null)}
@@ -545,79 +555,101 @@ function StatsView({
               </CardContent>
             </Card>
 
-            <Card
-              className="card-interactive cursor-pointer"
-              onClick={() =>
-                onFilterClick({
-                  label: tfilters("presets.modeSit"),
-                  filter: (c) => c.mode === "sit",
-                })
-              }
-            >
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">{t("daysSitting")}</CardTitle>
-                <Clock className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold tabular-nums">{animTotalDaysSit.toLocaleString()}</div>
-              </CardContent>
-            </Card>
+            {totalDaysSit > 0 && (
+              <Card
+                className="card-interactive cursor-pointer"
+                onClick={() =>
+                  onFilterClick({
+                    label: tfilters("presets.modeSit"),
+                    filter: (c) => c.mode === "sit",
+                  })
+                }
+              >
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">{t("daysSitting")}</CardTitle>
+                  <Clock className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold tabular-nums">{animTotalDaysSit.toLocaleString()}</div>
+                </CardContent>
+              </Card>
+            )}
 
-            <Card
-              className="card-interactive cursor-pointer"
-              onClick={() =>
-                onFilterClick({
-                  label: tfilters("presets.modeServe"),
-                  filter: (c) => c.mode === "serve",
-                })
-              }
-            >
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">{t("daysServing")}</CardTitle>
-                <Users className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold tabular-nums">{animTotalDaysServe.toLocaleString()}</div>
-              </CardContent>
-            </Card>
+            {totalDaysServe > 0 && (
+              <Card
+                className="card-interactive cursor-pointer"
+                onClick={() =>
+                  onFilterClick({
+                    label: tfilters("presets.modeServe"),
+                    filter: (c) => c.mode === "serve",
+                  })
+                }
+              >
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">{t("daysServing")}</CardTitle>
+                  <Users className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold tabular-nums">{animTotalDaysServe.toLocaleString()}</div>
+                </CardContent>
+              </Card>
+            )}
 
-            <Card
-              className="card-interactive cursor-pointer"
-              onClick={() => setShowCountries(true)}
-            >
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">{t("countriesVisited")}</CardTitle>
-                <Globe className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold tabular-nums">{animCountries.toLocaleString()}</div>
-              </CardContent>
-            </Card>
+            {countries > 0 && (
+              <Card
+                className="card-interactive cursor-pointer"
+                onClick={() => setShowCountries(true)}
+              >
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">{t("countriesVisited")}</CardTitle>
+                  <Globe className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold tabular-nums">{animCountries.toLocaleString()}</div>
+                </CardContent>
+              </Card>
+            )}
 
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">{t("yearsMeditating")}</CardTitle>
-                <Hourglass className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold tabular-nums">{animYearsMeditating.toLocaleString()}</div>
-              </CardContent>
-            </Card>
+            {yearsMeditating > 0 && (
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">{t("yearsMeditating")}</CardTitle>
+                  <Hourglass className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold tabular-nums">{animYearsMeditating.toLocaleString()}</div>
+                </CardContent>
+              </Card>
+            )}
+
+            {yearsAT > 0 && (
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">{t("yearsAT")}</CardTitle>
+                  <GraduationCap className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold tabular-nums">{animYearsAT.toLocaleString()}</div>
+                </CardContent>
+              </Card>
+            )}
           </div>
 
-          {/* Secondary metrics — compact inline row */}
+          {/* Secondary metrics — compact inline row (hidden when value is 0) */}
           <div className="flex flex-wrap items-center gap-x-6 gap-y-3 rounded-lg border bg-card/50 px-5 py-3">
-            {secondaryMetrics.map((m) => (
-              <button
-                key={m.label}
-                type="button"
-                onClick={m.onClick}
-                className="text-left transition-colors hover:text-primary"
-              >
-                <p className="text-xs text-muted-foreground">{m.label}</p>
-                <p className="text-lg font-semibold tabular-nums">{m.value.toLocaleString()}</p>
-              </button>
-            ))}
+            {secondaryMetrics
+              .filter((m) => m.value > 0)
+              .map((m) => (
+                <button
+                  key={m.label}
+                  type="button"
+                  onClick={m.onClick}
+                  className="text-left transition-colors hover:text-primary"
+                >
+                  <p className="text-xs text-muted-foreground">{m.label}</p>
+                  <p className="text-lg font-semibold tabular-nums">{m.value.toLocaleString()}</p>
+                </button>
+              ))}
           </div>
 
           {/* Mode breakdown */}

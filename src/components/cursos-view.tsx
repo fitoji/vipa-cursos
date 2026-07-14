@@ -15,8 +15,6 @@ import {
   courseFormSchema,
   type CourseFormValues,
   DAY_PRESETS,
-  SPECIAL_COURSES,
-  COURSE_NAMES,
   defaultCourseFormValues,
   daysFromFormValues,
 } from "@/lib/course-form";
@@ -247,7 +245,7 @@ export function CursosView() {
                   </SelectTrigger>
                   <SelectContent>
                     {DAY_PRESETS.map((d) => {
-                      const name = COURSE_NAMES[String(d)];
+                      const name = t(`days.courseNames.${d}`) as string;
                       return (
                         <SelectItem key={d} value={String(d)}>
                           {name
@@ -258,10 +256,13 @@ export function CursosView() {
                     })}
                     <SelectSeparator />
                     <SelectItem value="special-10">
-                      {t("days.labelWithName", { days: 10, name: "especial" })}
+                      {t("days.labelWithName", { days: 10, name: t("days.courseNames.special-10") })}
                     </SelectItem>
                     <SelectItem value="kids-1">
-                      {t("days.labelWithName", { days: 1, name: "niños" })}
+                      {t("days.labelWithName", { days: 1, name: t("days.courseNames.kids-1") })}
+                    </SelectItem>
+                    <SelectItem value="tsc">
+                      {t("days.courseNames.tsc")}
                     </SelectItem>
                     <SelectItem value="other">
                       {mode === "serve" ? t("labels.daysCustomServe") : t("labels.daysCustomSit")}
@@ -270,7 +271,7 @@ export function CursosView() {
                 </Select>
               </div>
 
-              {daysPreset === "other" && (
+              {(daysPreset === "other" || daysPreset === "tsc") && (
                 <div className="grid gap-1.5">
                   <Label htmlFor="daysCustom">
                     {mode === "serve" ? t("labels.daysCustomServe") : t("labels.daysCustomSit")}

@@ -110,7 +110,7 @@ export function ImportCoursesDialog({ children }: { children?: ReactNode }) {
       <DialogContent className="max-w-2xl">
         <DialogHeader>
           <DialogTitle>{t("dialogTitle")}</DialogTitle>
-          <DialogDescription>{t("dialogDescription")}</DialogDescription>
+          <DialogDescription>{t("dialogDescription", { code: ".json" })}</DialogDescription>
         </DialogHeader>
 
         <div className="grid gap-4">

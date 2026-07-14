@@ -8,6 +8,7 @@ export const DAY_PRESETS = [1, 3, 8, 10, 20, 30, 45, 60] as const;
 export const SPECIAL_COURSES = [
   { value: "special-10", days: 10, label: "10 días (especial)" },
   { value: "kids-1", days: 1, label: "Niños (1 día)" },
+  { value: "tsc", days: 0, label: "TSC (Teacher Self Course)" },
 ] as const;
 
 /** Course names for known Vipassana course lengths */
@@ -97,7 +98,7 @@ export function toFormValues(c: Course): CourseFormValues {
 export function daysFromFormValues(values: CourseFormValues): number {
   if (values.daysPreset === "other") return Number(values.daysCustom);
   const special = SPECIAL_COURSES.find((s) => s.value === values.daysPreset);
-  if (special) return special.days;
+  if (special) return special.days || Number(values.daysCustom);
   return Number(values.daysPreset);
 }
 

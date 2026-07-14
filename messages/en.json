@@ -105,6 +105,7 @@
       "daysServing": "Days serving",
       "countriesVisited": "Countries visited",
       "yearsMeditating": "Years meditating",
+      "yearsAT": "Years of AT",
       "coursesSitting10d": "Courses sitting (10d)",
       "coursesServing10d": "Courses serving (10d)",
       "longServing20d": "Long serving (20d+)",
@@ -191,7 +192,22 @@
         "daysPlaceholder": "Select",
         "daysLabel": "{days} days",
         "daysCustomSit": "Days (custom)",
-        "daysCustomServe": "LTS days"
+        "daysCustomServe": "LTS days",
+        "sit": "Sitting",
+        "serve": "Serving",
+        "courseNames": {
+          "1": "mini course",
+          "3": "short course",
+          "8": "Sati (Satipaṭṭhāna)",
+          "10": "standard course",
+          "20": "20-day course",
+          "30": "30-day course",
+          "45": "45-day course",
+          "60": "60-day course",
+          "special-10": "special",
+          "kids-1": "kids",
+          "tsc": "TSC (Teacher Self Course)"
+        }
       }
     },
     "filters": {
@@ -244,7 +260,20 @@
       "other": "Other…",
       "lts": "LTS (long-term service)",
       "label": "{days} days",
-      "labelWithName": "{days} days — {name}"
+      "labelWithName": "{days} days — {name}",
+      "courseNames": {
+        "1": "mini course",
+        "3": "short course",
+        "8": "Sati (Satipaṭṭhāna)",
+        "10": "standard course",
+        "20": "20-day course",
+        "30": "30-day course",
+        "45": "45-day course",
+        "60": "60-day course",
+        "special-10": "special",
+        "kids-1": "kids",
+        "tsc": "TSC (Teacher Self Course)"
+      }
     },
     "submit": {
       "save": "Save course",
