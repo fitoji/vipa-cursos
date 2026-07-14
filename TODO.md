@@ -12,7 +12,7 @@
 
 - [ ] **Gráficos en el Dashboard** (recharts) — Timeline de cursos (scatter: fecha vs días, color por modo), barras por año, pie sit/serve. `recharts` ya instalado.
 - [ ] **Heatmap de rachas** (estilo GitHub) — Grid de contribución mostrando días activos/omitidos. `date-fns` ya instalado.
-- [ ] **Detalle de curso** (modal o página) — Click en fila de la tabla para ver todos los campos, contexto temporal, y eventualmente fotos.
+- [x] **Detalle de curso** (modal o página) — Click en fila de la tabla para ver todos los campos, contexto temporal, y eventualmente fotos.
 - [ ] **Export CSV/Excel** — Export directo de la tabla filtrada. El prompt de ChatGPT en el empty state es un workaround.
 
 ### Tier 2 — Alto impacto, factibilidad media
