@@ -2,6 +2,7 @@
 
 import { TransitionLink as Link } from "@/components/transition-link";
 import {
+  ArrowLeft,
   BookOpen,
   Clock,
   BarChart3,
@@ -39,6 +40,16 @@ export function HelpView() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
+      {/* Back to dashboard */}
+      <div className="mb-8">
+        <Button variant="ghost" size="sm" asChild>
+          <Link href="/dashboard">
+            <ArrowLeft className="mr-1.5 h-4 w-4" />
+            {t("backToDashboard")}
+          </Link>
+        </Button>
+      </div>
+
       {/* Header */}
       <div className="mb-10">
         <h1 className="font-serif text-3xl font-bold tracking-tight sm:text-4xl">

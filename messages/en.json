@@ -16,6 +16,7 @@
     "subtitle": "Everything you need to know about VipaBase: from your first course to data export.",
     "navLabel": "Sections",
     "contentLabel": "Help content",
+    "backToDashboard": "Back to dashboard",
     "sections": {
       "intro": {
         "title": "Introduction",
