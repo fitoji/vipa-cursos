@@ -20,10 +20,10 @@ import { listStreaks, createStreak, deleteStreak } from "@/app/actions/streaks";
 type Streak = {
   id: number;
   user_id: string;
-  start_date: string;
-  end_date: string;
+  start_date: string | Date;
+  end_date: string | Date;
   is_active: boolean;
-  created_at: string;
+  created_at: string | Date;
 };
 
 type FormValues = {
@@ -33,8 +33,15 @@ type FormValues = {
 
 const todayStr = () => new Date().toISOString().slice(0, 10);
 
-function daysBetween(a: string, b: string) {
-  return Math.floor((new Date(b).getTime() - new Date(a).getTime()) / 86_400_000) + 1;
+function toDateStr(d: string | Date): string {
+  if (typeof d === "string") return d.split("T")[0];
+  return d.toISOString().slice(0, 10);
+}
+
+function daysBetween(a: string | Date, b: string | Date) {
+  const aStr = toDateStr(a);
+  const bStr = toDateStr(b);
+  return Math.floor((new Date(bStr).getTime() - new Date(aStr).getTime()) / 86_400_000) + 1;
 }
 
 const streaksQuery = queryOptions({
@@ -72,12 +79,14 @@ export default function MeditationStreakTracker() {
   const endDate = watch("end_date");
   const isActive = endDate === todayStr();
 
-  const formatDate = (d: string) =>
-    new Date(d + "T00:00:00").toLocaleDateString(locale, {
+  const formatDate = (d: string | Date) => {
+    const dateStr = toDateStr(d);
+    return new Date(dateStr + "T12:00:00").toLocaleDateString(locale, {
       day: "numeric",
       month: "short",
       year: "numeric",
     });
+  };
 
   const onSubmit = async (values: FormValues) => {
     try {
@@ -341,7 +350,7 @@ function StreakRow({
 }: {
   streak: Streak;
   onDelete: (id: number) => void;
-  formatDate: (d: string) => string;
+  formatDate: (d: string | Date) => string;
   tStreak: ReturnType<typeof useTranslations<"Racha.streak">>;
 }) {
   const days = daysBetween(streak.start_date, streak.end_date);
