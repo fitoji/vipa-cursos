@@ -87,19 +87,19 @@ export function LandingView() {
               {isLoggedIn ? (
                 <>
                   <Button size="lg" asChild>
-                    <Link href="/dashboard"><span className="shimmer">{t("hero.loggedInCta")}</span></Link>
+                    <Link href="/dashboard"><span className="shimmer shimmer-color-white/80">{t("hero.loggedInCta")}</span></Link>
                   </Button>
                   <Button size="lg" variant="outline" asChild>
-                    <Link href="/cursos"><span className="shimmer">{t("hero.newCourse")}</span></Link>
+                    <Link href="/cursos"><span className="shimmer shimmer-color-primary/80">{t("hero.newCourse")}</span></Link>
                   </Button>
                 </>
               ) : (
                 <>
                   <Button size="lg" variant="outline" asChild>
-                    <Link href="/login"><span className="shimmer">{t("hero.signIn")}</span></Link>
+                    <Link href="/login"><span className="shimmer shimmer-color-primary-foreground/80">{t("hero.signIn")}</span></Link>
                   </Button>
                   <Button size="lg" asChild>
-                    <Link href="/login"><span className="shimmer">{t("hero.signUp")}</span></Link>
+                    <Link href="/login"><span className="shimmer shimmer-color-white/80">{t("hero.signUp")}</span></Link>
                   </Button>
                 </>
               )}
@@ -126,28 +126,31 @@ export function LandingView() {
           </h2>
           <div className="grid gap-5 sm:grid-cols-2">
             {features.map((f) => {
-              const isHelp = f.icon === BookText;
-              const Wrapper = isHelp ? Link : "div";
-              const wrapperProps = isHelp ? { href: "/ayuda", className: "block" } : {};
-              return (
-                <Wrapper key={f.titleKey} {...wrapperProps}>
-                  <Card
-                    className={cn(
-                      "hover-lift border-white/10 bg-white/90 shadow-lg backdrop-blur-sm dark:bg-black/80",
-                      isHelp && "cursor-pointer transition-colors hover:bg-white/70 dark:hover:bg-black/60",
-                    )}
-                  >
-                    <CardContent className="flex gap-4 p-6">
-                      <f.icon className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
-                      <div>
-                        <h3 className="font-serif font-medium">{t(f.titleKey)}</h3>
-                        <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                          {t(f.descriptionKey)}
-                        </p>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Wrapper>
+              const card = (
+                <Card
+                  className={cn(
+                    "hover-lift border-white/10 bg-white/90 shadow-lg backdrop-blur-sm dark:bg-black/80",
+                    f.icon === BookText && "cursor-pointer transition-colors hover:bg-white/70 dark:hover:bg-black/60",
+                  )}
+                >
+                  <CardContent className="flex gap-4 p-6">
+                    <f.icon className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
+                    <div>
+                      <h3 className="font-serif font-medium">{t(f.titleKey)}</h3>
+                      <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                        {t(f.descriptionKey)}
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+
+              return f.icon === BookText ? (
+                <Link key={f.titleKey} href="/ayuda" className="block">
+                  {card}
+                </Link>
+              ) : (
+                <div key={f.titleKey}>{card}</div>
               );
             })}
           </div>

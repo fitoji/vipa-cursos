@@ -15,6 +15,7 @@
     "title": "Ayuda",
     "subtitle": "Todo lo que necesitás saber para usar VipaBase: desde el primer curso hasta la exportación de datos.",
     "navLabel": "Secciones",
+    "contentLabel": "Contenido de ayuda",
     "sections": {
       "intro": {
         "title": "Introducción",

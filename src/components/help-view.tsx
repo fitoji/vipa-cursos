@@ -134,7 +134,7 @@ export function HelpView() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
-      {/* Header */}
+      {/* Header — always visible */}
       <div className="mb-12">
         <h1 className="font-serif text-3xl font-bold tracking-tight sm:text-4xl">
           {t("title")}
@@ -142,7 +142,7 @@ export function HelpView() {
         <p className="mt-3 text-muted-foreground">{t("subtitle")}</p>
       </div>
 
-      {/* Quick nav */}
+      {/* Quick nav — always visible */}
       <nav aria-label={t("navLabel")} className="mb-12 rounded-lg border bg-card p-4 sm:p-6">
         <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
           {t("navLabel")}
@@ -163,8 +163,10 @@ export function HelpView() {
         </ul>
       </nav>
 
-      {/* Section: Introducción */}
-      <section id="intro" className="mb-16 scroll-mt-20" aria-label={t("sections.intro.title")}>
+      {/* Scrollable content with scroll-fade */}
+      <div className="scroll-fade overflow-y-auto max-h-[calc(100dvh-24rem)]" tabIndex={0} role="region" aria-label={t("contentLabel")}>
+        {/* Section: Introducción */}
+        <section id="intro" className="mb-16 scroll-mt-4" aria-label={t("sections.intro.title")}>
         <div className="mb-6 flex items-center gap-3">
           <SectionIcon icon={BookOpen} />
           <h2 className="font-serif text-2xl font-semibold tracking-tight">
@@ -306,6 +308,7 @@ export function HelpView() {
           </div>
         </div>
       </section>
+      </div>{/* end scroll-fade container */}
     </div>
   );
 }

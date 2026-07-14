@@ -15,6 +15,7 @@
     "title": "Help",
     "subtitle": "Everything you need to know about VipaBase: from your first course to data export.",
     "navLabel": "Sections",
+    "contentLabel": "Help content",
     "sections": {
       "intro": {
         "title": "Introduction",
