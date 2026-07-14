@@ -98,7 +98,7 @@ export function SiteHeader() {
                 aria-haspopup="true"
               >
                 {image ? (
-                  <img src={image} alt={name ?? email} className="h-full w-full object-cover" />
+                  <img src={image} alt={name ?? email} className="h-full w-full object-cover" referrerPolicy="no-referrer" />
                 ) : (
                   initials
                 )}
