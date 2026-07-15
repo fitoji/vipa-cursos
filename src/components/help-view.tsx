@@ -311,7 +311,7 @@ export function HelpView() {
         </section>
 
         {/* CTA buttons */}
-        <div className="mt-12 flex gap-4">
+        <div className="mt-12 flex justify-end gap-4">
           <Button asChild variant="outline">
             <Link href="/cursos">{t("cta.courses")}</Link>
           </Button>
