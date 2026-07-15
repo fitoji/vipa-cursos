@@ -64,6 +64,8 @@ import { CourseDetailDialog } from "@/components/course-detail-dialog";
 import { ImportCoursesPanel } from "@/components/import-courses-panel";
 import { LocationsExplorer } from "@/components/locations-explorer";
 import { AppSidebar } from "@/components/app-sidebar";
+import { BackgroundLayer } from "@/components/background-layer";
+import { useBackground } from "@/hooks/useBackground";
 import { formatDate } from "@/lib/format";
 import { useCountUp } from "@/lib/animations";
 
@@ -113,6 +115,7 @@ export function DashboardView() {
   const [busyDelete, setBusyDelete] = useState(false);
   const [view, setViewState] = useState<View>("stats");
   const [filterPreset, setFilterPreset] = useState<FilterPreset>(null);
+  const { backgroundImage, overlayOpacity } = useBackground();
 
   const locale = useLocale();
   const t = useTranslations("Dashboard");
@@ -302,15 +305,7 @@ export function DashboardView() {
       <AppSidebar activeView={view} onNavigate={navigate} />
       <SidebarInset>
         <div className="relative h-full">
-          {/* bosque.webp background */}
-          <div
-            className="pointer-events-none absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{
-              backgroundImage: "url('/bosque.webp')",
-            }}
-          />
-          {/* overlay for readability */}
-          <div className="pointer-events-none absolute inset-0 bg-background/55 backdrop-blur-sm" />
+          <BackgroundLayer imageKey={backgroundImage} overlayOpacity={overlayOpacity} />
 
           <div className="relative z-10 mx-auto max-w-6xl px-4 py-10">
             {/* Header */}
@@ -394,7 +389,10 @@ export function DashboardView() {
                   <CardContent>
                     <div className="space-y-3">
                       {Array.from({ length: 5 }).map((_, i) => (
-                        <div key={i} className="flex items-center justify-between rounded-lg border p-3">
+                        <div
+                          key={i}
+                          className="flex items-center justify-between rounded-lg border p-3"
+                        >
                           <div className="flex items-center gap-3">
                             <Skeleton className="h-4 w-4 rounded" />
                             <div className="space-y-1">

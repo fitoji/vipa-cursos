@@ -153,36 +153,51 @@ export async function deleteCourse({ data }: { data: { id: number } }) {
 }
 
 // --- Background preference ---
+//
+// DB migration (run once):
+//   ALTER TABLE user_preferences
+//     ADD COLUMN IF NOT EXISTS overlay_opacity INTEGER NOT NULL DEFAULT 55;
 
 const BACKGROUND_ALLOWLIST = [
   "bosque.webp",
-  "truthseeker08-bodhi-leaf-5213739_1280.jpg",
-  "kalyanayahaluwo-leaves-6636814_1280.jpg",
-  "kalyanayahaluwo-sacred-fig-6656594_1280.jpg",
+  "truthseeker08-bodhi-leaf-5213739_1280.webp",
+  "kalyanayahaluwo-leaves-6636814_1280.webp",
+  "kalyanayahaluwo-sacred-fig-6656594_1280.webp",
 ] as const;
 
 type BackgroundImage = (typeof BACKGROUND_ALLOWLIST)[number];
 
-export async function getBackgroundPreference(): Promise<{ backgroundImage: BackgroundImage }> {
+const DEFAULT_OVERLAY_OPACITY = 55;
+
+export async function getBackgroundPreference(): Promise<{
+  backgroundImage: BackgroundImage;
+  overlayOpacity: number;
+}> {
   const session = await getSession();
   if (!session?.user?.id) throw new Error("Unauthorized");
   const userId = session.user.id;
 
   const { neon } = await import("@neondatabase/serverless");
   const sql = neon(process.env.DATABASE_URL!);
-  const rows = await sql`
-    INSERT INTO user_preferences (user_id, background_image)
-    VALUES (${userId}, 'bosque.webp')
+  await sql`
+    INSERT INTO user_preferences (user_id, background_image, overlay_opacity)
+    VALUES (${userId}, 'bosque.webp', ${DEFAULT_OVERLAY_OPACITY})
     ON CONFLICT (user_id) DO NOTHING
   `;
 
   const result = await sql`
-    SELECT background_image FROM user_preferences WHERE user_id = ${userId}
+    SELECT background_image, overlay_opacity FROM user_preferences WHERE user_id = ${userId}
   `;
-  return { backgroundImage: (result[0]?.background_image as BackgroundImage) ?? "bosque.webp" };
+  return {
+    backgroundImage: (result[0]?.background_image as BackgroundImage) ?? "bosque.webp",
+    overlayOpacity: (result[0]?.overlay_opacity as number) ?? DEFAULT_OVERLAY_OPACITY,
+  };
 }
 
-export async function setBackgroundPreference(imageKey: string): Promise<{ ok: true }> {
+export async function setBackgroundPreference(
+  imageKey: string,
+  overlayOpacity?: number,
+): Promise<{ ok: true }> {
   const session = await getSession();
   if (!session?.user?.id) throw new Error("Unauthorized");
   const userId = session.user.id;
@@ -191,14 +206,53 @@ export async function setBackgroundPreference(imageKey: string): Promise<{ ok: t
     throw new Error("Invalid background image");
   }
 
+  const opacity =
+    overlayOpacity !== undefined
+      ? Math.min(100, Math.max(0, Math.round(overlayOpacity)))
+      : undefined;
+
+  const { neon } = await import("@neondatabase/serverless");
+  const sql = neon(process.env.DATABASE_URL!);
+
+  if (opacity !== undefined) {
+    await sql`
+      INSERT INTO user_preferences (user_id, background_image, overlay_opacity, updated_at)
+      VALUES (${userId}, ${imageKey}, ${opacity}, now())
+      ON CONFLICT (user_id) DO UPDATE
+      SET background_image = ${imageKey},
+          overlay_opacity = ${opacity},
+          updated_at = now()
+    `;
+  } else {
+    await sql`
+      INSERT INTO user_preferences (user_id, background_image, updated_at)
+      VALUES (${userId}, ${imageKey}, now())
+      ON CONFLICT (user_id) DO UPDATE
+      SET background_image = ${imageKey}, updated_at = now()
+    `;
+  }
+
+  revalidateBoth("/");
+  revalidateBoth("/dashboard");
+  return { ok: true };
+}
+
+export async function setOverlayPreference(overlayOpacity: number): Promise<{ ok: true }> {
+  const session = await getSession();
+  if (!session?.user?.id) throw new Error("Unauthorized");
+  const userId = session.user.id;
+
+  const opacity = Math.min(100, Math.max(0, Math.round(overlayOpacity)));
+
   const { neon } = await import("@neondatabase/serverless");
   const sql = neon(process.env.DATABASE_URL!);
   await sql`
-    INSERT INTO user_preferences (user_id, background_image, updated_at)
-    VALUES (${userId}, ${imageKey}, now())
+    INSERT INTO user_preferences (user_id, background_image, overlay_opacity, updated_at)
+    VALUES (${userId}, 'bosque.webp', ${opacity}, now())
     ON CONFLICT (user_id) DO UPDATE
-    SET background_image = ${imageKey}, updated_at = now()
+    SET overlay_opacity = ${opacity}, updated_at = now()
   `;
+
   revalidateBoth("/");
   revalidateBoth("/dashboard");
   return { ok: true };
