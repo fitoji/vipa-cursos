@@ -91,8 +91,9 @@
     },
     "attributions": {
       "title": "Image attributions",
-      "intro": "Some background images used in VipaBase are from Pixabay and Unsplash, released under the Pixabay Content License and the Unsplash License respectively. Attribution is not required but we gratefully acknowledge the creators.",
+      "intro": "Some background images used in VipaBase are from Pixabay and Unsplash, released under the Pixabay Content License and the Unsplash License respectively. Icons are from Icons8. Attribution is not required but we gratefully acknowledge the creators.",
       "license": "Images used under the Pixabay Content License and the Unsplash License.",
+      "icons8": "Icons provided by Icons8.",
       "images": {
         "forest": {
           "name": "Forest",

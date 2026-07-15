@@ -91,8 +91,9 @@
     },
     "attributions": {
       "title": "Atribuciones de imágenes",
-      "intro": "Algunas imágenes de fondo de VipaBase provienen de Pixabay y Unsplash, publicadas bajo la Licencia de Contenido de Pixabay y la Licencia de Unsplash respectivamente. La atribución no es requerida, pero agradecemos a los creadores.",
+      "intro": "Algunas imágenes de fondo de VipaBase provienen de Pixabay y Unsplash, publicadas bajo la Licencia de Contenido de Pixabay y la Licencia de Unsplash respectivamente. Los íconos son de Icons8. La atribución no es requerida, pero agradecemos a los creadores.",
       "license": "Imágenes usadas bajo la Licencia de Contenido de Pixabay y la Licencia de Unsplash.",
+      "icons8": "Íconos proporcionados por Icons8.",
       "images": {
         "forest": {
           "name": "Bosque",

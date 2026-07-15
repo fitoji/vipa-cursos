@@ -289,6 +289,16 @@ export function HelpView() {
               <p className="mt-3 text-xs text-muted-foreground">
                 {t("sections.attributions.license")}
               </p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                <a
+                  href="https://icons8.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary underline-offset-4 hover:underline"
+                >
+                  {t("sections.attributions.icons8")}
+                </a>
+              </p>
             </div>
           </div>
         </section>
