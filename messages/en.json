@@ -83,39 +83,39 @@
         "step1": "On the dashboard, click \"Download JSON\". A courses.json file will be downloaded.",
         "step2": "To import, go to the Courses page and use the \"Import JSON\" button. Select the file and courses will be loaded automatically.",
         "step3": "You can also convert data from Excel, Word or other formats using ChatGPT (see previous section)."
+      },
+      "attributions": {
+        "title": "Image attributions",
+        "intro": "Some background images used in VipaBase are from Pixabay and Unsplash, released under the Pixabay Content License and the Unsplash License respectively. Icons are from Icons8. Attribution is not required but we gratefully acknowledge the creators.",
+        "license": "Images used under the Pixabay Content License and the Unsplash License.",
+        "icons8": "Icons provided by Icons8.",
+        "images": {
+          "forest": {
+            "name": "Forest",
+            "author": "Philipp",
+            "source": "Unsplash"
+          },
+          "bodhiLeaf": {
+            "name": "Bodhi Leaf",
+            "author": "truthseeker08",
+            "source": "Pixabay"
+          },
+          "sacredLeaves": {
+            "name": "Sacred Leaves",
+            "author": "kalyanayahaluwo",
+            "source": "Pixabay"
+          },
+          "sacredFig": {
+            "name": "Sacred Fig",
+            "author": "kalyanayahaluwo",
+            "source": "Pixabay"
+          }
+        }
       }
     },
     "cta": {
       "courses": "Go to Courses",
       "dashboard": "Go to Dashboard"
-    },
-    "attributions": {
-      "title": "Image attributions",
-      "intro": "Some background images used in VipaBase are from Pixabay and Unsplash, released under the Pixabay Content License and the Unsplash License respectively. Icons are from Icons8. Attribution is not required but we gratefully acknowledge the creators.",
-      "license": "Images used under the Pixabay Content License and the Unsplash License.",
-      "icons8": "Icons provided by Icons8.",
-      "images": {
-        "forest": {
-          "name": "Forest",
-          "author": "Philipp",
-          "source": "Unsplash"
-        },
-        "bodhiLeaf": {
-          "name": "Bodhi Leaf",
-          "author": "truthseeker08",
-          "source": "Pixabay"
-        },
-        "sacredLeaves": {
-          "name": "Sacred Leaves",
-          "author": "kalyanayahaluwo",
-          "source": "Pixabay"
-        },
-        "sacredFig": {
-          "name": "Sacred Fig",
-          "author": "kalyanayahaluwo",
-          "source": "Pixabay"
-        }
-      }
     }
   },
   "HomePage": {

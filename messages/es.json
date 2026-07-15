@@ -83,39 +83,39 @@
         "step1": "En el panel de control, hacé clic en \"Descargar JSON\". Se descargará un archivo cursos.json.",
         "step2": "Para importar, andá a la página de Cursos y usá el botón \"Importar JSON\". Seleccioná el archivo y los cursos se cargarán automáticamente.",
         "step3": "También podés convertir datos desde Excel, Word u otros formatos usando ChatGPT (sección anterior)."
+      },
+      "attributions": {
+        "title": "Atribuciones de imágenes",
+        "intro": "Algunas imágenes de fondo de VipaBase provienen de Pixabay y Unsplash, publicadas bajo la Licencia de Contenido de Pixabay y la Licencia de Unsplash respectivamente. Los íconos son de Icons8. La atribución no es requerida, pero agradecemos a los creadores.",
+        "license": "Imágenes usadas bajo la Licencia de Contenido de Pixabay y la Licencia de Unsplash.",
+        "icons8": "Íconos proporcionados por Icons8.",
+        "images": {
+          "forest": {
+            "name": "Bosque",
+            "author": "Philipp",
+            "source": "Unsplash"
+          },
+          "bodhiLeaf": {
+            "name": "Bodhi Leaf",
+            "author": "truthseeker08",
+            "source": "Pixabay"
+          },
+          "sacredLeaves": {
+            "name": "Sacred Leaves",
+            "author": "kalyanayahaluwo",
+            "source": "Pixabay"
+          },
+          "sacredFig": {
+            "name": "Sacred Fig",
+            "author": "kalyanayahaluwo",
+            "source": "Pixabay"
+          }
+        }
       }
     },
     "cta": {
       "courses": "Ir a Cursos",
       "dashboard": "Ir al Panel de control"
-    },
-    "attributions": {
-      "title": "Atribuciones de imágenes",
-      "intro": "Algunas imágenes de fondo de VipaBase provienen de Pixabay y Unsplash, publicadas bajo la Licencia de Contenido de Pixabay y la Licencia de Unsplash respectivamente. Los íconos son de Icons8. La atribución no es requerida, pero agradecemos a los creadores.",
-      "license": "Imágenes usadas bajo la Licencia de Contenido de Pixabay y la Licencia de Unsplash.",
-      "icons8": "Íconos proporcionados por Icons8.",
-      "images": {
-        "forest": {
-          "name": "Bosque",
-          "author": "Philipp",
-          "source": "Unsplash"
-        },
-        "bodhiLeaf": {
-          "name": "Bodhi Leaf",
-          "author": "truthseeker08",
-          "source": "Pixabay"
-        },
-        "sacredLeaves": {
-          "name": "Sacred Leaves",
-          "author": "kalyanayahaluwo",
-          "source": "Pixabay"
-        },
-        "sacredFig": {
-          "name": "Sacred Fig",
-          "author": "kalyanayahaluwo",
-          "source": "Pixabay"
-        }
-      }
     }
   },
   "HomePage": {
