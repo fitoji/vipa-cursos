@@ -28,7 +28,7 @@ export function useCachedQuery<T>(options: {
       setCache(options.cacheKey, data);
       return data;
     },
-    initialData: () => getCache<T>(options.cacheKey) as T | undefined,
+    initialData: () => (getCache<T>(options.cacheKey) ?? undefined) as T | undefined,
     staleTime: options.staleTime ?? Infinity,
     gcTime: options.gcTime ?? Infinity,
   });
