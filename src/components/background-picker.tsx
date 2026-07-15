@@ -60,27 +60,21 @@ export function BackgroundPicker({ open, onOpenChange }: BackgroundPickerProps) 
     },
   });
 
-  const opacityMutation = useMutation({
-    mutationFn: (opacity: number) => setOverlayPreference(opacity),
-    onSuccess: async () => {
-      await qc.invalidateQueries({ queryKey: ["backgroundPreference"] });
-    },
-    onError: () => {
-      toast.error(t("error"));
-    },
-  });
-
-  const lastSavedRef = useRef(overlayOpacity);
-
   const handleOpacityChange = useCallback(
     (value: number[]) => {
       const newValue = value[0];
-      if (newValue !== lastSavedRef.current) {
-        lastSavedRef.current = newValue;
-        opacityMutation.mutate(newValue);
-      }
+      // Optimistic update — update cache instantly
+      qc.setQueryData(["backgroundPreference"], (old: { backgroundImage: string; overlayOpacity: number } | undefined) =>
+        old ? { ...old, overlayOpacity: newValue } : old,
+      );
+      // Save to DB in background (fire and forget)
+      setOverlayPreference(newValue).catch(() => {
+        // Rollback on error
+        qc.invalidateQueries({ queryKey: ["backgroundPreference"] });
+        toast.error(t("error"));
+      });
     },
-    [opacityMutation],
+    [qc, t],
   );
 
   return (
