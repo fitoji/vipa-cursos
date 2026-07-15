@@ -499,7 +499,11 @@
     "userMenu": {
       "name": "Usuario",
       "signOut": "Cerrar sesión",
-      "background": "Fondo"
+      "background": "Fondo",
+      "refresh": "Actualizar",
+      "help": "Ayuda",
+      "theme": "Tema",
+      "language": "Idioma"
     }
   },
   "BackgroundPicker": {
