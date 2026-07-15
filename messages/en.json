@@ -470,8 +470,16 @@
     "help": "Help",
     "userMenu": {
       "name": "User",
-      "signOut": "Sign out"
+      "signOut": "Sign out",
+      "background": "Background"
     }
+  },
+  "BackgroundPicker": {
+    "title": "Background",
+    "description": "Choose a background image for your tracker.",
+    "saved": "Background updated",
+    "error": "Could not update background",
+    "selectImage": "Select {name}"
   },
   "SiteFooter": {
     "copyright": "VipaBase © {year}",

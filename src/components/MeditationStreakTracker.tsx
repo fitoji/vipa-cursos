@@ -66,6 +66,7 @@ export default function MeditationStreakTracker() {
   const tEmpty = useTranslations("Racha.empty");
   const tStreak = useTranslations("Racha.streak");
   const tSidebar = useTranslations("Dashboard.sidebar");
+  const { backgroundImage } = useBackground();
 
   const {
     register,
@@ -143,11 +144,7 @@ export default function MeditationStreakTracker() {
       <AppSidebar />
       <SidebarInset>
         <div className="relative h-full">
-          <div
-            className="pointer-events-none absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: "url('/bosque.webp')" }}
-          />
-          <div className="pointer-events-none absolute inset-0 bg-background/55 backdrop-blur-sm" />
+          <BackgroundLayer imageKey={backgroundImage} />
 
           <div className="relative z-10 mx-auto max-w-3xl px-4 py-10">
             {/* Header */}

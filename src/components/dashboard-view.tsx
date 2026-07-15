@@ -64,6 +64,8 @@ import { CourseDetailDialog } from "@/components/course-detail-dialog";
 import { ImportCoursesPanel } from "@/components/import-courses-panel";
 import { LocationsExplorer } from "@/components/locations-explorer";
 import { AppSidebar } from "@/components/app-sidebar";
+import { BackgroundLayer } from "@/components/background-layer";
+import { useBackground } from "@/hooks/useBackground";
 import { formatDate } from "@/lib/format";
 import { useCountUp } from "@/lib/animations";
 
@@ -113,6 +115,7 @@ export function DashboardView() {
   const [busyDelete, setBusyDelete] = useState(false);
   const [view, setViewState] = useState<View>("stats");
   const [filterPreset, setFilterPreset] = useState<FilterPreset>(null);
+  const { backgroundImage } = useBackground();
 
   const locale = useLocale();
   const t = useTranslations("Dashboard");
@@ -302,15 +305,7 @@ export function DashboardView() {
       <AppSidebar activeView={view} onNavigate={navigate} />
       <SidebarInset>
         <div className="relative h-full">
-          {/* bosque.webp background */}
-          <div
-            className="pointer-events-none absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{
-              backgroundImage: "url('/bosque.webp')",
-            }}
-          />
-          {/* overlay for readability */}
-          <div className="pointer-events-none absolute inset-0 bg-background/55 backdrop-blur-sm" />
+          <BackgroundLayer imageKey={backgroundImage} />
 
           <div className="relative z-10 mx-auto max-w-6xl px-4 py-10">
             {/* Header */}
