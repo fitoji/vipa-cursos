@@ -11,6 +11,7 @@ import {
   MessageSquare,
   Sparkles,
   Heart,
+  Image,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -27,6 +28,7 @@ const sections = [
   { id: "courses", icon: Clock },
   { id: "dashboard", icon: BarChart3 },
   { id: "racha", icon: Flame },
+  { id: "background", icon: Image },
   { id: "chatgpt", icon: Sparkles },
   { id: "export", icon: Upload },
   { id: "attributions", icon: Heart },
@@ -234,6 +236,28 @@ export function HelpView() {
                 <Link href="/dashboard">{t("cta.dashboard")}</Link>
               </Button>
             </div>
+          </div>
+        </section>
+
+        {/* Section: Background — icon inline */}
+        <section
+          id="background"
+          className="mb-12 scroll-mt-4"
+          aria-label={t("sections.background.title")}
+        >
+          <div className="mb-4 flex items-center gap-2">
+            <Image className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
+            <h2 className="font-serif text-2xl font-semibold tracking-tight">
+              {t("sections.background.title")}
+            </h2>
+          </div>
+          <div className="space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+            <p>{t("sections.background.intro")}</p>
+            <ol className="list-decimal space-y-3 pl-5">
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <li key={i}>{t(`sections.background.step${i}`)}</li>
+              ))}
+            </ol>
           </div>
         </section>
 

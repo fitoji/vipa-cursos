@@ -84,6 +84,16 @@
         "step2": "Para importar, andá a la página de Cursos y usá el botón \"Importar JSON\". Seleccioná el archivo y los cursos se cargarán automáticamente.",
         "step3": "También podés convertir datos desde Excel, Word u otros formatos usando ChatGPT (sección anterior)."
       },
+      "background": {
+        "title": "Cambiar el fondo",
+        "intro": "VipaBase te permite personalizar tu experiencia eligiendo una imagen de fondo para la app.",
+        "step1": "Hacé clic en tu avatar arriba a la derecha para abrir el menú de usuario.",
+        "step2": "Seleccioná \"Fondo\" en el menú desplegable.",
+        "step3": "Se abrirá un panel lateral con cuatro opciones de fondo: Bosque, Bodhi Leaf, Sacred Leaves y Sacred Fig.",
+        "step4": "Hacé clic en una imagen para seleccionarla. El fondo se actualiza al instante.",
+        "step5": "Usá el control de opacidad para ajustar cuánto se ve la imagen de fondo detrás del contenido.",
+        "step6": "Tu selección se guarda automáticamente y persiste entre sesiones."
+      },
       "attributions": {
         "title": "Atribuciones de imágenes",
         "intro": "Algunas imágenes de fondo de VipaBase provienen de Pixabay y Unsplash, publicadas bajo la Licencia de Contenido de Pixabay y la Licencia de Unsplash respectivamente. Los íconos son de Icons8. La atribución no es requerida, pero agradecemos a los creadores.",
