@@ -1,6 +1,6 @@
 "use client";
 
-import { useQuery, useQueryClient, queryOptions } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { TransitionLink as Link } from "@/components/transition-link";
 import { useMemo, useState } from "react";
 import {
@@ -34,6 +34,8 @@ import { useLocale, useTranslations } from "next-intl";
 
 import { listCourses, deleteCourse } from "@/app/actions/courses";
 import { listStreaks } from "@/app/actions/streaks";
+import { useCachedQuery } from "@/hooks/use-cached-query";
+import { RefreshButton } from "@/components/refresh-button";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -88,23 +90,19 @@ function daysBetween(a: string | Date, b: string | Date) {
   return Math.floor((new Date(bStr).getTime() - new Date(aStr).getTime()) / 86_400_000) + 1;
 }
 
-const coursesQuery = queryOptions({
-  queryKey: ["courses"],
-  queryFn: () => listCourses(),
-  staleTime: 30_000,
-});
-
-const streaksQuery = queryOptions({
-  queryKey: ["streaks"],
-  queryFn: () => listStreaks(),
-  staleTime: 30_000,
-});
-
 const columnHelper = createColumnHelper<Course>();
 
 export function DashboardView() {
-  const { data: courses = [], isLoading } = useQuery(coursesQuery);
-  const { data: streaks = [] } = useQuery(streaksQuery);
+  const { data: courses = [], isLoading } = useCachedQuery({
+    queryKey: ["courses"],
+    queryFn: () => listCourses(),
+    cacheKey: "courses",
+  });
+  const { data: streaks = [] } = useCachedQuery({
+    queryKey: ["streaks"],
+    queryFn: () => listStreaks(),
+    cacheKey: "streaks",
+  });
   const qc = useQueryClient();
   const del = deleteCourse;
   const [globalFilter, setGlobalFilter] = useState("");
@@ -322,6 +320,7 @@ export function DashboardView() {
                 </div>
               </div>
               <div className="flex items-center gap-2">
+                <RefreshButton />
                 <Button variant="default" size="sm" asChild>
                   <Link href="/cursos">
                     <Plus className="mr-1 h-4 w-4" /> {t("header.newCourse")}

@@ -12,6 +12,7 @@ import { useTranslations } from "next-intl";
 import { LocaleSwitcher } from "@/components/locale-switcher";
 import { cn } from "@/lib/utils";
 import { BackgroundPicker } from "@/components/background-picker";
+import { RefreshButton } from "@/components/refresh-button";
 
 export function SiteHeader() {
   const router = useRouter();
@@ -74,6 +75,7 @@ export function SiteHeader() {
           <span className="font-serif text-lg font-semibold tracking-tight">{t("siteName")}</span>
         </Link>
         <div className="flex items-center gap-3">
+          <RefreshButton />
           <Button variant="ghost" size="icon" asChild aria-label={t("help")}>
             <Link href="/ayuda">
               <CircleHelp className="h-4 w-4" />
@@ -105,7 +107,12 @@ export function SiteHeader() {
                 aria-haspopup="true"
               >
                 {image ? (
-                  <img src={image} alt={name ?? email} className="h-full w-full object-cover" referrerPolicy="no-referrer" />
+                  <img
+                    src={image}
+                    alt={name ?? email}
+                    className="h-full w-full object-cover"
+                    referrerPolicy="no-referrer"
+                  />
                 ) : (
                   initials
                 )}

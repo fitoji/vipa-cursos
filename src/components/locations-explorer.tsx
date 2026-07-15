@@ -1,6 +1,6 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
+
 import { useMemo, useState } from "react";
 import {
   createColumnHelper,
@@ -19,6 +19,7 @@ import {
   type CountryRow,
   type LocationRow,
 } from "@/app/actions/locations";
+import { useCachedQuery } from "@/hooks/use-cached-query";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -42,38 +43,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useInView, staggerDelay } from "@/lib/animations";
 import { cn } from "@/lib/utils";
 
-// ── Queries ────────────────────────────────────────────────────────────────
-
-const continentsQuery = () => ({
-  queryKey: ["locations", "continents"],
-  queryFn: () => listContinents(),
-});
-
-const countriesQuery = (continentId?: number) => ({
-  queryKey: ["locations", "countries", continentId],
-  queryFn: () => listCountries(continentId),
-  enabled: true,
-});
-
-const locationsQuery = (opts: {
-  continentId?: number;
-  countryId?: number;
-  type?: "Center" | "Non-Centre";
-  query?: string;
-  page: number;
-}) => ({
-  queryKey: ["locations", "search", opts],
-  queryFn: () =>
-    searchLocations({
-      continentId: opts.continentId,
-      countryId: opts.countryId,
-      type: opts.type,
-      query: opts.query || undefined,
-      limit: 20,
-      offset: (opts.page - 1) * 20,
-    }),
-});
-
 // ── Component ──────────────────────────────────────────────────────────────
 
 type Filters = {
@@ -91,15 +60,33 @@ export function LocationsExplorer() {
   const [tableRef, tableInView] = useInView(0.05);
   const t = useTranslations("LocationsExplorer");
 
-  const { data: continents = [], isLoading: loadingContinents } = useQuery(continentsQuery());
+  const { data: continents = [], isLoading: loadingContinents } = useCachedQuery({
+    queryKey: ["locations", "continents"],
+    queryFn: () => listContinents(),
+    cacheKey: "locations:continents",
+  });
 
-  const { data: countries = [], isLoading: loadingCountries } = useQuery(
-    countriesQuery(filters.continentId),
-  );
+  const { data: countries = [], isLoading: loadingCountries } = useCachedQuery({
+    queryKey: ["locations", "countries", filters.continentId],
+    queryFn: () => listCountries(filters.continentId),
+    cacheKey: `locations:countries:${filters.continentId ?? "all"}`,
+  });
 
-  const { data: result, isLoading: loadingLocations } = useQuery(
-    locationsQuery({ ...filters, page }),
-  );
+  const searchCacheKey = `locations:search:${filters.continentId ?? "all"}:${filters.countryId ?? "all"}:${filters.type ?? "all"}:${filters.query ?? "all"}:${page}`;
+
+  const { data: result, isLoading: loadingLocations } = useCachedQuery({
+    queryKey: ["locations", "search", { ...filters, page }],
+    queryFn: () =>
+      searchLocations({
+        continentId: filters.continentId,
+        countryId: filters.countryId,
+        type: filters.type,
+        query: filters.query || undefined,
+        limit: 20,
+        offset: (page - 1) * 20,
+      }),
+    cacheKey: searchCacheKey,
+  });
 
   const locations = result?.locations ?? [];
   const total = result?.total ?? 0;
@@ -358,12 +345,7 @@ export function LocationsExplorer() {
               <div className="flex items-center justify-between px-4 py-3">
                 <p className="text-sm text-muted-foreground">
                   {t("pagination.resultCount", { total, tplural: total === 1 ? "" : "s" })}
-                  {totalPages > 1 && (
-                    <>
-                      {" "}
-                      {t("pagination.pageInfo", { page, totalPages })}
-                    </>
-                  )}
+                  {totalPages > 1 && <> {t("pagination.pageInfo", { page, totalPages })}</>}
                 </p>
                 {totalPages > 1 && (
                   <div className="flex items-center gap-2">

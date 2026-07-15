@@ -4,10 +4,11 @@ import { Check, Flame, Pencil, Plus, Trash2, X } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLocale, useTranslations } from "next-intl";
-import { useQuery, useQueryClient, queryOptions } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 import { cn } from "@/lib/utils";
+import { useCachedQuery } from "@/hooks/use-cached-query";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -53,18 +54,16 @@ function daysBetween(a: string | Date, b: string | Date) {
   return Math.floor((new Date(bStr).getTime() - new Date(aStr).getTime()) / 86_400_000) + 1;
 }
 
-const streaksQuery = queryOptions({
-  queryKey: ["streaks"],
-  queryFn: () => listStreaks(),
-  staleTime: 30_000,
-});
-
 export default function MeditationStreakTracker() {
   const [showForm, setShowForm] = useState(false);
   const [editing, setEditing] = useState<Streak | null>(null);
   const qc = useQueryClient();
 
-  const { data: streaks = [], isLoading } = useQuery(streaksQuery);
+  const { data: streaks = [], isLoading } = useCachedQuery({
+    queryKey: ["streaks"],
+    queryFn: () => listStreaks(),
+    cacheKey: "streaks",
+  });
 
   const locale = useLocale();
   const t = useTranslations("Racha");
