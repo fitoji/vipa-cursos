@@ -22,15 +22,15 @@ const BACKGROUNDS = [
     label: "Bosque",
   },
   {
-    key: "truthseeker08-bodhi-leaf-5213739_1280.jpg",
+    key: "truthseeker08-bodhi-leaf-5213739_1280.webp",
     label: "Bodhi Leaf",
   },
   {
-    key: "kalyanayahaluwo-leaves-6636814_1280.jpg",
+    key: "kalyanayahaluwo-leaves-6636814_1280.webp",
     label: "Sacred Leaves",
   },
   {
-    key: "kalyanayahaluwo-sacred-fig-6656594_1280.jpg",
+    key: "kalyanayahaluwo-sacred-fig-6656594_1280.webp",
     label: "Sacred Fig",
   },
 ] as const;

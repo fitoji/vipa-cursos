@@ -156,9 +156,9 @@ export async function deleteCourse({ data }: { data: { id: number } }) {
 
 const BACKGROUND_ALLOWLIST = [
   "bosque.webp",
-  "truthseeker08-bodhi-leaf-5213739_1280.jpg",
-  "kalyanayahaluwo-leaves-6636814_1280.jpg",
-  "kalyanayahaluwo-sacred-fig-6656594_1280.jpg",
+  "truthseeker08-bodhi-leaf-5213739_1280.webp",
+  "kalyanayahaluwo-leaves-6636814_1280.webp",
+  "kalyanayahaluwo-sacred-fig-6656594_1280.webp",
 ] as const;
 
 type BackgroundImage = (typeof BACKGROUND_ALLOWLIST)[number];
