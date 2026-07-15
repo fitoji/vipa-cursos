@@ -42,9 +42,7 @@
         "faq": {
           "title": "Preguntas frecuentes",
           "q1": "¿Puedo editar o eliminar un curso después de guardarlo?",
-          "a1": "Sí. En la tabla del panel de control encontrás los botones de Editar (icono lápiz) y Eliminar (icono papelera) a la derecha de cada fila. Al editar podés cambiar cualquier campo; al eliminar se borra permanentemente.",
-          "q2": "¿Puedo tener dos cursos con la misma fecha?",
-          "a2": "Sí. VipaBase permite fechas duplicadas. Si hiciste dos cursos en paralelo (uno sentado y el otro sirviendo), registralos por separado."
+          "a1": "Sí. En la tabla del panel de control encontrás los botones de Editar (icono lápiz) y Eliminar (icono papelera) a la derecha de cada fila. Al editar podés cambiar cualquier campo; al eliminar se borra permanentemente."
         }
       },
       "dashboard": {

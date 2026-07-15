@@ -133,14 +133,6 @@ export function HelpView() {
                     {t("sections.courses.faq.a1")}
                   </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value="q2">
-                  <AccordionTrigger className="text-sm">
-                    {t("sections.courses.faq.q2")}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-sm text-muted-foreground">
-                    {t("sections.courses.faq.a2")}
-                  </AccordionContent>
-                </AccordionItem>
               </Accordion>
             </div>
           </div>
@@ -227,15 +219,6 @@ export function HelpView() {
                 <li key={i}>{t(`sections.export.step${i}`)}</li>
               ))}
             </ol>
-
-            <div className="mt-8 flex gap-4">
-              <Button asChild variant="outline">
-                <Link href="/cursos">{t("cta.courses")}</Link>
-              </Button>
-              <Button asChild>
-                <Link href="/dashboard">{t("cta.dashboard")}</Link>
-              </Button>
-            </div>
           </div>
         </section>
 
@@ -260,6 +243,16 @@ export function HelpView() {
             </ol>
           </div>
         </section>
+
+        {/* CTA buttons */}
+        <div className="mb-12 flex gap-4">
+          <Button asChild variant="outline">
+            <Link href="/cursos">{t("cta.courses")}</Link>
+          </Button>
+          <Button asChild>
+            <Link href="/dashboard">{t("cta.dashboard")}</Link>
+          </Button>
+        </div>
 
         {/* Section: Atribuciones — icon inline */}
         <section

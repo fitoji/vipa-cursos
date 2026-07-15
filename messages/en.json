@@ -42,9 +42,7 @@
         "faq": {
           "title": "FAQ",
           "q1": "Can I edit or delete a course after saving it?",
-          "a1": "Yes. In the dashboard table you'll find Edit (pencil icon) and Delete (trash icon) buttons on the right side of each row. Editing lets you change any field; deleting removes it permanently.",
-          "q2": "Can I have two courses on the same date?",
-          "a2": "Yes. VipaBase allows duplicate dates. If you took two parallel courses (one sit and one serve, for example), just log them separately."
+          "a1": "Yes. In the dashboard table you'll find Edit (pencil icon) and Delete (trash icon) buttons on the right side of each row. Editing lets you change any field; deleting removes it permanently."
         }
       },
       "dashboard": {
