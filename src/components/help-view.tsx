@@ -54,7 +54,7 @@ export function HelpView() {
 
       <div className="relative z-10 mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
         {/* Back to dashboard */}
-        <div className="mb-8">
+        <div className="mb-8 flex justify-end">
           <Button variant="ghost" size="sm" asChild>
             <Link href="/dashboard">
               <ArrowLeft className="mr-1.5 h-4 w-4" />
