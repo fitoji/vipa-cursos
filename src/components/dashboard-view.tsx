@@ -115,7 +115,7 @@ export function DashboardView() {
   const [busyDelete, setBusyDelete] = useState(false);
   const [view, setViewState] = useState<View>("stats");
   const [filterPreset, setFilterPreset] = useState<FilterPreset>(null);
-  const { backgroundImage } = useBackground();
+  const { backgroundImage, overlayOpacity } = useBackground();
 
   const locale = useLocale();
   const t = useTranslations("Dashboard");
@@ -305,7 +305,7 @@ export function DashboardView() {
       <AppSidebar activeView={view} onNavigate={navigate} />
       <SidebarInset>
         <div className="relative h-full">
-          <BackgroundLayer imageKey={backgroundImage} />
+          <BackgroundLayer imageKey={backgroundImage} overlayOpacity={overlayOpacity} />
 
           <div className="relative z-10 mx-auto max-w-6xl px-4 py-10">
             {/* Header */}
@@ -389,7 +389,10 @@ export function DashboardView() {
                   <CardContent>
                     <div className="space-y-3">
                       {Array.from({ length: 5 }).map((_, i) => (
-                        <div key={i} className="flex items-center justify-between rounded-lg border p-3">
+                        <div
+                          key={i}
+                          className="flex items-center justify-between rounded-lg border p-3"
+                        >
                           <div className="flex items-center gap-3">
                             <Skeleton className="h-4 w-4 rounded" />
                             <div className="space-y-1">

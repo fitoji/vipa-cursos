@@ -479,7 +479,8 @@
     "description": "Choose a background image for your tracker.",
     "saved": "Background updated",
     "error": "Could not update background",
-    "selectImage": "Select {name}"
+    "selectImage": "Select {name}",
+    "overlayOpacity": "Overlay opacity"
   },
   "SiteFooter": {
     "copyright": "VipaBase © {year}",

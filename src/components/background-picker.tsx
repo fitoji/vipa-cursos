@@ -1,11 +1,12 @@
 "use client";
 
 import { useQueryClient, useMutation } from "@tanstack/react-query";
+import { useCallback, useRef } from "react";
 import { toast } from "sonner";
-import { Image } from "lucide-react";
+import { Image, SlidersHorizontal } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import { setBackgroundPreference } from "@/app/actions/courses";
+import { setBackgroundPreference, setOverlayPreference } from "@/app/actions/courses";
 import { useBackground } from "@/hooks/useBackground";
 import { cn } from "@/lib/utils";
 import {
@@ -15,6 +16,8 @@ import {
   SheetTitle,
   SheetDescription,
 } from "@/components/ui/sheet";
+import { Slider } from "@/components/ui/slider";
+import { Label } from "@/components/ui/label";
 
 const BACKGROUNDS = [
   {
@@ -42,21 +45,43 @@ type BackgroundPickerProps = {
 
 export function BackgroundPicker({ open, onOpenChange }: BackgroundPickerProps) {
   const qc = useQueryClient();
-  const { backgroundImage } = useBackground();
+  const { backgroundImage, overlayOpacity } = useBackground();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const t = useTranslations("BackgroundPicker") as any;
 
-  const mutation = useMutation({
+  const imageMutation = useMutation({
     mutationFn: (imageKey: string) => setBackgroundPreference(imageKey),
     onSuccess: async () => {
       await qc.invalidateQueries({ queryKey: ["backgroundPreference"] });
       toast.success(t("saved"));
-      onOpenChange(false);
     },
     onError: () => {
       toast.error(t("error"));
     },
   });
+
+  const opacityMutation = useMutation({
+    mutationFn: (opacity: number) => setOverlayPreference(opacity),
+    onSuccess: async () => {
+      await qc.invalidateQueries({ queryKey: ["backgroundPreference"] });
+    },
+    onError: () => {
+      toast.error(t("error"));
+    },
+  });
+
+  const lastSavedRef = useRef(overlayOpacity);
+
+  const handleOpacityChange = useCallback(
+    (value: number[]) => {
+      const newValue = value[0];
+      if (newValue !== lastSavedRef.current) {
+        lastSavedRef.current = newValue;
+        opacityMutation.mutate(newValue);
+      }
+    },
+    [opacityMutation],
+  );
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
@@ -75,8 +100,8 @@ export function BackgroundPicker({ open, onOpenChange }: BackgroundPickerProps) 
               <button
                 key={bg.key}
                 type="button"
-                disabled={mutation.isPending}
-                onClick={() => mutation.mutate(bg.key)}
+                disabled={imageMutation.isPending}
+                onClick={() => imageMutation.mutate(bg.key)}
                 aria-label={t("selectImage", { name: bg.label })}
                 aria-pressed={isSelected}
                 className={cn(
@@ -85,7 +110,7 @@ export function BackgroundPicker({ open, onOpenChange }: BackgroundPickerProps) 
                   isSelected
                     ? "border-primary ring-2 ring-primary"
                     : "border-border hover:border-primary/50",
-                  mutation.isPending && "opacity-50 cursor-not-allowed",
+                  imageMutation.isPending && "opacity-50 cursor-not-allowed",
                 )}
               >
                 <img
@@ -110,6 +135,25 @@ export function BackgroundPicker({ open, onOpenChange }: BackgroundPickerProps) 
               </button>
             );
           })}
+        </div>
+
+        {/* Opacity slider */}
+        <div className="mt-6 space-y-3">
+          <div className="flex items-center justify-between">
+            <Label className="flex items-center gap-1.5 text-sm font-medium">
+              <SlidersHorizontal className="h-3.5 w-3.5" />
+              {t("overlayOpacity")}
+            </Label>
+            <span className="text-sm tabular-nums text-muted-foreground">{overlayOpacity}%</span>
+          </div>
+          <Slider
+            min={0}
+            max={100}
+            step={5}
+            value={[overlayOpacity]}
+            onValueChange={handleOpacityChange}
+            aria-label={t("overlayOpacity")}
+          />
         </div>
       </SheetContent>
     </Sheet>

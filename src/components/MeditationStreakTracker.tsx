@@ -13,9 +13,17 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
 import { DatePicker } from "@/components/ui/date-picker";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
+import { BackgroundLayer } from "@/components/background-layer";
+import { useBackground } from "@/hooks/useBackground";
 import { listStreaks, createStreak, deleteStreak, updateStreak } from "@/app/actions/streaks";
 
 type Streak = {
@@ -66,7 +74,7 @@ export default function MeditationStreakTracker() {
   const tEmpty = useTranslations("Racha.empty");
   const tStreak = useTranslations("Racha.streak");
   const tSidebar = useTranslations("Dashboard.sidebar");
-  const { backgroundImage } = useBackground();
+  const { backgroundImage, overlayOpacity } = useBackground();
 
   const {
     register,
@@ -144,7 +152,7 @@ export default function MeditationStreakTracker() {
       <AppSidebar />
       <SidebarInset>
         <div className="relative h-full">
-          <BackgroundLayer imageKey={backgroundImage} />
+          <BackgroundLayer imageKey={backgroundImage} overlayOpacity={overlayOpacity} />
 
           <div className="relative z-10 mx-auto max-w-3xl px-4 py-10">
             {/* Header */}

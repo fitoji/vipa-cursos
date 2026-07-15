@@ -75,7 +75,7 @@ export function CursosView() {
     selectedCountry ? `locations-${selectedCountry}` : "locations-all",
     () => listLocationNamesByCountry(selectedCountry || undefined),
   );
-  const { backgroundImage } = useBackground();
+  const { backgroundImage, overlayOpacity } = useBackground();
 
   if (isPending || !session) return null;
 
@@ -109,7 +109,7 @@ export function CursosView() {
 
   return (
     <div className="relative h-full">
-      <BackgroundLayer imageKey={backgroundImage} />
+      <BackgroundLayer imageKey={backgroundImage} overlayOpacity={overlayOpacity} />
 
       <div className="relative z-10 mx-auto max-w-4xl px-4 py-10">
         <header className="mb-8 flex items-start justify-between gap-4">

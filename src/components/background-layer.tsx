@@ -1,4 +1,14 @@
-export function BackgroundLayer({ imageKey }: { imageKey: string }) {
+export function BackgroundLayer({
+  imageKey,
+  overlayOpacity = 55,
+}: {
+  imageKey: string;
+  overlayOpacity?: number;
+}) {
+  const opacity = Math.min(100, Math.max(0, overlayOpacity));
+  const opacityClass = opacity / 100;
+  const showBlur = opacity >= 30;
+
   return (
     <>
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -9,7 +19,13 @@ export function BackgroundLayer({ imageKey }: { imageKey: string }) {
           draggable={false}
         />
       </div>
-      <div className="pointer-events-none absolute inset-0 bg-background/55 backdrop-blur-sm" />
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundColor: `oklch(var(--background) / ${opacityClass})`,
+          backdropFilter: showBlur ? "blur(4px)" : "none",
+        }}
+      />
     </>
   );
 }
