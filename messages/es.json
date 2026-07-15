@@ -470,8 +470,17 @@
     "help": "Ayuda",
     "userMenu": {
       "name": "Usuario",
-      "signOut": "Cerrar sesión"
+      "signOut": "Cerrar sesión",
+      "background": "Fondo"
     }
+  },
+  "BackgroundPicker": {
+    "title": "Fondo",
+    "description": "Elegí una imagen de fondo para tu registro.",
+    "saved": "Fondo actualizado",
+    "error": "No se pudo actualizar el fondo",
+    "selectImage": "Seleccionar {name}",
+    "overlayOpacity": "Opacidad del fondo"
   },
   "SiteFooter": {
     "copyright": "VipaBase © {year}",

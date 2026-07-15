@@ -38,6 +38,8 @@ import { DatePicker } from "@/components/ui/date-picker";
 import { ImportCoursesDialog } from "@/components/import-courses-dialog";
 import { useInView } from "@/lib/animations";
 import { useCachedData } from "@/hooks/use-cached-data";
+import { BackgroundLayer } from "@/components/background-layer";
+import { useBackground } from "@/hooks/useBackground";
 import { cn } from "@/lib/utils";
 
 export function CursosView() {
@@ -73,6 +75,7 @@ export function CursosView() {
     selectedCountry ? `locations-${selectedCountry}` : "locations-all",
     () => listLocationNamesByCountry(selectedCountry || undefined),
   );
+  const { backgroundImage, overlayOpacity } = useBackground();
 
   if (isPending || !session) return null;
 
@@ -106,16 +109,7 @@ export function CursosView() {
 
   return (
     <div className="relative h-full">
-      {/* bosque.webp background */}
-      <div
-        className="pointer-events-none absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: "url('/bosque.webp')",
-          backgroundAttachment: "fixed",
-        }}
-      />
-      {/* overlay for readability */}
-      <div className="pointer-events-none absolute inset-0 bg-background/55 backdrop-blur-sm" />
+      <BackgroundLayer imageKey={backgroundImage} overlayOpacity={overlayOpacity} />
 
       <div className="relative z-10 mx-auto max-w-4xl px-4 py-10">
         <header className="mb-8 flex items-start justify-between gap-4">

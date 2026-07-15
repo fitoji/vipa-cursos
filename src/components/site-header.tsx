@@ -3,7 +3,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "@/i18n/navigation";
 import { useTheme } from "next-themes";
-import { Moon, Sun, LogOut, CircleHelp } from "lucide-react";
+import { Moon, Sun, LogOut, CircleHelp, Image } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { TransitionLink as Link } from "@/components/transition-link";
 import { authClient } from "@/lib/auth-client";
@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 import { LocaleSwitcher } from "@/components/locale-switcher";
 import { cn } from "@/lib/utils";
+import { BackgroundPicker } from "@/components/background-picker";
 
 export function SiteHeader() {
   const router = useRouter();
@@ -18,6 +19,7 @@ export function SiteHeader() {
   const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [pickerOpen, setPickerOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const t = useTranslations("SiteHeader") as any;
@@ -123,6 +125,16 @@ export function SiteHeader() {
                   <p className="truncate text-xs text-muted-foreground">{email}</p>
                 </div>
                 <button
+                  onClick={() => {
+                    setMenuOpen(false);
+                    setPickerOpen(true);
+                  }}
+                  className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:bg-accent focus-visible:text-foreground"
+                >
+                  <Image className="h-3.5 w-3.5" />
+                  {t("userMenu.background")}
+                </button>
+                <button
                   onClick={handleLogout}
                   className="mt-1 flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive focus-visible:bg-destructive/10 focus-visible:text-destructive"
                 >
@@ -134,7 +146,7 @@ export function SiteHeader() {
           ) : null}
         </div>
       </div>
+      <BackgroundPicker open={pickerOpen} onOpenChange={setPickerOpen} />
     </header>
   );
 }
-
