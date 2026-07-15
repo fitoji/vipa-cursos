@@ -6,7 +6,7 @@ export function BackgroundLayer({
   overlayOpacity?: number;
 }) {
   const opacity = Math.min(100, Math.max(0, overlayOpacity));
-  const opacityClass = opacity / 100;
+  const transparentPct = 100 - opacity;
   const showBlur = opacity >= 30;
 
   return (
@@ -22,7 +22,7 @@ export function BackgroundLayer({
       <div
         className="pointer-events-none absolute inset-0"
         style={{
-          backgroundColor: `oklch(var(--background) / ${opacityClass})`,
+          backgroundColor: `color-mix(in oklch, var(--background), transparent ${transparentPct}%)`,
           backdropFilter: showBlur ? "blur(4px)" : "none",
         }}
       />
