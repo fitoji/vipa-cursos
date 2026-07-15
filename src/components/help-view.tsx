@@ -244,16 +244,6 @@ export function HelpView() {
           </div>
         </section>
 
-        {/* CTA buttons */}
-        <div className="mb-12 flex gap-4">
-          <Button asChild variant="outline">
-            <Link href="/cursos">{t("cta.courses")}</Link>
-          </Button>
-          <Button asChild>
-            <Link href="/dashboard">{t("cta.dashboard")}</Link>
-          </Button>
-        </div>
-
         {/* Section: Atribuciones — icon inline */}
         <section
           id="attributions"
@@ -319,6 +309,16 @@ export function HelpView() {
             </div>
           </div>
         </section>
+
+        {/* CTA buttons */}
+        <div className="mt-12 flex gap-4">
+          <Button asChild variant="outline">
+            <Link href="/cursos">{t("cta.courses")}</Link>
+          </Button>
+          <Button asChild>
+            <Link href="/dashboard">{t("cta.dashboard")}</Link>
+          </Button>
+        </div>
       </div>
     </div>
   );
