@@ -151,3 +151,55 @@ export async function deleteCourse({ data }: { data: { id: number } }) {
   revalidateBoth("/dashboard");
   return { ok: true };
 }
+
+// --- Background preference ---
+
+const BACKGROUND_ALLOWLIST = [
+  "bosque.webp",
+  "truthseeker08-bodhi-leaf-5213739_1280.jpg",
+  "kalyanayahaluwo-leaves-6636814_1280.jpg",
+  "kalyanayahaluwo-sacred-fig-6656594_1280.jpg",
+] as const;
+
+type BackgroundImage = (typeof BACKGROUND_ALLOWLIST)[number];
+
+export async function getBackgroundPreference(): Promise<{ backgroundImage: BackgroundImage }> {
+  const session = await getSession();
+  if (!session?.user?.id) throw new Error("Unauthorized");
+  const userId = session.user.id;
+
+  const { neon } = await import("@neondatabase/serverless");
+  const sql = neon(process.env.DATABASE_URL!);
+  const rows = await sql`
+    INSERT INTO user_preferences (user_id, background_image)
+    VALUES (${userId}, 'bosque.webp')
+    ON CONFLICT (user_id) DO NOTHING
+  `;
+
+  const result = await sql`
+    SELECT background_image FROM user_preferences WHERE user_id = ${userId}
+  `;
+  return { backgroundImage: (result[0]?.background_image as BackgroundImage) ?? "bosque.webp" };
+}
+
+export async function setBackgroundPreference(imageKey: string): Promise<{ ok: true }> {
+  const session = await getSession();
+  if (!session?.user?.id) throw new Error("Unauthorized");
+  const userId = session.user.id;
+
+  if (!(BACKGROUND_ALLOWLIST as readonly string[]).includes(imageKey)) {
+    throw new Error("Invalid background image");
+  }
+
+  const { neon } = await import("@neondatabase/serverless");
+  const sql = neon(process.env.DATABASE_URL!);
+  await sql`
+    INSERT INTO user_preferences (user_id, background_image, updated_at)
+    VALUES (${userId}, ${imageKey}, now())
+    ON CONFLICT (user_id) DO UPDATE
+    SET background_image = ${imageKey}, updated_at = now()
+  `;
+  revalidateBoth("/");
+  revalidateBoth("/dashboard");
+  return { ok: true };
+}
