@@ -88,6 +88,33 @@
     "cta": {
       "courses": "Ir a Cursos",
       "dashboard": "Ir al Panel de control"
+    },
+    "attributions": {
+      "title": "Atribuciones de imágenes",
+      "intro": "Algunas imágenes de fondo de VipaBase provienen de Pixabay y Unsplash, publicadas bajo la Licencia de Contenido de Pixabay y la Licencia de Unsplash respectivamente. La atribución no es requerida, pero agradecemos a los creadores.",
+      "license": "Imágenes usadas bajo la Licencia de Contenido de Pixabay y la Licencia de Unsplash.",
+      "images": {
+        "forest": {
+          "name": "Bosque",
+          "author": "Philipp",
+          "source": "Unsplash"
+        },
+        "bodhiLeaf": {
+          "name": "Bodhi Leaf",
+          "author": "truthseeker08",
+          "source": "Pixabay"
+        },
+        "sacredLeaves": {
+          "name": "Sacred Leaves",
+          "author": "kalyanayahaluwo",
+          "source": "Pixabay"
+        },
+        "sacredFig": {
+          "name": "Sacred Fig",
+          "author": "kalyanayahaluwo",
+          "source": "Pixabay"
+        }
+      }
     }
   },
   "HomePage": {
