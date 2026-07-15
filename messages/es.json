@@ -246,7 +246,8 @@
       "sit": "Sentar",
       "serve": "Servir",
       "courseSingular": "curso",
-      "coursePlural": "cursos"
+      "coursePlural": "cursos",
+      "progressLabel": "Porcentaje de modo sentar/servir"
     },
     "table": {
       "header": {
@@ -281,7 +282,6 @@
       "sit": "Sentar",
       "serve": "Servir"
     },
-    "progressLabel": "Porcentaje de modo sentar/servir",
     "loading": "Cargando cursos…",
     "empty": {
       "title": "No hay cursos registrados",

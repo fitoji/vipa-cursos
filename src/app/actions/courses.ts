@@ -174,7 +174,9 @@ export async function getBackgroundPreference(): Promise<{
   overlayOpacity: number;
 }> {
   const session = await getSession();
-  if (!session?.user?.id) throw new Error("Unauthorized");
+  if (!session?.user?.id) {
+    return { backgroundImage: "bosque.webp", overlayOpacity: DEFAULT_OVERLAY_OPACITY };
+  }
   const userId = session.user.id;
 
   const { neon } = await import("@neondatabase/serverless");

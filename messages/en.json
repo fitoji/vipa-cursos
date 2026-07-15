@@ -246,7 +246,8 @@
       "sit": "Sitting",
       "serve": "Serving",
       "courseSingular": "course",
-      "coursePlural": "courses"
+      "coursePlural": "courses",
+      "progressLabel": "Sit/Serve mode percentage"
     },
     "table": {
       "header": {
@@ -281,7 +282,6 @@
       "sit": "Sit",
       "serve": "Serve"
     },
-    "progressLabel": "Sit/Serve mode percentage",
     "loading": "Loading courses…",
     "empty": {
       "title": "No courses registered",

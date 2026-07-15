@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { DashboardView } from "@/components/dashboard-view";
+import { DashboardClient } from "./dashboard-client";
 import { canonicalFor, languageAlternates } from "@/lib/seo";
 
 export async function generateMetadata({
@@ -23,5 +23,5 @@ export async function generateMetadata({
 }
 
 export default function DashboardPage() {
-  return <DashboardView />;
+  return <DashboardClient />;
 }
