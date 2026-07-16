@@ -66,9 +66,9 @@ const SelectContent = React.forwardRef<
     position?: string;
   }
 >(({ className, children, position: _position, ...props }, ref) => (
-  <Select.Portal>
-    <Select.Positioner>
-      <Select.Popup
+    <Select.Portal>
+      <Select.Positioner positionMethod="fixed" alignItemWithTrigger={false} className="z-50">
+        <Select.Popup
         ref={ref}
         className={cn(
           "relative z-50 min-w-[8rem] overflow-y-auto overflow-x-hidden rounded-md border bg-popover text-popover-foreground shadow-md",

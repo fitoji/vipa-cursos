@@ -112,7 +112,7 @@ export default async function LocaleLayout({
       className={`${montserrat.variable} ${playfair.variable} ${sourceCode.variable}`}
       suppressHydrationWarning
     >
-      <body className="flex h-screen flex-col overflow-hidden">
+      <body className="flex h-screen flex-col">
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-primary focus:text-primary-foreground focus:rounded-md"

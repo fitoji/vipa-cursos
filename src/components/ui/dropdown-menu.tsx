@@ -44,7 +44,7 @@ const DropdownMenuSubContent = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof Menu.Popup>
 >(({ className, ...props }, ref) => (
   <Menu.Portal>
-    <Menu.Positioner side="right" sideOffset={0} align="start" alignOffset={-3}>
+    <Menu.Positioner positionMethod="fixed" side="right" sideOffset={0} align="start" alignOffset={-3} className="z-50">
       <Menu.Popup
         ref={ref}
         className={cn(
@@ -71,7 +71,7 @@ const DropdownMenuContent = React.forwardRef<
   }
 >(({ className, sideOffset = 4, side, align, alignOffset, ...props }, ref) => (
   <Menu.Portal>
-    <Menu.Positioner sideOffset={sideOffset} side={side} align={align} alignOffset={alignOffset}>
+    <Menu.Positioner positionMethod="fixed" sideOffset={sideOffset} side={side} align={align} alignOffset={alignOffset} className="z-50">
       <Menu.Popup
         ref={ref}
         className={cn(
@@ -151,12 +151,12 @@ const DropdownMenuRadioItem = React.forwardRef<
 DropdownMenuRadioItem.displayName = "DropdownMenuRadioItem"
 
 const DropdownMenuLabel = React.forwardRef<
-  React.ElementRef<typeof Menu.GroupLabel>,
-  React.ComponentPropsWithoutRef<typeof Menu.GroupLabel> & {
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement> & {
     inset?: boolean
   }
 >(({ className, inset, ...props }, ref) => (
-  <Menu.GroupLabel
+  <div
     ref={ref}
     className={cn(
       "px-2 py-1.5 text-sm font-semibold",

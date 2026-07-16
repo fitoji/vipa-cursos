@@ -37,7 +37,7 @@ const TooltipContent = React.forwardRef<
   }
 >(({ className, side, align, sideOffset, alignOffset, ...props }, ref) => (
   <Tooltip.Portal>
-    <Tooltip.Positioner side={side} align={align} sideOffset={sideOffset} alignOffset={alignOffset}>
+    <Tooltip.Positioner positionMethod="fixed" side={side} align={align} sideOffset={sideOffset} alignOffset={alignOffset} className="z-50">
       <Tooltip.Popup
         ref={ref}
         className={cn(
