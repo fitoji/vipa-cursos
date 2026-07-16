@@ -33,6 +33,29 @@ No test runner is configured. No CI workflows exist.
 - shadcn utility: `cn()` from `@/lib/utils` (clsx + tailwind-merge)
 - Prettier: 100 cols, double quotes, trailing commas, semicolons
 
+## Animation conventions
+
+This is a **meditation app** — motion should feel calm, unhurried, and fluid. Not a crisp dashboard.
+
+**Easing**: All transitions use `cubic-bezier(0.4, 0, 0.2, 1)` (smooth ease-out, no abrupt stops). Defined inline — no CSS variable yet.
+
+**Duration scale** (meditative pacing):
+
+| Element | Duration |
+| --- | --- |
+| View transitions (page nav) | 450ms |
+| Entrance animations (fade-up, scale-in, etc.) | 400–600ms |
+| Hover effects | 250ms |
+| Press feedback | 140ms |
+
+**Touch safety**: All `:hover` rules are gated behind `@media (hover: hover) and (pointer: fine)`. Touch devices get press feedback only — no sticky hover.
+
+**Reduced motion**: `@media (prefers-reduced-motion: reduce)` block at the bottom of `globals.css` disables all animations and transforms. Uses `!important` to override media queries.
+
+**Base UI overlays** (Dialog, Select, Popover, Menu, Tooltip) use CSS-driven enter/exit via `data-starting-style` / `data-ending-style` — no JS animation props.
+
+**View transitions**: Use `document.startViewTransition()` via `TransitionLink` and `useTransitionRouter`. Crossfade only (opacity), no blur.
+
 ## Gotchas
 
 - `pnpm-workspace.yaml` exists only for `minimumReleaseAge: 0` (supply-chain policy relaxation) — this is NOT a monorepo
