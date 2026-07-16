@@ -7,8 +7,7 @@ const data = [
     name: "VipaBase",
     url: siteUrl,
     logo: `${siteUrl}/favicon.png`,
-    description:
-      "Personal app to register and organize your Vipassana meditation courses.",
+    description: "Personal app to register and organize your Vipassana meditation courses.",
   },
   {
     "@context": "https://schema.org",
@@ -21,9 +20,6 @@ const data = [
 
 export function SiteJsonLd() {
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
   );
 }

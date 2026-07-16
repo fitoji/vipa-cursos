@@ -120,12 +120,12 @@ export function CursosView() {
           <div className="flex items-center gap-2">
             <ImportCoursesDialog>
               <Button variant="outline">
-                <Upload className="mr-1 h-4 w-4" /> {t("importLink")}
+                <Upload data-icon="inline-start" /> {t("importLink")}
               </Button>
             </ImportCoursesDialog>
             <Button variant="default" asChild>
               <Link href="/dashboard">
-                <LayoutDashboard className="mr-1 h-4 w-4" /> {t("dashboardLink")}
+                <LayoutDashboard data-icon="inline-start" /> {t("dashboardLink")}
               </Link>
             </Button>
           </div>
@@ -296,7 +296,7 @@ export function CursosView() {
               <div className="sm:col-span-2 flex justify-end gap-2">
                 {submitted && (
                   <span className="anim-scale-in flex items-center gap-1 text-sm text-emerald-600">
-                    <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                    <svg className="size-4" viewBox="0 0 20 20" fill="currentColor">
                       <path
                         fillRule="evenodd"
                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"

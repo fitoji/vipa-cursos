@@ -159,8 +159,8 @@ export default function MeditationStreakTracker() {
               <div className="flex items-center gap-3">
                 <SidebarTrigger aria-label={tSidebar("toggleSidebar")} />
                 <div>
-                  <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 ring-1 ring-primary/20">
-                    <Flame className="h-5 w-5 text-primary" />
+                  <div className="mb-3 inline-flex size-10 items-center justify-center rounded-xl bg-primary/10 ring-1 ring-primary/20">
+                    <Flame className="size-5 text-primary" />
                   </div>
                   <h1 className="font-serif text-3xl font-semibold tracking-tight">
                     {t("header.title")}
@@ -173,9 +173,9 @@ export default function MeditationStreakTracker() {
             {/* Summary cards */}
             <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
               <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardHeader className="flex flex-row items-center justify-between gap-0 pb-2">
                   <CardTitle className="text-sm font-medium">{tStats("current")}</CardTitle>
-                  <Flame className="h-4 w-4 text-muted-foreground" />
+                  <Flame className="size-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold tabular-nums text-primary">
@@ -184,9 +184,9 @@ export default function MeditationStreakTracker() {
                 </CardContent>
               </Card>
               <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardHeader className="flex flex-row items-center justify-between gap-0 pb-2">
                   <CardTitle className="text-sm font-medium">{tStats("best")}</CardTitle>
-                  <Flame className="h-4 w-4 text-muted-foreground" />
+                  <Flame className="size-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold tabular-nums">
@@ -195,9 +195,9 @@ export default function MeditationStreakTracker() {
                 </CardContent>
               </Card>
               <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardHeader className="flex flex-row items-center justify-between gap-0 pb-2">
                   <CardTitle className="text-sm font-medium">{tStats("total")}</CardTitle>
-                  <Flame className="h-4 w-4 text-muted-foreground" />
+                  <Flame className="size-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold tabular-nums">{streaks.length}</div>
@@ -218,7 +218,7 @@ export default function MeditationStreakTracker() {
                         size="icon"
                         onClick={() => setShowForm(false)}
                       >
-                        <X className="h-5 w-5" />
+                        <X className="size-5" />
                       </Button>
                     </div>
 
@@ -260,12 +260,12 @@ export default function MeditationStreakTracker() {
                     <div className="mt-4 flex flex-wrap items-center gap-2 text-sm">
                       {isActive ? (
                         <Badge variant="default" className="gap-1.5">
-                          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary-foreground" />
+                          <span className="size-1.5 animate-pulse rounded-full bg-primary-foreground" />
                           {tForm("activeToday")}
                         </Badge>
                       ) : (
                         <Badge variant="secondary" className="gap-1.5">
-                          <Check className="h-3.5 w-3.5" />
+                          <Check className="size-3.5" />
                           {tForm("finished")}
                         </Badge>
                       )}
@@ -279,7 +279,7 @@ export default function MeditationStreakTracker() {
                         {tForm("cancel")}
                       </Button>
                       <Button type="submit" disabled={isSubmitting}>
-                        <Check className="mr-2 h-4 w-4" />
+                        <Check data-icon="inline-start" />
                         {tForm("save")}
                       </Button>
                     </div>
@@ -292,7 +292,7 @@ export default function MeditationStreakTracker() {
                 onClick={openNewForm}
                 className="mb-8 w-full justify-center gap-2 border-dashed py-6"
               >
-                <Plus className="h-5 w-5" />
+                <Plus className="size-5" />
                 {tForm("addButton")}
               </Button>
             )}
@@ -375,7 +375,7 @@ function Section({
         </h3>
         <Badge variant="secondary">{count}</Badge>
       </div>
-      <div className="space-y-3">{children}</div>
+      <div className="flex flex-col gap-3">{children}</div>
     </section>
   );
 }
@@ -404,13 +404,13 @@ function StreakRow({
       <div className="flex items-center gap-4">
         <div
           className={cn(
-            "flex h-11 w-11 shrink-0 items-center justify-center rounded-xl",
+            "flex size-11 shrink-0 items-center justify-center rounded-xl",
             streak.is_active
               ? "bg-primary/10 text-primary ring-1 ring-primary/20"
               : "bg-muted text-muted-foreground",
           )}
         >
-          <Flame className="h-5 w-5" />
+          <Flame className="size-5" />
         </div>
         <div>
           <p className="text-sm font-medium">
@@ -420,7 +420,7 @@ function StreakRow({
             {days} {days !== 1 ? tStreak("days") : tStreak("day")}
             {streak.is_active && (
               <span className="ml-2 inline-flex items-center gap-1 text-primary">
-                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
+                <span className="size-1.5 animate-pulse rounded-full bg-primary" />
                 {tStreak("active")}
               </span>
             )}
@@ -435,7 +435,7 @@ function StreakRow({
           className="opacity-0 transition-opacity group-hover:opacity-100 focus-visible:opacity-100 text-muted-foreground hover:text-foreground"
           aria-label={tStreak("edit")}
         >
-          <Pencil className="h-4 w-4" />
+          <Pencil className="size-4" />
         </Button>
         <Button
           variant="ghost"
@@ -444,7 +444,7 @@ function StreakRow({
           className="opacity-0 transition-opacity group-hover:opacity-100 focus-visible:opacity-100 text-muted-foreground hover:text-destructive"
           aria-label={tStreak("delete")}
         >
-          <Trash2 className="h-4 w-4" />
+          <Trash2 className="size-4" />
         </Button>
       </div>
     </div>
@@ -475,15 +475,15 @@ function EditStreakForm({
   });
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <div className="space-y-2">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2">
         <Label>{tForm("startDate")}</Label>
         <DatePicker
           value={watch("start_date")}
           onChange={(v) => v && setValue("start_date", v, { shouldValidate: true })}
         />
       </div>
-      <div className="space-y-2">
+      <div className="flex flex-col gap-2">
         <Label>{tForm("endDate")}</Label>
         <DatePicker
           value={watch("end_date")}

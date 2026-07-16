@@ -82,7 +82,7 @@ export function BackgroundPicker({ open, onOpenChange }: BackgroundPickerProps) 
       <SheetContent side="right" className="w-80 sm:w-96">
         <SheetHeader>
           <SheetTitle className="flex items-center gap-2">
-            <Image className="h-4 w-4" />
+            <Image className="size-4" />
             {t("title")}
           </SheetTitle>
           <SheetDescription>{t("description")}</SheetDescription>
@@ -115,8 +115,8 @@ export function BackgroundPicker({ open, onOpenChange }: BackgroundPickerProps) 
                 />
                 {isSelected && (
                   <div className="absolute inset-0 flex items-center justify-center bg-primary/20">
-                    <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-primary-foreground">
-                      <svg className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
+                    <div className="flex size-6 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                      <svg className="size-3.5" viewBox="0 0 20 20" fill="currentColor">
                         <path
                           fillRule="evenodd"
                           d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
@@ -132,10 +132,10 @@ export function BackgroundPicker({ open, onOpenChange }: BackgroundPickerProps) 
         </div>
 
         {/* Opacity slider */}
-        <div className="mt-6 space-y-3">
+        <div className="mt-6 flex flex-col gap-3">
           <div className="flex items-center justify-between">
             <Label className="flex items-center gap-1.5 text-sm font-medium">
-              <SlidersHorizontal className="h-3.5 w-3.5" />
+              <SlidersHorizontal className="size-3.5" />
               {t("overlayOpacity")}
             </Label>
             <span className="text-sm tabular-nums text-muted-foreground">{overlayOpacity}%</span>

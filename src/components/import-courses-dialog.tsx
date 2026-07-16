@@ -154,7 +154,7 @@ export function ImportCoursesDialog({ children }: { children?: ReactNode }) {
           <div className="rounded-md bg-muted p-3 text-xs">
             <p className="mb-1 font-medium">{tformat("title")}</p>
             <pre className="overflow-x-auto text-muted-foreground">{EXAMPLE}</pre>
-            <ul className="mt-2 list-disc space-y-0.5 pl-4 text-muted-foreground">
+            <ul className="mt-2 list-disc flex flex-col gap-0.5 pl-4 text-muted-foreground">
               <li>
                 <code>start_date</code>, <code>place</code>: {tformat("required", { field: "" })}.
               </li>
@@ -169,7 +169,7 @@ export function ImportCoursesDialog({ children }: { children?: ReactNode }) {
                 <code>teacher</code>, <code>country</code>, <code>obs</code>:{" "}
                 {tformat("optional", { fields: "" })}.
               </li>
-              <li className="font-medium text-amber-600 dark:text-amber-400">
+              <li className="font-medium text-amber-600">
                 {tformat("unknownTip", { code: "", empty: "" })}
               </li>
             </ul>
@@ -178,7 +178,7 @@ export function ImportCoursesDialog({ children }: { children?: ReactNode }) {
           {errors && (
             <div className="rounded-md border border-destructive/40 bg-destructive/10 p-3 text-xs text-destructive">
               <p className="mb-1 font-medium">{terrors("validationTitle")}</p>
-              <ul className="list-disc space-y-0.5 pl-4">
+              <ul className="list-disc flex flex-col gap-0.5 pl-4">
                 {errors.map((err, i) => (
                   <li key={err}>{err}</li>
                 ))}

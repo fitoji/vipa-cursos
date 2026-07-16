@@ -64,7 +64,7 @@ export function CourseDetailDialog({
       <DialogContent className="max-w-lg">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
-            <MapPin className="h-4 w-4 text-muted-foreground" />
+            <MapPin className="size-4 text-muted-foreground" />
             {course?.place}
           </DialogTitle>
           <DialogDescription className="flex items-center gap-2">
@@ -87,19 +87,19 @@ export function CourseDetailDialog({
           <div className="flex flex-col gap-4">
             {/* Fields grid */}
             <div className="grid gap-3 text-sm">
-              <Row icon={<Calendar className="h-4 w-4 shrink-0" />} label={t("startDate")}>
+              <Row icon={<Calendar className="size-4 shrink-0" />} label={t("startDate")}>
                 {formatDate(course.start_date, locale)}
               </Row>
-              <Row icon={<MapPin className="h-4 w-4 shrink-0" />} label={t("place")}>
+              <Row icon={<MapPin className="size-4 shrink-0" />} label={t("place")}>
                 {course.place}
               </Row>
-              <Row icon={<User className="h-4 w-4 shrink-0" />} label={t("teacher")}>
+              <Row icon={<User className="size-4 shrink-0" />} label={t("teacher")}>
                 {course.teacher || "—"}
               </Row>
-              <Row icon={<Globe className="h-4 w-4 shrink-0" />} label={t("country")}>
+              <Row icon={<Globe className="size-4 shrink-0" />} label={t("country")}>
                 {course.country || "—"}
               </Row>
-              <Row icon={<BookOpen className="h-4 w-4 shrink-0" />} label={t("mode")}>
+              <Row icon={<BookOpen className="size-4 shrink-0" />} label={t("mode")}>
                 <Badge variant={course.mode === "sit" ? "default" : "secondary"}>
                   {t(course.mode as "sit" | "serve")}
                 </Badge>
@@ -109,11 +109,11 @@ export function CourseDetailDialog({
                   </Badge>
                 )}
               </Row>
-              <Row icon={<Clock className="h-4 w-4 shrink-0" />} label={t("days")}>
+              <Row icon={<Clock className="size-4 shrink-0" />} label={t("days")}>
                 {course.days}
               </Row>
               {course.obs && (
-                <Row icon={<MessageSquare className="h-4 w-4 shrink-0" />} label={t("notes")}>
+                <Row icon={<MessageSquare className="size-4 shrink-0" />} label={t("notes")}>
                   {course.obs}
                 </Row>
               )}
@@ -124,7 +124,7 @@ export function CourseDetailDialog({
             <div className="grid grid-cols-2 gap-3 text-sm">
               <div className="flex flex-col gap-1">
                 <span className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
-                  <ArrowLeft className="h-3 w-3" />
+                  <ArrowLeft className="size-3" />
                   {t("previousCourse")}
                 </span>
                 {previousCourse ? (
@@ -140,7 +140,7 @@ export function CourseDetailDialog({
               </div>
               <div className="flex flex-col gap-1">
                 <span className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
-                  <ArrowRight className="h-3 w-3" />
+                  <ArrowRight className="size-3" />
                   {t("nextCourse")}
                 </span>
                 {nextCourse ? (

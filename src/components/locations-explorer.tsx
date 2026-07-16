@@ -161,7 +161,7 @@ export function LocationsExplorer() {
   // ── Render ─────────────────────────────────────────────────────────────
 
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col gap-6">
       {/* Continents */}
       <div>
         <h3 className="mb-3 text-sm font-medium text-muted-foreground">{t("continentLabel")}</h3>
@@ -203,7 +203,7 @@ export function LocationsExplorer() {
       <div className="flex flex-wrap items-end gap-3">
         {/* Search */}
         <div className="relative min-w-[240px] flex-1">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             value={filters.query}
             onChange={(e) => setQuery(e.target.value)}
@@ -257,25 +257,25 @@ export function LocationsExplorer() {
           <span>{t("activeFilters")}</span>
           {selectedContinent && (
             <Badge variant="outline" className="gap-1 anim-slide-left">
-              <Globe className="h-3 w-3" />
+              <Globe className="size-3" />
               {selectedContinent.name}
             </Badge>
           )}
           {selectedCountry && (
             <Badge variant="outline" className="gap-1 anim-slide-left" style={staggerDelay(1)}>
-              <MapPin className="h-3 w-3" />
+              <MapPin className="size-3" />
               {selectedCountry.name}
             </Badge>
           )}
           {filters.type && (
             <Badge variant="outline" className="gap-1 anim-slide-left" style={staggerDelay(2)}>
-              <Building2 className="h-3 w-3" />
+              <Building2 className="size-3" />
               {filters.type === "Center" ? t("typeCenter") : t("typeNonCentre")}
             </Badge>
           )}
           {filters.query && (
             <Badge variant="outline" className="gap-1 anim-slide-left" style={staggerDelay(3)}>
-              <Search className="h-3 w-3" />"{filters.query}"
+              <Search className="size-3" />"{filters.query}"
             </Badge>
           )}
           <Button
@@ -296,14 +296,14 @@ export function LocationsExplorer() {
       <Card>
         <CardContent className="p-0">
           {loadingLocations ? (
-            <div className="space-y-3 p-4">
+            <div className="flex flex-col gap-3 p-4">
               {Array.from({ length: 5 }).map((_, i) => (
                 <Skeleton key={i} className="h-12 w-full" />
               ))}
             </div>
           ) : locations.length === 0 ? (
             <div className="flex flex-col items-center gap-2 py-16 text-muted-foreground">
-              <MapPin className="h-8 w-8 opacity-40" />
+              <MapPin className="size-8 opacity-40" />
               <p className="text-sm">{t("noResults")}</p>
             </div>
           ) : (
@@ -355,7 +355,7 @@ export function LocationsExplorer() {
                       disabled={page <= 1}
                       onClick={() => setPage((p) => p - 1)}
                     >
-                      <ChevronLeft className="h-4 w-4" />
+                      <ChevronLeft className="size-4" />
                     </Button>
                     <Button
                       variant="outline"
@@ -363,7 +363,7 @@ export function LocationsExplorer() {
                       disabled={page >= totalPages}
                       onClick={() => setPage((p) => p + 1)}
                     >
-                      <ChevronRight className="h-4 w-4" />
+                      <ChevronRight className="size-4" />
                     </Button>
                   </div>
                 )}

@@ -32,12 +32,9 @@ export default function Error({
           >
             {t("retry")}
           </Button>
-          <Link
-            href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-          >
-            {t("goHome")}
-          </Link>
+          <Button variant="outline" asChild>
+            <Link href="/">{t("goHome")}</Link>
+          </Button>
         </div>
       </div>
     </div>

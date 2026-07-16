@@ -61,6 +61,7 @@ import {
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Progress } from "@/components/ui/progress";
 import { EditCourseDialog } from "@/components/edit-course-dialog";
 import { CourseDetailDialog } from "@/components/course-detail-dialog";
 import { ImportCoursesPanel } from "@/components/import-courses-panel";
@@ -266,7 +267,7 @@ export function DashboardView() {
               onClick={() => setEditing(i.row.original)}
               aria-label={tt("edit")}
             >
-              <Pencil className="h-4 w-4" />
+              <Pencil className="size-4" />
             </Button>
             <Button
               size="icon"
@@ -275,7 +276,7 @@ export function DashboardView() {
               aria-label={tt("delete")}
               className="text-destructive hover:text-destructive"
             >
-              <Trash2 className="h-4 w-4" />
+              <Trash2 className="size-4" />
             </Button>
           </div>
         ),
@@ -323,23 +324,23 @@ export function DashboardView() {
                 <RefreshButton />
                 <Button variant="default" size="sm" asChild>
                   <Link href="/cursos">
-                    <Plus className="mr-1 h-4 w-4" /> {t("header.newCourse")}
+                    <Plus data-icon="inline-start" /> {t("header.newCourse")}
                   </Link>
                 </Button>
               </div>
             </div>
 
             {isLoading ? (
-              <div className="space-y-8" role="status" aria-busy="true">
+              <div className="flex flex-col gap-8" role="status" aria-busy="true">
                 <span className="sr-only">{t("loading")}</span>
 
                 {/* Stat cards skeleton */}
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
                   {Array.from({ length: 6 }).map((_, i) => (
                     <Card key={i}>
-                      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                      <CardHeader className="flex flex-row items-center justify-between gap-0 pb-2">
                         <Skeleton className="h-4 w-24" />
-                        <Skeleton className="h-4 w-4 rounded" />
+                        <Skeleton className="size-4 rounded" />
                       </CardHeader>
                       <CardContent>
                         <Skeleton className="h-8 w-16" />
@@ -351,7 +352,7 @@ export function DashboardView() {
                 {/* Secondary metrics skeleton */}
                 <div className="flex flex-wrap items-center gap-x-6 gap-y-3 rounded-lg border bg-card/50 px-5 py-3">
                   {Array.from({ length: 4 }).map((_, i) => (
-                    <div key={i} className="space-y-1">
+                    <div key={i} className="flex flex-col gap-1">
                       <Skeleton className="h-3 w-20" />
                       <Skeleton className="h-6 w-10" />
                     </div>
@@ -386,15 +387,15 @@ export function DashboardView() {
                     <Skeleton className="h-4 w-36" />
                   </CardHeader>
                   <CardContent>
-                    <div className="space-y-3">
+                    <div className="flex flex-col gap-3">
                       {Array.from({ length: 5 }).map((_, i) => (
                         <div
                           key={i}
                           className="flex items-center justify-between rounded-lg border p-3"
                         >
                           <div className="flex items-center gap-3">
-                            <Skeleton className="h-4 w-4 rounded" />
-                            <div className="space-y-1">
+                            <Skeleton className="size-4 rounded" />
+                            <div className="flex flex-col gap-1">
                               <Skeleton className="h-4 w-32" />
                               <Skeleton className="h-3 w-48" />
                             </div>
@@ -496,16 +497,16 @@ mis datos son: [PEGAR AQUÍ]`;
   };
 
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col gap-6">
       <Card>
         <CardContent className="flex flex-col items-center py-12 text-center">
-          <BookOpen className="mb-4 h-12 w-12 text-muted-foreground/50" aria-hidden="true" />
+          <BookOpen className="mb-4 size-12 text-muted-foreground/50" aria-hidden="true" />
           <h2 className="text-xl font-semibold">{t("title")}</h2>
           <p className="mt-2 max-w-md text-sm text-muted-foreground">{t("description")}</p>
           <div className="mt-6 flex gap-3">
             <Button variant="outline" asChild>
               <Link href="/cursos">
-                <Upload className="mr-2 h-4 w-4" /> {t("addCourse")}
+                <Upload data-icon="inline-start" /> {t("addCourse")}
               </Link>
             </Button>
           </div>
@@ -515,11 +516,11 @@ mis datos son: [PEGAR AQUÍ]`;
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-sm font-medium">
-            <FileText className="h-4 w-4" />
+            <FileText className="size-4" />
             {t("excelTip")}
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-3">
+          <CardContent className="flex flex-col gap-3">
           <p className="text-sm text-muted-foreground">{t("excelTipDesc")}</p>
           <div className="relative rounded-lg border bg-muted/50 p-4 font-mono text-xs">
             <pre className="whitespace-pre-wrap">{promptText}</pre>
@@ -644,7 +645,7 @@ function StatsView({
   ];
 
   return (
-    <div className="space-y-8">
+    <div className="flex flex-col gap-8">
       {totalCourses === 0 ? (
         <EmptyState />
       ) : (
@@ -663,9 +664,9 @@ function StatsView({
                 }
               }}
             >
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardHeader className="flex flex-row items-center justify-between gap-0 pb-2">
                 <CardTitle className="text-sm font-medium">{t("totalCourses")}</CardTitle>
-                <BookOpen className="h-4 w-4 text-muted-foreground" />
+                <BookOpen className="size-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold tabular-nums">
@@ -695,9 +696,9 @@ function StatsView({
                   }
                 }}
               >
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardHeader className="flex flex-row items-center justify-between gap-0 pb-2">
                   <CardTitle className="text-sm font-medium">{t("daysSitting")}</CardTitle>
-                  <Clock className="h-4 w-4 text-muted-foreground" />
+                  <Clock className="size-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold tabular-nums">
@@ -728,9 +729,9 @@ function StatsView({
                   }
                 }}
               >
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardHeader className="flex flex-row items-center justify-between gap-0 pb-2">
                   <CardTitle className="text-sm font-medium">{t("daysServing")}</CardTitle>
-                  <Users className="h-4 w-4 text-muted-foreground" />
+                  <Users className="size-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold tabular-nums">
@@ -753,9 +754,9 @@ function StatsView({
                   }
                 }}
               >
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardHeader className="flex flex-row items-center justify-between gap-0 pb-2">
                   <CardTitle className="text-sm font-medium">{t("countriesVisited")}</CardTitle>
-                  <Globe className="h-4 w-4 text-muted-foreground" />
+                  <Globe className="size-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold tabular-nums">
@@ -767,9 +768,9 @@ function StatsView({
 
             {yearsMeditating > 0 && (
               <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardHeader className="flex flex-row items-center justify-between gap-0 pb-2">
                   <CardTitle className="text-sm font-medium">{t("yearsMeditating")}</CardTitle>
-                  <Hourglass className="h-4 w-4 text-muted-foreground" />
+                  <Hourglass className="size-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold tabular-nums">
@@ -781,9 +782,9 @@ function StatsView({
 
             {yearsAT > 0 && (
               <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardHeader className="flex flex-row items-center justify-between gap-0 pb-2">
                   <CardTitle className="text-sm font-medium">{t("yearsAT")}</CardTitle>
-                  <GraduationCap className="h-4 w-4 text-muted-foreground" />
+                  <GraduationCap className="size-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold tabular-nums">
@@ -795,9 +796,9 @@ function StatsView({
 
             {activeStreak && (
               <Card className="border-primary/20 bg-primary/50">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardHeader className="flex flex-row items-center justify-between gap-0 pb-2">
                   <CardTitle className="text-sm font-medium">{t("activeStreak")}</CardTitle>
-                  <Flame className="h-4 w-4 text-primary" />
+                  <Flame className="size-4 text-primary" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold tabular-nums text-primary">
@@ -842,23 +843,10 @@ function StatsView({
                   </span>
                 </div>
                 <div className="flex-1">
-                  <div
-                    className="h-2 w-full overflow-hidden rounded-full bg-secondary"
-                    role="progressbar"
-                    aria-valuenow={
-                      totalCourses > 0 ? Math.round((sitCount / totalCourses) * 100) : 0
-                    }
-                    aria-valuemin={0}
-                    aria-valuemax={100}
+                  <Progress
+                    value={totalCourses > 0 ? Math.round((sitCount / totalCourses) * 100) : 0}
                     aria-label={t("progressLabel")}
-                  >
-                    <div
-                      className="h-full bg-primary transition-all"
-                      style={{
-                        width: totalCourses > 0 ? `${(sitCount / totalCourses) * 100}%` : "0%",
-                      }}
-                    />
-                  </div>
+                  />
                 </div>
                 <div className="flex items-center gap-2">
                   <Badge variant="secondary">{ts("serve")}</Badge>
@@ -879,14 +867,14 @@ function StatsView({
               {recentCourses.length === 0 ? (
                 <p className="text-sm text-muted-foreground">{t("noCourses")}</p>
               ) : (
-                <div className="space-y-3">
+                <div className="flex flex-col gap-3">
                   {recentCourses.map((course) => (
                     <div
                       key={course.id}
                       className="flex items-center justify-between rounded-lg border p-3"
                     >
                       <div className="flex items-center gap-3">
-                        <Calendar className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
+                        <Calendar className="size-4 text-muted-foreground" aria-hidden="true" />
                         <div>
                           <p className="text-sm font-medium">{course.place}</p>
                           <p className="text-xs text-muted-foreground">
@@ -914,10 +902,10 @@ function StatsView({
             <DialogTitle>{t("countriesDialogTitle")}</DialogTitle>
           </DialogHeader>
           {uniqueCountries.length > 0 ? (
-            <ul className="space-y-1 text-sm">
+            <ul className="flex flex-col gap-1 text-sm">
               {uniqueCountries.map((c) => (
                 <li key={c} className="flex items-center gap-2">
-                  <Globe className="h-3 w-3 text-muted-foreground shrink-0" />
+                  <Globe className="size-3 text-muted-foreground shrink-0" />
                   {c}
                 </li>
               ))}
@@ -962,7 +950,7 @@ function CoursesTableView({
               className="ml-1 rounded-full hover:bg-muted-foreground/20 p-0.5"
               aria-label={tfilters("clear")}
             >
-              <svg className="h-3 w-3" viewBox="0 0 12 12" fill="currentColor">
+              <svg className="size-3" viewBox="0 0 12 12" fill="currentColor">
                 <path
                   d="M3.5 3.5l5 5M8.5 3.5l-5 5"
                   stroke="currentColor"
@@ -983,7 +971,7 @@ function CoursesTableView({
         <CardContent className="p-0">
           <div className="mb-4 px-6 pt-6">
             <div className="relative max-w-sm">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
               <Input
                 value={globalFilter}
                 onChange={(e) => onGlobalFilterChange(e.target.value)}
@@ -1021,7 +1009,7 @@ function CoursesTableView({
                           >
                             {flexRender(h.column.columnDef.header, h.getContext())}
                             {h.column.getCanSort() && (
-                              <ArrowUpDown className="h-3 w-3 opacity-50" />
+                              <ArrowUpDown className="size-3 opacity-50" />
                             )}
                           </button>
                         )}

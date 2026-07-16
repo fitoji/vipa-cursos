@@ -27,8 +27,8 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import {
   Select,
   SelectContent,
@@ -115,37 +115,37 @@ export function EditCourseDialog({
           <DialogTitle>{t("dialogTitle")}</DialogTitle>
         </DialogHeader>
         <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 sm:grid-cols-2">
-          <div className="grid gap-1.5 anim-fade-up" style={staggerDelay(0)}>
-            <Label htmlFor="e_start">{t("labels.date")}</Label>
+          <Field className="anim-fade-up" style={staggerDelay(0)}>
+            <FieldLabel htmlFor="e_start">{t("labels.date")}</FieldLabel>
             <DatePicker
               value={form.watch("start_date")}
               onChange={(v) => form.setValue("start_date", v)}
             />
-          </div>
-          <div className="grid gap-1.5 anim-fade-up" style={staggerDelay(1)}>
-            <Label htmlFor="e_place">{t("labels.place")}</Label>
+          </Field>
+          <Field className="anim-fade-up" style={staggerDelay(1)}>
+            <FieldLabel htmlFor="e_place">{t("labels.place")}</FieldLabel>
             <Input id="e_place" list="e_place-options" {...form.register("place")} />
             <datalist id="e_place-options">
               {locations.map((l) => (
                 <option key={l} value={l} />
               ))}
             </datalist>
-          </div>
-          <div className="grid gap-1.5 anim-fade-up" style={staggerDelay(2)}>
-            <Label htmlFor="e_teacher">{t("labels.teacher")}</Label>
+          </Field>
+          <Field className="anim-fade-up" style={staggerDelay(2)}>
+            <FieldLabel htmlFor="e_teacher">{t("labels.teacher")}</FieldLabel>
             <Input id="e_teacher" {...form.register("teacher")} />
-          </div>
-          <div className="grid gap-1.5 anim-fade-up" style={staggerDelay(3)}>
-            <Label htmlFor="e_country">{t("labels.country")}</Label>
+          </Field>
+          <Field className="anim-fade-up" style={staggerDelay(3)}>
+            <FieldLabel htmlFor="e_country">{t("labels.country")}</FieldLabel>
             <Input id="e_country" list="e_country-options" {...form.register("country")} />
             <datalist id="e_country-options">
               {countries.map((c) => (
                 <option key={c} value={c} />
               ))}
             </datalist>
-          </div>
-          <div className="grid gap-1.5 sm:col-span-2 anim-fade-up" style={staggerDelay(4)}>
-            <Label id="e_mode-label">{t("labels.mode")}</Label>
+          </Field>
+          <Field className="sm:col-span-2 anim-fade-up" style={staggerDelay(4)}>
+            <FieldLabel id="e_mode-label">{t("labels.mode")}</FieldLabel>
             <RadioGroup
               value={form.watch("mode")}
               aria-labelledby="e_mode-label"
@@ -170,16 +170,16 @@ export function EditCourseDialog({
                       checked={isAt}
                       onCheckedChange={(v) => form.setValue("isAt", !!v)}
                     />
-                    <Label htmlFor="e_is_at" className="text-sm">
+                    <label htmlFor="e_is_at" className="text-sm">
                       AT
-                    </Label>
+                    </label>
                   </div>
                 )}
               </label>
             </RadioGroup>
-          </div>
-          <div className="grid gap-1.5 anim-fade-up" style={staggerDelay(5)}>
-            <Label id="e_days-label">{t("labels.days")}</Label>
+          </Field>
+          <Field className="anim-fade-up" style={staggerDelay(5)}>
+            <FieldLabel id="e_days-label">{t("labels.days")}</FieldLabel>
             <Select
               value={form.watch("daysPreset")}
               onValueChange={(v) => form.setValue("daysPreset", v)}
@@ -211,19 +211,19 @@ export function EditCourseDialog({
                 </SelectItem>
               </SelectContent>
             </Select>
-          </div>
+          </Field>
           {(daysPreset === "other" || daysPreset === "tsc") && (
-            <div className="grid gap-1.5 anim-fade-up" style={staggerDelay(6)}>
-              <Label htmlFor="e_custom">
+            <Field className="anim-fade-up" style={staggerDelay(6)}>
+              <FieldLabel htmlFor="e_custom">
                 {mode === "serve" ? t("labels.daysCustomServe") : t("labels.daysCustomSit")}
-              </Label>
+              </FieldLabel>
               <Input id="e_custom" type="number" min={1} {...form.register("daysCustom")} />
-            </div>
+            </Field>
           )}
-          <div className="grid gap-1.5 sm:col-span-2 anim-fade-up" style={staggerDelay(7)}>
-            <Label htmlFor="e_obs">{t("labels.obs")}</Label>
+          <Field className="sm:col-span-2 anim-fade-up" style={staggerDelay(7)}>
+            <FieldLabel htmlFor="e_obs">{t("labels.obs")}</FieldLabel>
             <Textarea id="e_obs" rows={3} {...form.register("obs")} />
-          </div>
+          </Field>
           <DialogFooter className="sm:col-span-2">
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
               {t("cancel")}

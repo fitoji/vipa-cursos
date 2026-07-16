@@ -87,19 +87,33 @@ export function LandingView() {
               {isLoggedIn ? (
                 <>
                   <Button size="lg" asChild>
-                    <Link href="/dashboard"><span className="shimmer shimmer-color-white/80">{t("hero.loggedInCta")}</span></Link>
+                    <Link href="/dashboard">
+                      <span className="shimmer shimmer-color-white/80">
+                        {t("hero.loggedInCta")}
+                      </span>
+                    </Link>
                   </Button>
                   <Button size="lg" variant="outline" asChild>
-                    <Link href="/cursos"><span className="shimmer shimmer-color-primary/80">{t("hero.newCourse")}</span></Link>
+                    <Link href="/cursos">
+                      <span className="shimmer shimmer-color-primary/80">
+                        {t("hero.newCourse")}
+                      </span>
+                    </Link>
                   </Button>
                 </>
               ) : (
                 <>
                   <Button size="lg" variant="outline" asChild>
-                    <Link href="/login"><span className="shimmer shimmer-color-primary-foreground/80">{t("hero.signIn")}</span></Link>
+                    <Link href="/login">
+                      <span className="shimmer shimmer-color-primary-foreground/80">
+                        {t("hero.signIn")}
+                      </span>
+                    </Link>
                   </Button>
                   <Button size="lg" asChild>
-                    <Link href="/login"><span className="shimmer shimmer-color-white/80">{t("hero.signUp")}</span></Link>
+                    <Link href="/login">
+                      <span className="shimmer shimmer-color-white/80">{t("hero.signUp")}</span>
+                    </Link>
                   </Button>
                 </>
               )}
@@ -113,7 +127,7 @@ export function LandingView() {
         className="relative border-t"
         aria-label={t("aria.features")}
         style={{
-          backgroundImage: "url('/bosque.webp')",
+          backgroundImage: "url('/background/bosque.webp')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -129,12 +143,13 @@ export function LandingView() {
               const card = (
                 <Card
                   className={cn(
-                    "hover-lift border-white/10 bg-white/90 shadow-lg backdrop-blur-sm dark:bg-black/80",
-                    f.icon === BookText && "cursor-pointer transition-colors hover:bg-white/70 dark:hover:bg-black/60",
+                    "hover-lift border-white/10 bg-white/90 shadow-lg backdrop-blur-sm dark:bg-card/80",
+                    f.icon === BookText &&
+                      "cursor-pointer transition-colors hover:bg-white/70 dark:hover:bg-card/60",
                   )}
                 >
                   <CardContent className="flex gap-4 p-6">
-                    <f.icon className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
+                    <f.icon className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden="true" />
                     <div>
                       <h3 className="font-serif font-medium">{t(f.titleKey)}</h3>
                       <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
@@ -165,7 +180,7 @@ export function LandingView() {
               <img
                 src="/pagoda.webp"
                 alt={t("cta.alt")}
-                className="h-28 w-28 shrink-0 rounded-full object-cover shadow-lg sm:h-36 sm:w-36"
+                className="size-28 shrink-0 rounded-full object-cover shadow-lg sm:h-36 sm:w-36"
               />
               <div className="text-left">
                 <h2 className="font-serif text-2xl font-semibold tracking-tight sm:text-3xl">

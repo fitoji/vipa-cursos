@@ -59,7 +59,7 @@ export function DatePicker({
             className,
           )}
         >
-          <CalendarIcon className="mr-2 size-4" />
+          <CalendarIcon data-icon="inline-start" />
           {date ? format(date, "dd/MM/yyyy") : <span>{placeholder}</span>}
         </Button>
       </PopoverTrigger>

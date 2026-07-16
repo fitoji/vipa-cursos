@@ -118,7 +118,7 @@ export function LoginForm() {
       {/* Left panel — brand image */}
       <div
         className="hidden w-1/2 bg-cover bg-center lg:block"
-        style={{ backgroundImage: "url('/bosque.webp')" }}
+        style={{ backgroundImage: "url('/background/bosque.webp')" }}
       >
         <div className="flex h-full items-end p-12">
           <div className="text-left">
@@ -163,7 +163,7 @@ export function LoginForm() {
               disabled={busy}
               type="button"
             >
-              <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24" aria-hidden="true">
+              <svg data-icon="inline-start" viewBox="0 0 24 24" aria-hidden="true">
                 <path
                   d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"
                   fill="#4285F4"
@@ -240,10 +240,10 @@ export function LoginForm() {
                   <button
                     type="button"
                     onClick={() => setShowPassword((v) => !v)}
-                    className="absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center text-muted-foreground hover:text-foreground focus-visible:text-foreground"
+                    className="absolute right-2 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center text-muted-foreground hover:text-foreground focus-visible:text-foreground"
                     aria-label={showPassword ? t("form.hidePassword") : t("form.showPassword")}
                   >
-                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
                   </button>
                 </div>
                 {errors.password && (

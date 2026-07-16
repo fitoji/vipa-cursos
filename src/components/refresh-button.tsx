@@ -26,7 +26,7 @@ export function RefreshButton({ className }: { className?: string }) {
       aria-label="Actualizar datos"
       className={className}
     >
-      <RefreshCw className={cn("h-4 w-4", spinning && "animate-spin")} />
+      <RefreshCw className={cn("size-4", spinning && "animate-spin")} />
     </Button>
   );
 }

@@ -35,7 +35,7 @@ const sections = [
 ];
 
 function SectionIcon({ icon: Icon }: { icon: typeof BookOpen }) {
-  return <Icon className="h-5 w-5 shrink-0 text-primary" aria-hidden="true" />;
+  return <Icon className="size-5 shrink-0 text-primary" aria-hidden="true" />;
 }
 
 export function HelpView() {
@@ -57,7 +57,7 @@ export function HelpView() {
         <div className="mb-8 flex justify-end">
           <Button variant="ghost" size="sm" asChild>
             <Link href="/dashboard">
-              <ArrowLeft className="mr-1.5 h-4 w-4" />
+              <ArrowLeft data-icon="inline-start" />
               {t("backToDashboard")}
             </Link>
           </Button>
@@ -91,9 +91,9 @@ export function HelpView() {
           <h2 className="mb-4 font-serif text-2xl font-semibold tracking-tight">
             {t("sections.intro.title")}
           </h2>
-          <div className="space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+          <div className="flex flex-col gap-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
             <p>{t("sections.intro.intro")}</p>
-            <ul className="list-disc space-y-2 pl-5">
+            <ul className="list-disc flex flex-col gap-2 pl-5">
               {[0, 1, 2, 3, 4].map((i) => (
                 <li key={i}>{t(`sections.intro.item${i + 1}`)}</li>
               ))}
@@ -108,13 +108,13 @@ export function HelpView() {
           aria-label={t("sections.courses.title")}
         >
           <div className="mb-4 flex items-center gap-2">
-            <Clock className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
+            <Clock className="size-5 text-muted-foreground" aria-hidden="true" />
             <h2 className="font-serif text-2xl font-semibold tracking-tight">
               {t("sections.courses.title")}
             </h2>
           </div>
-          <div className="space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
-            <ol className="list-decimal space-y-3 pl-5">
+          <div className="flex flex-col gap-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+            <ol className="list-decimal flex flex-col gap-3 pl-5">
               {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
                 <li key={i}>{t(`sections.courses.step${i}`)}</li>
               ))}
@@ -147,9 +147,9 @@ export function HelpView() {
           <h2 className="mb-4 font-serif text-2xl font-semibold tracking-tight">
             {t("sections.dashboard.title")}
           </h2>
-          <div className="space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+          <div className="flex flex-col gap-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
             <p>{t("sections.dashboard.intro")}</p>
-            <ul className="list-disc space-y-2 pl-5">
+            <ul className="list-disc flex flex-col gap-2 pl-5">
               {[1, 2, 3, 4].map((i) => (
                 <li key={i}>{t(`sections.dashboard.item${i}`)}</li>
               ))}
@@ -160,14 +160,14 @@ export function HelpView() {
         {/* Section: Racha — icon inline */}
         <section id="racha" className="mb-14 scroll-mt-4" aria-label={t("sections.racha.title")}>
           <div className="mb-4 flex items-center gap-2">
-            <Flame className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
+            <Flame className="size-5 text-muted-foreground" aria-hidden="true" />
             <h2 className="font-serif text-2xl font-semibold tracking-tight">
               {t("sections.racha.title")}
             </h2>
           </div>
-          <div className="space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+          <div className="flex flex-col gap-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
             <p>{t("sections.racha.intro")}</p>
-            <ul className="list-disc space-y-2 pl-5">
+            <ul className="list-disc flex flex-col gap-2 pl-5">
               {[1, 2, 3, 4].map((i) => (
                 <li key={i}>{t(`sections.racha.item${i}`)}</li>
               ))}
@@ -183,14 +183,14 @@ export function HelpView() {
         >
           <div className="rounded-xl border border-primary/20 bg-primary/5 p-6 sm:p-8">
             <div className="mb-4 flex items-center gap-2">
-              <Sparkles className="h-5 w-5 text-primary" aria-hidden="true" />
+              <Sparkles className="size-5 text-primary" aria-hidden="true" />
               <h2 className="font-serif text-2xl font-semibold tracking-tight">
                 {t("sections.chatgpt.title")}
               </h2>
             </div>
-            <div className="space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+            <div className="flex flex-col gap-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
               <p>{t("sections.chatgpt.intro")}</p>
-              <ol className="list-decimal space-y-3 pl-5">
+              <ol className="list-decimal flex flex-col gap-3 pl-5">
                 {[1, 2, 3, 4, 5, 6].map((i) => (
                   <li key={i}>{t(`sections.chatgpt.step${i}`)}</li>
                 ))}
@@ -198,7 +198,7 @@ export function HelpView() {
 
               <div className="mt-4 rounded-lg bg-muted/50 p-4">
                 <div className="mb-1 flex items-center gap-2 text-sm font-medium text-foreground">
-                  <MessageSquare className="h-4 w-4 text-primary" aria-hidden="true" />
+                  <MessageSquare className="size-4 text-primary" aria-hidden="true" />
                   <span>{t("sections.chatgpt.tipTitle")}</span>
                 </div>
                 <p className="text-sm text-muted-foreground">{t("sections.chatgpt.tip")}</p>
@@ -212,9 +212,9 @@ export function HelpView() {
           <h2 className="mb-4 font-serif text-2xl font-semibold tracking-tight">
             {t("sections.export.title")}
           </h2>
-          <div className="space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+          <div className="flex flex-col gap-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
             <p>{t("sections.export.intro")}</p>
-            <ol className="list-decimal space-y-3 pl-5">
+            <ol className="list-decimal flex flex-col gap-3 pl-5">
               {[1, 2, 3].map((i) => (
                 <li key={i}>{t(`sections.export.step${i}`)}</li>
               ))}
@@ -229,14 +229,14 @@ export function HelpView() {
           aria-label={t("sections.background.title")}
         >
           <div className="mb-4 flex items-center gap-2">
-            <Image className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
+            <Image className="size-5 text-muted-foreground" aria-hidden="true" />
             <h2 className="font-serif text-2xl font-semibold tracking-tight">
               {t("sections.background.title")}
             </h2>
           </div>
-          <div className="space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+          <div className="flex flex-col gap-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
             <p>{t("sections.background.intro")}</p>
-            <ol className="list-decimal space-y-3 pl-5">
+            <ol className="list-decimal flex flex-col gap-3 pl-5">
               {[1, 2, 3, 4, 5, 6].map((i) => (
                 <li key={i}>{t(`sections.background.step${i}`)}</li>
               ))}
@@ -251,19 +251,19 @@ export function HelpView() {
           aria-label={t("sections.attributions.title")}
         >
           <div className="mb-4 flex items-center gap-2">
-            <Heart className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
+            <Heart className="size-5 text-muted-foreground" aria-hidden="true" />
             <h2 className="font-serif text-2xl font-semibold tracking-tight">
               {t("sections.attributions.title")}
             </h2>
           </div>
-          <div className="space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+          <div className="flex flex-col gap-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
             <p>{t("sections.attributions.intro")}</p>
 
             <div className="rounded-lg border bg-card/50 p-4">
               <h3 className="mb-3 font-medium text-foreground">
                 {t("sections.attributions.title")}
               </h3>
-              <ul className="space-y-2">
+              <ul className="flex flex-col gap-2">
                 {(
                   ["forest", "bodhiLeaf", "sacredLeaves", "sacredFig"] as const
                 ).map((key) => (
