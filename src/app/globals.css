@@ -166,11 +166,13 @@
   }
 }
 
-/* View transitions — page navigation */
+/* View transitions — page navigation
+   Meditation-app pacing: slower, gentler, unhurried.
+   cubic-bezier(0.4, 0, 0.2, 1) = smooth ease-out, no abrupt stops */
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation-duration: 200ms;
-  animation-timing-function: ease-out;
+  animation-duration: 450ms;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 ::view-transition-old(root) {
@@ -284,19 +286,19 @@
 
 /* Utility classes */
 .anim-fade-up {
-  animation: fade-up-in 0.5s ease-out backwards;
+  animation: fade-up-in 0.6s ease-out backwards;
 }
 .anim-fade-in {
-  animation: fade-in 0.4s ease-out both;
+  animation: fade-in 0.5s ease-out both;
 }
 .anim-scale-in {
-  animation: scale-in 0.3s ease-out backwards;
+  animation: scale-in 0.4s ease-out backwards;
 }
 .anim-slide-left {
-  animation: slide-in-left 0.4s ease-out backwards;
+  animation: slide-in-left 0.5s ease-out backwards;
 }
 .anim-slide-right {
-  animation: slide-in-right 0.4s ease-out backwards;
+  animation: slide-in-right 0.5s ease-out backwards;
 }
 .anim-pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
@@ -307,7 +309,7 @@
 
 /* Streak form enter transition */
 .streak-form-enter {
-  animation: streak-form-in 200ms ease-out;
+  animation: streak-form-in 350ms ease-out;
 }
 
 @keyframes streak-form-in {
