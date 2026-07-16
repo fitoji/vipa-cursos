@@ -274,6 +274,20 @@
   }
 }
 
+@keyframes avatar-ring {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 0 oklch(0.5676 0.2021 283.0838 / 0.4),
+      0 0 0 0 oklch(0.5676 0.2021 283.0838 / 0);
+  }
+  50% {
+    box-shadow:
+      0 0 0 4px oklch(0.5676 0.2021 283.0838 / 0),
+      0 0 12px 3px oklch(0.5676 0.2021 283.0838 / 0.25);
+  }
+}
+
 /* Utility classes */
 .anim-fade-up {
   animation: fade-up-in 0.5s ease-out backwards;
@@ -292,6 +306,9 @@
 }
 .anim-pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
+}
+.anim-avatar-ring {
+  animation: avatar-ring 2s ease-in-out infinite;
 }
 
 /* Hover effects */
