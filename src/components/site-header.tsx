@@ -91,7 +91,7 @@ export function SiteHeader() {
             <DropdownMenuTrigger render={
               <button
                 type="button"
-                className="flex size-8 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-primary/10 text-xs font-medium text-primary ring-1 ring-primary/20 transition-shadow hover:ring-primary/40 focus-visible:ring-primary/60"
+                className="flex size-8 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-primary/10 text-xs font-medium text-primary ring-1 ring-primary/20 transition-all duration-200 hover:scale-110 hover:ring-primary/40 hover:shadow-md focus-visible:ring-primary/60 active:scale-95"
                 aria-label={name ?? email}
               >
                 {image ? (
