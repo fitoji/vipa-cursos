@@ -384,7 +384,8 @@
   .anim-scale-in,
   .anim-slide-left,
   .anim-slide-right,
-  .anim-pulse-glow {
+  .anim-pulse-glow,
+  .streak-form-enter {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
@@ -403,7 +404,8 @@
   .card-interactive {
     transition: none !important;
   }
-  .press-effect:active {
+  .press-effect:active,
+  .card-interactive:active {
     transform: none !important;
   }
 }
