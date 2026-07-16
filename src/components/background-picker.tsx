@@ -145,7 +145,7 @@ export function BackgroundPicker({ open, onOpenChange }: BackgroundPickerProps) 
             max={100}
             step={5}
             value={[overlayOpacity]}
-            onValueChange={handleOpacityChange}
+            onValueChange={(v) => handleOpacityChange(Array.isArray(v) ? v : [v])}
             aria-label={t("overlayOpacity")}
           />
         </div>

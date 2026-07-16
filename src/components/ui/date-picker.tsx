@@ -49,7 +49,7 @@ export function DatePicker({
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
+      <PopoverTrigger render={
         <Button
           type="button"
           variant="outline"
@@ -62,7 +62,7 @@ export function DatePicker({
           <CalendarIcon data-icon="inline-start" />
           {date ? format(date, "dd/MM/yyyy") : <span>{placeholder}</span>}
         </Button>
-      </PopoverTrigger>
+      } />
       <PopoverContent className="w-auto p-0" align="start">
         <Calendar
           mode="single"

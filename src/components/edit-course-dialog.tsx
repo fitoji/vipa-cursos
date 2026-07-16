@@ -182,7 +182,7 @@ export function EditCourseDialog({
             <FieldLabel id="e_days-label">{t("labels.days")}</FieldLabel>
             <Select
               value={form.watch("daysPreset")}
-              onValueChange={(v) => form.setValue("daysPreset", v)}
+              onValueChange={(v) => v != null && form.setValue("daysPreset", v)}
             >
               <SelectTrigger aria-labelledby="e_days-label">
                 <SelectValue />

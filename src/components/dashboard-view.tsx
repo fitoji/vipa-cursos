@@ -322,11 +322,9 @@ export function DashboardView() {
               </div>
               <div className="flex items-center gap-2">
                 <RefreshButton />
-                <Button variant="default" size="sm" asChild>
-                  <Link href="/cursos">
+                <Button variant="default" size="sm" render={<Link href="/cursos">
                     <Plus data-icon="inline-start" /> {t("header.newCourse")}
-                  </Link>
-                </Button>
+                  </Link>} />
               </div>
             </div>
 
@@ -504,11 +502,9 @@ mis datos son: [PEGAR AQUÍ]`;
           <h2 className="text-xl font-semibold">{t("title")}</h2>
           <p className="mt-2 max-w-md text-sm text-muted-foreground">{t("description")}</p>
           <div className="mt-6 flex gap-3">
-            <Button variant="outline" asChild>
-              <Link href="/cursos">
+            <Button variant="outline" render={<Link href="/cursos">
                 <Upload data-icon="inline-start" /> {t("addCourse")}
-              </Link>
-            </Button>
+              </Link>} />
           </div>
         </CardContent>
       </Card>

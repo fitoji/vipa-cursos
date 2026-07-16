@@ -123,11 +123,9 @@ export function CursosView() {
                 <Upload data-icon="inline-start" /> {t("importLink")}
               </Button>
             </ImportCoursesDialog>
-            <Button variant="default" asChild>
-              <Link href="/dashboard">
+            <Button variant="default" render={<Link href="/dashboard">
                 <LayoutDashboard data-icon="inline-start" /> {t("dashboardLink")}
-              </Link>
-            </Button>
+              </Link>} />
           </div>
         </header>
 
@@ -235,7 +233,7 @@ export function CursosView() {
                 <Label id="cursos-days-label">{t("labels.days")}</Label>
                 <Select
                   value={form.watch("daysPreset")}
-                  onValueChange={(v) => form.setValue("daysPreset", v)}
+                  onValueChange={(v) => v != null && form.setValue("daysPreset", v)}
                 >
                   <SelectTrigger aria-labelledby="cursos-days-label">
                     <SelectValue placeholder={t("labels.daysPlaceholder")} />

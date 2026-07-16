@@ -12,9 +12,7 @@ export default function NotFound() {
         <h2 className="mt-4 text-xl font-semibold text-foreground">{t("title")}</h2>
         <p className="mt-2 text-sm text-muted-foreground">{t("message")}</p>
         <div className="mt-6">
-          <Button asChild>
-            <Link href="/">{t("goHome")}</Link>
-          </Button>
+          <Button render={<Link href="/">{t("goHome")}</Link>} />
         </div>
       </div>
     </div>

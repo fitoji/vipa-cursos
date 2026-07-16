@@ -24,7 +24,8 @@ export function LocaleSwitcher() {
     { code: "en", label: "EN" },
   ] as const;
 
-  const handleLocaleChange = (newLocale: string) => {
+  const handleLocaleChange = (newLocale: string | null) => {
+    if (newLocale == null) return;
     // usePathname() from @/i18n/navigation returns internal path (no locale prefix)
     // useRouter() from next/navigation pushes raw URL — no locale re-prefixing
     if (newLocale === "en") {

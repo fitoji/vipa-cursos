@@ -32,9 +32,7 @@ export default function Error({
           >
             {t("retry")}
           </Button>
-          <Button variant="outline" asChild>
-            <Link href="/">{t("goHome")}</Link>
-          </Button>
+          <Button variant="outline" render={<Link href="/">{t("goHome")}</Link>} />
         </div>
       </div>
     </div>

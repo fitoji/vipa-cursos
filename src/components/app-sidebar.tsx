@@ -105,22 +105,27 @@ export function AppSidebar({ activeView, onNavigate }: AppSidebarProps) {
                         <span>{item.label}</span>
                       </SidebarMenuButton>
                     ) : (
-                      <SidebarMenuButton asChild isActive={false}>
-                        <Link href="/dashboard">
-                          <item.icon className="size-4" />
-                          <span>{item.label}</span>
-                        </Link>
-                      </SidebarMenuButton>
+                      <SidebarMenuButton
+                        render={
+                          <Link href="/dashboard">
+                            <item.icon className="size-4" />
+                            <span>{item.label}</span>
+                          </Link>
+                        }
+                        isActive={false}
+                      />
                     )}
                   </SidebarMenuItem>
                 ))}
                 <SidebarMenuItem>
-                  <SidebarMenuButton asChild>
-                    <Link href="/racha">
-                      <Flame className="size-4" />
-                      <span>{t("racha")}</span>
-                    </Link>
-                  </SidebarMenuButton>
+                  <SidebarMenuButton
+                    render={
+                      <Link href="/racha">
+                        <Flame className="size-4" />
+                        <span>{t("racha")}</span>
+                      </Link>
+                    }
+                  />
                 </SidebarMenuItem>
               </SidebarMenu>
             </nav>
@@ -152,21 +157,26 @@ export function AppSidebar({ activeView, onNavigate }: AppSidebarProps) {
                 <span>{t("import")}</span>
               </SidebarMenuButton>
             ) : (
-              <SidebarMenuButton asChild isActive={false}>
-                <Link href="/dashboard">
-                  <Upload className="size-4" />
-                  <span>{t("import")}</span>
-                </Link>
-              </SidebarMenuButton>
+              <SidebarMenuButton
+                render={
+                  <Link href="/dashboard">
+                    <Upload className="size-4" />
+                    <span>{t("import")}</span>
+                  </Link>
+                }
+                isActive={false}
+              />
             )}
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild>
-              <Link href="/cursos">
-                <ArrowLeft className="size-4" />
-                <span>{t("back")}</span>
-              </Link>
-            </SidebarMenuButton>
+            <SidebarMenuButton
+              render={
+                <Link href="/cursos">
+                  <ArrowLeft className="size-4" />
+                  <span>{t("back")}</span>
+                </Link>
+              }
+            />
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>

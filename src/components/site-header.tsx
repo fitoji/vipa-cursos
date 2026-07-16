@@ -88,7 +88,7 @@ export function SiteHeader() {
 
         {email ? (
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
+            <DropdownMenuTrigger render={
               <button
                 type="button"
                 className="flex size-8 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-primary/10 text-xs font-medium text-primary ring-1 ring-primary/20 transition-shadow hover:ring-primary/40 focus-visible:ring-primary/60"
@@ -105,7 +105,7 @@ export function SiteHeader() {
                   </Avatar>
                 )}
               </button>
-            </DropdownMenuTrigger>
+            } />
             <DropdownMenuContent align="end" className="w-52">
               <DropdownMenuLabel>
                 <p className="truncate text-sm font-medium">{name ?? t("userMenu.name")}</p>
@@ -116,12 +116,10 @@ export function SiteHeader() {
                 <RefreshCw className={cn("size-3.5", spinning && "animate-spin")} />
                 {t("userMenu.refresh")}
               </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="/ayuda">
+              <DropdownMenuItem render={<Link href="/ayuda">
                   <CircleHelp className="size-3.5" />
                   {t("userMenu.help")}
-                </Link>
-              </DropdownMenuItem>
+                </Link>} />
               <DropdownMenuItem onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}>
                 {mounted && resolvedTheme === "dark" ? (
                   <Sun className="size-3.5" />

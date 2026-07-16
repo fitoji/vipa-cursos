@@ -1,32 +1,56 @@
 "use client";
 
 import * as React from "react";
-import * as TooltipPrimitive from "@radix-ui/react-tooltip";
+import { Tooltip } from "@base-ui/react/tooltip";
 
 import { cn } from "@/lib/utils";
 
-const TooltipProvider = TooltipPrimitive.Provider;
+const TooltipProvider = ({
+  delayDuration,
+  skipDelayDuration,
+  children,
+  ...props
+}: React.ComponentPropsWithoutRef<typeof Tooltip.Provider> & {
+  delayDuration?: number;
+  skipDelayDuration?: number;
+}) => (
+  <Tooltip.Provider
+    delay={delayDuration}
+    timeout={skipDelayDuration}
+    {...props}
+  >
+    {children}
+  </Tooltip.Provider>
+);
 
-const Tooltip = TooltipPrimitive.Root;
+const TooltipRoot = Tooltip.Root;
 
-const TooltipTrigger = TooltipPrimitive.Trigger;
+const TooltipTrigger = Tooltip.Trigger;
 
 const TooltipContent = React.forwardRef<
-  React.ElementRef<typeof TooltipPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>
->(({ className, sideOffset = 4, ...props }, ref) => (
-  <TooltipPrimitive.Portal>
-    <TooltipPrimitive.Content
-      ref={ref}
-      sideOffset={sideOffset}
-      className={cn(
-        "z-50 overflow-hidden rounded-md bg-primary px-3 py-1.5 text-xs text-primary-foreground animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-(--radix-tooltip-content-transform-origin)",
-        className,
-      )}
-      {...props}
-    />
-  </TooltipPrimitive.Portal>
+  React.ElementRef<typeof Tooltip.Popup>,
+  React.ComponentPropsWithoutRef<typeof Tooltip.Popup> & {
+    side?: "top" | "bottom" | "left" | "right";
+    align?: "start" | "center" | "end";
+    sideOffset?: number;
+    alignOffset?: number;
+  }
+>(({ className, side, align, sideOffset, alignOffset, ...props }, ref) => (
+  <Tooltip.Portal>
+    <Tooltip.Positioner side={side} align={align} sideOffset={sideOffset} alignOffset={alignOffset}>
+      <Tooltip.Popup
+        ref={ref}
+        className={cn(
+          "z-50 overflow-hidden rounded-md bg-primary px-3 py-1.5 text-xs text-primary-foreground",
+          "data-starting-style:opacity-0 data-starting-style:scale-95 data-ending-style:opacity-0 data-ending-style:scale-95",
+          "origin-[--transform-origin]",
+          className,
+        )}
+        {...props}
+      />
+    </Tooltip.Positioner>
+  </Tooltip.Portal>
 ));
-TooltipContent.displayName = TooltipPrimitive.Content.displayName;
+TooltipContent.displayName = "TooltipContent";
 
-export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };
+export { TooltipRoot as Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };

@@ -86,35 +86,27 @@ export function LandingView() {
             >
               {isLoggedIn ? (
                 <>
-                  <Button size="lg" asChild>
-                    <Link href="/dashboard">
+                  <Button size="lg" render={<Link href="/dashboard">
                       <span className="shimmer shimmer-color-white/80">
                         {t("hero.loggedInCta")}
                       </span>
-                    </Link>
-                  </Button>
-                  <Button size="lg" variant="outline" asChild>
-                    <Link href="/cursos">
+                    </Link>} />
+                  <Button size="lg" variant="outline" render={<Link href="/cursos">
                       <span className="shimmer shimmer-color-primary/80">
                         {t("hero.newCourse")}
                       </span>
-                    </Link>
-                  </Button>
+                    </Link>} />
                 </>
               ) : (
                 <>
-                  <Button size="lg" variant="outline" asChild>
-                    <Link href="/login">
+                  <Button size="lg" variant="outline" render={<Link href="/login">
                       <span className="shimmer shimmer-color-primary-foreground/80">
                         {t("hero.signIn")}
                       </span>
-                    </Link>
-                  </Button>
-                  <Button size="lg" asChild>
-                    <Link href="/login">
+                    </Link>} />
+                  <Button size="lg" render={<Link href="/login">
                       <span className="shimmer shimmer-color-white/80">{t("hero.signUp")}</span>
-                    </Link>
-                  </Button>
+                    </Link>} />
                 </>
               )}
             </div>
@@ -187,9 +179,7 @@ export function LandingView() {
                   {t("cta.title")}
                 </h2>
                 <p className="mt-2 max-w-md text-muted-foreground">{t("cta.description")}</p>
-                <Button size="lg" className="mt-6 hover:bg-primary/90" asChild>
-                  <Link href="/login">{t("cta.button")}</Link>
-                </Button>
+                <Button size="lg" className="mt-6 hover:bg-primary/90" render={<Link href="/login">{t("cta.button")}</Link>} />
               </div>
             </div>
           </div>

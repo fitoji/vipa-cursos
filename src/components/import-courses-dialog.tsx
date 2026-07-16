@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, type ReactNode } from "react";
+import { useRef, useState, type ReactElement, type ReactNode } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
@@ -104,9 +104,7 @@ export function ImportCoursesDialog({ children }: { children?: ReactNode }) {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        {children ?? <Button variant="outline">{tbuttons("import")}</Button>}
-      </DialogTrigger>
+      <DialogTrigger render={(children ?? <Button variant="outline">{tbuttons("import")}</Button>) as ReactElement} />
       <DialogContent className="max-w-2xl">
         <DialogHeader>
           <DialogTitle>{t("dialogTitle")}</DialogTitle>

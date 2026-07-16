@@ -55,12 +55,10 @@ export function HelpView() {
       <div className="relative z-10 mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
         {/* Back to dashboard */}
         <div className="mb-8 flex justify-end">
-          <Button variant="ghost" size="sm" asChild>
-            <Link href="/dashboard">
+          <Button variant="ghost" size="sm" render={<Link href="/dashboard">
               <ArrowLeft data-icon="inline-start" />
               {t("backToDashboard")}
-            </Link>
-          </Button>
+            </Link>} />
         </div>
 
         {/* Header */}
@@ -124,7 +122,7 @@ export function HelpView() {
               <h3 className="mb-3 font-serif text-lg font-medium text-foreground">
                 {t("sections.courses.faq.title")}
               </h3>
-              <Accordion type="single" collapsible className="border-t">
+                <Accordion className="border-t">
                 <AccordionItem value="q1">
                   <AccordionTrigger className="text-sm">
                     {t("sections.courses.faq.q1")}
@@ -312,12 +310,8 @@ export function HelpView() {
 
         {/* CTA buttons */}
         <div className="mt-12 flex justify-end gap-4">
-          <Button asChild variant="outline">
-            <Link href="/cursos">{t("cta.courses")}</Link>
-          </Button>
-          <Button asChild>
-            <Link href="/dashboard">{t("cta.dashboard")}</Link>
-          </Button>
+          <Button variant="outline" render={<Link href="/cursos">{t("cta.courses")}</Link>} />
+          <Button render={<Link href="/dashboard">{t("cta.dashboard")}</Link>} />
         </div>
       </div>
     </div>
