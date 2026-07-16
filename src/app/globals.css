@@ -277,14 +277,12 @@
 @keyframes avatar-ring {
   0%,
   100% {
-    box-shadow:
-      0 0 0 0 oklch(0.5676 0.2021 283.0838 / 0.4),
-      0 0 0 0 oklch(0.5676 0.2021 283.0838 / 0);
+    outline: 2px solid oklch(0.5676 0.2021 283.0838 / 0.4);
+    outline-offset: 0px;
   }
   50% {
-    box-shadow:
-      0 0 0 4px oklch(0.5676 0.2021 283.0838 / 0),
-      0 0 12px 3px oklch(0.5676 0.2021 283.0838 / 0.25);
+    outline: 1px solid oklch(0.5676 0.2021 283.0838 / 0);
+    outline-offset: 5px;
   }
 }
 
