@@ -24,7 +24,7 @@ export function RefreshButton({ className }: { className?: string }) {
       size="icon"
       onClick={handleRefresh}
       aria-label="Actualizar datos"
-      className={className}
+      className={cn("press-effect", className)}
     >
       <RefreshCw className={cn("size-4", spinning && "animate-spin")} />
     </Button>

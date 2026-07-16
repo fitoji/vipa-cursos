@@ -186,10 +186,10 @@ export function ImportCoursesDialog({ children }: { children?: ReactNode }) {
         </div>
 
         <DialogFooter>
-          <Button type="button" variant="outline" onClick={() => setOpen(false)}>
+          <Button type="button" variant="outline" onClick={() => setOpen(false)} className="press-effect">
             {tbuttons("cancel")}
           </Button>
-          <Button type="button" disabled={importing || !text.trim()} onClick={onImport}>
+          <Button type="button" disabled={importing || !text.trim()} onClick={onImport} className="press-effect">
             {importing ? tbuttons("importing") : tbuttons("import")}
           </Button>
         </DialogFooter>

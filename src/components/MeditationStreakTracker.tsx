@@ -207,7 +207,7 @@ export default function MeditationStreakTracker() {
 
             {/* New streak form */}
             {showForm ? (
-              <Card className="mb-8">
+              <Card className="mb-8 streak-form-enter">
                 <CardContent className="pt-6">
                   <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="mb-4 flex items-center justify-between">
@@ -217,6 +217,7 @@ export default function MeditationStreakTracker() {
                         variant="ghost"
                         size="icon"
                         onClick={() => setShowForm(false)}
+                        className="press-effect"
                       >
                         <X className="size-5" />
                       </Button>
@@ -275,10 +276,10 @@ export default function MeditationStreakTracker() {
                     </div>
 
                     <div className="mt-6 flex justify-end gap-3">
-                      <Button type="button" variant="outline" onClick={() => setShowForm(false)}>
+                      <Button type="button" variant="outline" onClick={() => setShowForm(false)} className="press-effect">
                         {tForm("cancel")}
                       </Button>
-                      <Button type="submit" disabled={isSubmitting}>
+                      <Button type="submit" disabled={isSubmitting} className="press-effect">
                         <Check data-icon="inline-start" />
                         {tForm("save")}
                       </Button>
@@ -290,7 +291,7 @@ export default function MeditationStreakTracker() {
               <Button
                 variant="outline"
                 onClick={openNewForm}
-                className="mb-8 w-full justify-center gap-2 border-dashed py-6"
+                className="press-effect mb-8 w-full justify-center gap-2 border-dashed py-6"
               >
                 <Plus className="size-5" />
                 {tForm("addButton")}
@@ -432,7 +433,7 @@ function StreakRow({
           variant="ghost"
           size="icon"
           onClick={() => onEdit(streak)}
-          className="opacity-0 transition-opacity group-hover:opacity-100 focus-visible:opacity-100 text-muted-foreground hover:text-foreground"
+          className="press-effect opacity-0 transition-opacity group-hover:opacity-100 focus-visible:opacity-100 text-muted-foreground hover:text-foreground"
           aria-label={tStreak("edit")}
         >
           <Pencil className="size-4" />
@@ -441,7 +442,7 @@ function StreakRow({
           variant="ghost"
           size="icon"
           onClick={() => onDelete(streak.id)}
-          className="opacity-0 transition-opacity group-hover:opacity-100 focus-visible:opacity-100 text-muted-foreground hover:text-destructive"
+          className="press-effect opacity-0 transition-opacity group-hover:opacity-100 focus-visible:opacity-100 text-muted-foreground hover:text-destructive"
           aria-label={tStreak("delete")}
         >
           <Trash2 className="size-4" />

@@ -225,7 +225,7 @@ export function EditCourseDialog({
             <Textarea id="e_obs" rows={3} {...form.register("obs")} />
           </Field>
           <DialogFooter className="sm:col-span-2">
-            <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
+            <Button type="button" variant="outline" onClick={() => onOpenChange(false)} className="press-effect">
               {t("cancel")}
             </Button>
             <Button type="submit" disabled={saving} className="press-effect">

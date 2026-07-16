@@ -99,7 +99,7 @@ export function BackgroundPicker({ open, onOpenChange }: BackgroundPickerProps) 
                 aria-label={t("selectImage", { name: bg.label })}
                 aria-pressed={isSelected}
                 className={cn(
-                  "group relative aspect-[4/3] overflow-hidden rounded-lg border-2 transition-all",
+                  "press-effect group relative aspect-[4/3] overflow-hidden rounded-lg border-2 transition-all",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
                   isSelected
                     ? "border-primary ring-2 ring-primary"

@@ -295,6 +295,7 @@ export function ImportCoursesPanel({ onImported }: { onImported?: () => void }) 
         <Button
           type="button"
           variant="outline"
+          className="press-effect"
           onClick={() => {
             setText("");
             setItems(null);
@@ -304,7 +305,7 @@ export function ImportCoursesPanel({ onImported }: { onImported?: () => void }) 
         >
           {tbuttons("clear")}
         </Button>
-        <Button type="button" disabled={!canImport} onClick={onImport}>
+        <Button type="button" disabled={!canImport} onClick={onImport} className="press-effect">
           {importing
             ? tbuttons("importing")
             : tbuttons("importCount", {

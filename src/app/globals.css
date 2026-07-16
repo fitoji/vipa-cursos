@@ -309,6 +309,18 @@
   animation: avatar-ring 2s ease-in-out infinite;
 }
 
+/* Streak form enter transition */
+.streak-form-enter {
+  animation: streak-form-in 200ms ease-out;
+}
+
+@keyframes streak-form-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
 /* Hover effects */
 .hover-lift {
   transition:
@@ -356,6 +368,10 @@
   transform: translateY(-2px);
   box-shadow: 0 8px 30px oklch(0 0 0 / 0.1);
   border-color: oklch(0.5676 0.2021 283.0838 / 0.2);
+}
+.card-interactive:active {
+  transform: scale(0.98);
+  transition: transform 100ms ease-out;
 }
 .dark .card-interactive:hover {
   box-shadow: 0 8px 30px oklch(0 0 0 / 0.3);

@@ -352,6 +352,7 @@ export function LocationsExplorer() {
                     <Button
                       variant="outline"
                       size="sm"
+                      className="press-effect"
                       disabled={page <= 1}
                       onClick={() => setPage((p) => p - 1)}
                     >
@@ -360,6 +361,7 @@ export function LocationsExplorer() {
                     <Button
                       variant="outline"
                       size="sm"
+                      className="press-effect"
                       disabled={page >= totalPages}
                       onClick={() => setPage((p) => p + 1)}
                     >
