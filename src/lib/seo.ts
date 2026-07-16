@@ -1,5 +1,4 @@
-export const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://vipabase.vercel.app";
+export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://vipabase.vercel.app";
 
 export function localePrefix(locale: string): string {
   return locale === "en" ? "/en" : "";
