@@ -46,13 +46,23 @@ export async function listStreaks(): Promise<StreakRow[]> {
 
   const { neon } = await import("@neondatabase/serverless");
   const sql = neon(process.env.DATABASE_URL!);
+  const today = new Date().toISOString().slice(0, 10);
+
   const rows = await sql`
     SELECT id, user_id, start_date, end_date, is_active, created_at
     FROM meditation_streaks
     WHERE user_id = ${userId}
     ORDER BY start_date DESC, id DESC
   `;
-  return rows as StreakRow[];
+
+  // Active streaks with an expired end_date are treated as open-ended:
+  // their effective end_date is today so they count up to the current day.
+  return (rows as StreakRow[]).map((row) => {
+    if (row.is_active && row.end_date < today) {
+      return { ...row, end_date: today };
+    }
+    return row;
+  });
 }
 
 export async function createStreak({ data }: { data: StreakInput }) {
