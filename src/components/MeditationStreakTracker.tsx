@@ -9,6 +9,7 @@ import { toast } from "sonner";
 
 import { cn } from "@/lib/utils";
 import { useCachedQuery } from "@/hooks/use-cached-query";
+import { authClient } from "@/lib/auth-client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -58,11 +59,14 @@ export default function MeditationStreakTracker() {
   const [showForm, setShowForm] = useState(false);
   const [editing, setEditing] = useState<Streak | null>(null);
   const qc = useQueryClient();
+  const { data: session } = authClient.useSession();
+  const userId = session?.user?.id;
 
   const { data: streaks = [], isLoading } = useCachedQuery({
     queryKey: ["streaks"],
     queryFn: () => listStreaks(),
     cacheKey: "streaks",
+    userId,
   });
 
   const locale = useLocale();

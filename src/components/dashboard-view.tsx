@@ -35,6 +35,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { listCourses, deleteCourse } from "@/app/actions/courses";
 import { listStreaks } from "@/app/actions/streaks";
 import { useCachedQuery } from "@/hooks/use-cached-query";
+import { authClient } from "@/lib/auth-client";
 import { RefreshButton } from "@/components/refresh-button";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -94,15 +95,20 @@ function daysBetween(a: string | Date, b: string | Date) {
 const columnHelper = createColumnHelper<Course>();
 
 export function DashboardView() {
+  const { data: session } = authClient.useSession();
+  const userId = session?.user?.id;
+
   const { data: courses = [], isLoading } = useCachedQuery({
     queryKey: ["courses"],
     queryFn: () => listCourses(),
     cacheKey: "courses",
+    userId,
   });
   const { data: streaks = [] } = useCachedQuery({
     queryKey: ["streaks"],
     queryFn: () => listStreaks(),
     cacheKey: "streaks",
+    userId,
   });
   const qc = useQueryClient();
   const del = deleteCourse;

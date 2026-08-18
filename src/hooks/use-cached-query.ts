@@ -6,10 +6,13 @@ import { getCache, setCache } from "@/lib/local-cache";
 /**
  * Wraps React Query with localStorage persistence.
  *
- * Uses placeholderData so React Query correctly manages loading states.
- * The queryFn always runs on mount (no initialData), but staleTime is
- * preserved to avoid redundant fetches. After each successful fetch,
- * data is synced to localStorage for cross-session persistence.
+ * Each successful fetch syncs data to localStorage for cross-session
+ * persistence (key scoped by userId). React Query's staleTime controls
+ * when a refetch is triggered without invalidation.
+ *
+ * Cache keys are scoped by userId so different users on the same browser
+ * do NOT see each other's cached data. If userId is not yet available,
+ * no localStorage caching occurs (prevents cross-user data leakage).
  *
  * Invalidation works correctly: staleTime is NOT Infinity, so
  * invalidateQueries triggers an actual refetch.
@@ -18,21 +21,25 @@ export function useCachedQuery<T>(options: {
   queryKey: unknown[];
   queryFn: () => Promise<T>;
   cacheKey: string;
+  userId?: string;
   staleTime?: number;
   gcTime?: number;
 }): UseQueryResult<T> {
+  const { userId, cacheKey } = options;
+  // Scope cache key by userId so localStorage is NOT shared across users.
+  // If userId is unknown (session not loaded yet), skip localStorage caching
+  // entirely to avoid showing another user's data.
+  const effectiveCacheKey = userId ? `${cacheKey}:${userId}` : undefined;
+  // scoped queryKey so React Query cache is isolated per user
+  const queryKey = userId ? [...options.queryKey, userId] : options.queryKey;
+
   return useQuery({
-    queryKey: options.queryKey,
+    queryKey,
     queryFn: async () => {
       const data = await options.queryFn();
-      setCache(options.cacheKey, data);
+      if (effectiveCacheKey) setCache(effectiveCacheKey, data);
       return data;
     },
-    // Show stale localStorage data while fetching fresh data in background.
-    // Unlike initialData, this does NOT suppress isLoading on the initial fetch,
-    // so invalidation triggers real refetches correctly.
-    placeholderData: () => (getCache<T>(options.cacheKey) ?? undefined) as T | undefined,
-    // Default to 5 minutes instead of Infinity so invalidateQueries actually works.
     staleTime: options.staleTime ?? 1000 * 60 * 5,
     gcTime: options.gcTime ?? Infinity,
   });
