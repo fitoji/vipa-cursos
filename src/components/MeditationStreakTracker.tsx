@@ -32,7 +32,7 @@ type Streak = {
   id: number;
   user_id: string;
   start_date: string | Date;
-  end_date: string | Date;
+  end_date: string | Date | null;
   is_active: boolean;
   created_at: string | Date;
 };
@@ -56,9 +56,10 @@ function daysBetween(a: string | Date, b: string | Date) {
 }
 
 /** Days in a streak counting up to today if the streak hasn't ended yet. */
-function streakDaysUpToToday(startDate: string, endDate: string) {
+function streakDaysUpToToday(startDate: string, endDate: string | null) {
   const today = todayStr();
-  const effectiveEnd = endDate > today ? today : endDate;
+  // null endDate means open-ended (active streak): count to today
+  const effectiveEnd = endDate == null ? today : endDate > today ? today : endDate;
   return daysBetween(startDate, effectiveEnd);
 }
 
@@ -155,7 +156,9 @@ export default function MeditationStreakTracker() {
       ? streakDaysUpToToday(activeStreaks[0].start_date, activeStreaks[0].end_date)
       : 0;
   const bestDays =
-    streaks.length > 0 ? Math.max(...streaks.map((s) => daysBetween(s.start_date, s.end_date))) : 0;
+    streaks.length > 0
+      ? Math.max(...streaks.map((s) => daysBetween(s.start_date, s.end_date as string)))
+      : 0;
 
   return (
     <SidebarProvider>
@@ -405,7 +408,14 @@ function StreakRow({
   formatDate: (d: string | Date) => string;
   tStreak: ReturnType<typeof useTranslations<"Racha.streak">>;
 }) {
-  const days = daysBetween(streak.start_date, streak.end_date);
+  const days = streakDaysUpToToday(
+    typeof streak.start_date === "string" ? streak.start_date : streak.start_date.toISOString().slice(0, 10),
+    streak.end_date
+      ? typeof streak.end_date === "string"
+        ? streak.end_date
+        : streak.end_date.toISOString().slice(0, 10)
+      : null,
+  );
   return (
     <div
       className={cn(
@@ -426,7 +436,12 @@ function StreakRow({
         </div>
         <div>
           <p className="text-sm font-medium">
-            {formatDate(streak.start_date)} → {formatDate(streak.end_date)}
+            {formatDate(streak.start_date)}
+            {streak.end_date
+              ? ` → ${formatDate(streak.end_date)}`
+              : streak.is_active
+                ? ` → ${tStreak("today")}`
+                : ""}
           </p>
           <p className="mt-0.5 text-xs text-muted-foreground">
             {days} {days !== 1 ? tStreak("days") : tStreak("day")}
@@ -482,7 +497,9 @@ function EditStreakForm({
   } = useForm<FormValues>({
     defaultValues: {
       start_date: toDateStr(streak.start_date),
-      end_date: toDateStr(streak.end_date),
+      // For active streaks (null end_date), use today as the end_date in the form.
+      // The server will save NULL when the streak remains active.
+      end_date: streak.end_date ? toDateStr(streak.end_date) : todayStr(),
     },
   });
 

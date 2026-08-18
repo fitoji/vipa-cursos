@@ -96,9 +96,9 @@ function daysBetween(a: string | Date, b: string | Date) {
 const todayStr = () => new Date().toISOString().slice(0, 10);
 
 /** Days in a streak counting up to today if the streak hasn't ended yet. */
-function streakDaysUpToToday(startDate: string, endDate: string) {
+function streakDaysUpToToday(startDate: string, endDate: string | null) {
   const today = todayStr();
-  const effectiveEnd = endDate > today ? today : endDate;
+  const effectiveEnd = endDate == null ? today : endDate > today ? today : endDate;
   return daysBetween(startDate, effectiveEnd);
 }
 
@@ -596,7 +596,7 @@ function StatsView({
   yearsAT: number;
   recentCourses: Course[];
   courses: Course[];
-  activeStreak: { id: number; start_date: string | Date; end_date: string | Date } | null;
+  activeStreak: { id: number; start_date: string | Date; end_date: string | Date | null } | null;
   activeStreakDays: number;
   onFilterClick: (preset: FilterPreset) => void;
 }) {

@@ -24,7 +24,7 @@ type StreakRow = {
   id: number;
   user_id: string;
   start_date: string;
-  end_date: string;
+  end_date: string | null;
   is_active: boolean;
   created_at: string;
 };
@@ -55,10 +55,12 @@ export async function listStreaks(): Promise<StreakRow[]> {
     ORDER BY start_date DESC, id DESC
   `;
 
-  // Active streaks with an expired end_date are treated as open-ended:
-  // their effective end_date is today so they count up to the current day.
+  // Active streaks: end_date is NULL (open-ended) or a future date.
+  // For display, we count up to today. If end_date is past and is_active=true,
+  // it means the streak was not closed — still count up to today.
   return (rows as StreakRow[]).map((row) => {
-    if (row.is_active && row.end_date < today) {
+    if (row.is_active) {
+      // Open-ended: count up to today regardless of stored end_date
       return { ...row, end_date: today };
     }
     return row;
@@ -75,9 +77,12 @@ export async function createStreak({ data }: { data: StreakInput }) {
   const { neon } = await import("@neondatabase/serverless");
   const sql = neon(process.env.DATABASE_URL!);
   const active = isStreakActive(parsed.end_date);
+  // Active streaks are open-ended: end_date is NULL in the DB.
+  // Only finished streaks store an actual end_date.
+  const endDateToStore = active ? null : parsed.end_date;
   const rows = await sql`
     INSERT INTO meditation_streaks (user_id, start_date, end_date, is_active)
-    VALUES (${userId}, ${parsed.start_date}, ${parsed.end_date}, ${active})
+    VALUES (${userId}, ${parsed.start_date}, ${endDateToStore}, ${active})
     RETURNING id, user_id, start_date, end_date, is_active, created_at
   `;
   revalidateBoth("/racha");
@@ -110,9 +115,11 @@ export async function updateStreak({
   const { neon } = await import("@neondatabase/serverless");
   const sql = neon(process.env.DATABASE_URL!);
   const active = isStreakActive(parsed.end_date);
+  // Active streaks are open-ended: end_date is NULL in the DB.
+  const endDateToStore = active ? null : parsed.end_date;
   const rows = await sql`
     UPDATE meditation_streaks
-    SET start_date = ${parsed.start_date}, end_date = ${parsed.end_date}, is_active = ${active}
+    SET start_date = ${parsed.start_date}, end_date = ${endDateToStore}, is_active = ${active}
     WHERE id = ${data.id} AND user_id = ${userId}
     RETURNING id, user_id, start_date, end_date, is_active, created_at
   `;
