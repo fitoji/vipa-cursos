@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { TransitionLink as Link } from "@/components/transition-link";
 import { useTranslations } from "next-intl";
-import { Upload, LayoutDashboard } from "lucide-react";
+import { Upload, LayoutDashboard, Loader2 } from "lucide-react";
 
 import { createCourse } from "@/app/actions/courses";
 import { listCountryNames, listLocationNamesByCountry } from "@/app/actions/locations";
@@ -305,7 +305,14 @@ export function CursosView() {
                   </span>
                 )}
                 <Button type="submit" disabled={submitting} className="press-effect">
-                  {submitting ? t("submit.saving") : t("submit.save")}
+                  {submitting ? (
+                    <span className="flex items-center gap-1.5">
+                      <Loader2 className="size-4 animate-spin" />
+                      {t("submit.saving")}
+                    </span>
+                  ) : (
+                    t("submit.save")
+                  )}
                 </Button>
               </div>
             </form>

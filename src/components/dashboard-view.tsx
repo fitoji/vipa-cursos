@@ -28,6 +28,7 @@ import {
   Upload,
   Hourglass,
   GraduationCap,
+  Loader2,
 } from "lucide-react";
 import { toast } from "sonner";
 import { useLocale, useTranslations } from "next-intl";
@@ -473,7 +474,14 @@ export function DashboardView() {
                 disabled={busyDelete}
                 className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
               >
-                {busyDelete ? tt("deleteDialog.deleting") : tt("deleteDialog.delete")}
+                {busyDelete ? (
+                  <span className="flex items-center gap-1.5">
+                    <Loader2 className="size-4 animate-spin" />
+                    {tt("deleteDialog.deleting")}
+                  </span>
+                ) : (
+                  tt("deleteDialog.delete")
+                )}
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
