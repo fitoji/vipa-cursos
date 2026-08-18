@@ -55,6 +55,13 @@ function daysBetween(a: string | Date, b: string | Date) {
   return Math.floor((new Date(bStr).getTime() - new Date(aStr).getTime()) / 86_400_000) + 1;
 }
 
+/** Days in a streak counting up to today if the streak hasn't ended yet. */
+function streakDaysUpToToday(startDate: string, endDate: string) {
+  const today = todayStr();
+  const effectiveEnd = endDate > today ? today : endDate;
+  return daysBetween(startDate, effectiveEnd);
+}
+
 export default function MeditationStreakTracker() {
   const [showForm, setShowForm] = useState(false);
   const [editing, setEditing] = useState<Streak | null>(null);
@@ -145,7 +152,7 @@ export default function MeditationStreakTracker() {
 
   const currentDays =
     activeStreaks.length > 0
-      ? daysBetween(activeStreaks[0].start_date, activeStreaks[0].end_date)
+      ? streakDaysUpToToday(activeStreaks[0].start_date, activeStreaks[0].end_date)
       : 0;
   const bestDays =
     streaks.length > 0 ? Math.max(...streaks.map((s) => daysBetween(s.start_date, s.end_date))) : 0;

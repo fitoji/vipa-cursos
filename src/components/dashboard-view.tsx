@@ -93,6 +93,15 @@ function daysBetween(a: string | Date, b: string | Date) {
   return Math.floor((new Date(bStr).getTime() - new Date(aStr).getTime()) / 86_400_000) + 1;
 }
 
+const todayStr = () => new Date().toISOString().slice(0, 10);
+
+/** Days in a streak counting up to today if the streak hasn't ended yet. */
+function streakDaysUpToToday(startDate: string, endDate: string) {
+  const today = todayStr();
+  const effectiveEnd = endDate > today ? today : endDate;
+  return daysBetween(startDate, effectiveEnd);
+}
+
 const columnHelper = createColumnHelper<Course>();
 
 export function DashboardView() {
@@ -192,13 +201,13 @@ export function DashboardView() {
     const activeStreak =
       activeStreaks.length > 0
         ? activeStreaks.reduce((longest, s) => {
-            const longestDays = daysBetween(longest.start_date, longest.end_date);
-            const sDays = daysBetween(s.start_date, s.end_date);
+            const longestDays = streakDaysUpToToday(longest.start_date, longest.end_date);
+            const sDays = streakDaysUpToToday(s.start_date, s.end_date);
             return sDays > longestDays ? s : longest;
           })
         : null;
     const activeStreakDays = activeStreak
-      ? daysBetween(activeStreak.start_date, activeStreak.end_date)
+      ? streakDaysUpToToday(activeStreak.start_date, activeStreak.end_date)
       : 0;
 
     return {
